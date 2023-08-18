@@ -1,13 +1,33 @@
+// import PaginadDeVenta from "./PaginaDeVenta";
+// import ImagenesDescargadas from "./ImagenesDescargadas";
+// import Home from "./Home";
+// import Historial from "./Historial";
+// import ProyectoInstitutcional from "./ProyectoInstitucional";
+// import EstatutoYReglamento from "./EstatutoYReglamento";
+// import IniciarSesion from "./IniciarSesion";
+// import PaginaProfesor from "./Paginaprofesor";
+// import PaginaAlumno from "./PaginaAlumno";
+// import Contacto from "./Contacto";
 import Navbar from "./navbar";
-import Footer from "./footer";
 import RegistrationForm from "./registro";
+import Footer from "./footer";
 
-function App() {
+function App()  {
   return (
-    <div className="App">
-        <Navbar />
-        <RegistrationForm />
-        <Footer />
+    <div>
+      <Navbar />
+      <RegistrationForm />
+      <Footer />
+      {/* <PaginadDeVenta/>
+      <Home/>
+      <Historial/>
+      <ProyectoInstitutcional/>
+      <EstatutoYReglamento/>
+      <Contacto/>
+      <IniciarSesion/>
+      <PaginaProfesor/>
+      <PaginaAlumno/>
+      <ImagenesDescargadas/>      */}
     </div>
   );
 }
