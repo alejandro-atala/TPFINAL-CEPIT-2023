@@ -1,26 +1,26 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import './css/footer.css'; // Importa tu archivo CSS personalizado
 
 const Footer = () => {
   return (
     <footer className="bg-light py-4">
       <div className="container">
+        <div className="social-icons text-center"> {/* Asegúrate de usar la clase social-icons */}
+          <a href="#">
+            <FontAwesomeIcon icon={faFacebookF} />
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faTwitter} />
+          </a>
+          <a href="#">
+            <FontAwesomeIcon icon={faInstagram} />
+          </a>
+        </div>
         <p className="text-center mb-0">
           Todos los derechos reservados &copy; {new Date().getFullYear()}
         </p>
-        <ul className="list-inline text-center mt-2">
-          <li className="list-inline-item">
-            <a href="/">Inicio</a>
-          </li>
-          <li className="list-inline-item">
-            <a href="/">Acerca de</a>
-          </li>
-          <li className="list-inline-item">
-            <a href="/">Contacto</a>
-          </li>
-          <li className="list-inline-item">
-            <a href="/">Términos y condiciones</a>
-          </li>
-        </ul>
       </div>
     </footer>
   );

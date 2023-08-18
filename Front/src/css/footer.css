@@ -1,0 +1,19 @@
+/* Footer.css */
+.social-icons {
+    background-color: rgb(255, 121, 143);
+    padding: 10px 0; /* Ajusta el espacio interior según necesites */
+    display: flex;
+    justify-content: center;
+  }
+  
+  .social-icons a {
+    font-size: 24px;
+    margin: 0 10px;
+    color: #333; /* Cambia el color según tus necesidades */
+    transition: color 0.3s; /* Transición de color suave */
+  }
+  
+  .social-icons a:hover {
+    color: white; /* Cambia el color al pasar el cursor sobre los íconos */
+  }
+  
