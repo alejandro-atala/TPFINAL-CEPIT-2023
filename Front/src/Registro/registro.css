@@ -1,4 +1,5 @@
 .blue {
+
     background-color: #eaf2f8; /* Cambia este color al azul suave deseado */
     padding: 20px; /* Ajusta el espacio interior según sea necesario */
     border-radius: 10px; /* Añade esquinas redondeadas si lo deseas */
@@ -6,4 +7,6 @@
   }
   
   /* Agrega más estilos según tus necesidades */
-  
+  .fondo{
+    background-color: rgb(92, 14, 216);
+  }
