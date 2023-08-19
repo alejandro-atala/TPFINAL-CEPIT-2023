@@ -5,10 +5,11 @@ import Registro from './Registro';
 import Alumno from './Alumno/alumno';
 import Footer from './Footer/footer';
 import SideMenu from './MenuLateral/sideMenu';
-
+import InicioSesion from './InicioSesion/inicioSesion';
 const App = () => {
   return (
     <BrowserRouter>
+    <InicioSesion />
       <Navbar />
       <SideMenu />
       <Routes>

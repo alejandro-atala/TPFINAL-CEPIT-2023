@@ -4,7 +4,7 @@ const InicioSesion = () => {
   return (
     <div className="container text-center col-xs-12 col-sm-3 p-5 ">
       <div className="row align-items-center">
-        <div className=" bg-warning">
+        <div className=" ">
           <h2 className="text-center">Iniciar sesión</h2>
           <form>
             <div className="form-group">
