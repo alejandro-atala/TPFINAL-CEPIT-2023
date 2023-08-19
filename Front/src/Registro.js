@@ -1,17 +1,17 @@
 
 import Navbar from "./BarraPrincipal/navbar";
 import Footer from "./Footer/footer";
-import MenuLateral from "./MenuLateral/sideMenu";
+import RegistrationForm from "./Registro/registro";
 
-function App()  {
+function Registro()  {
   return (
     <div>
       <Navbar />
-      <MenuLateral/>
+      <RegistrationForm />
       <Footer />
- 
+
     </div>
   );
 }
 
-export default App;
+export default Registro;
