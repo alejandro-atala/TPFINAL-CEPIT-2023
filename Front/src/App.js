@@ -4,11 +4,13 @@ import Navbar from './BarraPrincipal/navbar';
 import Registro from './Registro';
 import Alumno from './Alumno/alumno';
 import Footer from './Footer/footer';
+import SideMenu from './MenuLateral/sideMenu';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Navbar />
+      <SideMenu />
       <Routes>
         {/* Ruta para la página de registro */}
         <Route path="/Registro" element={<Registro />} />
@@ -16,6 +18,7 @@ const App = () => {
         {/* Ruta para la página de inicio (Alumno) */}
         <Route path="/" element={<Alumno />} />
       </Routes>
+      
       <Footer />
     </BrowserRouter>
   );
