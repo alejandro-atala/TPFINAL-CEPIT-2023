@@ -8,18 +8,20 @@
 // import PaginaProfesor from "./Paginaprofesor";
 // import PaginaAlumno from "./PaginaAlumno";
 // import Contacto from "./Contacto";
-import Navbar from "./navbar";
-import RegistrationForm from "./registro";
-import Footer from "./footer";
+import Navbar from "./BarraPrincipal/navbar";
+//import RegistrationForm from "./Registro/registro";
+import Footer from "./Footer/footer";
+import MenuLateral from "./MenuLateral/sideMenu";
 
 function App()  {
   return (
     <div>
       <Navbar />
-      <RegistrationForm />
+      <MenuLateral/>
       <Footer />
       {/* <PaginadDeVenta/>
       <Home/>
+      <RegistrationForm />
       <Historial/>
       <ProyectoInstitutcional/>
       <EstatutoYReglamento/>
