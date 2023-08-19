@@ -1,29 +1,47 @@
+import React from 'react';
 
-import React from 'react'
-
-const Avisos = () => {
+const Asistencia = () => {
   return (
     <div>
-          <h1><a href="usuario-alumno.html">Atras</a></h1>
-<div class="row">
-    <div class="card mx-auto m-5" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
+      <h1>Log de asistencias e inasistencias</h1>
+      <table className="custom-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Entrada</th>
+            <th>Salida</th>
+            <th>Asistencia/Inasistencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2023-04-21</td>
+            <td>09:00</td>
+            <td>09:00</td>
+            <td>Asistencia</td>
+          </tr>
+          <tr>
+            <td>2023-04-20</td>
+            <td>14:30</td>
+            <td>09:00</td>
+            <td>Inasistencia</td>
+          </tr>
+          <tr>
+            <td>2023-04-19</td>
+            <td>10:15</td>
+            <td>09:00</td>
+            <td>Asistencia</td>
+          </tr>
+          <tr>
+            <td>2023-04-18</td>
+            <td>08:45</td>
+            <td>09:00</td>
+            <td>Asistencia</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-
-    </div>
-  )
-}
-
-export default Avisos
-
   );
 };
 
-
+export default Asistencia;
