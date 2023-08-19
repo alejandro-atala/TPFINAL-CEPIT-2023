@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css'; // Asegúrate de importar tus estilos personalizados si es necesario
 import Navbar from './BarraPrincipal/navbar';
 import Registro from './Registro';
 import Alumno from './Alumno/alumno';
@@ -16,6 +18,7 @@ const App = () => {
 
     <BrowserRouter>
 
+
       <Navbar />
 
 
@@ -31,6 +34,8 @@ const App = () => {
 
       </Routes>
       <Footer />
+
+
     </BrowserRouter>
   );
 };
