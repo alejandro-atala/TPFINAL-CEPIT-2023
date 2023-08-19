@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 const Avisos = () => {
@@ -21,3 +22,8 @@ const Avisos = () => {
 }
 
 export default Avisos
+
+  );
+};
+
+
