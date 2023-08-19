@@ -7,16 +7,18 @@ const Footer = () => {
   return (
     <footer className="bg-light py-4">
       <div className="container">
-        <div className="social-icons text-center"> {/* Asegúrate de usar la clase social-icons */}
-          <a href="#">
-            <FontAwesomeIcon icon={faFacebookF} />
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faTwitter} />
-          </a>
-          <a href="#">
-            <FontAwesomeIcon icon={faInstagram} />
-          </a>
+        <div className="social-icons-container">
+          <div className="social-icons text-center">
+            <a href="#">
+              <FontAwesomeIcon icon={faFacebookF} />
+            </a>
+            <a href="#">
+              <FontAwesomeIcon icon={faTwitter} />
+            </a>
+            <a href="#">
+              <FontAwesomeIcon icon={faInstagram} />
+            </a>
+          </div>
         </div>
         <p className="text-center mb-0">
           Todos los derechos reservados &copy; {new Date().getFullYear()}
