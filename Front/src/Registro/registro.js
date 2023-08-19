@@ -4,7 +4,7 @@ const RegistrationForm = () => {
   return (
     <div className="container text-center col-xs-12 col-sm-3 p-5">
       <div className="row align-items-center">
-        <div className="col bg-warning">
+        <div className="col blue">
           <h2 className="text-center">Registro de usuario</h2>
           <form>
             <div className="form-group">
