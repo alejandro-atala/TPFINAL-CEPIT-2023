@@ -1,0 +1,12 @@
+/* Navbar.css */
+.bg-pink {
+    background-color: rgb(255, 121, 143);
+  }
+  
+  /* Añade más estilos según sea necesario */
+  /* Navbar.css */
+.navbar-logo {
+  width: 50px; /* Ajusta el tamaño de la imagen según tus necesidades */
+  height: auto;
+  margin-right: 10px; /* Ajusta el margen derecho para separar la imagen del texto */
+}
