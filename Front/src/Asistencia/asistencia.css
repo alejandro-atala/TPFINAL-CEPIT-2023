@@ -1,15 +1,21 @@
 
-  /* .custom-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  .custom-table th,
-  .custom-table td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  .custom-table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  } */
+.notas-container {
+  padding: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+ 
 
