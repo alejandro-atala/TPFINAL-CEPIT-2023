@@ -6,6 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 function Alumno()  {
   return (
+    
     <div>
       <Navbar />
       <div class="container mt-4 p-5">
