@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+
 
 const Alumno = () => {
   return (
@@ -10,7 +12,7 @@ const Alumno = () => {
             <div class="card-body">
               <h5 class="card-title">Notas de examenes</h5>
               <p class="card-text">Aqui podras ver las notas de los examenes realizados</p>
-              <a href="notas-examen.html" class="btn btn-primary" id="myButton">Ver notas</a>
+              <Link to="/notas" className="btn btn-primary" id="myButton">Ver notas</Link>
             </div>
             <div class="card-footer">
               <small class="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -24,7 +26,7 @@ const Alumno = () => {
             <div class="card-body">
               <h5 class="card-title">Boletin</h5>
               <p class="card-text">Aqui podras ver el boletin </p>
-              <a href="boletin.html" class="btn btn-primary" id="myButton">Ver Boletin</a>
+              <Link to="/boletin" className="btn btn-primary" id="myButton">Ver Boletin</Link>
             </div>
             <div class="card-footer">
               <small class="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -37,7 +39,7 @@ const Alumno = () => {
             <div class="card-body">
               <h5 class="card-title">Materias del año en curso</h5>
               <p class="card-text">Aqui veras las meterias con sus dias y horarios</p>
-              <a href="materias.html" class="btn btn-primary" id="myButton">Ver Materias</a>
+              <Link to="/materias" className="btn btn-primary" id="myButton">Ver Materias</Link>
             </div>
             <div class="card-footer">
               <small class="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -51,7 +53,7 @@ const Alumno = () => {
               <div class="card-body">
                 <h5 class="card-title">Asistencias</h5>
                 <p class="card-text">Aqui veras las asistencias. </p>
-                <a href="asistencias.html" class="btn btn-primary" id="myButton">Ver LOG</a>
+                <Link to="/asistencia" className="btn btn-primary" id="myButton">Asistencias</Link>
               </div>
               <div class="card-footer">
                 <small class="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -65,7 +67,7 @@ const Alumno = () => {
               <div class="card-body">
                 <h5 class="card-title">Avisos de los profes</h5>
                 <p class="card-text">Aqui veras llos mensajes que envien los profesores a sus alumnos</p>
-                <a href="avisos.html" class="btn btn-primary" id="myButton">Ver avisos</a>
+                <Link to="/avisos" className="btn btn-primary" id="myButton">Ver avisos</Link>
               </div>
               <div class="card-footer">
                 <small class="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -79,7 +81,7 @@ const Alumno = () => {
               <div class="card-body">
                 <h5 class="card-title">Enviar mensaje</h5>
                 <p class="card-text">Aqui podras enviar un mensaje directamente al profesor</p>
-                <a href="mensaje.html" class="btn btn-primary" id="myButton">Enviar mensaje</a>
+                <Link to="/mensaje" className="btn btn-primary" id="myButton">Enviar Mensaje</Link>
               </div>
               <div class="card-footer">
                 <small class="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
