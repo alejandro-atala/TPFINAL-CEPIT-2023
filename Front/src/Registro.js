@@ -6,7 +6,7 @@ import RegistrationForm from "./Registro/registro";
 function Registro()  {
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <RegistrationForm />
       <Footer />
 
