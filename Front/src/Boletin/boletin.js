@@ -3,7 +3,7 @@ import React from 'react'
 const Boletin = () => {
   return (
     <div>
-       <h1><a href="usuario-alumno.html">Atras</a></h1>
+
 
     <table >
         <thead>
