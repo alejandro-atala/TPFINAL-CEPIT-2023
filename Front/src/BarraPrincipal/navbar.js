@@ -1,14 +1,16 @@
 import React from 'react';
 import './navbar.css'; // Importa tu archivo CSS personalizado
 
+import { Link } from 'react-router-dom';
+
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-pink">
       <div className="container justify-content-center text-center"> {/* Centrar */}
-        <a className="navbar-brand" href="/">
-        <img src="https://images4.imagebam.com/9c/af/6d/MENQMV5_o.png" alt="Logo" className="navbar-logo" />
+        <Link className="navbar-brand" to="/">
+          <img src="https://images4.imagebam.com/9c/af/6d/MENQMV5_o.png" alt="Logo" className="navbar-logo" />
           Home
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -35,7 +37,7 @@ const Navbar = () => {
               <a className="nav-link" href="/">Contacto</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/">Iniciar Sesion</a>
+              <Link to="/Registro" className="nav-link">Iniciar Sesion</Link>
             </li>
           </ul>
         </div>
