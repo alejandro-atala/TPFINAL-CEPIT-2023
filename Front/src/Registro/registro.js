@@ -1,10 +1,12 @@
 import React from 'react';
+import './registro.css'; // Verifica la ruta de la importación
+
 
 const RegistrationForm = () => {
   return (
-    <div className="container text-center col-xs-12 col-sm-3 p-5">
-      <div className="row align-items-center">
-        <div className="col bg-warning">
+    <div className="container   mt-4 text-center col-xs-12 col-sm-3 p-5">
+      <div className="row align-items-center ">
+        <div className="col ">
           <h2 className="text-center">Registro de usuario</h2>
           <form>
             <div className="form-group">
@@ -46,7 +48,6 @@ const RegistrationForm = () => {
               </label>
               <select id="inputState" className="form-select">
                 <option defaultValue>Elija usuario</option>
-                <option>Padre</option>
                 <option>Alumno</option>
                 <option>Profesor</option>
               </select>
