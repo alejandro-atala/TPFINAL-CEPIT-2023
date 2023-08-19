@@ -53,7 +53,7 @@ const Alumno = () => {
               <div class="card-body">
                 <h5 class="card-title">Asistencias</h5>
                 <p class="card-text">Aqui veras las asistencias. </p>
-                <Link to="/asistencia" className="btn btn-primary" id="myButton">Asistencias</Link>
+                <Link to="/Asistencia" className="btn btn-primary" id="myButton">Asistencias</Link>
               </div>
               <div class="card-footer">
                 <small class="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
