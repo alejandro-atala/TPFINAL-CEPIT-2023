@@ -1,12 +1,11 @@
 import React from 'react';
-import './navbar.css'; // Importa tu archivo CSS personalizado
-
+import './navbar.css';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-pink">
-      <div className="container justify-content-center text-center"> {/* Centrar */}
+      <div className="container justify-content-center text-center">
         <Link className="navbar-brand" to="/">
           <img src="https://images4.imagebam.com/9c/af/6d/MENQMV5_o.png" alt="Logo" className="navbar-logo" />
           Home
@@ -22,22 +21,22 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+        <div className="collapse navbar-collapse " id="navbarNav">
+          <ul className="navbar-nav ">
             <li className="nav-item">
-              <a className="nav-link" href="/">Proyecto Institucional</a>
+              <Link to="/" className="nav-link">Proyecto Institucional</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/">Historial</a>
+              <Link to="/" className="nav-link">Historial</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/">Estatuto y Reglamento</a>
+              <Link to="/" className="nav-link">Estatuto y Reglamento</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/">Contacto</a>
+              <Link to="/" className="nav-link">Contacto</Link>
             </li>
             <li className="nav-item">
-              <Link to="/Registro" className="nav-link">Iniciar Sesion</Link>
+              <Link to="/iniciarSesion" className="nav-link sesion">Iniciar Sesion</Link>
             </li>
           </ul>
         </div>

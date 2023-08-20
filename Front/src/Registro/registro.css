@@ -1,12 +1,7 @@
-.blue {
 
-    background-color: #eaf2f8; /* Cambia este color al azul suave deseado */
-    padding: 20px; /* Ajusta el espacio interior según sea necesario */
-    border-radius: 10px; /* Añade esquinas redondeadas si lo deseas */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Añade sombra si deseas */
-  }
   
   /* Agrega más estilos según tus necesidades */
-  .fondo{
-    background-color: rgb(92, 14, 216);
-  }
+  .bg-registro{
+    margin-left:220px;
+    background-color: rgb(255, 121, 143);
+}

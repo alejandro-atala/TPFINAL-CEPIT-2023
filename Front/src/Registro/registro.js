@@ -4,7 +4,7 @@ import './registro.css'; // Verifica la ruta de la importación
 
 const RegistrationForm = () => {
   return (
-    <div className="container   mt-4 text-center col-xs-12 col-sm-3 p-5">
+    <div className="container rounded  mt-4 text-center col-md-4 col-xs-12 col-sm-3 p-5 bg-registro ">
       <div className="row align-items-center ">
         <div className="col ">
           <h2 className="text-center">Registro de usuario</h2>
