@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './planDeEstudios.css'; 
+import './planDeEstudios.css';
 
 const PlanDeEstudios = () => {
   const materiasPorAnio = {
@@ -11,29 +11,30 @@ const PlanDeEstudios = () => {
     '5° AÑO': ['Materia 4', 'Materia 5', 'Materia 6'],
     '6° AÑO': ['Materia 7', 'Materia 8', 'Materia 9'],
   };
-  
- return(
-  <div className="container plan-de-estudios">
-    <h1>Plan de Estudio Por Año</h1>
-        <div className="row">
-          
-          {Object.keys(materiasPorAnio).map((year, index) => (
-            <div key={index} className="col-md-6 col-lg-4 mb-4">
-              <div className="anio p-3 border shadow">
-                <h2>{year}</h2>
+
+  return (
+    <div className="container plan-de-estudios mt-5">
+      <h1>Plan de Estudio Por Año</h1>
+      <div className="row">
+        {Object.keys(materiasPorAnio).map((year, index) => (
+          <div key={index} className="col-md-6 col-lg-4 mb-4">
+            <div className="card shadow">
+              <div className="card-body">
+                <h2 className="card-title">{year}</h2>
                 <div className="materias">
                   {materiasPorAnio[year].map((materia, subIndex) => (
-                    <div key={subIndex} className="materia">
+                    <div key={subIndex} className="card-text">
                       {materia}
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
- )   
-  };
-  
+    </div>
+  );
+};
+
 export default PlanDeEstudios;
