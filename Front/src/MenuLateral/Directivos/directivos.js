@@ -9,12 +9,12 @@ const Directivos = () => {
   const titulo = ('Nuestros Directivos');
 
   return (
-    <div className="container component-directivos">
+    <div className="container component-directivos mt-4">
       <h1>{titulo}</h1>
-      <div className="row">
-        <div className="col-md-8">
-          <div className="directivos">
-             <div className="cuadro-imagen">
+      <div className="row ">
+        <div className="col-md-8 ">
+          <div className="directivos ">
+             <div className="cuadro-imagen ">
                 <img src={directora} alt="foto de la directora" />
              </div>
              <h3>Sonia Perez</h3>

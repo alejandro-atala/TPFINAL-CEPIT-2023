@@ -5,7 +5,7 @@ import SideMenu from '../MenuLateral/sideMenu.js';
 const HomePage = () => {
   return (
     <div>
-      <SideMenu/>
+      {/* <SideMenu/> */}
     </div>
   );
 };

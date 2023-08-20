@@ -8,7 +8,7 @@ import crochet from '../../ImagenesDescargadas/tallerCrochet.jpg';
 import ceramica from '../../ImagenesDescargadas/tallerCeramica.jpg';
 import deporte from '../../ImagenesDescargadas/handball.jpg';
 
-const ComponenteTalleres = () => {
+const Talleres = () => {
   const titulo = ('Talleres disponibles en nuestras instalaciones');
 
   return (
@@ -71,4 +71,4 @@ const ComponenteTalleres = () => {
   );
 };
 
-export default ComponenteTalleres;
+export default Talleres;

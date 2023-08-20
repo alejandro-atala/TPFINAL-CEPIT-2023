@@ -1,7 +1,7 @@
 import React from 'react';
 import Registro from '../../Registro';
 
-const ComponentePrincipal = () => {
+const Inscripcion = () => {
   return (
     <div>
       <Registro />
@@ -9,4 +9,4 @@ const ComponentePrincipal = () => {
   );
 };
 
-export default ComponentePrincipal;
+export default Inscripcion;

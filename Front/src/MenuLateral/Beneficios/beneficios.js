@@ -2,7 +2,7 @@ import React from 'react';
 import './beneficios.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const ComponenteBeneficios = () => {
+const Beneficios = () => {
   const titulos = ({
     principal: 'Los beneficios de estudiar en nuestro Instituto',
     secundario: 'Estudiar con nosotros es'
@@ -37,4 +37,4 @@ const ComponenteBeneficios = () => {
   );
 };
 
-export default ComponenteBeneficios;
+export default Beneficios;

@@ -16,6 +16,7 @@ const PlanDeEstudios = () => {
   <div className="container plan-de-estudios">
     <h1>Plan de Estudio Por Año</h1>
         <div className="row">
+          
           {Object.keys(materiasPorAnio).map((year, index) => (
             <div key={index} className="col-md-6 col-lg-4 mb-4">
               <div className="anio p-3 border shadow">
