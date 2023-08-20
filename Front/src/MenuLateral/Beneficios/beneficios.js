@@ -17,7 +17,7 @@ const Beneficios = () => {
 
 
   return (
-    <div className="container componente-beneficios">
+    <div className="container componente-beneficios mt-5">
         <h1 className="col align-self-start titulo-principal">{titulos.principal}</h1>
         <div className="row">
             <div className="contenido">
