@@ -15,11 +15,7 @@
   margin-left: 400px;
 }
 
-.sesion:hover {
-  color: #fff; 
-  background-color: #ee6e82; 
 
-}
 .nav-link {
   transition: color 0.3s ease, background-color 0.3s ease;
   border-radius: 5px;;
@@ -27,6 +23,6 @@
 
 .nav-link:hover {
   color: #fff;
-  /* background-color: #ee6e82; */
-  background-color: rgb(77, 184, 211);
+  background-color: #ee6e82;
+
 }
