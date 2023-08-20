@@ -37,11 +37,9 @@ const Navbar = () => {
               <a className="nav-link" href="/">Contacto</a>
             </li>
             <li className="nav-item ">
-              <Link to="/iniciarSesion" className="nav-link">Iniciar Sesion</Link>
+              <Link to="/iniciarSesion" className="nav-link sesion">Iniciar Sesion</Link>
             </li>
-            <li className="nav-item ">
-              <Link to="/registro" className="nav-link registro">Registrarse</Link>
-            </li>
+
           </ul>
         </div>
       </div>
