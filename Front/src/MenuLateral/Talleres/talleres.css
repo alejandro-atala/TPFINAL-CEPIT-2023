@@ -1,5 +1,6 @@
 .titulo {
   color: #3C7BA8; 
+  margin-left: -300px;
 }
 
 .talleres {
@@ -23,4 +24,10 @@
   border-radius: 10px;
   margin-top: 20px;
   width: 400px;
+  margin-left: 360px;
+  
+}
+
+.talleres{
+  margin-left: -100px ;
 }

@@ -13,8 +13,8 @@ const Talleres = () => {
 
     return (
         <div>
-            <h1 className="text-center mt-5">{titulo}</h1>
-            <div className="container mt-4 p-5">
+            <h1 className="text-center mt-5 titulo ">{titulo}</h1>
+            <div className="container mt-4 p-5 talleres">
 
                 <div className="row row-cols-1 row-cols-md-3 g-4">
                     <div className="col">
