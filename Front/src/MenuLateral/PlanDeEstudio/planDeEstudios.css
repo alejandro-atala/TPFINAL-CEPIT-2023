@@ -12,36 +12,11 @@
     margin-bottom: 20px; 
   }
   
-  .cuadros-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    position: relative; 
-    top: -40px; 
-  }
-  
-  .grupo-cuadros {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .anio {
-    width: 30%;
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: aquamarine;
-  }
-  
   .materias {
     margin-top: 10px;
     padding-top: 10px;
     border-top: 1px solid #ccc;
   }
   
-  .materia {
-    margin-bottom: 5px;
-  }
+
   
