@@ -13,12 +13,14 @@
 
 .llamado-titulo {
   font-family: 'Irish Grover', sans-serif;
-  color: white;
-  font-size: 16px;
+  color: rgb(0, 0, 0);
+  font-size: 30px;
 }
 
 .rectangulo-llamado {
-  padding: 20px;
+  background-color:  rgb(255, 121, 143);
+  padding: 10px;
   border-radius: 10px;
   margin-top: 20px;
+  width: 400px;
 }
