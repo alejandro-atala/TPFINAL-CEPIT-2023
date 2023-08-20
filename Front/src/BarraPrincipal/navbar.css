@@ -1,5 +1,6 @@
 /* Navbar.css */
 .bg-pink {
+
   background-color: rgb(255, 121, 143);
 }
 
@@ -15,8 +16,9 @@
 }
 
 .sesion:hover {
-  color: #fff; /* Cambiar el color del texto al pasar el mouse */
-  background-color: #ee6e82; /* Cambiar el color de fondo al pasar el mouse */
+  color: #fff; 
+  background-color: #ee6e82; 
+
 }
 .nav-link {
   transition: color 0.3s ease, background-color 0.3s ease;
@@ -25,5 +27,6 @@
 
 .nav-link:hover {
   color: #fff;
-  background-color: #ee6e82;
+  /* background-color: #ee6e82; */
+  background-color: rgb(77, 184, 211);
 }
