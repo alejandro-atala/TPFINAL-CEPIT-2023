@@ -1,7 +1,7 @@
 /* Footer.css */
-.container {
+.container-footer {
   background-color: rgb(255, 121, 143);
-  padding: 10px 0; /* Ajusta el espacio interior según necesites */
+  padding: 20px 0; /* Ajusta el espacio interior según necesites */
 }
 
 .social-icons {
