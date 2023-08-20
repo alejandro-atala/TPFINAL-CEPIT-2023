@@ -1,10 +1,10 @@
 import React from 'react';
-import Registro from '../../Registro';
+import RegistrationForm from '../../Registro/registro';
 
 const Inscripcion = () => {
   return (
     <div>
-      <Registro />
+      <RegistrationForm />
     </div>
   );
 };

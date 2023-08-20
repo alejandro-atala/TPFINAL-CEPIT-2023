@@ -3,8 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navbar from './BarraPrincipal/navbar';
-import RegistrationForm from './Registro';
-import Alumno from './Alumno/alumno';
 import Footer from './Footer/footer';
 import Asistencia from './Asistencia/asistencia';
 import Notas from './Notas/notas';
