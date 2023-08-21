@@ -14,9 +14,9 @@ const Beneficios = () => {
 
 
   return (
-    <div className="container componente-beneficios mt-5">
+    <div className="container componente-beneficios mt-5 contenido">
         <div className="row">
-            <div className="contenido">
+            <div className="">
             <div className="col align-self-center cuadro-beneficios">
                 <h2 className="titulo">{titulos}</h2>
                 <ul className="list-unstyled lista-beneficios">
