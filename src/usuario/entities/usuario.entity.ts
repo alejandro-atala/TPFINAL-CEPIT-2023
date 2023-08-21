@@ -1,39 +1,17 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Escuela } from 'src/escuela/entities/escuela.entity'; 
+import { Rol } from 'src/rol/entities/rol.entity'; 
 
+@Entity()
 export class Usuario {
-    @PrimaryGeneratedColumn()
-    public idUsuario: number;
+  @PrimaryGeneratedColumn()
+  idUsuario: number;
 
-    @Column()
-    public nombreUsuario: string;
+  @ManyToOne(() => Escuela, escuela => escuela.usuarios)
+  escuela: Escuela;
 
-    @Column()
-    public dniUsuario: number;
-  
-    constructor(idUsuario: number, nombreUsuario: string, dniUsuario: number) { 
-        this.idUsuario = idUsuario;
-        this.nombreUsuario = nombreUsuario;
-        this.dniUsuario = dniUsuario;
-     } 
+  @ManyToOne(() => Rol, rol => rol.usuarios)
+  rol: Rol;
 
-    public getIdUsuario(): number {
-        return this.idUsuario;
-    }
-
-    public setIdUsuario(idUsuario: number): void {
-        this.idUsuario = idUsuario;
-    }
-    
-    public getNombreUsuario(): string {
-        return this.nombreUsuario;
-    }
-    
-    public setNombreUsuario(nombreUsuario: string): void {
-        this.nombreUsuario = nombreUsuario;
-    }
-
-    public getdniUsuario(): number {
-        return this.dniUsuario;
-    }
-
+  // Otros atributos y métodos de la entidad Usuario
 }

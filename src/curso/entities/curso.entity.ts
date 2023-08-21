@@ -1,32 +1,20 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable, OneToMany } from 'typeorm';
+import { Escuela } from 'src/escuela/entities/escuela.entity'; 
+import { MateriaCurso } from 'src/materia_curso/entities/materia_curso.entity';
+import { AlumnoCurso } from 'src/alumno-curso/entities/alumno-curso.entity';
 
+@Entity()
 export class Curso {
+  @PrimaryGeneratedColumn()
+  idCurso: number;
 
-    @PrimaryGeneratedColumn()
-    public idCurso: number;
+  @ManyToOne(() => Escuela, escuela => escuela.cursos)
+  escuela: Escuela;
 
-    @Column()
-    public anioCurso: number;
-  
-    constructor(idCurso: number, anioCurso:number) { 
-        this.idCurso = idCurso;
-        this.anioCurso = anioCurso;
-     } 
+  @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.curso)
+  materiasCursos: MateriaCurso[];
 
-    public getIdCurso(): number {
-        return this.idCurso;
-    }
-
-    public setIdCurso(idCurso: number): void {
-        this.idCurso = idCurso;
-    }
-
-    public getAnioCurso(): number {
-        return this.anioCurso;
-    }
-
-    public setAnioCurso(anioCurso: number): void{
-        this.anioCurso = anioCurso;
-    }
-
+  @OneToMany(() => AlumnoCurso, alumnoCurso => alumnoCurso.curso)
+  alumnosCursos: AlumnoCurso[];
+  alumnos: number;
 }

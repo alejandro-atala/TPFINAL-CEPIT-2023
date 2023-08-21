@@ -1,41 +1,15 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany } from 'typeorm';
+import { Usuario } from 'src/usuario/entities/usuario.entity'; 
+import { Curso } from 'src/curso/entities/curso.entity'; 
 
+@Entity()
 export class Escuela {
-    @PrimaryGeneratedColumn()
-    public idEscuela: number;
+  @PrimaryGeneratedColumn()
+  idEscuela: number;
 
-    @Column({unique : true}) 
-    public nombreEscuela: string;
+  @OneToMany(() => Usuario, usuario => usuario.escuela)
+  usuarios: Usuario[];
 
-    @Column()
-    public cue: number;
-  
-    constructor(idEscuela: number, nombreEscuela: string, cue: number) { 
-        this.idEscuela = idEscuela;
-        this.nombreEscuela = nombreEscuela;
-        this.cue = cue;
-     } 
-
-    public getIdEscuela(): number {
-        return this.idEscuela;
-    }
-
-    public setIdEscuela(idEscuela: number): void {
-        this.idEscuela = idEscuela;
-    }
-    
-    public getNombreEscuela(): string {
-        return this.nombreEscuela;
-    }
-    
-    public setNombreEscuela(nombreEscuela: string): void {
-        this.nombreEscuela = nombreEscuela;
-    }
-
-    public getCue(): number {
-        return this.cue;
-    }
-
-    // el set de cue no lo hago porque es un dato que no se puede modificar
-    
+  @OneToMany(() => Curso, curso => curso.escuela)
+  cursos: Curso[];
 }

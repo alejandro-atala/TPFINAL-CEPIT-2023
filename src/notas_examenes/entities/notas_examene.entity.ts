@@ -1,43 +1,16 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Alumno } from 'src/alumno/entities/alumno.entity'; 
+import { Materia } from 'src/materia/entities/materia.entity';
+@Entity()
+export class NotaExamen {
+  @PrimaryGeneratedColumn()
+  idNotaExamen: number;
 
-export class NotasExamene {
+  @ManyToOne(() => Alumno, alumno => alumno.notasExamenes)
+  alumno: Alumno;
 
-    @PrimaryGeneratedColumn()
-    public idNota: number;
+  @ManyToOne(() => Materia, materia => materia.notasExamenes)
+  materia: Materia;
 
-    @Column()
-    public nota: number;
-
-    @Column()
-    public fechaNota: number;
-  
-    constructor(idNota: number, nota: number, fechaNota: number) { 
-        this.idNota = idNota;
-        this.nota = nota;
-        this.fechaNota = fechaNota;
-     } 
-
-    public getIdNota(): number {
-        return this.idNota;
-    }
-
-    public setIdNota(idNota: number): void {
-        this.idNota = idNota;
-    }
-    
-    public getNota(): number {
-        return this.nota;
-    }
-    
-    public setNota(nota: number): void {
-        this.nota = nota;
-    }
-
-    public getFechaNota(): number {
-        return this.fechaNota;
-    }
-
-    public setFechaNota(fechaNota: number): void {
-        this.fechaNota = fechaNota;
-    }
+  // Otros atributos como la nota del examen, fecha, etc.
 }

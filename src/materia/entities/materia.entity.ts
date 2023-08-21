@@ -1,44 +1,19 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany, JoinTable } from 'typeorm';
+import { Profesor } from 'src/profesor/entities/profesor.entity'; 
+import { MateriaCurso } from 'src/materia_curso/entities/materia_curso.entity'; 
+import { NotaExamen } from 'src/notas_examenes/entities/notas_examene.entity'; 
 
+@Entity()
 export class Materia {
+  @PrimaryGeneratedColumn()
+  idMateria: number;
 
-    @PrimaryGeneratedColumn()
-    public idMateria: number;
+  @ManyToOne(() => Profesor, profesor => profesor.materias)
+  profesor: Profesor;
 
-    @Column() 
-    public nombreMateria: string;
+  @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.materia)
+  materiasCursos: MateriaCurso[];
 
-    @Column()
-    public horarioMateria: number;
-
-  
-    constructor(idMateria: number, nombreMateria: string, horarioMateria: number) { 
-        this.idMateria = idMateria;
-        this.nombreMateria = nombreMateria;
-        this.horarioMateria= horarioMateria;
-     } 
-
-    public getIdMateria(): number {
-        return this.idMateria;
-    }
-
-    public setIdMateria(idMateria: number): void {
-        this.idMateria = idMateria;
-    }
-    
-    public getNombreMateria(): string {
-        return this.nombreMateria;
-    }
-    
-    public setNombreMateria(nombreMateria: string): void {
-        this.nombreMateria = nombreMateria;
-    }
-
-    public getHorarioMateria(): number {
-        return this.horarioMateria;
-    }
-
-    public setHorarioMateria(horarioMateria: number): void{
-        this.horarioMateria = horarioMateria;
-    }
+  @OneToMany(() => NotaExamen, notaExamen => notaExamen.materia)
+  notasExamenes: NotaExamen[];
 }

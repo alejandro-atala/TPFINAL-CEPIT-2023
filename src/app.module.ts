@@ -20,8 +20,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "Vicky.63-router",
-    database: "escolar", 
+    password: "root",
+    database: "escuela", 
     entities: [
       "dist/**/**.entity{.ts,.js}" 
     ],
