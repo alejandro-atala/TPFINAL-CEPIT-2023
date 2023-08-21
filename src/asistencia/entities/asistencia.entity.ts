@@ -6,10 +6,12 @@ export class Asistencia {
   @PrimaryGeneratedColumn()
   idAsistencia: number;
 
-  @ManyToOne(() => Alumno, alumno => alumno.asistencias)
-  alumno: Alumno;
-
   @Column()
   fecha: Date; 
+
+  @Column()
   asistencia: string;
+
+  @ManyToOne(() => Alumno, alumno => alumno.idAlumno)
+  alumno: Alumno;
 }

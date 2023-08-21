@@ -7,9 +7,9 @@ export class MateriaCurso {
   @PrimaryGeneratedColumn()
   idMateriaCurso: number;
 
-  @ManyToOne(() => Curso, curso => curso.materiasCursos)
+  @ManyToOne(() => Curso, curso => curso.idCurso)
   curso: Curso;
 
-  @ManyToOne(() => Materia, materia => materia.materiasCursos)
+  @ManyToOne(() => Materia, materia => materia.idMateria)
   materia: Materia;
 }

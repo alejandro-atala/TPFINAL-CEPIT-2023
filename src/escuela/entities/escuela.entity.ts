@@ -7,9 +7,9 @@ export class Escuela {
   @PrimaryGeneratedColumn()
   idEscuela: number;
 
-  @OneToMany(() => Usuario, usuario => usuario.escuela)
+  @OneToMany(() => Usuario, usuario => usuario.idUsuario)
   usuarios: Usuario[];
 
-  @OneToMany(() => Curso, curso => curso.escuela)
+  @OneToMany(() => Curso, curso => curso.idCurso)
   cursos: Curso[];
 }

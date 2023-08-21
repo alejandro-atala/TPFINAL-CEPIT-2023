@@ -8,12 +8,12 @@ export class Materia {
   @PrimaryGeneratedColumn()
   idMateria: number;
 
-  @ManyToOne(() => Profesor, profesor => profesor.materias)
+  @ManyToOne(() => Profesor, profesor => profesor.idProfesor)
   profesor: Profesor;
 
-  @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.materia)
+  @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.idMateriaCurso)
   materiasCursos: MateriaCurso[];
 
-  @OneToMany(() => NotaExamen, notaExamen => notaExamen.materia)
+  @OneToMany(() => NotaExamen, notaExamen => notaExamen.idNotaExamen)
   notasExamenes: NotaExamen[];
 }

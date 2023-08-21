@@ -6,6 +6,6 @@ export class Profesor {
   @PrimaryGeneratedColumn()
   idProfesor: number;
 
-  @OneToMany(() => Materia, materia => materia.profesor)
+  @OneToMany(() => Materia, materia => materia.idMateria)
   materias: Materia[];
 }

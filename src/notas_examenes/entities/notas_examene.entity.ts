@@ -6,10 +6,10 @@ export class NotaExamen {
   @PrimaryGeneratedColumn()
   idNotaExamen: number;
 
-  @ManyToOne(() => Alumno, alumno => alumno.notasExamenes)
+  @ManyToOne(() => Alumno, alumno => alumno.idAlumno)
   alumno: Alumno;
 
-  @ManyToOne(() => Materia, materia => materia.notasExamenes)
+  @ManyToOne(() => Materia, materia => materia.idMateria)
   materia: Materia;
 
   // Otros atributos como la nota del examen, fecha, etc.

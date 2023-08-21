@@ -8,13 +8,13 @@ export class Curso {
   @PrimaryGeneratedColumn()
   idCurso: number;
 
-  @ManyToOne(() => Escuela, escuela => escuela.cursos)
+  @ManyToOne(() => Escuela, escuela => escuela.idEscuela)
   escuela: Escuela;
 
-  @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.curso)
+  @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.idMateriaCurso)
   materiasCursos: MateriaCurso[];
 
-  @OneToMany(() => AlumnoCurso, alumnoCurso => alumnoCurso.curso)
+  @OneToMany(() => AlumnoCurso, alumnoCurso => alumnoCurso.idAlumnoCurso)
   alumnosCursos: AlumnoCurso[];
   alumnos: number;
 }
