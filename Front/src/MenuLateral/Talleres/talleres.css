@@ -1,0 +1,30 @@
+.titulo {
+  color: #3C7BA8; 
+
+}
+
+.talleres {
+  color: #333;
+}
+
+.card {
+  background-color: #f0f0f0; 
+  border: none;
+}
+
+.llamado-titulo {
+  font-family: 'Irish Grover', sans-serif;
+  color: rgb(0, 0, 0);
+  font-size: 30px;
+}
+
+.rectangulo-llamado {
+  background-color:  rgb(255, 121, 143);
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 20px;
+  width: 400px;
+  margin-left: 360px;
+  
+}
+

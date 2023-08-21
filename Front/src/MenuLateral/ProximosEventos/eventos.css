@@ -1,0 +1,24 @@
+.proximos-eventos {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    padding: 20px;
+    position: relative;
+    background-color: #f2f2f2;
+  }
+  
+  h1 {
+    margin-bottom: 20px; 
+  }
+  
+  h2{
+    text-align: center;
+  }
+
+  .evento {
+    text-align: center;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 2px solid #439cea;
+    font-size: 20px;;
+  }
