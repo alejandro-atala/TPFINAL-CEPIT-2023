@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './materias.css';
 
 const Materias = () => {
-  const [editableCells, setEditableCells] = useState([]);
+  //const [editableCells, setEditableCells] = useState([]);
   const [editingCell, setEditingCell] = useState(null);
 
   const handleEditClick = (cellIndex) => {

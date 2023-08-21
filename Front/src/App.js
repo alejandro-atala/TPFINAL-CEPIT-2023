@@ -18,6 +18,7 @@ import Beneficios from './MenuLateral/Beneficios/beneficios';
 import Inscripcion from './MenuLateral/InscripcionOnline/inscripcion'
 import Talleres from './MenuLateral/Talleres/talleres';
 import Directivos from './MenuLateral/Directivos/directivos'
+import ProximosEventos from './MenuLateral/ProximosEventos/eventos';
 
 
 const App = () => {
@@ -46,7 +47,7 @@ const App = () => {
               <Route path="/inscripcion-online" element={<Inscripcion />} />
               <Route path="/directivos" element={<Directivos />} />
               <Route path="/talleres" element={<Talleres />} />
-  
+              <Route path="/proximos-eventos" element={<ProximosEventos />} />
 
             </Routes>
           </div>
