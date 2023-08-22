@@ -7,12 +7,12 @@ const Inscripcion = () => {
   const [formData, setFormData] = useState({
     nombre: '',
     dni: '',
-    fecha: '',
+    fechaNac: '',
     direccion: '',
     telefono: '',
     email: '',
     password: '',
-    tipoUsuario: 'Elija usuario',
+    tipo: 'Elija usuario',
   });
 
   const handleChange = (e) => {
@@ -28,7 +28,7 @@ const Inscripcion = () => {
 
     try {
       // Realiza la solicitud POST al controlador de NestJS
-      const response = await axios.post('/api/registro', formData);
+      const response = await axios.post('http://localhost:3000/usuario', formData);
 
       // Maneja la respuesta del servidor aquí (puede mostrar mensaje de éxito)
       console.log('Registro exitoso:', response.data);
@@ -60,10 +60,16 @@ const Inscripcion = () => {
                   onChange={handleChange} />
               </div>
               <div className="form-group">
-                <label htmlFor="fecha">Fecha de nacimiento:</label>
-                <input type="date" className="form-control" id="fecha" value={formData.fecha}  
-                  onChange={handleChange} />
-              </div>
+  <label htmlFor="fecha">Fecha de nacimiento:</label>
+  <input
+    type="date"
+    className="form-control"
+    id="fechaNac" // Cambia el ID a "fechaNac"
+    value={formData.fechaNac}  
+    onChange={handleChange} // Cambia el manejador de cambios a handleChangeFecha
+  />
+</div>
+
               <div className="form-group">
                 <label htmlFor="direccion">Direccion:</label>
                 <input type="text" className="form-control" id="direccion" value={formData.direccion}  
@@ -88,7 +94,7 @@ const Inscripcion = () => {
                 <label htmlFor="inputState" className="form-label">
                   Tipo de usuario
                 </label>
-                <select id="inputState" className="form-select">
+                <select id="inputState" className="form-select" value={formData.tipo} onChange={handleChange}>
                   <option defaultValue>Elija usuario</option>
                   <option>Alumno</option>
                   <option>Profesor</option>
@@ -108,6 +114,6 @@ const Inscripcion = () => {
     </div>
 
   );
-};
+}; 
 
 export default Inscripcion;

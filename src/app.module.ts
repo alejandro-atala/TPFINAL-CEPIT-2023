@@ -14,6 +14,7 @@ import { NotasExamenesModule } from './notas_examenes/notas_examenes.module';
 import { ProfesorModule } from './profesor/profesor.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+
 @Module({
   imports: [TypeOrmModule.forRoot({
     type: "mysql",
@@ -38,6 +39,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     AsistenciaModule, 
     NotasExamenesModule,
     ProfesorModule],
+
   controllers: [AppController],
   providers: [AppService],
 })

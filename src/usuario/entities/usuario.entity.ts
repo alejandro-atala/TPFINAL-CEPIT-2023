@@ -7,6 +7,30 @@ export class Usuario {
   @PrimaryGeneratedColumn()
   idUsuario: number;
 
+  @Column()
+  nombre: string;
+  
+  @Column()
+  dni: number;
+  
+  @Column()
+  fechaNac: Date;
+  
+  @Column()
+  direccion: string;
+  
+  @Column()
+  telefono: number;
+  
+  @Column()
+  email: string;
+  
+  @Column()
+  password: string;
+  
+  @Column()
+  tipo: string;
+
   @ManyToOne(() => Escuela, escuela => escuela.idEscuela)
   escuela: Escuela;
 
