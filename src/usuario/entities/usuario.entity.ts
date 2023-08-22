@@ -13,7 +13,7 @@ export class Usuario {
   @Column()
   dni: number;
   
-  @Column()
+  @Column({type :'date'})
   fechaNac: Date;
   
   @Column()
