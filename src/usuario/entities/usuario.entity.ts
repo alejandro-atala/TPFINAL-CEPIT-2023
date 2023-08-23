@@ -11,7 +11,7 @@ export class Usuario {
   nombre: string;
   
   @Column()
-  dni: number;
+  dni: string;
   
   @Column({type :'date'})
   fechaNac: Date;
@@ -20,7 +20,7 @@ export class Usuario {
   direccion: string;
   
   @Column()
-  telefono: number;
+  telefono: string;
   
   @Column()
   email: string;

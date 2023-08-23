@@ -1,10 +1,10 @@
-
 import React, { useState } from 'react';
 import './inscripcion.css';
 import axios from 'axios'; // Importa la librería Axios
 
 const Inscripcion = () => {
   const [formData, setFormData] = useState({
+    id:'',
     nombre: '',
     dni: '',
     fechaNac: '',
@@ -12,7 +12,7 @@ const Inscripcion = () => {
     telefono: '',
     email: '',
     password: '',
-    tipo: 'Elija usuario',
+    tipo: '',
   });
 
   const handleChange = (e) => {
@@ -24,29 +24,27 @@ const Inscripcion = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
+    e.preventDefault(); // Evita la recarga de la página al enviar el formulario
+console.log(formData)
     try {
       // Realiza la solicitud POST al controlador de NestJS
       const response = await axios.post('http://localhost:3000/usuario', formData);
-
-      // Maneja la respuesta del servidor aquí (puede mostrar mensaje de éxito)
       console.log('Registro exitoso:', response.data);
     } catch (error) {
-      // Maneja el error aquí (puede mostrar mensaje de error)
       console.error('Error en el registro:', error);
     }
   };
+
   return (
     <div>
       <div className="container rounded  mt-4 text-center col-md-4 col-xs-12 col-sm-3 p-5 bg-registro ">
         <div className="row align-items-center ">
           <div className="col ">
             <h2 className="text-center">Registro de usuario</h2>
-            <form onSubmit={handleSubmit}>
+            <form>
               <div className="form-group">
                 <label htmlFor="nombre">Nombre completo:</label>
-                <input type="text" className="form-control" id="nombre" value={formData.nombre} 
+                <input type="text" className="form-control" id="nombre" value={formData.nombre}
                   onChange={handleChange} />
               </div>
               <div className="form-group">
@@ -60,41 +58,41 @@ const Inscripcion = () => {
                   onChange={handleChange} />
               </div>
               <div className="form-group">
-  <label htmlFor="fecha">Fecha de nacimiento:</label>
-  <input
-    type="date"
-    className="form-control"
-    id="fechaNac" // Cambia el ID a "fechaNac"
-    value={formData.fechaNac}  
-    onChange={handleChange} // Cambia el manejador de cambios a handleChangeFecha
-  />
-</div>
+                <label htmlFor="fecha">Fecha de nacimiento:</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="fechaNac" // Cambia el ID a "fechaNac"
+                  value={formData.fechaNac}
+                  onChange={handleChange} // Cambia el manejador de cambios a handleChangeFecha
+                />
+              </div>
 
               <div className="form-group">
                 <label htmlFor="direccion">Direccion:</label>
-                <input type="text" className="form-control" id="direccion" value={formData.direccion}  
+                <input type="text" className="form-control" id="direccion" value={formData.direccion}
                   onChange={handleChange} />
               </div>
               <div className="form-group">
                 <label htmlFor="telefono">Telefono:</label>
-                <input type="number" className="form-control" id="telefono" value={formData.telefono}  
+                <input type="number" className="form-control" id="telefono" value={formData.telefono}
                   onChange={handleChange} />
               </div>
               <div className="form-group">
                 <label htmlFor="email">Correo electrónico:</label>
-                <input type="email" className="form-control" id="email" value={formData.email}  
+                <input type="email" className="form-control" id="email" value={formData.email}
                   onChange={handleChange} />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Contraseña:</label>
-                <input type="password" className="form-control" id="password" value={formData.password}  
+                <input type="password" className="form-control" id="password" value={formData.password}
                   onChange={handleChange} />
               </div>
               <div className="form-group">
                 <label htmlFor="inputState" className="form-label">
                   Tipo de usuario
                 </label>
-                <select id="inputState" className="form-select" value={formData.tipo} onChange={handleChange}>
+                <select id="tipo" className="form-select" value={formData.tipo} onChange={handleChange}>
                   <option defaultValue>Elija usuario</option>
                   <option>Alumno</option>
                   <option>Profesor</option>
@@ -104,6 +102,7 @@ const Inscripcion = () => {
                 type="submit"
                 className="btn btn-primary m-4"
                 id="registrarse"
+                onClick={handleSubmit} // Cambio aquí: ejecuta handleSubmit al hacer clic en el botón
               >
                 Registrarse
               </button>
@@ -112,8 +111,7 @@ const Inscripcion = () => {
         </div>
       </div>
     </div>
-
   );
-}; 
+};
 
 export default Inscripcion;
