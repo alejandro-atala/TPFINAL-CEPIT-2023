@@ -3,7 +3,7 @@ import './inicioSesion.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const InicioSesion = () => {
+const InicioSesion = ({ onLogin }) => {
   const navigate = useNavigate(); // Acceso a la función de navegación
 
 
@@ -26,12 +26,12 @@ const InicioSesion = () => {
     try {
       const response = await axios.post('http://localhost:3000/usuario/login', formData);
   
-      console.log('Inicio de sesión exitoso:', response.data);
-  
+      console.log('Inicio de sesión exitoso:', response.data.nombre);
+      onLogin(response.data.nombre);
       // Redirigir a la ruta correcta según el tipo de usuario
-      if (response.data === 'Alumno') {
+      if (response.data.tipo === 'Alumno') {
         navigate('/alumno');
-      } else if (response.data === 'Profesor') {
+      } else if (response.data.tipo === 'Profesor') {
         navigate('/profesor');
       }
     } catch (error) {

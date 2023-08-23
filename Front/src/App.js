@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -24,9 +24,20 @@ import Profesor from './PaginaProfe/profesor';
 import AssistanceApp from './PaginaProfe/Asistencia/AssistanceApp';
 
 const App = () => {
+
+    // State para almacenar el nombre del usuario que inició sesión
+    const [loggedInUser, setLoggedInUser] = useState('');
+  
+    // Función para actualizar el nombre del usuario cuando inicie sesión
+    const handleLogin = (username) => {
+      setLoggedInUser(username);
+    };
+
+
   return (
     <BrowserRouter>
-      <Navbar />
+   <Navbar loggedInUser={loggedInUser} />
+
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-3">
@@ -36,7 +47,9 @@ const App = () => {
           <div className="col-md-9">
             {/* Contenido principal */}
             <Routes>
-              <Route path="/iniciarSesion" element={<InicioSesion />} />
+            <Route path="/iniciarSesion" element={<InicioSesion onLogin={handleLogin} />} />
+
+              {/* <Route path="/iniciarSesion" element={<InicioSesion />} /> */}
               <Route path="/" element={<Home />} />
               {/* pagina alumno */}
               <Route path="/notas" element={<Notas />} />
