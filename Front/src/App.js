@@ -19,7 +19,7 @@ import Inscripcion from './MenuLateral/InscripcionOnline/inscripcion'
 import Talleres from './MenuLateral/Talleres/talleres';
 import Directivos from './MenuLateral/Directivos/directivos'
 import ProximosEventos from './MenuLateral/ProximosEventos/eventos';
-
+import Alumno from './Alumno/alumno'
 
 const App = () => {
   return (
@@ -48,7 +48,7 @@ const App = () => {
               <Route path="/directivos" element={<Directivos />} />
               <Route path="/talleres" element={<Talleres />} />
               <Route path="/proximos-eventos" element={<ProximosEventos />} />
-
+              <Route path="/alumno" element={<Alumno />} />
             </Routes>
           </div>
         </div>

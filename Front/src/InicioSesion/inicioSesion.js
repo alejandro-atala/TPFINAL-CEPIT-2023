@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import './inicioSesion.css';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 
 const InicioSesion = () => {
+  const navigate = useNavigate(); // Acceso a la función de navegación
+
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-
- 
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -21,12 +22,18 @@ const InicioSesion = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+  
     try {
       const response = await axios.post('http://localhost:3000/usuario/login', formData);
-      
+  
       console.log('Inicio de sesión exitoso:', response.data);
-
+  
+      // Redirigir a la ruta correcta según el tipo de usuario
+      if (response.data === 'Alumno') {
+        navigate('/alumno');
+      } else if (response.data === 'Profesor') {
+        navigate('/alumno');
+      }
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
     }
