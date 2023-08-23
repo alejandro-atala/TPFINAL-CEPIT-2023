@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { Controller, Post, Body } from '@nestjs/common';
@@ -44,8 +44,23 @@ export class UsuarioService {
     if (!contraseñaCoincide) {
       throw new NotFoundException('Contraseña incorrecta');
     }
+
+    
     return usuario;
   }
+
+
+async verificarTipoUsuario(credenciales: CredencialesDto, tipo: string): Promise<Usuario | null> {
+    const usuario = await this.verificarContraseña(credenciales);
+
+    if (usuario.tipo !== tipo) {
+      throw new UnauthorizedException('Tipo de usuario incorrecto');
+    }
+
+    return usuario;
+  }
+
+  
   
   
 
