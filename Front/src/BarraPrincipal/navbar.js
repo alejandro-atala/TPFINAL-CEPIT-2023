@@ -37,7 +37,7 @@ const Navbar = ({ loggedInUser }) => {
             </li>
             {loggedInUser ? (
               <li className="nav-item">
-                <span className="nav-link"><h6>Hola {loggedInUser}</h6></span>
+                <span className="nav-link hola-usuario">Hola {loggedInUser}</span>
               </li>
             ) : null}
             <li className="nav-item">
