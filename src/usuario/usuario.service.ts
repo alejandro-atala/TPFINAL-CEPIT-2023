@@ -7,6 +7,8 @@ import { Usuario } from './entities/usuario.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { CredencialesDto } from './dto/credenciales.dto';
+const saltRounds = 10; // Número de rondas de encriptación
+
 
 @Injectable()
 export class UsuarioService {
@@ -15,8 +17,13 @@ export class UsuarioService {
     private usuarioRepository: Repository<Usuario>,
   ) {}
 
+
+
   async createRegistro(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
     const nuevoUsuario = this.usuarioRepository.create(createUsuarioDto);
+  
+    nuevoUsuario.password = await bcrypt.hash(nuevoUsuario.password, saltRounds);
+  
     return await this.usuarioRepository.save(nuevoUsuario);
   }
 
@@ -33,8 +40,7 @@ export class UsuarioService {
     }
 
     const contraseñaCoincide = await bcrypt.compare(credenciales.password, usuario.password);
-console.log(credenciales.password)
-console.log(usuario.password)
+
     if (!contraseñaCoincide) {
       throw new NotFoundException('Contraseña incorrecta');
     }

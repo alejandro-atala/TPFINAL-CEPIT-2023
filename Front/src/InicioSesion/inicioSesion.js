@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import './inicioSesion.css';
-import axios from 'axios'; // Importa la librería Axios
+import axios from 'axios';
+
 
 const InicioSesion = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+ 
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -20,16 +23,11 @@ const InicioSesion = () => {
     e.preventDefault();
     
     try {
-      // Realiza la solicitud POST al controlador de NestJS para autenticar al usuario
       const response = await axios.post('http://localhost:3000/usuario/login', formData);
       
-      // Maneja la respuesta del servidor aquí (puede redirigir a otra página)
       console.log('Inicio de sesión exitoso:', response.data);
-      
-      // Redirige a otra página después del inicio de sesión exitoso
-      // Por ejemplo: window.location.href = '/dashboard';
+
     } catch (error) {
-      // Maneja el error aquí (puede mostrar mensaje de error)
       console.error('Error en el inicio de sesión:', error);
     }
   };

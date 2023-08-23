@@ -55,7 +55,7 @@ async iniciarSesion(@Body() credenciales: CredencialesDto) {
 
     // Verificar la contraseña
     const contraseñaCoincide = await this.usuarioService.verificarContraseña(credenciales);
-    console.log(contraseñaCoincide)
+
     if (!contraseñaCoincide) {
       throw new UnauthorizedException('Contraseña incorrecta');
     }
