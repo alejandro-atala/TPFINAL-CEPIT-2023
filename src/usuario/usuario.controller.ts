@@ -67,13 +67,10 @@ export class UsuarioController {
       }
 
       // Redirigir a diferentes rutas según el tipo de usuario
-      if (usuario.tipo === 'Alumno') {
+      if (usuario.tipo === 'Alumno' || usuario.tipo === 'Profesor') {
 
         return usuario.tipo;
-      } else if (usuario.tipo === 'Profesor') {
-
-        return usuario.tipo;
-      }
+      } 
 
 
 
