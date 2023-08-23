@@ -1,12 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UnauthorizedException } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { CredencialesDto } from './dto/credenciales.dto';
 
 
 @Controller('usuario')
 export class UsuarioController {
-  constructor(private readonly usuarioService: UsuarioService) {}
+  constructor(private readonly usuarioService: UsuarioService) { }
 
   // @Post()
   // create(@Body() createUsuarioDto: CreateUsuarioDto) {
@@ -42,5 +43,33 @@ export class UsuarioController {
       throw new Error('Error al crear el usuario');
     }
   }
-  
+
+  @Post('login')
+async iniciarSesion(@Body() credenciales: CredencialesDto) {
+  try {
+    const usuario = await this.usuarioService.buscarPorEmail(credenciales.email);
+
+    if (!usuario) {
+      throw new UnauthorizedException('Correo electrónico no registrado');
+    }
+
+    // Verificar la contraseña
+    const contraseñaCoincide = await this.usuarioService.verificarContraseña(credenciales);
+    console.log(contraseñaCoincide)
+    if (!contraseñaCoincide) {
+      throw new UnauthorizedException('Contraseña incorrecta');
+    }
+
+    // Aquí podrías devolver una respuesta de éxito si las credenciales son válidas
+    return {
+      message: 'Inicio de sesión exitoso',
+      usuario: usuario, // Opcional: podrías enviar datos adicionales del usuario
+    };
+
+  } catch (error) {
+    throw new UnauthorizedException('Error al iniciar sesión');
+  }
+}
+
+
 }
