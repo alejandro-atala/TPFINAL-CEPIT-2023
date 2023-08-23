@@ -32,7 +32,7 @@ const InicioSesion = () => {
       if (response.data === 'Alumno') {
         navigate('/alumno');
       } else if (response.data === 'Profesor') {
-        navigate('/alumno');
+        navigate('/profesor');
       }
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);

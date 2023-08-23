@@ -20,6 +20,8 @@ import Talleres from './MenuLateral/Talleres/talleres';
 import Directivos from './MenuLateral/Directivos/directivos'
 import ProximosEventos from './MenuLateral/ProximosEventos/eventos';
 import Alumno from './Alumno/alumno'
+import Profesor from './PaginaProfe/profesor';
+import AssistanceApp from './PaginaProfe/Asistencia/AssistanceApp';
 
 const App = () => {
   return (
@@ -29,19 +31,21 @@ const App = () => {
         <div className="row">
           <div className="col-md-3">
             <Sidebar />
-          
+
           </div>
           <div className="col-md-9">
             {/* Contenido principal */}
             <Routes>
               <Route path="/iniciarSesion" element={<InicioSesion />} />
               <Route path="/" element={<Home />} />
+              {/* pagina alumno */}
               <Route path="/notas" element={<Notas />} />
               <Route path="/boletin" element={<Boletin />} />
               <Route path="/materias" element={<Materias />} />
               <Route path="/Asistencia" element={<Asistencia />} />
               <Route path="/avisos" element={<Avisos />} />
               <Route path="/mensaje" element={<Mensaje />} />
+
               <Route path="/plan-de-estudio" element={<PlanDeEstudios />} />
               <Route path="/beneficios" element={<Beneficios />} />
               <Route path="/inscripcion-online" element={<Inscripcion />} />
@@ -49,6 +53,14 @@ const App = () => {
               <Route path="/talleres" element={<Talleres />} />
               <Route path="/proximos-eventos" element={<ProximosEventos />} />
               <Route path="/alumno" element={<Alumno />} />
+              {/* pagina profesor */}
+              <Route path="/profesor" element={<Profesor />} />
+              {/* <Route path="/Profnotas" element={<ProfNotas />} />
+              <Route path="/Profboletin" element={<ProfBoletin />} />
+              <Route path="/Profmaterias" element={<ProfMaterias />} /> */}
+              <Route path="/ProfAsistencia" element={<AssistanceApp />} />
+              {/* <Route path="/Profavisos" element={<ProfAvisos />} />
+              <Route path="/Profmensaje" element={<ProfMensaje />} /> */}
             </Routes>
           </div>
         </div>
