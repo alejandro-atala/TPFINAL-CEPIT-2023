@@ -20,8 +20,9 @@ import Talleres from './MenuLateral/Talleres/talleres';
 import Directivos from './MenuLateral/Directivos/directivos'
 import ProximosEventos from './MenuLateral/ProximosEventos/eventos';
 import Alumno from './Alumno/alumno'
-// import Profesor from './PaginaProfe/profesor';
-// import AssistanceApp from './PaginaProfe/Asistencia/AssistanceApp';
+import Profesor from './PaginaProfe/profesor';
+import AlumnosList from './PaginaProfe/Asistencia/asistenciaList';
+
 
 const App = () => {
 
@@ -36,6 +37,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+
       <div className="d-flex flex-column min-vh-100">
         <Navbar loggedInUser={loggedInUser} />
         <div className="flex-grow-1">
@@ -47,6 +49,7 @@ const App = () => {
               <div className="col-md-9">
                 {/* Contenido principal */}
                 <Routes>
+
             <Route path="/iniciarSesion" element={<InicioSesion onLogin={handleLogin} />} />
 
               {/* <Route path="/iniciarSesion" element={<InicioSesion />} /> */}
@@ -67,14 +70,15 @@ const App = () => {
               <Route path="/proximos-eventos" element={<ProximosEventos />} />
               <Route path="/alumno" element={<Alumno />} />
               {/* pagina profesor */}
-              {/* <Route path="/profesor" element={<Profesor />} /> */}
+
+              <Route path="/profesor" element={<Profesor />} />
               {/* <Route path="/Profnotas" element={<ProfNotas />} />
               <Route path="/Profboletin" element={<ProfBoletin />} />
               <Route path="/Profmaterias" element={<ProfMaterias />} /> */}
-              {/* <Route path="/ProfAsistencia" element={<AssistanceApp />} /> */}
+              <Route path="/ProfAsistencia" element={<AlumnosList />} />
               {/* <Route path="/Profavisos" element={<ProfAvisos />} />
               <Route path="/Profmensaje" element={<ProfMensaje />} /> */}
-            </Routes>
+            </Routes> 
               </div>
             </div>
           </div>
@@ -86,3 +90,4 @@ const App = () => {
 };
 
 export default App;
+
