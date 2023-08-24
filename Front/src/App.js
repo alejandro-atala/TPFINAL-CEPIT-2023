@@ -23,6 +23,7 @@ import Alumno from './Alumno/alumno'
 import Profesor from './PaginaProfe/profesor';
 import AlumnosList from './PaginaProfe/Asistencia/asistenciaList';
 
+
 const App = () => {
 
     // State para almacenar el nombre del usuario que inició sesión
@@ -36,17 +37,19 @@ const App = () => {
 
   return (
     <BrowserRouter>
-   <Navbar loggedInUser={loggedInUser} />
 
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-md-3">
-            <Sidebar />
+      <div className="d-flex flex-column min-vh-100">
+        <Navbar loggedInUser={loggedInUser} />
+        <div className="flex-grow-1">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-md-3">
+                <Sidebar />
+              </div>
+              <div className="col-md-9">
+                {/* Contenido principal */}
+                <Routes>
 
-          </div>
-          <div className="col-md-9">
-            {/* Contenido principal */}
-            <Routes>
             <Route path="/iniciarSesion" element={<InicioSesion onLogin={handleLogin} />} />
 
               {/* <Route path="/iniciarSesion" element={<InicioSesion />} /> */}
@@ -67,6 +70,7 @@ const App = () => {
               <Route path="/proximos-eventos" element={<ProximosEventos />} />
               <Route path="/alumno" element={<Alumno />} />
               {/* pagina profesor */}
+
               <Route path="/profesor" element={<Profesor />} />
               {/* <Route path="/Profnotas" element={<ProfNotas />} />
               <Route path="/Profboletin" element={<ProfBoletin />} />
@@ -75,12 +79,15 @@ const App = () => {
               {/* <Route path="/Profavisos" element={<ProfAvisos />} />
               <Route path="/Profmensaje" element={<ProfMensaje />} /> */}
             </Routes> 
+              </div>
+            </div>
           </div>
         </div>
+        <Footer className="fixed-bottom" />
       </div>
-      <Footer />
     </BrowserRouter>
   );
 };
 
 export default App;
+

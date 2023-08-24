@@ -12,6 +12,8 @@ const InicioSesion = ({ onLogin }) => {
     password: '',
   });
 
+  const [message, setMessage] = useState('');
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
@@ -36,6 +38,7 @@ const InicioSesion = ({ onLogin }) => {
       }
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
+      setMessage('Error en el inicio de sesión. Verifica tus credenciales.');
     }
   };
 
@@ -44,6 +47,7 @@ const InicioSesion = ({ onLogin }) => {
       <div className="row align-items-center">
         <div className=" ">
           <h2 className="text-center">Iniciar sesión</h2>
+          {message && <div className="alert alert-danger">{message}</div>}
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Correo electrónico:</label>
