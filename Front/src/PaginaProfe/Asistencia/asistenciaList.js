@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, ListGroup, Button } from 'react-bootstrap';
 import axios from 'axios';
+import  './asistenciaList.css';
 
 const AlumnosList = () => {
   const [anios, setAnios] = useState([]);
@@ -102,39 +103,44 @@ const AlumnosList = () => {
           </Form.Control>
         </Form.Group>
       </Form>
-      <h2 className="text-center">Alumnos de {selectedAnio}</h2>
+      <h4 className="text-center">Alumnos de {selectedAnio}</h4>
       <ListGroup>
-        {alumnos.map((alumno) => (
-          <ListGroup.Item key={alumno.idAlumno} className="d-flex justify-content-between align-items-center">
-            <span>{alumno.nombre}</span>
-            <div>
-              <input
-                type="radio"
-                name={`asistencia_${alumno.idAlumno}`}
-                value="presente"
-                onChange={() => handleAttendanceChange(alumno.idAlumno, 'presente')}
-              /> Presente
-              <input
-                type="radio"
-                name={`asistencia_${alumno.idAlumno}`}
-                value="ausente"
-                onChange={() => handleAttendanceChange(alumno.idAlumno, 'ausente')}
-              /> Ausente
-              <input
-                type="radio"
-                name={`asistencia_${alumno.idAlumno}`}
-                value="media-falta"
-                onChange={() => handleAttendanceChange(alumno.idAlumno, 'media-falta')}
-              /> Media Falta
-            </div>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
-      <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
-        <Button variant="primary" onClick={saveAttendance}>
-          Guardar Asistencias
-        </Button>
+  {alumnos.map((alumno) => (
+    <ListGroup.Item key={alumno.idAlumno} className="d-flex justify-content-around align-items-center">
+      <span>{alumno.nombre}</span>
+      <div>
+        <input
+          type="radio"
+          name={`asistencia_${alumno.idAlumno}`}
+          value="presente"
+          onChange={() => handleAttendanceChange(alumno.idAlumno, 'presente')}
+        /> Presente
+        <span className="mx-2"></span> {/* Espacio horizontal */}
+        <input
+          type="radio"
+          name={`asistencia_${alumno.idAlumno}`}
+          value="ausente"
+          onChange={() => handleAttendanceChange(alumno.idAlumno, 'ausente')}
+        /> Ausente
+        <span className="mx-2"></span> {/* Espacio horizontal */}
+        <input
+          type="radio"
+          name={`asistencia_${alumno.idAlumno}`}
+          value="media-falta"
+          onChange={() => handleAttendanceChange(alumno.idAlumno, 'media-falta')}
+        /> Media Falta
       </div>
+    </ListGroup.Item>
+  ))}
+</ListGroup>
+
+
+      <div className="d-flex justify-content-center mt-4">
+  <Button variant="primary" onClick={saveAttendance}>
+    Guardar Asistencias
+  </Button>
+</div>
+
     </div>
   );
 };
