@@ -1,17 +1,43 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Alumno } from 'src/alumno/entities/alumno.entity'; 
+import { Alumno } from 'src/alumno/entities/alumno.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity()
 export class Asistencia {
   @PrimaryGeneratedColumn()
-  idAsistencia: number;
+  id: number;
 
   @Column()
-  fecha: Date; 
+  alumno: string;
+
+  @Column()
+  fecha: Date;
 
   @Column()
   asistencia: string;
 
+
   @ManyToOne(() => Alumno, alumno => alumno.idAlumno)
-  alumno: Alumno;
+  @JoinColumn()
+  alumnos: Alumno;
 }
+  
+// import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+// import { Alumno } from 'src/alumno/entities/alumno.entity';
+
+// @Entity()
+// export class Asistencia {
+//   @PrimaryGeneratedColumn()
+//   id: number;
+
+//   @Column()
+//   fecha: Date;
+
+//   @Column()
+//   asistencia: string;
+
+//   @ManyToOne(() => Alumno, alumno => alumno.asistencias)
+//   @JoinColumn({ name: 'alumnoId' })
+//   alumno: Alumno; // Debes asignar el objeto Alumno, no el nombre
+// }
+
+ 

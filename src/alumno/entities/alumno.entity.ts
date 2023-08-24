@@ -1,19 +1,35 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from 'typeorm';
-import { AlumnoCurso } from 'src/alumno-curso/entities/alumno-curso.entity'; 
-import { Asistencia } from 'src/asistencia/entities/asistencia.entity'; 
-import { NotaExamen } from 'src/notas_examenes/entities/notas_examene.entity'; 
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Curso } from 'src/curso/entities/curso.entity';  // Asegúrate de importar correctamente
 
 @Entity()
 export class Alumno {
   @PrimaryGeneratedColumn()
   idAlumno: number;
 
-  @OneToMany(() => AlumnoCurso, alumnoCurso => alumnoCurso.idAlumnoCurso)
-  alumnosCursos: AlumnoCurso[];
+  @Column()
+  nombre: string;
 
-  @OneToMany(() => Asistencia, asistencia => asistencia.idAsistencia)
-  asistencias: Asistencia[];
+  @ManyToOne(() => Curso, curso => curso.alumnos)
+  curso: Curso;
 
-  @OneToMany(() => NotaExamen, notaExamen => notaExamen.idNotaExamen)
-  notasExamenes: NotaExamen[];
+
 }
+
+// import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
+// import { Curso } from 'src/curso/entities/curso.entity';
+// import { Asistencia } from 'src/asistencia/entities/asistencia.entity';
+
+// @Entity()
+// export class Alumno {
+//   @PrimaryGeneratedColumn()
+//   idAlumno: number;
+
+//   @Column()
+//   nombre: string;
+
+//   @ManyToOne(() => Curso, curso => curso.alumnos)
+//   curso: Curso;
+
+//   @OneToMany(() => Asistencia, asistencia => asistencia.alumno)
+//   asistencias: Asistencia[];
+// }

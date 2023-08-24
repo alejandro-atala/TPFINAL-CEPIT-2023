@@ -1,9 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Curso } from './entities/curso.entity';
 import { CreateCursoDto } from './dto/create-curso.dto';
 import { UpdateCursoDto } from './dto/update-curso.dto';
 
 @Injectable()
 export class CursoService {
+  constructor(
+    @InjectRepository(Curso) private cursoRepository: Repository<Curso>,
+  ) {}
+  async getAnios(): Promise<Curso[]> {
+    return this.cursoRepository
+      .createQueryBuilder('curso')
+      .select('DISTINCT curso.anio', 'anio') // Selecciona años únicos
+      .getRawMany();
+  }
   create(createCursoDto: CreateCursoDto) {
     return 'This action adds a new curso';
   }
