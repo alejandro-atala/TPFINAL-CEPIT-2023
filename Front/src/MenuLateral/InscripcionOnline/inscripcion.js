@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './inscripcion.css';
 import axios from 'axios'; // Importa la librería Axios
+import { useNavigate } from 'react-router-dom';
+
 
 const Inscripcion = () => {
+  const navigate = useNavigate(); // Acceso a la función de navegación
   const [formData, setFormData] = useState({
     id:'',
     nombre: '',
@@ -14,6 +17,9 @@ const Inscripcion = () => {
     password: '',
     tipo: '',
   });
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -30,8 +36,16 @@ console.log(formData)
       // Realiza la solicitud POST al controlador de NestJS
       const response = await axios.post('http://localhost:3000/usuario', formData);
       console.log('Registro exitoso:', response.data);
+      setSuccessMessage('Registro exitoso. ¡Bienvenido! ');
+      setErrorMessage('');
+     // Agregar un retraso de 2 segundos antes de redirigir
+     setTimeout(() => {
+      navigate('/iniciarSesion');
+    }, 3000);
     } catch (error) {
       console.error('Error en el registro:', error);
+      setErrorMessage('Error en el registro. Inténtelo nuevamente.');
+      setSuccessMessage('');
     }
   };
 
@@ -41,6 +55,8 @@ console.log(formData)
         <div className="row align-items-center ">
           <div className="col ">
             <h2 className="text-center">Registro de usuario</h2>
+            {successMessage && <div className="alert alert-success">{successMessage}</div>}
+            {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
             <form>
               <div className="form-group">
                 <label htmlFor="nombre">Nombre completo:</label>
