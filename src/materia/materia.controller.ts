@@ -13,8 +13,9 @@ export class MateriaController {
   }
 
   @Get()
-  findAll() {
-    return this.materiaService.findAll();
+  async findAll() {
+    const materias = await this.materiaService.findAll();
+    return materias;
   }
 
   @Get(':id')

@@ -8,6 +8,9 @@ export class Materia {
   @PrimaryGeneratedColumn()
   idMateria: number;
 
+  @Column()
+  public nombre: string;
+
   @ManyToOne(() => Profesor, profesor => profesor.idProfesor)
   profesor: Profesor;
 

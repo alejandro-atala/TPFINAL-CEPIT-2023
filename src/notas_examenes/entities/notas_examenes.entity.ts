@@ -9,6 +9,9 @@ export class NotaExamen {
   public idNota: number;
 
   @Column()
+  public idAlumno: number;
+
+  @Column()
   public nombre: string;
 
   @Column()
@@ -23,11 +26,10 @@ export class NotaExamen {
   @Column()
   public trimestre: number;
 
-  @ManyToOne(() => Alumno, alumno => alumno.notasExamenes)
-  alumno: Alumno;
+  @Column()
+  public materia: string;
 
-  @ManyToOne(() => Materia, materia => materia.notasExamenes)
-  materia: Materia;
+ 
 
   // Otros atributos y métodos si es necesario
 }
