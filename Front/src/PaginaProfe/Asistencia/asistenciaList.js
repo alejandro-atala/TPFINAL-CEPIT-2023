@@ -46,7 +46,7 @@ const AsistenciaList = () => {
 
   const handleAttendanceChange = (alumnoId, asistenciaType) => {
     setAttendanceData((prevData) => {
-      const fecha = new Date().toISOString();
+      const fecha = new Date().toISOString().split('T')[0];;
 
       // Filtra los datos anteriores y actualiza con los nuevos valores
       const updatedData = prevData.filter((item) => item.id !== alumnoId);
