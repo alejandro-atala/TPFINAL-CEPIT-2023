@@ -5,20 +5,36 @@ import { useAlumno } from '../Alumno/AlumnoContext';
 const Asistencia = () => {
   const [asistencias, setAsistencias] = useState([]);
   const { alumnoLogueado } = useAlumno();
-  console.log(alumnoLogueado);
-
+  const [contadorAsistencias, setContadorAsistencias] = useState(0);
+  const [contadorInasistencias, setContadorInasistencias] = useState(0);
+  const [contadorMediaFalta, setContadorMediaFalta] = useState(0);
 
   useEffect(() => {
     fetchAsistencias();
   }, []);
-  //`http://localhost:3000/asistencia/${alumnoLogueado}`
+
   const fetchAsistencias = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/asistencia/${alumnoLogueado}`);
-      const asistenciasData = response.data; // Asumiendo que response.data es un Array
-      console.log(response.data)
-      const asistenciasAlumno = asistenciasData.filter(asistencia => asistencia.idAlumno === alumnoLogueado);
-      setAsistencias(asistenciasAlumno);
+      const asistenciasData = response.data;
+      setAsistencias(asistenciasData);
+      // Calcular los contadores
+      const asistenciasCounts = asistenciasData.reduce(
+        (counts, asistencia) => {
+          if (asistencia.asistencia === 'presente') {
+            counts.asistencias += 1;
+          } else if (asistencia.asistencia === 'ausente') {
+            counts.inasistencias += 1;
+          } else if (asistencia.asistencia === 'media falta') {
+            counts.mediaFalta += 1;
+          }
+          return counts;
+        },
+        { asistencias: 0, inasistencias: 0, mediaFalta: 0 }
+      );
+      setContadorAsistencias(asistenciasCounts.asistencias);
+      setContadorInasistencias(asistenciasCounts.inasistencias);
+      setContadorMediaFalta(asistenciasCounts.mediaFalta);
     } catch (error) {
       console.error('Error fetching asistencias:', error);
     }
@@ -28,6 +44,7 @@ const Asistencia = () => {
     <div className='col-9'>
       <h4>Registro de asistencias e inasistencias</h4>
       <table className="custom-table">
+
         <thead>
           <tr>
             <th>Fecha</th>
@@ -51,6 +68,12 @@ const Asistencia = () => {
           ))}
         </tbody>
       </table>
+      <br></br>
+      <div className="d-flex justify-content-between ">
+        <p>Asistencias: <strong>{contadorAsistencias}</strong></p>
+        <p>Inasistencias: <strong>{contadorInasistencias}</strong></p>
+        <p>Medias Faltas:<strong> {contadorMediaFalta}</strong></p>
+      </div>
     </div>
   );
 };
