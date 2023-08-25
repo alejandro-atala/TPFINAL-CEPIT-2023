@@ -1,7 +1,7 @@
 export class CreateAsistenciaDto {
-  
-  public alumno: string;
-  public fecha: Date;
-  public asistencia: string;
-
+  idAlumno: number;
+  nombre: string;
+  anio: string;
+  fecha: Date;
+  asistencia: string;
 }
