@@ -81,7 +81,7 @@ const NotasExamenesList = () => {
   };
 
   return (
-    <div>
+    <div className="col-9">
       <h2>Registro de Notas de Exámenes</h2>
       <Form className="text-center mb-3">
         <Form.Group controlId="formAnio" className="mx-auto" style={{ maxWidth: '200px' }}>
