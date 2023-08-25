@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Patch, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Patch, Delete, ParseIntPipe } from '@nestjs/common';
 import { AsistenciaService } from './asistencia.service';
 import { CreateAsistenciaDto } from './dto/create-asistencia.dto';
 import { UpdateAsistenciaDto } from './dto/update-asistencia.dto';
@@ -19,9 +19,11 @@ export class AsistenciaController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.asistenciaService.findOne(+id);
+  findAsistenciasByAlumno(@Param('id', ParseIntPipe) idAlumno: number) {
+    return this.asistenciaService.findAsistenciasByAlumno(idAlumno);
   }
+  
+  
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAsistenciaDto: UpdateAsistenciaDto) {

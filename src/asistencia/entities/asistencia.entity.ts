@@ -27,23 +27,6 @@ export class Asistencia {
   alumnos: Alumno;
 }
   
-// import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-// import { Alumno } from 'src/alumno/entities/alumno.entity';
 
-// @Entity()
-// export class Asistencia {
-//   @PrimaryGeneratedColumn()
-//   id: number;
-
-//   @Column()
-//   fecha: Date;
-
-//   @Column()
-//   asistencia: string;
-
-//   @ManyToOne(() => Alumno, alumno => alumno.asistencias)
-//   @JoinColumn({ name: 'alumnoId' })
-//   alumno: Alumno; // Debes asignar el objeto Alumno, no el nombre
-// }
 
  

@@ -1,6 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useAlumno } from '../Alumno/AlumnoContext';
 
 const Asistencia = () => {
+  const [asistencias, setAsistencias] = useState([]);
+  const { alumnoLogueado } = useAlumno();
+console.log(alumnoLogueado);
+
+
+  useEffect(() => {
+    fetchAsistencias();
+  }, []);
+//`http://localhost:3000/asistencia/${alumnoLogueado}`
+const fetchAsistencias = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/asistencia/${alumnoLogueado}`);
+    const asistenciasData = response.data; // Asumiendo que response.data es un Array
+    console.log(response.data)
+    const asistenciasAlumno = asistenciasData.filter(asistencia => asistencia.idAlumno === alumnoLogueado);
+    setAsistencias(asistenciasAlumno);
+  } catch (error) {
+    console.error('Error fetching asistencias:', error);
+  }
+};
+
   return (
     <div>
       <h1>Log de asistencias e inasistencias</h1>
@@ -14,30 +37,14 @@ const Asistencia = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2023-04-21</td>
-            <td>09:00</td>
-            <td>09:00</td>
-            <td>Asistencia</td>
-          </tr>
-          <tr>
-            <td>2023-04-20</td>
-            <td>14:30</td>
-            <td>09:00</td>
-            <td>Inasistencia</td>
-          </tr>
-          <tr>
-            <td>2023-04-19</td>
-            <td>10:15</td>
-            <td>09:00</td>
-            <td>Asistencia</td>
-          </tr>
-          <tr>
-            <td>2023-04-18</td>
-            <td>08:45</td>
-            <td>09:00</td>
-            <td>Asistencia</td>
-          </tr>
+          {asistencias.map(asistencia => (
+            <tr key={asistencia.id}>
+              <td>{asistencia.fecha}</td>
+              <td>{asistencia.entrada}</td>
+              <td>{asistencia.salida}</td>
+              <td>{asistencia.asistencia ? 'Asistencia' : 'Inasistencia'}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
