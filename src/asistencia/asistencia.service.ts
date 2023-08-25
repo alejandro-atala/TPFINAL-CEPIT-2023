@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Asistencia } from './entities/asistencia.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
 import { CreateAsistenciaDto } from './dto/create-asistencia.dto';
 import { UpdateAsistenciaDto } from './dto/update-asistencia.dto';
 
@@ -33,9 +33,15 @@ export class AsistenciaService {
     return `This action returns all asistencia`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} asistencia`;
+
+  async findAsistenciasByAlumno(idAlumno: number): Promise<Asistencia[]> {
+    return this.asistenciaRepository.find({
+      where: { idAlumno: idAlumno },
+    });
   }
+  
+  
+  
 
   update(id: number, updateAsistenciaDto: UpdateAsistenciaDto) {
     return `This action updates a #${id} asistencia`;

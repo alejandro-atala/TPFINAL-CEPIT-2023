@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import './inicioSesion.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAlumno } from '../Alumno/AlumnoContext';
 
 const InicioSesion = ({ onLogin }) => {
   const navigate = useNavigate(); // Acceso a la función de navegación
-
+  const { setAlumnoLogueado } = useAlumno();
 
   const [formData, setFormData] = useState({
     email: '',
@@ -30,6 +31,8 @@ const InicioSesion = ({ onLogin }) => {
   
       console.log('Inicio de sesión exitoso:', response.data.nombre);
       onLogin(response.data.nombre);
+      setAlumnoLogueado(response.data.id);
+//console.log(response.data.id)
       // Redirigir a la ruta correcta según el tipo de usuario
       if (response.data.tipo === 'Alumno') {
         navigate('/alumno');
