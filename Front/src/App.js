@@ -21,7 +21,8 @@ import Directivos from './MenuLateral/Directivos/directivos'
 import ProximosEventos from './MenuLateral/ProximosEventos/eventos';
 import Alumno from './Alumno/alumno'
 import Profesor from './PaginaProfe/profesor';
-import AlumnosList from './PaginaProfe/Asistencia/asistenciaList';
+import AsistenciaList from './PaginaProfe/Asistencia/asistenciaList';
+import NotasExamenesList from './PaginaProfe/NotasExamen/notaList';
 
 
 const App = () => {
@@ -75,7 +76,8 @@ const App = () => {
               {/* <Route path="/Profnotas" element={<ProfNotas />} />
               <Route path="/Profboletin" element={<ProfBoletin />} />
               <Route path="/Profmaterias" element={<ProfMaterias />} /> */}
-              <Route path="/ProfAsistencia" element={<AlumnosList />} />
+              <Route path="/ProfAsistencia" element={<AsistenciaList />} />
+              <Route path="/Profnotas" element={<NotasExamenesList />} />
               {/* <Route path="/Profavisos" element={<ProfAvisos />} />
               <Route path="/Profmensaje" element={<ProfMensaje />} /> */}
             </Routes> 

@@ -13,12 +13,13 @@ export class CursoService {
   async getAnios(): Promise<Curso[]> {
     return this.cursoRepository
       .createQueryBuilder('curso')
-      .select('DISTINCT curso.anio', 'anio') // Selecciona años únicos
+      .select('DISTINCT curso.anio', 'anio') // Selecciona aÃ±os Ãºnicos
       .getRawMany();
   }
   create(createCursoDto: CreateCursoDto) {
     return 'This action adds a new curso';
   }
+
 
   findAll() {
     return `This action returns all curso`;

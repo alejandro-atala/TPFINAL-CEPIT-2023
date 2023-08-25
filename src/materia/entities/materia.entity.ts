@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany, JoinTable } from 'typeorm';
 import { Profesor } from 'src/profesor/entities/profesor.entity'; 
 import { MateriaCurso } from 'src/materia_curso/entities/materia_curso.entity'; 
-import { NotaExamen } from 'src/notas_examenes/entities/notas_examene.entity'; 
+import { NotaExamen } from 'src/notas_examenes/entities/notas_examenes.entity'; 
 
 @Entity()
 export class Materia {
@@ -14,6 +14,6 @@ export class Materia {
   @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.idMateriaCurso)
   materiasCursos: MateriaCurso[];
 
-  @OneToMany(() => NotaExamen, notaExamen => notaExamen.idNotaExamen)
+  @OneToMany(() => NotaExamen, notaExamen => notaExamen.idNota)
   notasExamenes: NotaExamen[];
 }

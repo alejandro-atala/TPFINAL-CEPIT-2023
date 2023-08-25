@@ -8,10 +8,10 @@ export class AsistenciaController {
   constructor(private readonly asistenciaService: AsistenciaService) {}
 
   @Post()
-  async create(@Body() createAsistenciaDto: { asistencias: CreateAsistenciaDto[] }) {
-    const result = await this.asistenciaService.create(createAsistenciaDto.asistencias);
-    return result;
+  async create(@Body() createAsistenciaDto: CreateAsistenciaDto[]) {
+    await this.asistenciaService.create(createAsistenciaDto);
   }
+
 
   @Get()
   findAll() {

@@ -7,7 +7,13 @@ export class Asistencia {
   id: number;
 
   @Column()
-  alumno: string;
+  idAlumno: number; // Cambia 'alumno' a 'idAlumno'
+
+  @Column()
+  nombre: string; // Agrega el campo para el nombre del alumno
+
+  @Column()
+  anio: string;
 
   @Column()
   fecha: Date;

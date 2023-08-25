@@ -11,6 +11,7 @@ export class Alumno {
 
   @ManyToOne(() => Curso, curso => curso.alumnos)
   curso: Curso;
+  notasExamenes: any;
 
 
 }

@@ -12,18 +12,19 @@ export class AsistenciaService {
     private asistenciaRepository: Repository<Asistencia>,
   ) {}
 
-  async create(asistencias: CreateAsistenciaDto[]) {
-    const asistenciaEntities = asistencias.map((asistenciaDto) => this.convertToAsistenciaEntity(asistenciaDto));
-    return await this.asistenciaRepository.save(asistenciaEntities);
+  async create(createAsistenciaDto: CreateAsistenciaDto[]): Promise<void> {
+    const asistenciaEntities: Asistencia[] = createAsistenciaDto.map(dto => {
+      const asistencia = new Asistencia();
+      asistencia.idAlumno = dto.idAlumno;
+      asistencia.nombre = dto.nombre;
+      asistencia.anio = dto.anio;
+      asistencia.fecha = dto.fecha;
+      asistencia.asistencia = dto.asistencia;
+      return asistencia;
+    });
+    await this.asistenciaRepository.save(asistenciaEntities);
   }
 
-  private convertToAsistenciaEntity(createAsistenciaDto: CreateAsistenciaDto): Asistencia {
-    const asistencia = new Asistencia();
-    asistencia.alumno = createAsistenciaDto.alumno;
-    asistencia.fecha = createAsistenciaDto.fecha;
-    asistencia.asistencia = createAsistenciaDto.asistencia;
-    return asistencia;
-  }
 
 
   
