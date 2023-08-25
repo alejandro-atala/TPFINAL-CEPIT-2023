@@ -18,7 +18,7 @@ const AsistenciaList = () => {
       const data = await response.json();
       setAnios(data);
     } catch (error) {
-      console.error('Error fetching aÃ±os:', error);
+      console.error('Error fetching anios:', error);
     }
   };
 
@@ -28,7 +28,7 @@ const AsistenciaList = () => {
       const data = await response.json();
       setAlumnos(data);
     } catch (error) {
-      console.error(`Error fetching alumnos del aÃ±o ${anio}:`, error);
+      console.error(`Error fetching alumnos del anio ${anio}:`, error);
     }
   };
 
@@ -100,13 +100,13 @@ const AsistenciaList = () => {
   };
 
   return (
-    <div>
+    <div className="col-9">
       <h2>Registro de asistencia</h2>
-      <Form className="text-center mb-3">
+      <Form className="  text-center mb-3">
         <Form.Group controlId="formAnio" className="mx-auto" style={{ maxWidth: '200px' }}>
-          <Form.Label>Seleccionar AÃ±o</Form.Label>
+          <Form.Label>Seleccionar Año</Form.Label>
           <Form.Control as="select" onChange={handleAnioChange} value={selectedAnio}>
-            <option value="">Seleccione un aÃ±o</option>
+            <option value="">Seleccione un año</option>
             {anios.map((anio) => (
               <option key={anio} value={anio}>
                 {anio}
@@ -116,10 +116,11 @@ const AsistenciaList = () => {
         </Form.Group>
       </Form>
       <h2 className="text-center">Alumnos de {selectedAnio}</h2>
-      <ListGroup>
+      <ListGroup className="d-flex flex-wrap justify-content-center">
+  
         {alumnos.map((alumno) => (
-          <ListGroup.Item key={alumno.idAlumno} className="d-flex justify-content-between align-items-center">
-            <span>{alumno.nombre}</span>
+          <ListGroup.Item key={alumno.idAlumno} className=" d-flex justify-content-around align-items-center">
+            <span >{alumno.nombre}</span>
             <div>
               <input
                 type="radio"
@@ -127,12 +128,14 @@ const AsistenciaList = () => {
                 value="presente"
                 onChange={() => handleAttendanceChange(alumno.idAlumno, 'presente')}
               /> Presente
+              <span className="mx-2"></span>
               <input
                 type="radio"
                 name={`asistencia_${alumno.idAlumno}`}
                 value="ausente"
                 onChange={() => handleAttendanceChange(alumno.idAlumno, 'ausente')}
               /> Ausente
+              <span className="mx-2"></span>
               <input
                 type="radio"
                 name={`asistencia_${alumno.idAlumno}`}
@@ -140,15 +143,17 @@ const AsistenciaList = () => {
                 onChange={() => handleAttendanceChange(alumno.idAlumno, 'media-falta')}
               /> Media Falta
             </div>
+            
           </ListGroup.Item>
         ))}
       </ListGroup>
-      <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "1rem" }}>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
         <Button variant="primary" onClick={saveAttendance}>
           Guardar Asistencias
         </Button>
       </div>
     </div>
+    
   );
 };
 
