@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { Alumno } from 'src/alumno/entities/alumno.entity'; 
+
 import { Materia } from 'src/materia/entities/materia.entity';
 
 @Entity()
@@ -26,10 +26,11 @@ export class NotaExamen {
   @Column()
   public trimestre: number;
 
-  @Column()
-  public materia: string;
+
 
  
-
+  @ManyToOne(() => Materia, materia => materia.nombre)
+  materia: Materia[];
   // Otros atributos y métodos si es necesario
-}
+} 
+  
