@@ -44,4 +44,11 @@ async findOne(id: number): Promise<NotaExamen | undefined> {
   async remove(id: number): Promise<void> {
     await this.notasExameneRepository.delete(id);
   }
+
+  async findAsistenciasByAlumno(idAlumno: number): Promise<NotaExamen[]> {
+    return this.notasExameneRepository.find({
+      where: { idAlumno: idAlumno },
+    });
+  }
+
 }

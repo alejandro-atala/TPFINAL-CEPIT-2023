@@ -29,7 +29,7 @@ export class NotaExamen {
 
 
  
-  @ManyToOne(() => Materia, materia => materia.nombre)
+  @ManyToOne(() => Materia, materia => materia.notasExamenes)
   materia: Materia[];
   // Otros atributos y métodos si es necesario
 } 
