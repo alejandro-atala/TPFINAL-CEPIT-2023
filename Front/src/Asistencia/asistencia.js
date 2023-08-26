@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAlumno } from '../Alumno/AlumnoContext';
 
+const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, options);
+};
+
 const Asistencia = () => {
   const [asistencias, setAsistencias] = useState([]);
   const { alumnoLogueado } = useAlumno();
@@ -15,6 +21,7 @@ const Asistencia = () => {
 
   const fetchAsistencias = async () => {
     try {
+      console.log(alumnoLogueado);
       const response = await axios.get(`http://localhost:3000/asistencia/${alumnoLogueado}`);
       const asistenciasData = response.data;
       setAsistencias(asistenciasData);
@@ -56,7 +63,7 @@ const Asistencia = () => {
         <tbody>
           {asistencias.map(asistencia => (
             <tr key={asistencia.id}>
-              <td>{asistencia.fecha}</td>
+                <td>{formatDate(asistencia.fecha)}</td>
               <td>{asistencia.entrada}</td>
               <td>{asistencia.salida}</td>
               <td>
