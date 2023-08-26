@@ -44,4 +44,14 @@ async findOne(id: number): Promise<NotaExamen | undefined> {
   async remove(id: number): Promise<void> {
     await this.notasExameneRepository.delete(id);
   }
-}
+
+  async findNotasExamenByAlumno(idAlumno: number) {
+    return this.notasExameneRepository
+      .createQueryBuilder('nota')
+      .leftJoinAndSelect('nota.materia', 'materia')
+      .where('nota.idAlumno = :idAlumno', { idAlumno })
+      .getMany();
+  }
+  }
+
+

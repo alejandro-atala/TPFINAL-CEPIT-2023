@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { NotasExamenesService } from './notas_examenes.service';
 import { CreateNotasExameneDto } from './dto/create-notas_examenes.dto';
 import { UpdateNotasExameneDto } from './dto/update-notas_examenes.dto';
@@ -17,8 +17,8 @@ export class NotasExamenesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.notasExamenesService.findOne(+id);
+  findNotasExamenByAlumno(@Param('id', ParseIntPipe) idAlumno: number) {
+    return this.notasExamenesService.findNotasExamenByAlumno(idAlumno);
   }
 
   @Patch(':id')

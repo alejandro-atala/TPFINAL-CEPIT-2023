@@ -26,10 +26,16 @@ export class NotaExamen {
   @Column()
   public trimestre: number;
 
+  @Column({ nullable: true })
+  public fechaRecuperatorio :Date;
+
+  @Column({ nullable: true })
+  public notaRecuperatorio :number;
+
 
 
  
-  @ManyToOne(() => Materia, materia => materia.nombre)
+  @ManyToOne(() => Materia, materia => materia.notasExamenes)
   materia: Materia[];
   // Otros atributos y métodos si es necesario
 } 
