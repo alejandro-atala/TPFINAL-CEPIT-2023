@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, ListGroup, Button } from 'react-bootstrap';
+import { Form, ListGroup, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
 
 const AsistenciaList = () => {
@@ -7,6 +7,7 @@ const AsistenciaList = () => {
   const [selectedAnio, setSelectedAnio] = useState('');
   const [alumnos, setAlumnos] = useState([]);
   const [attendanceData, setAttendanceData] = useState([]);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   useEffect(() => {
     fetchAnios();
@@ -36,9 +37,8 @@ const AsistenciaList = () => {
     const selectedAnio = event.target.value;
     setSelectedAnio(selectedAnio);
 
-    // Limpia los datos de asistencia
     setAttendanceData([]);
-    setAlumnos([]); // Vaciar la lista de alumnos
+    setAlumnos([]);
     if (selectedAnio) {
       await fetchAlumnosPorAnio(selectedAnio);
     }
@@ -46,15 +46,12 @@ const AsistenciaList = () => {
 
   const handleAttendanceChange = (alumnoId, asistenciaType) => {
     setAttendanceData((prevData) => {
-      const fecha = new Date().toISOString().split('T')[0];;
+      const fecha = new Date().toISOString().split('T')[0];
 
-      // Filtra los datos anteriores y actualiza con los nuevos valores
       const updatedData = prevData.filter((item) => item.id !== alumnoId);
 
-      // Encuentra el alumno correspondiente
       const alumno = alumnos.find((alumno) => alumno.idAlumno === alumnoId);
 
-      // Solo aÃ±ade asistencia si el checkbox estÃ¡ tildado
       if (asistenciaType) {
         return [
           ...updatedData,
@@ -68,7 +65,7 @@ const AsistenciaList = () => {
           },
         ];
       } else {
-        return updatedData; // No se agrega asistencia si el checkbox no estÃ¡ marcado
+        return updatedData;
       }
     });
   };
@@ -88,11 +85,8 @@ const AsistenciaList = () => {
       });
       console.log('Asistencias guardadas');
   
-      // Mostrar un alert y limpiar los datos de asistencia
-      alert('Asistencias guardadas');
+      setShowSuccessAlert(true);
       setAttendanceData([]);
-  
-      // Vaciar la lista de alumnos
       setAlumnos([]);
     } catch (error) {
       console.error('Error al guardar asistencias:', error);
@@ -102,7 +96,7 @@ const AsistenciaList = () => {
   return (
     <div className="col-9">
       <h2>Registro de asistencia</h2>
-      <Form className="  text-center mb-3">
+      <Form className="text-center mb-3">
         <Form.Group controlId="formAnio" className="mx-auto" style={{ maxWidth: '200px' }}>
           <Form.Label>Seleccionar Año</Form.Label>
           <Form.Control as="select" onChange={handleAnioChange} value={selectedAnio}>
@@ -117,10 +111,9 @@ const AsistenciaList = () => {
       </Form>
       <h2 className="text-center">Alumnos de {selectedAnio}</h2>
       <ListGroup className="d-flex flex-wrap justify-content-center">
-  
         {alumnos.map((alumno) => (
-          <ListGroup.Item key={alumno.idAlumno} className=" d-flex justify-content-around align-items-center">
-            <span >{alumno.nombre}</span>
+          <ListGroup.Item key={alumno.idAlumno} className="d-flex justify-content-around align-items-center">
+            <span>{alumno.nombre}</span>
             <div>
               <input
                 type="radio"
@@ -143,7 +136,6 @@ const AsistenciaList = () => {
                 onChange={() => handleAttendanceChange(alumno.idAlumno, 'media-falta')}
               /> Media Falta
             </div>
-            
           </ListGroup.Item>
         ))}
       </ListGroup>
@@ -152,8 +144,12 @@ const AsistenciaList = () => {
           Guardar Asistencias
         </Button>
       </div>
+      {showSuccessAlert && (
+        <Alert variant="success" className="mt-3 text-center">
+          Asistencias guardadas exitosamente.
+        </Alert>
+      )}
     </div>
-    
   );
 };
 
