@@ -7,9 +7,12 @@ const NotasExamenesList = () => {
   const [selectedAnio, setSelectedAnio] = useState('');
   const [alumnos, setAlumnos] = useState([]);
   const [selectedTrimestre, setSelectedTrimestre] = useState(1);
+  const [selectedMateria, setSelectedMateria] = useState('');
+  const [materias, setMaterias] = useState([]); // Agregado
 
   useEffect(() => {
     fetchAnios();
+    fetchMaterias(); // Agregado
   }, []);
 
   const fetchAnios = async () => {
@@ -20,6 +23,20 @@ const NotasExamenesList = () => {
       console.error('Error fetching años:', error);
     }
   };
+
+  const fetchMaterias = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/materia');
+      setMaterias(response.data); // Asegúrate de que response.data sea la estructura correcta
+    } catch (error) {
+      console.error('Error fetching materias:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAnios();
+    fetchMaterias();
+  }, []);
 
   const fetchAlumnosPorAnio = async (anio) => {
     try {
@@ -36,6 +53,7 @@ const NotasExamenesList = () => {
 
     setAlumnos([]); // Vaciar la lista de alumnos
     setSelectedTrimestre(1); // Reiniciar el trimestre seleccionado
+    setSelectedMateria('');
     if (selectedAnio) {
       await fetchAlumnosPorAnio(selectedAnio);
     }
@@ -43,6 +61,10 @@ const NotasExamenesList = () => {
 
   const handleTrimestreChange = (trimestre) => {
     setSelectedTrimestre(trimestre);
+  };
+
+  const handleMateriaChange = (event) => {
+    setSelectedMateria(event.target.value);
   };
 
   const handleNotaChange = (event, alumnoId) => {
@@ -61,20 +83,23 @@ const NotasExamenesList = () => {
       fechaNota: new Date().toISOString(),
       nota: alumno.selectedNota,
       trimestre: selectedTrimestre,
+      materia: selectedMateria,
     }));
-
+  
     try {
       await axios.post('http://localhost:3000/notas-examenes', notasToSave, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
+  
       console.log('Notas de exámenes guardadas');
-
+  
       // Mostrar un alert y limpiar los datos de notas de exámenes
       alert('Notas de exámenes guardadas');
       setAlumnos([]);
+      setSelectedAnio(''); // Vaciar el valor de selectedAnio
+      setSelectedMateria(''); // Vaciar el valor de selectedMateria
     } catch (error) {
       console.error('Error al guardar notas de exámenes:', error);
     }
@@ -97,7 +122,18 @@ const NotasExamenesList = () => {
         </Form.Group>
       </Form>
       {selectedAnio && (
-        <>
+  <>
+    <Form.Group controlId="formMateria" className="mx-auto" style={{ maxWidth: '200px' }}>
+      <Form.Label>Seleccionar Materia</Form.Label>
+      <Form.Control as="select" onChange={handleMateriaChange} value={selectedMateria}>
+        <option value="">Seleccione una materia</option>
+        {materias.map((materia) => (
+          <option key={materia.idMateria} value={materia.idMateria}>
+            {materia.nombre}
+          </option>
+        ))}
+      </Form.Control>
+    </Form.Group>
           <div className="text-center mb-3">
             <h3>Fecha: {new Date().toLocaleDateString()}</h3>
             {[1, 2, 3].map((trimestre) => (
