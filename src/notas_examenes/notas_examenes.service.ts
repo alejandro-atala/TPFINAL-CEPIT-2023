@@ -45,10 +45,13 @@ async findOne(id: number): Promise<NotaExamen | undefined> {
     await this.notasExameneRepository.delete(id);
   }
 
-  async findAsistenciasByAlumno(idAlumno: number): Promise<NotaExamen[]> {
-    return this.notasExameneRepository.find({
-      where: { idAlumno: idAlumno },
-    });
+  async findNotasExamenByAlumno(idAlumno: number) {
+    return this.notasExameneRepository
+      .createQueryBuilder('nota')
+      .leftJoinAndSelect('nota.materia', 'materia')
+      .where('nota.idAlumno = :idAlumno', { idAlumno })
+      .getMany();
+  }
   }
 
-}
+

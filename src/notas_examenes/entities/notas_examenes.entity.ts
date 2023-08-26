@@ -26,6 +26,12 @@ export class NotaExamen {
   @Column()
   public trimestre: number;
 
+  @Column({ nullable: true })
+  public fechaRecuperatorio :Date;
+
+  @Column({ nullable: true })
+  public notaRecuperatorio :number;
+
 
 
  

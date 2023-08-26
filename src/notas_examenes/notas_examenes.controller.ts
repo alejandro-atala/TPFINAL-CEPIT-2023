@@ -17,9 +17,8 @@ export class NotasExamenesController {
   }
 
   @Get(':id')
-  findAsistenciasByAlumno(@Param('id', ParseIntPipe) idAlumno: number) {
-    console.log(idAlumno);
-    return this.notasExamenesService.findAsistenciasByAlumno(idAlumno);
+  findNotasExamenByAlumno(@Param('id', ParseIntPipe) idAlumno: number) {
+    return this.notasExamenesService.findNotasExamenByAlumno(idAlumno);
   }
 
   @Patch(':id')
