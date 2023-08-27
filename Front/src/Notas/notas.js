@@ -55,7 +55,7 @@ const Notas = () => {
 							<td> {nota.nota !== null ? (nota.nota >= 7 ? 'Aprobado' : 'Desaprobado') : '-'}</td>
 							<td>{formatDate(nota.fechaRecuperatorio) || '-'}</td>
 							<td>{nota.notaRecuperatorio || '-'}</td>
-							<td>{nota.notaRecuperatorio !== null ? (nota.notaRecuperatorio >= 7 ? 'Aprobado' : 'Desaprobado') : '-'}</td>
+							<td>{nota.notaRecuperatorio !== (null || undefined) ? (nota.notaRecuperatorio >= 7 ? 'Aprobado' : 'Desaprobado') : '-'}</td>
 
 						</tr>
 					))}
