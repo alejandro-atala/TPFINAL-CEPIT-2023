@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UnauthorizedException} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UnauthorizedException } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
@@ -62,15 +62,15 @@ export class UsuarioController {
       }
 
       if (usuario.tipo !== 'Alumno' && usuario.tipo !== 'Profesor') {
- 
+
         throw new UnauthorizedException('Tipo de usuario no válido');
       }
 
       // Redirigir a diferentes rutas según el tipo de usuario
       if (usuario.tipo === 'Alumno' || usuario.tipo === 'Profesor') {
-//console.log(usuario.tipo, usuario.nombre, usuario.idUsuario)
-        return { tipo: usuario.tipo, nombre: usuario.nombre, id : usuario.idUsuario};
-      } 
+        //console.log(usuario.tipo, usuario.nombre, usuario.idUsuario)
+        return { tipo: usuario.tipo, nombre: usuario.nombre, id: usuario.idUsuario };
+      }
 
 
 

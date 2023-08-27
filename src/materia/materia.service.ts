@@ -1,33 +1,45 @@
+// src/materias/materias.service.ts
 import { Injectable } from '@nestjs/common';
-import { CreateMateriaDto } from './dto/create-materia.dto';
-import { UpdateMateriaDto } from './dto/update-materia.dto';
-import { Materia } from './entities/materia.entity';
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Materia } from './entities/materia.entity';
 
 @Injectable()
-export class MateriaService {
+export class MateriasService {
   constructor(
     @InjectRepository(Materia)
-    private materiaRepository: Repository<Materia>,
+    private materiasRepository: Repository<Materia>,
   ) {}
-  create(createMateriaDto: CreateMateriaDto) {
-    return 'This action adds a new materia';
+
+  async guardarMaterias(materiaData: any[]) {
+  try {
+    for (const data of materiaData) {
+      const { diaHora, materia } = data;
+
+      const materiaExistente = await this.materiasRepository.findOne({ where : {diaHora} });
+
+      if (materiaExistente) {
+        // Si la materia ya existe, actualiza el nombre
+        materiaExistente.materia = materia;
+        await this.materiasRepository.save(materiaExistente);
+      } else {
+        // Si no existe, crea un nuevo registro
+        const nuevaMateria = this.materiasRepository.create({
+          diaHora: diaHora,
+          materia: materia,
+        }); 
+        await this.materiasRepository.save(nuevaMateria);
+      }
+    }
+  } catch (error) {
+    console.error('Error al guardar las materias', error);
+    throw new Error('Error al guardar las materias');
   }
+}
+
+  
 
   async findAll(): Promise<Materia[]> {
-    return this.materiaRepository.find();
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} materia`;
-  }
-
-  update(id: number, updateMateriaDto: UpdateMateriaDto) {
-    return `This action updates a #${id} materia`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} materia`;
+    return this.materiasRepository.find();
   }
 }
