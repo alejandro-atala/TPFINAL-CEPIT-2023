@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, ListGroup, Button, Col } from 'react-bootstrap';
+import { Form, ListGroup, Button, Col , Alert} from 'react-bootstrap';
 import axios from 'axios';
 
 const NotasExamenesList = () => {
@@ -9,6 +9,8 @@ const NotasExamenesList = () => {
   const [selectedTrimestre, setSelectedTrimestre] = useState(1);
   const [selectedMateria, setSelectedMateria] = useState('');
   const [materias, setMaterias] = useState([]); // Agregado
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
 
   useEffect(() => {
     fetchAnios();
@@ -50,11 +52,11 @@ const NotasExamenesList = () => {
   const handleAnioChange = async (event) => {
     const selectedAnio = event.target.value;
     setSelectedAnio(selectedAnio);
-
-    setAlumnos([]); // Vaciar la lista de alumnos
     setSelectedTrimestre(1); // Reiniciar el trimestre seleccionado
     setSelectedMateria('');
+  
     if (selectedAnio) {
+      setAlumnos([]); // Vaciar la lista de alumnos
       await fetchAlumnosPorAnio(selectedAnio);
     }
   };
@@ -85,25 +87,27 @@ const NotasExamenesList = () => {
       trimestre: selectedTrimestre,
       materia: selectedMateria,
     }));
-  
+    console.log(notasToSave)
     try {
       await axios.post('http://localhost:3000/notas-examenes', notasToSave, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-  
+      setShowSuccessAlert(true);
       console.log('Notas de exámenes guardadas');
   
-      // Mostrar un alert y limpiar los datos de notas de exámenes
-      alert('Notas de exámenes guardadas');
+      
+    setTimeout(() => {
+      setShowSuccessAlert(false);
       setAlumnos([]);
-      setSelectedAnio(''); // Vaciar el valor de selectedAnio
-      setSelectedMateria(''); // Vaciar el valor de selectedMateria
-    } catch (error) {
-      console.error('Error al guardar notas de exámenes:', error);
-    }
-  };
+      setSelectedAnio('');
+      setSelectedMateria('');
+    }, 2000); 
+  } catch (error) {
+    console.error('Error al guardar notas de exámenes:', error);
+  }
+};
 
   return (
     <div className="col-9">
@@ -173,10 +177,15 @@ const NotasExamenesList = () => {
             ))}
           </ListGroup>
           <div className="text-center mt-3">
-            <Button variant="primary" onClick={saveNotasExamenes}>
+            <Button variant="primary"  type="button" onClick={saveNotasExamenes}>
               Guardar Notas de Exámenes
             </Button>
           </div>
+          {showSuccessAlert && (
+        <Alert variant="success" className="mt-3 text-center">
+          Notas de exámenes guardadas exitosamente.
+        </Alert>
+      )}
         </>
       )}
     </div>

@@ -26,11 +26,11 @@ export class NotaExamen {
   @Column()
   public trimestre: number;
 
-  @Column({ nullable: true })
-  public fechaRecuperatorio :Date;
+  // @Column({ nullable: true })
+  // public fechaRecuperatorio :Date;
 
-  @Column({ nullable: true })
-  public notaRecuperatorio :number;
+  // @Column({ nullable: true })
+  // public notaRecuperatorio :number;
 
 
 
@@ -39,4 +39,4 @@ export class NotaExamen {
   materia: Materia[];
   // Otros atributos y métodos si es necesario
 } 
-  
+   
