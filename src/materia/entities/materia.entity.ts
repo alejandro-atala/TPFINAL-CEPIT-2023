@@ -9,7 +9,7 @@ export class Materia {
   @PrimaryGeneratedColumn()
   idMateria: number;
 
-  @Column()
+  @Column({nullable:true})
   public materia: string;
 
   @Column() 
@@ -18,11 +18,11 @@ export class Materia {
   @Column() 
   public anio: string;
 
-  // @ManyToOne(() => Curso, curso => curso.idCurso)
-  // curso: Curso;
+  @ManyToOne(() => Curso, curso => curso.idCurso)
+  curso: Curso;
 
-  // @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.idMateriaCurso)
-  // materiasCursos: MateriaCurso[];
+  @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.idMateriaCurso)
+  materiasCursos: MateriaCurso[];
 
   @OneToMany(() => NotaExamen, notaExamen => notaExamen.idNota)
   notasExamenes: NotaExamen[];  
