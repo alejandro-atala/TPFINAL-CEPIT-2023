@@ -80,8 +80,9 @@ const MateriasList = () => {
             'Content-Type': 'application/json',
           },
         });
-  
-        if (response.status === 200) {
+      
+        if (response.status === 201) {
+          
           console.log('Materias guardadas exitosamente');
         } else {
           console.error('Error al guardar las materias');
