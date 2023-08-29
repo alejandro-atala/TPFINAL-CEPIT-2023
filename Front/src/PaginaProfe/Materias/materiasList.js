@@ -17,7 +17,7 @@ const MateriasList = () => {
       try {
         const response = await axios.get('http://localhost:3000/curso'); // Adjust the API endpoint
         const data = response.data; // Assuming the data is an array of course objects
-  
+
         if (Array.isArray(data)) {
           setCursos(data);
         } else {
@@ -41,7 +41,7 @@ const MateriasList = () => {
           try {
             const response = await axios.get(`http://localhost:3000/materias/${selectedCursoId}`);
             const materiaData = response.data;
-      
+    //  console.log(materiaData)
             if (materiaData.length > 0) {
               const updatedMateriaInputs = materiaData.map((materiaItem) => materiaItem.materia || '');
               setMateriaInputs(updatedMateriaInputs);

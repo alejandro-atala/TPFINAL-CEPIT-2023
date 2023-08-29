@@ -12,9 +12,10 @@ export class MateriasService {
   ) {}
 
   async guardarMaterias(materiaData: any[]) {
+    console.log(materiaData);
   try {
     for (const data of materiaData) {
-      const { diaHora, materia } = data;
+      const { materia, diaHora, anio } = data;
 
       const materiaExistente = await this.materiasRepository.findOne({ where : {diaHora} });
 
@@ -25,8 +26,10 @@ export class MateriasService {
       } else {
         // Si no existe, crea un nuevo registro
         const nuevaMateria = this.materiasRepository.create({
-          diaHora: diaHora,
           materia: materia,
+          diaHora: diaHora,
+          anio: anio
+         
         }); 
         await this.materiasRepository.save(nuevaMateria);
       }

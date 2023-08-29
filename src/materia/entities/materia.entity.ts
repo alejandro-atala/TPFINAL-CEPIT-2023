@@ -9,19 +9,20 @@ export class Materia {
   @PrimaryGeneratedColumn()
   idMateria: number;
 
-  @Column({ nullable: true })
+  @Column()
   public materia: string;
 
-  @Column({ nullable: true }) 
+  @Column() 
   public diaHora: string;
 
- 
+  @Column() 
+  public anio: string;
 
-  @ManyToOne(() => Curso, curso => curso.idCurso)
-  curso: Curso;
+  // @ManyToOne(() => Curso, curso => curso.idCurso)
+  // curso: Curso;
 
-  @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.idMateriaCurso)
-  materiasCursos: MateriaCurso[];
+  // @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.idMateriaCurso)
+  // materiasCursos: MateriaCurso[];
 
   @OneToMany(() => NotaExamen, notaExamen => notaExamen.idNota)
   notasExamenes: NotaExamen[];  
