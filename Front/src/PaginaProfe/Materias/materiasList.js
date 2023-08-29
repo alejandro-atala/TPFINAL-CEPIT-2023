@@ -42,15 +42,20 @@ const MateriasList = () => {
             const response = await axios.get(`http://localhost:3000/materias/${selectedCursoId}`);
             const materiaData = response.data;
       
-            const updatedMateriaInputs = materiaData.map((materiaItem) => materiaItem.materia || '');
-            setMateriaInputs(updatedMateriaInputs);
+            if (materiaData.length > 0) {
+              const updatedMateriaInputs = materiaData.map((materiaItem) => materiaItem.materia || '');
+              setMateriaInputs(updatedMateriaInputs);
+            } else {
+              setMateriaInputs(Array(25).fill('')); // Clear inputs when no data available
+            }
           } catch (error) {
             console.error('Error fetching materia data:', error);
           }
         } else {
-          setMateriaInputs(Array(25).fill(''));
+          setMateriaInputs(Array(25).fill('')); // Clear inputs when no year is selected
         }
       };
+      
       
     
   
@@ -65,7 +70,7 @@ const MateriasList = () => {
         ];
   
         const materiaData = daysAndTimes.map((dayAndTime, index) => ({
-          nombre: materiaInputs[index],
+          materia: materiaInputs[index],
           diaHora: dayAndTime,
           anio: selectedCurso,
         }));
