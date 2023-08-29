@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, OneToOne, JoinColumn } from 'typeorm';
 import { Curso } from 'src/curso/entities/curso.entity';  // Asegúrate de importar correctamente
+import { Usuario } from 'src/usuario/entities/usuario.entity';
 
 @Entity()
 export class Alumno {
@@ -13,8 +14,10 @@ export class Alumno {
   curso: Curso;
   notasExamenes: any;
 
-
-}
+  @OneToOne(() => Usuario, usuario => usuario.idUsuario) 
+  @JoinColumn({ name: 'usuario_id' })
+  usuarios: Usuario;  
+} 
 
 // import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 // import { Curso } from 'src/curso/entities/curso.entity';

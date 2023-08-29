@@ -1,22 +1,29 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, ManyToMany, JoinTable } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
 import { Profesor } from 'src/profesor/entities/profesor.entity'; 
 import { MateriaCurso } from 'src/materia_curso/entities/materia_curso.entity'; 
 import { NotaExamen } from 'src/notas_examenes/entities/notas_examenes.entity'; 
+import { Curso } from 'src/curso/entities/curso.entity';
 
 @Entity()
 export class Materia {
   @PrimaryGeneratedColumn()
   idMateria: number;
 
-  @Column()
-  public nombre: string;
+  @Column({ nullable: true })
+  public materia: string;
 
-  @ManyToOne(() => Profesor, profesor => profesor.idProfesor)
-  profesor: Profesor;
+  @Column({ nullable: true }) 
+  public diaHora: string;
+
+ 
+
+  @ManyToOne(() => Curso, curso => curso.idCurso)
+  curso: Curso;
 
   @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.idMateriaCurso)
   materiasCursos: MateriaCurso[];
 
   @OneToMany(() => NotaExamen, notaExamen => notaExamen.idNota)
-  notasExamenes: NotaExamen[];
-}
+  notasExamenes: NotaExamen[];  
+} 
+  
