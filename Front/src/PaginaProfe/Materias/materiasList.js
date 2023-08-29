@@ -1,14 +1,17 @@
 import React, { useState , useEffect } from 'react';
 import './materiasList.css';
 import axios from 'axios';
-
+import {  Alert } from 'react-bootstrap';
 
 
 const MateriasList = () => {
     const [selectedCurso, setSelectedCurso] = useState('');
     const [materiaInputs, setMateriaInputs] = useState(Array(25).fill(''));
     const [cursos, setCursos] = useState([]);
-  
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false); // State for success alert
+    const [showErrorAlert, setShowErrorAlert] = useState(false); // State for error alert
+
+
     useEffect(() => {
       fetchCursos(); // Fetch the list of courses when the component mounts
     }, []);
@@ -82,11 +85,15 @@ const MateriasList = () => {
   
         if (response.status === 201) {
           console.log('Materias guardadas exitosamente');
+          setShowSuccessAlert(true); // Show success alert
+          setShowErrorAlert(false); // Hide error alert
         } else {
           console.error('Error al guardar las materias');
         }
       } catch (error) {
         console.error('Error en la solicitud:', error);
+        setShowSuccessAlert(false); // Hide success alert
+        setShowErrorAlert(true); // Show error alert
       }
     };
   
@@ -188,7 +195,19 @@ const MateriasList = () => {
         <button className="btn btn-primary" onClick={handleSaveClick}>
           Guardar Materias
         </button>
-      </div>
+       
+      {showSuccessAlert && (
+        <Alert variant="success" className="mt-3 text-center">
+          Materias guardadas exitosamente.
+        </Alert>
+      )}
+
+      {showErrorAlert && (
+        <Alert variant="danger" className="mt-3 text-center">
+          Error al guardar las materias. Por favor, inténtalo nuevamente.
+        </Alert>
+      )}
+           </div>
     );
   };
 
