@@ -39,7 +39,16 @@ export class MateriasService {
 
   
 
-  async findAll(): Promise<Materia[]> {
-    return this.materiasRepository.find();
-  }
+async getMateriasByCursoNombre(cursoNombre: string): Promise<Materia[]> {
+  // Implementa la lógica para buscar las materias por nombre de curso
+  // Puedes usar el método del repositorio que mejor se adapte a tu caso
+  const materias = await this.materiasRepository.find({where:{ anio: cursoNombre }});
+  return materias;
+}
+
+
+
+async findAll(): Promise<Materia[]> {
+  return this.materiasRepository.find();
+}
 }

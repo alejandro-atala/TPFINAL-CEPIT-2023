@@ -1,5 +1,5 @@
 // src/materias/materias.controller.ts
-import { Controller, Post, Get, Body } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param } from '@nestjs/common';
 import { MateriasService } from './materia.service';
 
 
@@ -11,6 +11,7 @@ export class MateriasController {
   @Post('guardar')
   async guardarMaterias(@Body() materiaData: any[]) {
     try {
+      //console.log(materiaData);
       await this.materiasService.guardarMaterias(materiaData);
       return { message: 'Materias guardadas exitosamente' };
     } catch (error) {
@@ -19,6 +20,12 @@ export class MateriasController {
     }
   }
   
+  @Get('/:cursoNombre')
+  async getMateriasByCursoNombre(@Param('cursoNombre') cursoNombre: string) {
+    // Buscar las materias por nombre de curso
+    const materias = await this.materiasService.getMateriasByCursoNombre(cursoNombre);
+    return materias;
+  }
 
   @Get()
   async getAllMaterias() {

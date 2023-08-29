@@ -9,13 +9,14 @@ export class Materia {
   @PrimaryGeneratedColumn()
   idMateria: number;
 
-  @Column({ nullable: true })
+  @Column()
   public materia: string;
 
-  @Column({ nullable: true }) 
+  @Column() 
   public diaHora: string;
 
- 
+  @Column() 
+  public anio: string;
 
   @ManyToOne(() => Curso, curso => curso.idCurso)
   curso: Curso;
