@@ -34,23 +34,27 @@ const MateriasList = () => {
   
   
     const handleCursoChange = async (e) => {
-        const selectedCursoId = e.target.value;
-        setSelectedCurso(selectedCursoId);
-      
-        if (selectedCursoId) {
-          try {
-            const response = await axios.get(`http://localhost:3000/materias/${selectedCursoId}`);
-            const materiaData = response.data;
-      
+      const selectedCursoId = e.target.value;
+      setSelectedCurso(selectedCursoId);
+    
+      if (selectedCursoId) {
+        try {
+          const response = await axios.get(`http://localhost:3000/materias/${selectedCursoId}`);
+          const materiaData = response.data;
+    
+          if (materiaData.length > 0) {
             const updatedMateriaInputs = materiaData.map((materiaItem) => materiaItem.materia || '');
             setMateriaInputs(updatedMateriaInputs);
-          } catch (error) {
-            console.error('Error fetching materia data:', error);
+          } else {
+            setMateriaInputs(Array(25).fill('')); // Clear inputs when no data available
           }
-        } else {
-          setMateriaInputs(Array(25).fill(''));
+        } catch (error) {
+          console.error('Error fetching materia data:', error);
         }
-      };
+      } else {
+        setMateriaInputs(Array(25).fill('')); // Clear inputs when no year is selected
+      }
+    };
       
     
   
@@ -69,14 +73,14 @@ const MateriasList = () => {
           diaHora: dayAndTime,
           anio: selectedCurso,
         }));
-  console.log(materiaData);
+//  console.log(materiaData);
         const response = await axios.post('http://localhost:3000/materias/guardar', materiaData, {
           headers: {
             'Content-Type': 'application/json',
           },
         });
   
-        if (response.status === 200) {
+        if (response.status === 201) {
           console.log('Materias guardadas exitosamente');
         } else {
           console.error('Error al guardar las materias');

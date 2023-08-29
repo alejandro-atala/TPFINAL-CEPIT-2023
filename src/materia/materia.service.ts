@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Materia } from './entities/materia.entity';
+import { CreateMateriaDto } from './dto/create-materia.dto';
 
 @Injectable()
 export class MateriasService {
@@ -11,31 +12,31 @@ export class MateriasService {
     private materiasRepository: Repository<Materia>,
   ) {}
 
-  async guardarMaterias(materiaData: any[]) {
-  try {
+  async guardarMaterias(materiaData: CreateMateriaDto[]) {
+    console.log(materiaData);
+    const existingMaterias = await this.getMateriasByCursoNombre(materiaData[0].anio);
+
     for (const data of materiaData) {
-      const { diaHora, materia } = data;
+      const { materia, diaHora, anio } = data;
 
-      const materiaExistente = await this.materiasRepository.findOne({ where : {diaHora} });
-
-      if (materiaExistente) {
-        // Si la materia ya existe, actualiza el nombre
-        materiaExistente.materia = materia;
-        await this.materiasRepository.save(materiaExistente);
+      const existingMateria = existingMaterias.find(m => m.diaHora === diaHora);
+      
+      if (existingMateria) {
+        // Update existing materia
+        existingMateria.materia = materia;
+        await this.materiasRepository.save(existingMateria);
       } else {
-        // Si no existe, crea un nuevo registro
+        // Create new materia
         const nuevaMateria = this.materiasRepository.create({
-          diaHora: diaHora,
           materia: materia,
-        }); 
+          diaHora: diaHora,
+          anio: anio
+        });
+
         await this.materiasRepository.save(nuevaMateria);
       }
     }
-  } catch (error) {
-    console.error('Error al guardar las materias', error);
-    throw new Error('Error al guardar las materias');
   }
-}
 
   
 

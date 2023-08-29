@@ -9,7 +9,7 @@ export class Materia {
   @PrimaryGeneratedColumn()
   idMateria: number;
 
-  @Column()
+  @Column({nullable:true})
   public materia: string;
 
   @Column() 
