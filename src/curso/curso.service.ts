@@ -10,6 +10,8 @@ export class CursoService {
   constructor(
     @InjectRepository(Curso) private cursoRepository: Repository<Curso>,
   ) {}
+  
+  
   async getAnios(): Promise<Curso[]> {
     return this.cursoRepository
       .createQueryBuilder('curso')
@@ -21,8 +23,9 @@ export class CursoService {
   }
 
 
-  findAll() {
-    return `This action returns all curso`;
+  async getAllCursos() {
+    const cursos = await this.cursoRepository.find();
+    return cursos;
   }
 
   findOne(id: number) {
