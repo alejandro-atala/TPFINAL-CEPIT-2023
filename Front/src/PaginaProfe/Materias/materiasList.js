@@ -1,46 +1,51 @@
 import React, { useState , useEffect } from 'react';
 import './materiasList.css';
 import axios from 'axios';
-
+import { Form } from 'react-bootstrap';
 
 
 const MateriasList = () => {
     const [editingCell, setEditingCell] = useState(null);
-  const [selectedCurso, setSelectedCurso] = useState('');
-  const [materiaInputs, setMateriaInputs] = useState(Array(25).fill(''));
-  const [cursos, setCursos] = useState([]);
+    const [selectedCurso, setSelectedCurso] = useState('');
+    const [materiaInputs, setMateriaInputs] = useState(Array(25).fill(''));
+    const [cursos, setCursos] = useState([]);
+    const [selectedAnio, setSelectedAnio] = useState(''); // Define selectedAnio state
+    const [anios, setAnios] = useState([]); // Define anios state
 
-  useEffect(() => {
-    fetchCursos(); // Fetch the list of courses when the component mounts
-  }, []);
+    useEffect(() => {
+        fetchCursos(); // Fetch the list of courses when the component mounts
+        fetchAnios(); // Fetch the list of years when the component mounts
+      }, []);
 
-  const fetchCursos = async () => {
-    try {
-      const response = await axios.get('http://localhost:3000/curso'); // Adjust the API endpoint
-      const data = response.data; // Assuming the data is an array of course objects
-  
-      if (Array.isArray(data)) {
-        setCursos(data);
-      } else {
-        console.error('Received data is not an array:', data);
-      }
-    } catch (error) {
-      console.error('Error fetching cursos:', error);
-    }
-  };
-  
+      const fetchCursos = async () => {
+        try {
+          const response = await axios.get('http://localhost:3000/curso');
+          const data = response.data;
+          if (Array.isArray(data)) {
+            setCursos(data);
+          } else {
+            console.error('Received data is not an array:', data);
+          }
+        } catch (error) {
+          console.error('Error fetching cursos:', error);
+        }
+      };
+    
+      const fetchAnios = async () => {
+        try {
+          const response = await axios.get('http://localhost:3000/anios'); // Adjust the API endpoint
+          const data = response.data; // Assuming the data is an array of years
+          setAnios(data);
+        } catch (error) {
+          console.error('Error fetching anios:', error);
+        }
+      };
+    
+      const handleAnioChange = (e) => {
+        setSelectedAnio(e.target.value);
+      };
 
-  const handleEditClick = (cellIndex) => {
-    setEditingCell(cellIndex);
-  };
-
-  const handleCellBlur = () => {
-    setEditingCell(null);
-  };
-
-  const handleCursoChange = (e) => {
-    setSelectedCurso(e.target.value);
-  };
+ 
 
   const handleSaveClick = async () => {
     try {
@@ -53,12 +58,12 @@ const MateriasList = () => {
       ];
 
       const materiaData = daysAndTimes.map((dayAndTime, index) => ({
-        materia: materiaInputs[index],
+        nombre: materiaInputs[index],
         diaHora: dayAndTime,
         anio: selectedCurso,
       }));
 console.log(materiaData);
-      const response = await axios.post('http://localhost:3000/materias/guardar', materiaData, {
+      const response = await axios.post('http://localhost:3000/materia/guardar', materiaData, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -91,28 +96,29 @@ console.log(materiaData);
     updatedMateriaInputs[cellIndex] = e.target.value;
     setMateriaInputs(updatedMateriaInputs);
   };
-  
-  
+
+
+
+
 
   return (
-    <div>
-      
-      <h4>Aquí podrás editar las materias según los días y horarios</h4>
-      <div>
-        <label>Seleccione un curso:</label>
-        <select onChange={handleCursoChange} value={selectedCurso}>
-  <option value="">Seleccione un curso</option>
-  {cursos.map((curso) => (
-    <option key={curso.id} value={curso.id}>
-      {curso.anio} {/* Display the course name */}
-    </option>
-  ))}
-</select>
-      </div>
-      <div className="table-responsive m-5">
-        <table>
-          <thead>
-            <tr>
+    <div className="container d-flex flex-column justify-content-center align-items-center vh-100">
+    <h4 className="mb-4">Aquí podrás editar las materias según los días y horarios</h4>
+    <div className="mb-3">
+      <label>Seleccione un curso:</label>
+      <select className="form-select" onChange={handleAnioChange} value={selectedCurso}>
+        <option value="">Seleccione un curso</option>
+        {cursos.map((curso) => (
+          <option key={curso.id} value={curso.id}>
+            {curso.anio}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div className="table-responsive mb-4">
+      <table className="table table-bordered">
+        <thead>
+          <tr>
               <th>Día/Hora</th>
               <th>8:00-9:00</th>
               <th>9:00-10:00</th>
@@ -162,10 +168,12 @@ console.log(materiaData);
               {renderEditableCell('Fisica', 23)}
               {renderEditableCell('Recreo', 24)}
             </tr>
-          </tbody>
-        </table>
-        </div>
-      <button onClick={handleSaveClick}>Guardar Materias</button>
+            </tbody>
+            </table>
+      </div>
+      <button className="btn btn-primary" onClick={handleSaveClick}>
+        Guardar Materias
+      </button>
     </div>
   );
 };
