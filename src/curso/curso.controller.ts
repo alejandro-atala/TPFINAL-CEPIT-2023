@@ -18,8 +18,9 @@ export class CursoController {
   }
 
   @Get()
-  findAll() {
-    return this.cursoService.findAll();
+  async getAllCursos() {
+    const cursos = await this.cursoService.getAllCursos();
+    return cursos;
   }
 
   @Get(':id')

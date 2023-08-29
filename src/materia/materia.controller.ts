@@ -10,6 +10,7 @@ export class MateriasController {
 
   @Post('guardar')
   async guardarMaterias(@Body() materiaData: any[]) {
+   
     try {
       //console.log(materiaData);
       await this.materiasService.guardarMaterias(materiaData);
