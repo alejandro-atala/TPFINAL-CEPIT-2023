@@ -33,7 +33,7 @@ const MateriasList = () => {
     
       const fetchAnios = async () => {
         try {
-          const response = await axios.get('http://localhost:3000/anios'); // Adjust the API endpoint
+          const response = await axios.get('http://localhost:3000/curso/anios'); // Adjust the API endpoint
           const data = response.data; // Assuming the data is an array of years
           setAnios(data);
         } catch (error) {
@@ -41,9 +41,20 @@ const MateriasList = () => {
         }
       };
     
-      const handleAnioChange = (e) => {
-        setSelectedAnio(e.target.value);
+      const handleCursoChange = async (e) => {
+        setSelectedCurso(e.target.value);
+    
+        try {
+          const response = await axios.get(`http://localhost:3000/materias/${e.target.value}`);
+          const materias = response.data;
+          // Actualiza las materias en el estado local
+          console.log(materias);
+          setMateriaInputs(materias.map(materia => materia.nombre));
+        } catch (error) {
+          console.error('Error al cargar las materias:', error);
+        }
       };
+      
 
  
 
@@ -58,12 +69,12 @@ const MateriasList = () => {
       ];
 
       const materiaData = daysAndTimes.map((dayAndTime, index) => ({
-        nombre: materiaInputs[index],
+        materia: materiaInputs[index],
         diaHora: dayAndTime,
         anio: selectedCurso,
       }));
 console.log(materiaData);
-      const response = await axios.post('http://localhost:3000/materia/guardar', materiaData, {
+      const response = await axios.post('http://localhost:3000/materias/guardar', materiaData, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -79,7 +90,7 @@ console.log(materiaData);
     }
   };
 
-  const renderEditableCell = (cellContent, cellIndex) => {
+  const renderEditableCell = (cellIndex) => {
     return (
       <td>
         <input
@@ -91,6 +102,8 @@ console.log(materiaData);
     );
   };
   
+  
+
   const handleMateriaInputChange = (e, cellIndex) => {
     const updatedMateriaInputs = [...materiaInputs];
     updatedMateriaInputs[cellIndex] = e.target.value;
@@ -101,12 +114,13 @@ console.log(materiaData);
 
 
 
+
   return (
     <div className="container d-flex flex-column justify-content-center align-items-center vh-100">
     <h4 className="mb-4">Aquí podrás editar las materias según los días y horarios</h4>
     <div className="mb-3">
       <label>Seleccione un curso:</label>
-      <select className="form-select" onChange={handleAnioChange} value={selectedCurso}>
+      <select className="form-select" onChange={handleCursoChange} value={selectedCurso}>
         <option value="">Seleccione un curso</option>
         {cursos.map((curso) => (
           <option key={curso.id} value={curso.id}>
@@ -130,43 +144,43 @@ console.log(materiaData);
           <tbody>
             <tr>
               <td>Lunes</td>
-              {renderEditableCell('Matematicas', 0)}
-              {renderEditableCell('Fisica', 1)}
-              {renderEditableCell('Ingles', 2)}
-              {renderEditableCell('Historia', 3)}
-              {renderEditableCell('Recreo', 4)}
+              {renderEditableCell(0)}
+              {renderEditableCell(1)}
+              {renderEditableCell(2)}
+              {renderEditableCell(3)}
+              {renderEditableCell(4)}
             </tr>
             <tr>
               <td>Martes</td>
-              {renderEditableCell('Biologia', 5)}
-              {renderEditableCell('Educación Física', 6)}
-              {renderEditableCell('Matematicas', 7)}
-              {renderEditableCell('Fisica', 8)}
-              {renderEditableCell('Recreo', 9)}
+              {renderEditableCell(5)}
+              {renderEditableCell(6)}
+              {renderEditableCell(7)}
+              {renderEditableCell(8)}
+              {renderEditableCell(9)}
             </tr>
             <tr>
               <td>Miércoles</td>
-              {renderEditableCell('Ingles', 10)}
-              {renderEditableCell('Historia', 11)}
-              {renderEditableCell('Biologia', 12)}
-              {renderEditableCell('Educación Física', 13)}
-              {renderEditableCell('Recreo', 14)}
+              {renderEditableCell(10)}
+              {renderEditableCell(11)}
+              {renderEditableCell(12)}
+              {renderEditableCell(13)}
+              {renderEditableCell(14)}
             </tr>
             <tr>
               <td>Jueves</td>
-              {renderEditableCell('Matematicas', 15)}
-              {renderEditableCell('Fisica', 16)}
-              {renderEditableCell('Ingles', 17)}
-              {renderEditableCell('Historia', 18)}
-              {renderEditableCell('Recreo', 19)}
+              {renderEditableCell(15)}
+              {renderEditableCell(16)}
+              {renderEditableCell(17)}
+              {renderEditableCell(18)}
+              {renderEditableCell(19)}
             </tr>
             <tr>
               <td>Viernes</td>
-              {renderEditableCell('Biologia', 20)}
-              {renderEditableCell('Educación Física', 21)}
-              {renderEditableCell('Matematicas', 22)}
-              {renderEditableCell('Fisica', 23)}
-              {renderEditableCell('Recreo', 24)}
+              {renderEditableCell(20)}
+              {renderEditableCell(21)}
+              {renderEditableCell(22)}
+              {renderEditableCell(23)}
+              {renderEditableCell(24)}
             </tr>
             </tbody>
             </table>
