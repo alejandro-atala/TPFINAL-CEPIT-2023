@@ -24,6 +24,8 @@ import Profesor from './PaginaProfe/profesor';
 import AsistenciaList from './PaginaProfe/Asistencia/asistenciaList';
 import NotasExamenesList from './PaginaProfe/NotasExamen/notaList';
 import { AlumnoProvider } from './Alumno/AlumnoContext';
+import MateriasList from './PaginaProfe/Materias/materiasList';
+
 
 const App = () => {
 
@@ -75,9 +77,9 @@ const App = () => {
                     {/* pagina profesor */}
 
                     <Route path="/profesor" element={<Profesor />} />
-                    {/* <Route path="/Profnotas" element={<ProfNotas />} />
-              <Route path="/Profboletin" element={<ProfBoletin />} />
-              <Route path="/Profmaterias" element={<ProfMaterias />} /> */}
+                     {/* <Route path="/Profnotas" element={<ProfNotas />} /> */}
+              {/* <Route path="/Profboletin" element={<ProfBoletin />} /> */}
+              <Route path="/Profmaterias" element={<MateriasList />} /> 
                     <Route path="/ProfAsistencia" element={<AsistenciaList />} />
                     <Route path="/Profnotas" element={<NotasExamenesList />} />
                     {/* <Route path="/Profavisos" element={<ProfAvisos />} />
