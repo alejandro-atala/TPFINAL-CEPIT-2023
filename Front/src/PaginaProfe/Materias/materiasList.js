@@ -87,6 +87,10 @@ const MateriasList = () => {
           console.log('Materias guardadas exitosamente');
           setShowSuccessAlert(true); // Show success alert
           setShowErrorAlert(false); // Hide error alert
+
+          setTimeout(() => {
+            setShowSuccessAlert(false);
+          }, 2000);
         } else {
           console.error('Error al guardar las materias');
         }
