@@ -15,9 +15,10 @@ export class CursoService {
   async getAnios(): Promise<Curso[]> {
     return this.cursoRepository
       .createQueryBuilder('curso')
-      .select('DISTINCT curso.anio', 'anio') // Selecciona aÃ±os Ãºnicos
-      .getRawMany();
+      .select(['curso.idCurso', 'curso.anio'])
+      .getMany();
   }
+  
 
   
   create(createCursoDto: CreateCursoDto) {

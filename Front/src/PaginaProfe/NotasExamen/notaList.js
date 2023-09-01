@@ -21,6 +21,7 @@ const NotasExamenesList = () => {
     try {
       const response = await axios.get('http://localhost:3000/curso/anios');
       setAnios(response.data);
+
     } catch (error) {
       console.error('Error fetching años:', error);
     }
@@ -49,6 +50,7 @@ const NotasExamenesList = () => {
     }
   };
 
+ 
   const handleAnioChange = async (event) => {
     const selectedAnio = event.target.value;
     setSelectedAnio(selectedAnio);

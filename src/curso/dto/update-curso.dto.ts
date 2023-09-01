@@ -4,5 +4,5 @@ import { CreateCursoDto } from './create-curso.dto';
 export class UpdateCursoDto extends PartialType(CreateCursoDto) {
 
     public idCurso?: number;
-    public anioCurso?: number;
+    public anioCurso?: string;
 }
