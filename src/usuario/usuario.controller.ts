@@ -5,6 +5,7 @@ import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
 import { Profesor } from 'src/profesor/entities/profesor.entity';
 import { Alumno } from 'src/alumno/entities/alumno.entity';
+import { CredencialesDto } from './dto/credenciales.dto';
 
 
 
@@ -37,7 +38,39 @@ export class UsuarioController {
     return this.usuarioService.remove(+id);
   }
 
+  @Post('login')
+  async iniciarSesion(@Body() credenciales: CredencialesDto) {
+    try {
+      const usuario = await this.usuarioService.buscarPorEmail(credenciales.email);
 
+      if (!usuario) {
+        throw new UnauthorizedException('Correo electrónico no registrado');
+      }
+
+      // Verificar la contraseña
+      const contraseñaCoincide = await this.usuarioService.verificarContraseña(credenciales);
+
+      if (!contraseñaCoincide) {
+        throw new UnauthorizedException('Contraseña incorrecta');
+      }
+
+      if (usuario.tipo !== 'Alumno' && usuario.tipo !== 'Profesor') {
+
+        throw new UnauthorizedException('Tipo de usuario no válido');
+      }
+
+      // Redirigir a diferentes rutas según el tipo de usuario
+      if (usuario.tipo === 'Alumno' || usuario.tipo === 'Profesor') {
+        //console.log(usuario.tipo, usuario.nombre, usuario.idUsuario)
+        return { tipo: usuario.tipo, nombre: usuario.nombre, id: usuario.idUsuario };
+      }
+
+
+
+    } catch (error) {
+      throw new UnauthorizedException('Error al iniciar sesión');
+    }
+  }
 
   @Post()
   async createRegistro(@Body() createUsuarioDto: CreateUsuarioDto) {
@@ -54,7 +87,7 @@ export class UsuarioController {
         alumno.usuarioId = nuevoUsuario.idUsuario;
         alumno.curso = nuevoUsuario.curso;
         alumno.usuarioId = nuevoUsuario.idUsuario;
-        usuarioAsociado = await this.usuarioService.asociarAlumno(alumno);
+        usuarioAsociado = await this.usuarioService.asociarAlumno(alumno);  
       } 
       
       else if (createUsuarioDto.tipo === 'Profesor') {
