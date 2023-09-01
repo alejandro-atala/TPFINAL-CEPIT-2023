@@ -7,10 +7,10 @@ import { Alumno } from 'src/alumno/entities/alumno.entity';
 @Entity()
 export class Curso {
   @PrimaryGeneratedColumn()
-  idCurso: number; 
+  idCurso: number;
 
   @Column()
-  anio: number;
+  anio: string;
 
   @OneToMany(() => Alumno, alumno => alumno.idAlumno)
   alumnos: Alumno[];

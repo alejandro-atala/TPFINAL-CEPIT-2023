@@ -10,15 +10,15 @@ export class Alumno {
   @Column()
   nombre: string;
 
-  @ManyToOne(() => Curso, curso => curso.idCurso)
-  cursoIdCurso: number;
-  
-  @Column({ nullable: false }) // Indica que esta columna no puede ser nula
-  usuarioId: number;
+@OneToOne(() => Usuario ,usuario => usuario.idUsuario)
+@JoinColumn({name: 'usuarioId'})
+usuarioId: number;
 
-  @OneToOne(() => Usuario, usuario => usuario.idUsuario) 
+  @ManyToOne(() => Curso, curso => curso.alumnos)
+  curso: number;
+  notasExamenes: any;
 
-  usuarios: Usuario;  
-} 
+
+}
 
 

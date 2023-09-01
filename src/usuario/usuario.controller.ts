@@ -39,7 +39,7 @@ export class UsuarioController {
 
       // Redirigir a diferentes rutas según el tipo de usuario
       if (usuario.tipo === 'Alumno' || usuario.tipo === 'Profesor') {
-        //console.log(usuario.tipo, usuario.nombre, usuario.idUsuario)
+      
         return { tipo: usuario.tipo, nombre: usuario.nombre, id: usuario.idUsuario };
       }
 
@@ -56,16 +56,15 @@ export class UsuarioController {
     try {
       const nuevoUsuario = await this.usuarioService.createUsuario(createUsuarioDto);
       let usuarioAsociado;
-     console.log(createUsuarioDto)
-     console.log(nuevoUsuario)
+
       // Verificar el tipo de usuario y asociarlo a la tabla correspondiente
       if (createUsuarioDto.tipo === 'Alumno') {
         const alumno = new Alumno();
-        console.log(nuevoUsuario.curso)
+   
         alumno.nombre = nuevoUsuario.nombre;
+        // alumno.idAlumno = nuevoUsuario.idUsuario;
+        alumno.curso = nuevoUsuario.curso;
         alumno.usuarioId = nuevoUsuario.idUsuario;
-        alumno.cursoIdCurso = nuevoUsuario.curso;
-       
         usuarioAsociado = await this.usuarioService.asociarAlumno(alumno);
       } 
 
@@ -78,7 +77,7 @@ export class UsuarioController {
       profesor.usuarioId = nuevoUsuario.idUsuario;
 
         usuarioAsociado = await this.usuarioService.asociarProfesor(profesor);
-        console.log(usuarioAsociado)
+ 
       }
       return usuarioAsociado;
     } catch (error) {

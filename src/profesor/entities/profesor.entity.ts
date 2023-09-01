@@ -14,7 +14,7 @@ export class Profesor {
   @OneToMany(() => Materia, materia => materia.idMateria)
   materias: Materia[];
 
-  @Column() // Indica que esta columna no puede ser nula
+  @Column()
   usuarioId: number;
 
   @OneToOne(() => Usuario, usuario => usuario.tipo)
