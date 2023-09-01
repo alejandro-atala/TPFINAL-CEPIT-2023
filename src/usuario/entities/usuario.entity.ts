@@ -1,6 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
-import { Escuela } from 'src/escuela/entities/escuela.entity';
-import { Rol } from 'src/rol/entities/rol.entity';
 import { Alumno } from 'src/alumno/entities/alumno.entity';
 
 @Entity()
@@ -14,7 +12,7 @@ export class Usuario {
   @Column()
   dni: string;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date'  })
   fechaNac: Date;
 
   @Column()
@@ -27,15 +25,19 @@ export class Usuario {
   email: string;
 
   @Column()
-  password: string;
+  password: string; 
 
   @Column()
   tipo: string;
 
+  @Column()
+  curso: number;
 
   @OneToOne(() => Alumno, alumno => alumno.idAlumno) // Define the relationship
-  @JoinColumn({ name: 'alumno_id' }) // Specify the foreign key column name
-  alumno: Alumno;
+  
+  alumno: Alumno; 
+
+
 
   // Otros atributos y métodos de la entidad Usuario
 } 

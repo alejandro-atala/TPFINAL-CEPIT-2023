@@ -7,6 +7,8 @@ import { Usuario } from './entities/usuario.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { CredencialesDto } from './dto/credenciales.dto';
+import { Alumno } from 'src/alumno/entities/alumno.entity';
+import { Profesor } from 'src/profesor/entities/profesor.entity';
 const saltRounds = 10; // Número de rondas de encriptación
 
 
@@ -15,6 +17,10 @@ export class UsuarioService {
   constructor(
     @InjectRepository(Usuario)
     private usuarioRepository: Repository<Usuario>,
+    @InjectRepository(Profesor) 
+     private profesorRepository: Repository<Profesor>,
+     @InjectRepository(Alumno)
+     private alumnoRepository: Repository<Alumno>,
   ) {}
 
 
@@ -61,7 +67,14 @@ async verificarTipoUsuario(credenciales: CredencialesDto, tipo: string): Promise
   }
 
   
-  
+  async asociarAlumno(alumno: Alumno): Promise<Alumno> {
+    return await this.alumnoRepository.save(alumno);
+  }
+
+  async asociarProfesor(profesor: Profesor): Promise<Profesor> {
+    //console.log(profesor);
+    return await this.profesorRepository.save(profesor);
+  }
   
 
   findAll() {

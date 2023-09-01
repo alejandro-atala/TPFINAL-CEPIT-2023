@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable, OneToMany } from 'typeorm';
-import { Escuela } from 'src/escuela/entities/escuela.entity'; 
+
 import { MateriaCurso } from 'src/materia_curso/entities/materia_curso.entity';
 import { AlumnoCurso } from 'src/alumno-curso/entities/alumno-curso.entity';
 import { Alumno } from 'src/alumno/entities/alumno.entity';
@@ -7,10 +7,10 @@ import { Alumno } from 'src/alumno/entities/alumno.entity';
 @Entity()
 export class Curso {
   @PrimaryGeneratedColumn()
-  idCurso: number;
+  idCurso: number; 
 
   @Column()
-  anio: string;
+  anio: number;
 
   @OneToMany(() => Alumno, alumno => alumno.idAlumno)
   alumnos: Alumno[];

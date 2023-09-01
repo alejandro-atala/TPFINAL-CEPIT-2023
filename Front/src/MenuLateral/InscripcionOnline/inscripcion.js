@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Inscripcion = () => {
   const navigate = useNavigate(); // Acceso a la función de navegación
   const [formData, setFormData] = useState({
-    id:'',
+
     nombre: '',
     dni: '',
     fechaNac: '',
@@ -16,6 +16,7 @@ const Inscripcion = () => {
     email: '',
     password: '',
     tipo: '',
+    curso: ''
   });
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -112,6 +113,20 @@ console.log(formData)
                   <option defaultValue>Elija usuario</option>
                   <option>Alumno</option>
                   <option>Profesor</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="inputState" className="form-label">
+                  Curso
+                </label>
+                <select id="curso" className="form-select" value={formData.curso} onChange={handleChange}>
+                  <option defaultValue>Elija usuario</option>
+                  <option value={1}>Primero</option>
+                  <option value={2}>Segundo</option>
+                  <option value={3}>Tercero</option>
+                  <option value={4}>Cuarto</option>
+                  <option value={5}>Quinto</option>
+                  <option value={6}>Sexto</option>
                 </select>
               </div>
               <button

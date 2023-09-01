@@ -9,4 +9,5 @@ export class CreateUsuarioDto {
     public email :string;
     public password: string;
     public tipo :string;
+    public curso :number;
 }

@@ -10,30 +10,15 @@ export class Alumno {
   @Column()
   nombre: string;
 
-  @ManyToOne(() => Curso, curso => curso.alumnos)
-  curso: Curso;
-  notasExamenes: any;
+  @ManyToOne(() => Curso, curso => curso.idCurso)
+  curso: number;
+  
+  @Column({ nullable: false }) // Indica que esta columna no puede ser nula
+  usuarioId: number;
 
   @OneToOne(() => Usuario, usuario => usuario.idUsuario) 
-  @JoinColumn({ name: 'usuario_id' })
+
   usuarios: Usuario;  
 } 
 
-// import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
-// import { Curso } from 'src/curso/entities/curso.entity';
-// import { Asistencia } from 'src/asistencia/entities/asistencia.entity';
 
-// @Entity()
-// export class Alumno {
-//   @PrimaryGeneratedColumn()
-//   idAlumno: number;
-
-//   @Column()
-//   nombre: string;
-
-//   @ManyToOne(() => Curso, curso => curso.alumnos)
-//   curso: Curso;
-
-//   @OneToMany(() => Asistencia, asistencia => asistencia.alumno)
-//   asistencias: Asistencia[];
-// }
