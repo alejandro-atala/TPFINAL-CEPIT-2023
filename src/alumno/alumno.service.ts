@@ -20,9 +20,20 @@ export class AlumnoService {
       .getMany();
   }
 
-  async create(createAlumnoDto: CreateAlumnoDto): Promise<Alumno> {
-    const newAlumno = this.alumnoRepository.create(createAlumnoDto);
-    return this.alumnoRepository.save(newAlumno);
+  async createAlumno(nombre: string, cursoId: number): Promise<Alumno> {
+    const nuevoAlumno = new Alumno();
+    nuevoAlumno.nombre = nombre;
+    nuevoAlumno.curso = cursoId;
+    
+    return this.alumnoRepository.save(nuevoAlumno);
+  }
+
+  async findAllAlumnos(): Promise<Alumno[]> {
+    return this.alumnoRepository.find();
+  }
+
+  async findAlumnoById(id): Promise<Alumno | null> {
+    return this.alumnoRepository.findOne(id);
   }
 
   async getAllAlumnos(): Promise<Alumno[]> {

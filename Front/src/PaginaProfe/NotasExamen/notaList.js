@@ -28,7 +28,7 @@ const NotasExamenesList = () => {
 
   const fetchMaterias = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/materia');
+      const response = await axios.get('http://localhost:3000/materias');
       setMaterias(response.data); // Asegúrate de que response.data sea la estructura correcta
     } catch (error) {
       console.error('Error fetching materias:', error);
@@ -133,7 +133,7 @@ const NotasExamenesList = () => {
         <option value="">Seleccione una materia</option>
         {materias.map((materia) => (
           <option key={materia.idMateria} value={materia.idMateria}>
-            {materia.nombre}
+            {materia.materia}
           </option>
         ))}
       </Form.Control>

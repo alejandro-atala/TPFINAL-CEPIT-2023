@@ -25,13 +25,35 @@ export class UsuarioService {
 
 
 
-  async createRegistro(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
+  async createUsuario(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
     const nuevoUsuario = this.usuarioRepository.create(createUsuarioDto);
-  
     nuevoUsuario.password = await bcrypt.hash(nuevoUsuario.password, saltRounds);
-  
-    return await this.usuarioRepository.save(nuevoUsuario);
+
+    // Asignar el tipo de usuario al nuevoUsuario
+
+    let usuarioAsociado: Usuario | null = null;
+
+    if (createUsuarioDto.tipo === 'Alumno') {
+      usuarioAsociado = await this.createAlumnoConUsuario(nuevoUsuario);
+    } else if (createUsuarioDto.tipo === 'Profesor') {
+      usuarioAsociado = await this.createProfesorConUsuario(nuevoUsuario);
+    }
+
+    return usuarioAsociado;
   }
+
+  async createAlumnoConUsuario(usuario: Usuario): Promise<Usuario> {
+    // Validaciones y asignación de datos del alumno
+    // ...
+    return this.usuarioRepository.save(usuario);
+  }
+
+  async createProfesorConUsuario(usuario: Usuario): Promise<Usuario> {
+    // Validaciones y asignación de datos del profesor
+    // ...
+    return this.usuarioRepository.save(usuario);
+  }
+
 
   async buscarPorEmail(email: string): Promise<Usuario | null> {
     return this.usuarioRepository.findOne({ where: { email } });
@@ -45,7 +67,7 @@ export class UsuarioService {
       throw new NotFoundException('Usuario no encontrado');
     }
 
-    const contraseñaCoincide = await bcrypt.compare(credenciales.password, usuario.password);
+    const contraseñaCoincide = await bcrypt.compare(credenciales.password, usuario.password); 
 
     if (!contraseñaCoincide) {
       throw new NotFoundException('Contraseña incorrecta');
@@ -69,27 +91,11 @@ async verificarTipoUsuario(credenciales: CredencialesDto, tipo: string): Promise
   
   async asociarAlumno(alumno: Alumno): Promise<Alumno> {
     return await this.alumnoRepository.save(alumno);
-  }
+  } 
 
-  async asociarProfesor(profesor: Profesor): Promise<Profesor> {
+  async asociarProfesor(profesor: Profesor): Promise<Profesor> { 
     //console.log(profesor);
     return await this.profesorRepository.save(profesor);
   }
   
-
-  findAll() {
-    return `This action returns all usuario`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} usuario`;
-  }
-
-  update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
-    return `This action updates a #${id} usuario`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} usuario`;
-  }
 }

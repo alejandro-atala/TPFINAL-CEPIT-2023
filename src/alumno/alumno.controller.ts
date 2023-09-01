@@ -12,10 +12,7 @@ export class AlumnoController {
     return this.alumnoService.getAlumnosPorAnio(anio);
   }
 
-  @Post()
-  create(@Body() createAlumnoDto: CreateAlumnoDto) {
-    return this.alumnoService.create(createAlumnoDto);
-  }
+
 
   @Get()
   async getAllAlumnos() {
@@ -37,5 +34,5 @@ export class AlumnoController {
   remove(@Param('id') id: string) {
     return this.alumnoService.remove(+id);
   }
-}
+} 
  

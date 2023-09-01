@@ -42,6 +42,7 @@ const MateriasList = () => {
     
       if (selectedCursoId) {
         try {
+          console.log(selectedCursoId);
           const response = await axios.get(`http://localhost:3000/materias/${selectedCursoId}`);
           const materiaData = response.data;
     
