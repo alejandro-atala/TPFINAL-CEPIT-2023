@@ -1,17 +1,37 @@
 /* Navbar.css */
 .bg-pink {
-    background-color: rgb(255, 121, 143);
-  }
-  
-  /* Añade más estilos según sea necesario */
-  /* Navbar.css */
+
+  background-color: rgb(255, 121, 143);
+}
+
 .navbar-logo {
-  width: 50px; /* Ajusta el tamaño de la imagen según tus necesidades */
+  width: 50px;
   height: auto;
-  margin-right: 10px; /* Ajusta el margen derecho para separar la imagen del texto */
+  margin-right: 10px;
+}
+
+.sesion {
+  transition: color 0.3s ease, background-color 0.3s ease;
+  margin-left: 400px;
 }
 
 
-.registro{
-  margin-left: 400px;
+.nav-link {
+  transition: color 0.3s ease, background-color 0.3s ease;
+  border-radius: 5px;;
+}
+
+.nav-link:hover {
+  color: #fff;
+  background-color: #ee6e82;
+
+}
+
+.hola-usuario{
+  margin-left:50px;
+  margin-top: -5px;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 20px;
+  background-color: rgb(250, 148, 148);
+  text-decoration: underline;
 }

@@ -1,20 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { AlumnoService } from './alumno.service';
-import { CreateAlumnoDto } from './dto/create-alumno.dto';
 import { UpdateAlumnoDto } from './dto/update-alumno.dto';
+import { CreateAlumnoDto } from './dto/create-alumno.dto';
 
 @Controller('alumno')
 export class AlumnoController {
   constructor(private readonly alumnoService: AlumnoService) {}
 
-  @Post()
-  create(@Body() createAlumnoDto: CreateAlumnoDto) {
-    return this.alumnoService.create(createAlumnoDto);
+  @Get('por-anio/:anio')
+  async getAlumnosPorAnio(@Param('anio') anio: string) {
+    return this.alumnoService.getAlumnosPorAnio(anio);
   }
 
+
+
   @Get()
-  findAll() {
-    return this.alumnoService.findAll();
+  async getAllAlumnos() {
+    const alumnos = await this.alumnoService.getAllAlumnos();
+    return alumnos;
   }
 
   @Get(':id')
@@ -31,4 +34,5 @@ export class AlumnoController {
   remove(@Param('id') id: string) {
     return this.alumnoService.remove(+id);
   }
-}
+} 
+ 

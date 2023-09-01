@@ -1,69 +1,23 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn } from 'typeorm';
+import { Materia } from 'src/materia/entities/materia.entity'; 
+import { Usuario } from 'src/usuario/entities/usuario.entity';
 
+@Entity()
 export class Profesor {
+  @PrimaryGeneratedColumn()
+  idProfesor: number;
 
-    @PrimaryGeneratedColumn()
-    public idProfesor: number;
+  @Column()
+  nombre :string;
 
-    @Column({unique : true}) 
-    public nombreProfesor: string;
 
-    @Column()
-    public dniProfesor: number;
+  @OneToMany(() => Materia, materia => materia.idMateria)
+  materias: Materia[];
 
-    @Column()
-    public fechaNacProfesor: number;
+  @Column() // Indica que esta columna no puede ser nula
+  usuarioId: string;
 
-    @Column()
-    public nroLegajoProfesor: number;
-
-    @Column()
-    public direccionProfesor: string;
-
-  
-    constructor(idProfesor: number, nombreProfesor: string, dniProfesor: number, fechaNacProfesor: number,
-        nroLegajoProfesor:number, direccionProfesor: string) { 
-        this.idProfesor = idProfesor;
-        this.nombreProfesor = nombreProfesor;
-        this.dniProfesor = dniProfesor;
-        this.fechaNacProfesor = fechaNacProfesor;
-        this.nroLegajoProfesor = nroLegajoProfesor;
-        this.direccionProfesor = direccionProfesor;
-     } 
-
-    public getIdProfesor(): number {
-        return this.idProfesor;
-    }
-
-    public setIdProfesor(idProfesor: number): void {
-        this.idProfesor = idProfesor;
-    }
-    
-    public getNombreProfesor(): string {
-        return this.nombreProfesor;
-    }
-    
-    public setNombreProfesor(nombreProfesor: string): void {
-        this.nombreProfesor= nombreProfesor;
-    }
-
-    public getdniProfesor(): number {
-        return this.dniProfesor;
-    }
-    
-    public getFechaNacProfesor(): number {
-        return this.fechaNacProfesor;
-    }
-
-    public getNroLegajoProfesor(): number {
-        return this.nroLegajoProfesor;
-    }
-
-    public getDireccionProfesor(): string{
-        return this.direccionProfesor;
-    }
-
-    public setDireccionProfesor(direccionProfesor: string): void {
-        this.direccionProfesor = direccionProfesor;
-    }
-}
+  @OneToOne(() => Usuario, usuario => usuario.tipo)
+  @JoinColumn({ name: 'usuarioId' })
+  usuario: Usuario;
+} 

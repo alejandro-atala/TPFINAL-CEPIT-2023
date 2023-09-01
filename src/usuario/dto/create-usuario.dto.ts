@@ -1,6 +1,13 @@
 export class CreateUsuarioDto {
 
     public idusuario: number;
-    public nombreUsuario: string;
-    public dniUsuario: number;
+    public nombre: string;
+    public dni: string;
+    public fechaNac :Date;
+    public direccion: string;
+    public telefono: string;
+    public email :string;
+    public password: string;
+    public tipo :string;
+    public curso :number;
 }

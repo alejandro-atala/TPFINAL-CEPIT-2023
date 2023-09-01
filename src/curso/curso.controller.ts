@@ -6,6 +6,11 @@ import { UpdateCursoDto } from './dto/update-curso.dto';
 @Controller('curso')
 export class CursoController {
   constructor(private readonly cursoService: CursoService) {}
+  @Get('anios')
+  async getAnios() {
+    const anios = await this.cursoService.getAnios();
+    return anios.map(curso => curso.anio); // Extrae solo los valores de "anio"
+  }
 
   @Post()
   create(@Body() createCursoDto: CreateCursoDto) {
@@ -13,8 +18,9 @@ export class CursoController {
   }
 
   @Get()
-  findAll() {
-    return this.cursoService.findAll();
+  async getAllCursos() {
+    const cursos = await this.cursoService.getAllCursos();
+    return cursos;
   }
 
   @Get(':id')

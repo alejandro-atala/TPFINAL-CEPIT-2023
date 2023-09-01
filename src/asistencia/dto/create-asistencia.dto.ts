@@ -1,7 +1,7 @@
 export class CreateAsistenciaDto {
-   
-    public idAsistencia: number;
-    public fechaAsistencia: number; //no se como poner date solo me deja number
-    public presente: boolean;
-
+  idAlumno: number;
+  nombre: string;
+  anio: string;
+  fecha: Date;
+  asistencia: string;
 }

@@ -1,33 +1,48 @@
 .container {
-    display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente */
-    background-size: cover; /* Ajustar el fondo al tamaño de la ventana */
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+}
 
 .side-menu {
-    width: 400px;
-    background-image: linear-gradient(to bottom, rgba(23, 162, 184, 0.8), rgba(23, 162, 184, 0.4));
-    color: white;
-    padding: 20px; 
-    border-radius: 10px;
-    margin-top: 30px;
-  } 
-  
-  .menu-item {
-    padding: 15px; /* Aumentar el espacio entre elementos */
-    border-bottom: 1px solid #128293; /* Color de borde más claro */
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
-  }
-  
-  .menu-item:hover {
-    background-color: #128293; /* Color de fondo más oscuro al pasar el mouse */
-  }
-  
-  .menu-item:last-child {
-    border-bottom: none;
-  }
+  width: 300px;
+  background-image: linear-gradient(to bottom, rgba(23, 162, 184, 0.8), rgba(23, 162, 184, 0.4));
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+}
 
-  
-  
+.menu-item {
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 10px;
+  font-family: 'Arial', sans-serif;
+  font-size: 22px;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative; /* Agregar esta línea */
+  border-bottom: 3px solid #4e4e4e; /* Agregar línea divisoria */
+  margin-top: 15px;
+}
+
+
+
+.side-menu a { /* Cambiar a apuntar a los enlaces dentro de .side-menu */
+  text-decoration: none;
+  color: inherit; /* Heredar el color de texto */
+}
+
+.menu-item:hover {
+  background-color: #859598;
+  color: rgb(255, 255, 255);
+}
+
+.menu-item:last-child:before {
+  display: none;
+
+}

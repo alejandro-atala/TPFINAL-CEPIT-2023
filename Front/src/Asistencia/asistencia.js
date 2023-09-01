@@ -1,10 +1,57 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useAlumno } from '../Alumno/AlumnoContext';
+
+const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, options);
+};
 
 const Asistencia = () => {
+  const [asistencias, setAsistencias] = useState([]);
+  const { alumnoLogueado } = useAlumno();
+  const [contadorAsistencias, setContadorAsistencias] = useState(0);
+  const [contadorInasistencias, setContadorInasistencias] = useState(0);
+  const [contadorMediaFalta, setContadorMediaFalta] = useState(0);
+
+  useEffect(() => {
+    fetchAsistencias();
+  }, []);
+
+  const fetchAsistencias = async () => {
+    try {
+      console.log(alumnoLogueado);
+      const response = await axios.get(`http://localhost:3000/asistencia/${alumnoLogueado}`);
+      const asistenciasData = response.data;
+      setAsistencias(asistenciasData);
+      // Calcular los contadores
+      const asistenciasCounts = asistenciasData.reduce(
+        (counts, asistencia) => {
+          if (asistencia.asistencia === 'presente') {
+            counts.asistencias += 1;
+          } else if (asistencia.asistencia === 'ausente') {
+            counts.inasistencias += 1;
+          } else if (asistencia.asistencia === 'media falta') {
+            counts.mediaFalta += 1;
+          }
+          return counts;
+        },
+        { asistencias: 0, inasistencias: 0, mediaFalta: 0 }
+      );
+      setContadorAsistencias(asistenciasCounts.asistencias);
+      setContadorInasistencias(asistenciasCounts.inasistencias);
+      setContadorMediaFalta(asistenciasCounts.mediaFalta);
+    } catch (error) {
+      console.error('Error fetching asistencias:', error);
+    }
+  };
+
   return (
-    <div>
-      <h1>Log de asistencias e inasistencias</h1>
+    <div className='col-9'>
+      <h4>Registro de asistencias e inasistencias</h4>
       <table className="custom-table">
+
         <thead>
           <tr>
             <th>Fecha</th>
@@ -14,32 +61,26 @@ const Asistencia = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2023-04-21</td>
-            <td>09:00</td>
-            <td>09:00</td>
-            <td>Asistencia</td>
-          </tr>
-          <tr>
-            <td>2023-04-20</td>
-            <td>14:30</td>
-            <td>09:00</td>
-            <td>Inasistencia</td>
-          </tr>
-          <tr>
-            <td>2023-04-19</td>
-            <td>10:15</td>
-            <td>09:00</td>
-            <td>Asistencia</td>
-          </tr>
-          <tr>
-            <td>2023-04-18</td>
-            <td>08:45</td>
-            <td>09:00</td>
-            <td>Asistencia</td>
-          </tr>
+          {asistencias.map(asistencia => (
+            <tr key={asistencia.id}>
+                <td>{formatDate(asistencia.fecha)}</td>
+              <td>{asistencia.entrada}</td>
+              <td>{asistencia.salida}</td>
+              <td>
+                {asistencia.asistencia === 'presente' && 'Presente'}
+                {asistencia.asistencia === 'ausente' && 'Ausente'}
+                {asistencia.asistencia === 'media-falta' && 'Media-Falta'}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
+      <br></br>
+      <div className="d-flex justify-content-between ">
+        <p>Asistencias: <strong>{contadorAsistencias}</strong></p>
+        <p>Inasistencias: <strong>{contadorInasistencias}</strong></p>
+        <p>Medias Faltas:<strong> {contadorMediaFalta}</strong></p>
+      </div>
     </div>
   );
 };

@@ -1,39 +1,43 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
+import { Alumno } from 'src/alumno/entities/alumno.entity';
 
+@Entity()
 export class Usuario {
-    @PrimaryGeneratedColumn()
-    public idUsuario: number;
+  @PrimaryGeneratedColumn()
+  idUsuario: number;
 
-    @Column()
-    public nombreUsuario: string;
+  @Column()
+  nombre: string;
 
-    @Column()
-    public dniUsuario: number;
+  @Column()
+  dni: string;
+
+  @Column({ type: 'date'  })
+  fechaNac: Date;
+
+  @Column()
+  direccion: string;
+
+  @Column()
+  telefono: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  password: string; 
+
+  @Column()
+  tipo: string;
+
+  @Column()
+  curso: number;
+
+  @OneToOne(() => Alumno, alumno => alumno.idAlumno) // Define the relationship
   
-    constructor(idUsuario: number, nombreUsuario: string, dniUsuario: number) { 
-        this.idUsuario = idUsuario;
-        this.nombreUsuario = nombreUsuario;
-        this.dniUsuario = dniUsuario;
-     } 
+  alumno: Alumno; 
 
-    public getIdUsuario(): number {
-        return this.idUsuario;
-    }
 
-    public setIdUsuario(idUsuario: number): void {
-        this.idUsuario = idUsuario;
-    }
-    
-    public getNombreUsuario(): string {
-        return this.nombreUsuario;
-    }
-    
-    public setNombreUsuario(nombreUsuario: string): void {
-        this.nombreUsuario = nombreUsuario;
-    }
 
-    public getdniUsuario(): number {
-        return this.dniUsuario;
-    }
-
-}
+  // Otros atributos y métodos de la entidad Usuario
+} 

@@ -29,10 +29,10 @@ const Inscripcion = () => {
       console.log('Registro exitoso:', response.data);
       setSuccessMessage('Registro exitoso. ¡Bienvenido! ');
       setErrorMessage('');
-      // Agregar un retraso de 2 segundos antes de redirigir
-      setTimeout(() => {
-        navigate('/iniciarSesion');
-      }, 3000);
+     // Agregar un retraso de 2 segundos antes de redirigir
+     setTimeout(() => {
+      navigate('/iniciarSesion');
+    }, 3000);
     } catch (error) {
       console.error('Error en el registro:', error);
       setErrorMessage('Error en el registro. Inténtelo nuevamente.');

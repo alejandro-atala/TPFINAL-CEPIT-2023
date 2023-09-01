@@ -1,70 +1,68 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './notas.css';
+import { useAlumno } from '../Alumno/AlumnoContext';
 
+const formatDate = (dateString) => {
+	const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+	const date = new Date(dateString);
+	return date.toLocaleDateString(undefined, options);
+  };
 
 const Notas = () => {
-  return (
-    <div>
-      
-  <h4> Aqui podras ver las notas de tus examenes</h4>
+	const [notas, setNotas] = useState([]);
+	const { alumnoLogueado } = useAlumno();
+	useEffect(() => {
+		fetchNotas();
+	}, []);
 
-  <table>
-		<thead>
-			<tr>
-				<th>Fecha</th>
-				<th>Materia</th>
-				<th>Nota del examen</th>
-				<th>Estado</th>
-				<th>Recuperatorio</th>
-        <th>Nota del recuperatorio</th>
-				<th>Estado</th>
-			</tr>
-		</thead>
+	const fetchNotas = async () => {
+		try {
 
+			const response = await axios.get(`http://localhost:3000/notas-examenes/${alumnoLogueado}`);
+			const notasData = response.data; // Asumiendo que response.data es un Array de objetos de nota
+			setNotas(notasData);
 
-		<tbody>
-			<tr>
-				<td>2023-04-21</td>
-				<td>Matematica</td>
-				<td>8</td>
-				<td>Aprobado</td>
-				<td>-</td>
-        <td>-</td>
-        <td>-</td>
-			</tr>
-			<tr>
-				<td>2023-04-20</td>
-				<td>Ingles</td>
-				<td>5</td>
-				<td>Desaprobado</td>
-				<td>2023-04-27</td>
-        <td>7</td>
-        <td>Aprobado</td>
-			</tr>
-			<tr>
-				<td>2023-04-19</td>
-				<td>Historia</td>
-				<td>9</td>
-				<td>Aprobado</td>
-				<td>-</td>
-        <td>-</td>
-        <td>-</td>
-			</tr>
-			<tr>
-				<td>2023-04-18</td>
-				<td>Fisica</td>
-				<td>3</td>
-				<td>Desaprobado</td>
-				<td>2023-05-01</td>
-        <td>6</td>
-        <td>Desaprobado</td>
-			</tr>
-		</tbody>
-	</table>
+		} catch (error) {
+			console.error('Error fetching notas:', error);
+		}
 
-</div>
+	};
 
-  )
-}
+	return (
+		<div>
+			<h4>Aquí podrás ver las notas de tus exámenes</h4>
 
-export default Notas
+			<table>
+				<thead>
+					<tr>
+						<th>Fecha</th>
+						<th>Materia</th>
+						<th>Nota del examen</th>
+						<th>Estado</th>
+						<th>Recuperatorio</th>
+						<th>Nota del recuperatorio</th>
+						<th>Estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					{notas.map((nota, index) => (
+						<tr key={index}>
+
+							<td>{formatDate(nota.fechaNota)}</td>
+							<td>{nota.materia.nombre}</td>
+							<td>{nota.nota}</td>
+							<td> {nota.nota !== null ? (nota.nota >= 7 ? 'Aprobado' : 'Desaprobado') : '-'}</td>
+							<td>{formatDate(nota.fechaRecuperatorio) || '-'}</td>
+							<td>{nota.notaRecuperatorio || '-'}</td>
+							<td>{nota.notaRecuperatorio !== (null || undefined) ? (nota.notaRecuperatorio >= 7 ? 'Aprobado' : 'Desaprobado') : '-'}</td>
+
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	);
+};
+
+export default Notas;

@@ -1,44 +1,32 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Alumno } from 'src/alumno/entities/alumno.entity';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
+@Entity()
 export class Asistencia {
-    
-    @PrimaryGeneratedColumn()
-    public idAsistencia: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    public fechaAsistencia: number;
+  @Column()
+  idAlumno: number; // Cambia 'alumno' a 'idAlumno'
 
-    @Column()
-    public presente: boolean;
-  
-    constructor(idAsistencia: number, fechaAsistencia: number, presente: boolean) { 
-        this.idAsistencia = idAsistencia;
-        this.fechaAsistencia = fechaAsistencia;
-        this.presente = presente;
-     } 
+  @Column()
+  nombre: string; // Agrega el campo para el nombre del alumno
 
-    public getIdAsistencia(): number {
-        return this.idAsistencia;
-    }
+  @Column()
+  anio: string;
 
-    public setIdAsistencia(idAsistencia: number): void {
-        this.idAsistencia = idAsistencia;
-    }
-    
-    public getFechaAsistencia(): number {
-        return this.fechaAsistencia;
-    }
-    
-    public setFechaAsistencia(fechaAsistencia: number): void {
-        this.fechaAsistencia = fechaAsistencia;
-    }
+  @Column()
+  fecha: Date;
 
-    public getPresente(): boolean {
-        return this.presente;
-    }
+  @Column()
+  asistencia: string;
 
-    //deberia ser true or false no?
-    public setPresente(presente: boolean): void {
-        this.presente = presente;
-    }
+
+  @ManyToOne(() => Alumno, alumno => alumno.idAlumno)
+  @JoinColumn()
+  alumnos: Alumno;
 }
+  
+
+
+ 

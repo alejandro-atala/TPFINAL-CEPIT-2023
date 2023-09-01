@@ -1,6 +1,7 @@
 export class CreateMateriaDto {
 
     public idMateria: number;
-    public nombreMateria: string;
-    public horarioMateria: number;
+    public materia: string;
+    public diaHora :string;
+    public anio: string;
 }

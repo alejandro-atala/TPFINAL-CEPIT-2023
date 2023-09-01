@@ -1,26 +1,57 @@
-import { Injectable } from '@nestjs/common';
-import { CreateNotasExameneDto } from './dto/create-notas_examene.dto';
-import { UpdateNotasExameneDto } from './dto/update-notas_examene.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { FindOneOptions, Repository } from 'typeorm';
+import { CreateNotasExameneDto } from './dto/create-notas_examenes.dto';
+import { NotaExamen } from './entities/notas_examenes.entity';
+import { UpdateNotasExameneDto } from './dto/update-notas_examenes.dto';
 
 @Injectable()
 export class NotasExamenesService {
-  create(createNotasExameneDto: CreateNotasExameneDto) {
-    return 'This action adds a new notasExamene';
+  constructor(
+    @InjectRepository(NotaExamen)
+    private readonly notasExameneRepository: Repository<NotaExamen>,
+  ) {}
+
+  async create(createNotasExameneDto: CreateNotasExameneDto): Promise<NotaExamen> {
+    const newNota = this.notasExameneRepository.create(createNotasExameneDto);
+    return await this.notasExameneRepository.save(newNota);
   }
 
-  findAll() {
-    return `This action returns all notasExamenes`;
+  async update(id: number, updateNotasExameneDto: UpdateNotasExameneDto): Promise<NotaExamen> {
+    const notaToUpdate = await this.notasExameneRepository.findOne({ where: { idNota: id } });
+    if (!notaToUpdate) {
+      throw new NotFoundException(`NotasExamene with id ${id} not found`);
+    }
+
+    await this.notasExameneRepository.update({ idNota: id }, updateNotasExameneDto);
+    return await this.notasExameneRepository.findOne({ where: { idNota: id } });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} notasExamene`;
+
+  async findAll(): Promise<NotaExamen[]> {
+    return await this.notasExameneRepository.find();
   }
 
-  update(id: number, updateNotasExameneDto: UpdateNotasExameneDto) {
-    return `This action updates a #${id} notasExamene`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} notasExamene`;
-  }
+  
+async findOne(id: number): Promise<NotaExamen | undefined> {
+  const options: FindOneOptions<NotaExamen> = {
+    where: { idNota: id }, // Ajusta la propiedad y el valor para que coincida con tus entidades
+  };
+  return await this.notasExameneRepository.findOne(options);
 }
+
+
+  async remove(id: number): Promise<void> {
+    await this.notasExameneRepository.delete(id);
+  }
+
+  async findNotasExamenByAlumno(idAlumno: number) {
+    return this.notasExameneRepository
+      .createQueryBuilder('nota')
+      .leftJoinAndSelect('nota.materia', 'materia')
+      .where('nota.idAlumno = :idAlumno', { idAlumno })
+      .getMany();
+  }
+  }
+
+
