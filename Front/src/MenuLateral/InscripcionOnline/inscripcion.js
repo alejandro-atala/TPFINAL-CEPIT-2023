@@ -32,23 +32,34 @@ const Inscripcion = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Evita la recarga de la página al enviar el formulario
-console.log(formData)
+    
+    // Validar que todos los campos estén llenos
+    const requiredFields = ['nombre', 'dni', 'fechaNac', 'direccion', 'telefono', 'email', 'password', 'tipo', 'curso'];
+    const isFormValid = requiredFields.every(field => formData[field].trim() !== ''); // Verifica que ningún campo esté vacío
+    
+    if (!isFormValid) {
+      setErrorMessage('Por favor, complete todos los campos.');
+      setSuccessMessage('');
+      return; // No se envía el formulario si faltan campos
+    }
+  
     try {
       // Realiza la solicitud POST al controlador de NestJS
       const response = await axios.post('http://localhost:3000/usuario', formData);
       console.log('Registro exitoso:', response.data);
-      setSuccessMessage('Registro exitoso. ¡Bienvenido! ');
+      setSuccessMessage('Registro exitoso. ¡Bienvenido!');
       setErrorMessage('');
-     // Agregar un retraso de 2 segundos antes de redirigir
-     setTimeout(() => {
-      navigate('/iniciarSesion');
-    }, 3000);
+      // Agregar un retraso de 2 segundos antes de redirigir
+      setTimeout(() => {
+        navigate('/iniciarSesion');
+      }, 3000);
     } catch (error) {
       console.error('Error en el registro:', error);
       setErrorMessage('Error en el registro. Inténtelo nuevamente.');
       setSuccessMessage('');
     }
   };
+  
 
   return (
     <div>
@@ -56,8 +67,7 @@ console.log(formData)
         <div className="row align-items-center ">
           <div className="col ">
             <h2 className="text-center">Registro de usuario</h2>
-            {successMessage && <div className="alert alert-success">{successMessage}</div>}
-            {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+
             <form>
               <div className="form-group">
                 <label htmlFor="nombre">Nombre completo:</label>
@@ -137,6 +147,8 @@ console.log(formData)
               >
                 Registrarse
               </button>
+              {successMessage && <div className="alert alert-success">{successMessage}</div>}
+            {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
             </form>
           </div>
         </div>
