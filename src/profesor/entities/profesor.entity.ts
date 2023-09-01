@@ -15,7 +15,7 @@ export class Profesor {
   materias: Materia[];
 
   @Column() // Indica que esta columna no puede ser nula
-  usuarioId: string;
+  usuarioId: number;
 
   @OneToOne(() => Usuario, usuario => usuario.tipo)
   @JoinColumn({ name: 'usuarioId' })

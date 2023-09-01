@@ -13,7 +13,7 @@ export class ProfesorService {
   ) {}
 
   
-  async createProfesor(nombre: string, curso: string): Promise<Profesor> {
+  async createProfesor(nombre: string, curso: number): Promise<Profesor> {
     const nuevoProfesor = new Profesor();
     nuevoProfesor.nombre = nombre;
     nuevoProfesor.usuarioId = curso;

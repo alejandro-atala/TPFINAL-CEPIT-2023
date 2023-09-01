@@ -91,9 +91,9 @@ async verificarTipoUsuario(credenciales: CredencialesDto, tipo: string): Promise
   
   async asociarAlumno(alumno: Alumno): Promise<Alumno> {
     return await this.alumnoRepository.save(alumno);
-  } 
+  }
 
-  async asociarProfesor(profesor: Profesor): Promise<Profesor> { 
+  async asociarProfesor(profesor: Profesor): Promise<Profesor> {
     //console.log(profesor);
     return await this.profesorRepository.save(profesor);
   }

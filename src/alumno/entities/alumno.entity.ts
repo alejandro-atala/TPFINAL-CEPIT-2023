@@ -11,7 +11,7 @@ export class Alumno {
   nombre: string;
 
   @ManyToOne(() => Curso, curso => curso.idCurso)
-  curso: number;
+  cursoIdCurso: number;
   
   @Column({ nullable: false }) // Indica que esta columna no puede ser nula
   usuarioId: number;
