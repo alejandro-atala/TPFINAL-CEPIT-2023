@@ -3,6 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTabl
 import { MateriaCurso } from 'src/materia_curso/entities/materia_curso.entity';
 import { AlumnoCurso } from 'src/alumno-curso/entities/alumno-curso.entity';
 import { Alumno } from 'src/alumno/entities/alumno.entity';
+import { Profesor } from 'src/profesor/entities/profesor.entity';
 
 @Entity()
 export class Curso {
@@ -15,8 +16,9 @@ export class Curso {
   @OneToMany(() => Alumno, alumno => alumno.idAlumno)
   alumnos: Alumno[];
 
-  // @ManyToOne(() => Escuela, escuela => escuela.idEscuela)
-  // escuela: Escuela;
+  @ManyToMany(() => Profesor, (profesor) => profesor.cursos)
+  @JoinTable() // Esto es necesario para definir la tabla intermedia
+  profesores: Profesor[];;
 
   @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.idMateriaCurso)
   materiasCursos: MateriaCurso[];
