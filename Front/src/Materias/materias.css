@@ -12,3 +12,8 @@ table {
   tr:nth-child(even) {
     background-color: #f2f2f2;
   }
+
+  .column-header {
+    width: 200px; /* Establece el ancho fijo deseado */
+  }
+  

@@ -86,17 +86,14 @@ const Materias = () => {
 
  
 
-  const renderNonEditableCell = (cellIndex) => {
+  const renderNonEditableCell = (cellIndex, materia) => {
     return (
       <td>
-        <input
-          type="text"
-          value={materiaCursoInputs[cellIndex]}
-          readOnly
-        />
+        <div>{materia}</div>
       </td>
     );
   };
+  
 
   return (
     <div className="container d-flex flex-column justify-content-center ">
@@ -115,56 +112,58 @@ const Materias = () => {
       <div className="table-responsive mb-4">
         <table className="table table-bordered">
           <thead>
-            <tr>
-              <th>Día/Hora</th>
-              <th>Lunes</th>
-              <th>Martes</th>
-              <th>Miércoles</th>
-              <th>Jueves</th>
-              <th>Viernes</th>
-            </tr>
+          <tr>
+  <th className="column-header">Día/Hora</th>
+  <th className="column-header">Lunes</th>
+  <th className="column-header">Martes</th>
+  <th className="column-header">Miércoles</th>
+  <th className="column-header">Jueves</th>
+  <th className="column-header">Viernes</th>
+</tr>
+
           </thead>
           <tbody>
+            
             <tr>
-              <td> 8:00-9:00</td>
-              {renderNonEditableCell(0)}
-              {renderNonEditableCell(1)}
-              {renderNonEditableCell(2)}
-              {renderNonEditableCell(3)}
-              {renderNonEditableCell(4)}
-            </tr>
-            <tr>
-              <td> 9:00-10:00</td>
-              {renderNonEditableCell(5)}
-              {renderNonEditableCell(6)}
-              {renderNonEditableCell(7)}
-              {renderNonEditableCell(8)}
-              {renderNonEditableCell(9)}
-            </tr>
-            <tr>
-              <td> 10:00-11:00</td>
-              {renderNonEditableCell(10)}
-              {renderNonEditableCell(11)}
-              {renderNonEditableCell(12)}
-              {renderNonEditableCell(13)}
-              {renderNonEditableCell(14)}
-            </tr>
-            <tr>
-              <td> 11:00-12:00</td>
-              {renderNonEditableCell(15)}
-              {renderNonEditableCell(16)}
-              {renderNonEditableCell(17)}
-              {renderNonEditableCell(18)}
-              {renderNonEditableCell(19)}
-            </tr>
-            <tr>
-              <td> 12:00-13:00</td>
-              {renderNonEditableCell(20)}
-              {renderNonEditableCell(21)}
-              {renderNonEditableCell(22)}
-              {renderNonEditableCell(23)}
-              {renderNonEditableCell(24)}
-            </tr>
+  <td>8:00-9:00</td>
+  {renderNonEditableCell(0, materiaCursoInputs[0])}
+  {renderNonEditableCell(1, materiaCursoInputs[1])}
+  {renderNonEditableCell(2, materiaCursoInputs[2])}
+  {renderNonEditableCell(3, materiaCursoInputs[3])}
+  {renderNonEditableCell(4, materiaCursoInputs[4])}
+</tr>
+<tr>
+  <td>9:00-10:00</td>
+  {renderNonEditableCell(5, materiaCursoInputs[5])}
+  {renderNonEditableCell(6, materiaCursoInputs[6])}
+  {renderNonEditableCell(7, materiaCursoInputs[7])}
+  {renderNonEditableCell(8, materiaCursoInputs[8])}
+  {renderNonEditableCell(9, materiaCursoInputs[9])}
+</tr>
+<tr>
+  <td>10:00-11:00</td>
+  {renderNonEditableCell(10, materiaCursoInputs[10])}
+  {renderNonEditableCell(11, materiaCursoInputs[11])}
+  {renderNonEditableCell(12, materiaCursoInputs[12])}
+  {renderNonEditableCell(13, materiaCursoInputs[13])}
+  {renderNonEditableCell(14, materiaCursoInputs[14])}
+</tr>
+<tr>
+  <td>11:00-12:00</td>
+  {renderNonEditableCell(15, materiaCursoInputs[15])}
+  {renderNonEditableCell(16, materiaCursoInputs[16])}
+  {renderNonEditableCell(17, materiaCursoInputs[17])}
+  {renderNonEditableCell(18, materiaCursoInputs[18])}
+  {renderNonEditableCell(19, materiaCursoInputs[19])}
+</tr>
+<tr>
+  <td>12:00-13:00</td>
+  {renderNonEditableCell(20, materiaCursoInputs[20])}
+  {renderNonEditableCell(21, materiaCursoInputs[21])}
+  {renderNonEditableCell(22, materiaCursoInputs[22])}
+  {renderNonEditableCell(23, materiaCursoInputs[23])}
+  {renderNonEditableCell(24, materiaCursoInputs[24])}
+</tr>
           </tbody>
         </table>
       </div>
