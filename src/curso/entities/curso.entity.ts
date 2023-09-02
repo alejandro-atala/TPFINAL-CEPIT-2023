@@ -16,8 +16,7 @@ export class Curso {
   @OneToMany(() => Alumno, alumno => alumno.idAlumno)
   alumnos: Alumno[];
 
-  @ManyToMany(() => Profesor, (profesor) => profesor.cursos)
-  @JoinTable() // Esto es necesario para definir la tabla intermedia
+  @ManyToOne(() => Profesor, (profesor) => profesor.cursos)
   profesores: Profesor[];;
 
   @OneToMany(() => MateriaCurso, materiaCurso => materiaCurso.idMateriaCurso)
