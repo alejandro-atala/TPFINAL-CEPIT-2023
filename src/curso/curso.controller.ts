@@ -9,7 +9,6 @@ export class CursoController {
   @Get('anios')
   async getAnios() {
     const anios = await this.cursoService.getAnios();
-  
     return anios.map(curso => curso.anio); // Extrae solo los valores de "anio"
   }
 

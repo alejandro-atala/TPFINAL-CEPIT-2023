@@ -6,8 +6,8 @@ export class Asistencia {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @Column()
-  // idAlumno: number; // Cambia 'alumno' a 'idAlumno'
+  @Column()
+  idAlumno: number; // Cambia 'alumno' a 'idAlumno'
 
   @Column()
   nombre: string; // Agrega el campo para el nombre del alumno
@@ -15,16 +15,16 @@ export class Asistencia {
   @Column()
   anio: string;
 
-  @Column({type: 'date'})
+  @Column()
   fecha: Date;
 
   @Column()
-  asistencia: string; 
+  asistencia: string;
 
 
   @ManyToOne(() => Alumno, alumno => alumno.idAlumno)
-  @JoinColumn({name: 'idAlumno',})
-  idAlumno: number;
+  @JoinColumn()
+  alumnos: Alumno;
 }
   
 
