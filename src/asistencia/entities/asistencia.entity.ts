@@ -15,7 +15,7 @@ export class Asistencia {
   @Column()
   anio: string;
 
-  @Column()
+  @Column({type: 'date'})
   fecha: Date;
 
   @Column()

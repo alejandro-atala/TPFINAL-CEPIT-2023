@@ -17,7 +17,7 @@ export class NotaExamen {
   @Column()
   public anio: string;
 
-  @Column()
+  @Column({type: 'date'})
   public fechaNota: Date;
 
   @Column()

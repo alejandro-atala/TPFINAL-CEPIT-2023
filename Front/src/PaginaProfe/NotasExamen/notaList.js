@@ -84,7 +84,7 @@ const NotasExamenesList = () => {
       idAlumno: alumno.idAlumno,
       nombre: alumno.nombre,
       anio: selectedAnio,
-      fechaNota: new Date().toISOString(),
+      fechaNota: new Date().toISOString().split('T')[0],
       nota: alumno.selectedNota,
       trimestre: selectedTrimestre,
       materia: selectedMateria,

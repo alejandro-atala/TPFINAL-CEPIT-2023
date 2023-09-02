@@ -7,7 +7,7 @@ const formatDate = (dateString) => {
 	const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
 	const date = new Date(dateString);
 	return date.toLocaleDateString(undefined, options);
-  };
+};
 
 const Notas = () => {
 	const [notas, setNotas] = useState([]);
@@ -18,11 +18,11 @@ const Notas = () => {
 
 	const fetchNotas = async () => {
 		try {
-console.log(alumnoLogueado);
+			console.log(alumnoLogueado);
 			const response = await axios.get(`http://localhost:3000/notas-examenes/${alumnoLogueado}`);
 			const notasData = response.data; // Asumiendo que response.data es un Array de objetos de nota
 			setNotas(notasData);
-
+			console.log(notasData);
 		} catch (error) {
 			console.error('Error fetching notas:', error);
 		}
@@ -50,10 +50,12 @@ console.log(alumnoLogueado);
 						<tr key={index}>
 
 							<td>{formatDate(nota.fechaNota)}</td>
-							<td>{nota.materia.nombre}</td>
+							<td>{nota.materia.materia}</td>
 							<td>{nota.nota}</td>
 							<td> {nota.nota !== null ? (nota.nota >= 7 ? 'Aprobado' : 'Desaprobado') : '-'}</td>
-							<td>{formatDate(nota.fechaRecuperatorio) || '-'}</td>
+							<td>
+								{nota.nota !== null && nota.nota < 7 ? formatDate(nota.fechaRecuperatorio) : '-'}
+							</td>
 							<td>{nota.notaRecuperatorio || '-'}</td>
 							<td>{nota.notaRecuperatorio !== (null || undefined) ? (nota.notaRecuperatorio >= 7 ? 'Aprobado' : 'Desaprobado') : '-'}</td>
 
