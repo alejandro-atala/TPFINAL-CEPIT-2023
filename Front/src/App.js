@@ -7,7 +7,7 @@ import Footer from './Footer/footer';
 import Asistencia from './Asistencia/asistencia';
 import Notas from './Notas/notas';
 import Boletin from './Boletin/boletin';
-import Materias from './Materias/materias';
+import Materias from './Materias/materias'; 
 import Avisos from './Avisos/avisos';
 import Mensaje from './Mensaje/mensaje';
 import InicioSesion from './InicioSesion/inicioSesion';

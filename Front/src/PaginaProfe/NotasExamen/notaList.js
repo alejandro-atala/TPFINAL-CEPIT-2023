@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, ListGroup, Button, Col , Alert} from 'react-bootstrap';
+import './notas.css';
 import axios from 'axios';
 
 const NotasExamenesList = () => {
@@ -133,7 +134,7 @@ const NotasExamenesList = () => {
         <option value="">Seleccione una materia</option>
         {materias.map((materia) => (
           <option key={materia.idMateria} value={materia.idMateria}>
-            {materia.materia}
+            {materia.nombre}
           </option>
         ))}
       </Form.Control>

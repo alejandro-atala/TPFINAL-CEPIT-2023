@@ -1,7 +1,4 @@
-export class CreateMateriaDto {
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateMateriaDto } from './create-materia.dto';
 
-    public idMateria?: number;
-    public materia?: string;
-    public diaHora? :string;
-    public anio?: string;
-}
+export class UpdateMateriaDto extends PartialType(CreateMateriaDto) {}

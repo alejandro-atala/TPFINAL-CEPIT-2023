@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 
-import { Materia } from 'src/materia/entities/materia.entity';
+import { Materia } from 'src/materia/entities/materia.entity'; 
 
 @Entity()
 export class NotaExamen {
