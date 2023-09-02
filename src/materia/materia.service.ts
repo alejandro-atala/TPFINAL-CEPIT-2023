@@ -1,57 +1,43 @@
-// src/materias/materias.service.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Materia } from './entities/materia.entity';
+import { Materia } from './entities/materia.entity';  // Importa la entidad Materia
+import { UpdateMateriaDto } from './dto/update-materia.dto';
 import { CreateMateriaDto } from './dto/create-materia.dto';
 
 @Injectable()
-export class MateriasService {
+export class MateriaService {
   constructor(
     @InjectRepository(Materia)
-    private materiasRepository: Repository<Materia>,
+    private readonly materiaRepository: Repository<Materia>,
   ) {}
 
-  async guardarMaterias(materiaData: CreateMateriaDto[]) {
-    console.log(materiaData);
-    const existingMaterias = await this.getMateriasByCursoNombre(materiaData[0].anio);
-
-    for (const data of materiaData) {
-      const { materia, diaHora, anio } = data;
-
-      const existingMateria = existingMaterias.find(m => m.diaHora === diaHora);
-      
-      if (existingMateria) {
-        // Update existing materia
-        existingMateria.materia = materia;
-        await this.materiasRepository.save(existingMateria);
-      } else {
-        // Create new materia
-        const nuevaMateria = this.materiasRepository.create({
-          materia: materia,
-          diaHora: diaHora,
-          anio: anio
-        });
-
-        await this.materiasRepository.save(nuevaMateria);
-      }
-    }
+  async create(createMateriaDto: CreateMateriaDto): Promise<Materia> {
+    const materia = new Materia();
+    // Configura las propiedades de la materia utilizando los datos de createMateriaDto
+    return await this.materiaRepository.save(materia);
   }
 
+  async findAll(): Promise<Materia[]> {
+    return await this.materiaRepository.find();
+  }
+
+  async findOneByNombre(nombre: string): Promise<Materia | undefined> {
+    return await this.materiaRepository.findOne({ where: { nombre } });
+  }
+  
   
 
-async getMateriasByCursoNombre(cursoNombre: string): Promise<Materia[]> {
-  // Implementa la lógica para buscar las materias por nombre de curso
-  // Puedes usar el método del repositorio que mejor se adapte a tu caso
-  const materias = await this.materiasRepository.find({where:{ anio: cursoNombre }});
-  return materias;
+  async update(nombre:string, updateMateriaDto: UpdateMateriaDto): Promise<Materia | undefined> {
+    const materia = await this.materiaRepository.findOne({ where: { nombre } });
+    if (!materia) {
+      return undefined;
+    }
+    // Actualiza las propiedades de la materia utilizando los datos de updateMateriaDto
+    return await this.materiaRepository.save(materia);
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.materiaRepository.delete(id);
+  }
 }
-
-
-
-async findAll(): Promise<Materia[]> {
-  return this.materiasRepository.find();
-}
-}
-
-

@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { MateriaController } from './materia.controller';
+import { MateriaController } from './materia.controller'; 
 import { MateriaService } from './materia.service';
 
 describe('MateriaController', () => {

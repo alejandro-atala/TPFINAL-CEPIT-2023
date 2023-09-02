@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { MateriasService } from './materia.service';
-import { MateriasController } from './materia.controller';
+import { MateriaService } from './materia.service';
+import { MateriaController } from './materia.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Materia } from './entities/materia.entity';
 
@@ -10,7 +10,7 @@ import { Materia } from './entities/materia.entity';
       Materia
     ])
   ],
-  controllers: [MateriasController],
-  providers: [MateriasService],
+  controllers: [MateriaController],
+  providers: [MateriaService],
 })
-export class MateriaModule {}
+export class MateriaCursoModule {}
