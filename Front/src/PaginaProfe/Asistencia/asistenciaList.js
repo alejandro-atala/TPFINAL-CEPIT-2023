@@ -10,7 +10,7 @@ const AsistenciaList = () => {
   const [attendanceData, setAttendanceData] = useState([]);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const { token } = useAuth();
-
+  console.log(token);
 
   useEffect(() => {
     fetchAnios();
@@ -83,7 +83,7 @@ const AsistenciaList = () => {
     try {
       await axios.post('http://localhost:3000/asistencia', attendanceData, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `${token}`,
           'Content-Type': 'application/json',
         },
       });

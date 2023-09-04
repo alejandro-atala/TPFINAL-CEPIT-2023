@@ -49,7 +49,7 @@ export class UsuarioService {
       // Redirigir a diferentes rutas según el tipo de usuario
       if (usuario.tipo === 'Alumno' || usuario.tipo === 'Profesor') {
         const token = await this.generateToken(usuario);
-        console.log(token);
+      // console.log(token);
         return {
           tipo: usuario.tipo,
           nombre: usuario.nombre,
@@ -115,7 +115,7 @@ export class UsuarioService {
   async generateToken(user: Usuario): Promise<string> {
     try {
       const payload = {
-        usuario: user.idUsuario,
+        // usuario: user.idUsuario,
         email: user.email,
         password: user.password
       };

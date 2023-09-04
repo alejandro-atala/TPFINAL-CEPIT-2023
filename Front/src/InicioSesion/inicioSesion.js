@@ -15,7 +15,7 @@ const InicioSesion = ({ onLogin }) => {
   });
 
   const [message, setMessage] = useState('');
-const token = ''
+
 
 
   const handleChange = (e) => {
