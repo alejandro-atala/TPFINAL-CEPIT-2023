@@ -12,7 +12,7 @@ import { JwtModule } from '@nestjs/jwt';
     ]),
     JwtModule.register({
       secret: 'ProgramadorFullStack2023', // Tu clave secreta aquí
-      signOptions: { expiresIn: '10s' },
+      signOptions: { expiresIn: '1h' },
     }),
   ],
   controllers: [AsistenciaController],

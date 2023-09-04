@@ -3,17 +3,20 @@ import './inicioSesion.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAlumno } from '../Alumno/AlumnoContext';
+import { useAuth } from './tokenContext';
 
 const InicioSesion = ({ onLogin }) => {
+  const { setToken } = useAuth();
   const navigate = useNavigate(); // Acceso a la función de navegación
   const { setAlumnoLogueado } = useAlumno();
-
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
   const [message, setMessage] = useState('');
+const token = ''
+
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -28,11 +31,14 @@ const InicioSesion = ({ onLogin }) => {
   
     try {
       const response = await axios.post('http://localhost:3000/usuario/login', formData);
-  
+      const token = response.data.token;
+      setToken(token);
       console.log('Inicio de sesión exitoso:', response.data.nombre);
       onLogin(response.data.nombre);
       setAlumnoLogueado(response.data.id);
+  
 
+//console.log(response.data.token);
       // Redirigir a la ruta correcta según el tipo de usuario
       if (response.data.tipo === 'Alumno') {
         navigate('/alumno');

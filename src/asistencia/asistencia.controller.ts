@@ -9,6 +9,8 @@ import { MiGuard } from 'src/auth/guard/guard';
 export class AsistenciaController {
   constructor(private readonly asistenciaService: AsistenciaService) {}
 
+  
+  @UseGuards(MiGuard)
   @Post()
   async create(@Body() createAsistenciaDto: CreateAsistenciaDto[]) {
     await this.asistenciaService.create(createAsistenciaDto);
@@ -19,7 +21,7 @@ export class AsistenciaController {
   findAll() {
     return this.asistenciaService.findAll();
   }
-  @UseGuards(MiGuard)
+
   @Get(':id')
   findAsistenciasByAlumno(@Param('id', ParseIntPipe) idAlumno: number) {
     return this.asistenciaService.findAsistenciasByAlumno(idAlumno);

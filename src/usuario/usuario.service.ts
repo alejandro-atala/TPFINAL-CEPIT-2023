@@ -49,13 +49,14 @@ export class UsuarioService {
       // Redirigir a diferentes rutas según el tipo de usuario
       if (usuario.tipo === 'Alumno' || usuario.tipo === 'Profesor') {
         const token = await this.generateToken(usuario);
-
+        console.log(token);
         return {
           tipo: usuario.tipo,
           nombre: usuario.nombre,
           id: usuario.idUsuario,
           token,
         };
+   
       }
     } catch (error) {
       throw new UnauthorizedException('Error al iniciar sesión');

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Form, ListGroup, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
+import { useAuth } from '../../InicioSesion/tokenContext';
 
 const AsistenciaList = () => {
   const [anios, setAnios] = useState([]);
@@ -8,6 +9,8 @@ const AsistenciaList = () => {
   const [alumnos, setAlumnos] = useState([]);
   const [attendanceData, setAttendanceData] = useState([]);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const { token } = useAuth();
+
 
   useEffect(() => {
     fetchAnios();
@@ -80,6 +83,7 @@ const AsistenciaList = () => {
     try {
       await axios.post('http://localhost:3000/asistencia', attendanceData, {
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
