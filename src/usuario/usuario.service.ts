@@ -7,6 +7,7 @@ import { CredencialesDto } from './dto/credenciales.dto';
 import { Alumno } from 'src/alumno/entities/alumno.entity';
 import { Profesor } from 'src/profesor/entities/profesor.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
 const saltRounds = 10; // Número de rondas de encriptación
 
@@ -20,6 +21,41 @@ export class UsuarioService {
     @InjectRepository(Alumno)
     private alumnoRepository: Repository<Alumno>,
   ) {}
+
+
+
+  async findAll(): Promise<Usuario[]> {
+    return this.usuarioRepository.find();
+  }
+
+
+
+  async update(id: number, updateUsuarioDto: UpdateUsuarioDto): Promise<Usuario> {
+    const usuario = await this.usuarioRepository.findOne({where : {idUsuario: id}}); 
+
+    if (!usuario) {
+      // Manejar el caso en el que el usuario no se encuentra
+      throw new Error('Usuario no encontrado');
+    }
+
+    // Actualiza los campos del usuario con los valores del DTO de actualización
+    if (updateUsuarioDto.nombre) {
+      usuario.nombre = updateUsuarioDto.nombre;
+    }
+
+    if (updateUsuarioDto.email) {
+      usuario.email = updateUsuarioDto.email;
+    }
+
+    // Puedes agregar más campos aquí
+
+    // Guarda los cambios en la base de datos
+    return this.usuarioRepository.save(usuario);
+  }
+
+
+
+
 
   async iniciarSesion(credenciales: CredencialesDto) {
     try {

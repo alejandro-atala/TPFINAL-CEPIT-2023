@@ -1,7 +1,8 @@
-import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
+import { Controller, Post, Body, UnauthorizedException, Get, Param, Put } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { CredencialesDto } from './dto/credenciales.dto';
+import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -28,4 +29,15 @@ export class UsuarioController {
       throw new Error(`Error al crear el usuario: ${error.message}`);
     }
   }
+
+  @Get()
+  async findAll() {
+    return this.usuarioService.findAll();
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: number, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+    return this.usuarioService.update(id, updateUsuarioDto);
+  }
+  
 }

@@ -7,7 +7,7 @@ import Footer from './Footer/footer';
 import Asistencia from './Asistencia/asistencia';
 import Notas from './Notas/notas';
 import Boletin from './Boletin/boletin';
-import Materias from './Materias/materias'; 
+import Materias from './Materias/materias';
 import Avisos from './Avisos/avisos';
 import Mensaje from './Mensaje/mensaje';
 import InicioSesion from './InicioSesion/inicioSesion';
@@ -25,7 +25,7 @@ import AsistenciaList from './PaginaProfe/Asistencia/asistenciaList';
 import NotasExamenesList from './PaginaProfe/NotasExamen/notaList';
 import { AlumnoProvider } from './Alumno/AlumnoContext';
 import MateriasList from './PaginaProfe/Materias/materiasList';
-
+import AdminPage from './admin/admin';
 
 const App = () => {
 
@@ -40,19 +40,19 @@ const App = () => {
 
   return (
     <BrowserRouter>
-        <AlumnoProvider>
-      <div className="d-flex flex-column min-vh-100">
-        <Navbar loggedInUser={loggedInUser} />
-        <div className="flex-grow-1">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-3">
-                <Sidebar />
-              </div>
-              <div className="col-md-9">
-                {/* Contenido principal */}
-                <Routes>
-          
+      <AlumnoProvider>
+        <div className="d-flex flex-column min-vh-100">
+          <Navbar loggedInUser={loggedInUser} />
+          <div className="flex-grow-1">
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-md-3">
+                  <Sidebar />
+                </div>
+                <div className="col-md-9">
+                  {/* Contenido principal */}
+                  <Routes>
+
                     <Route path="/iniciarSesion" element={<InicioSesion onLogin={handleLogin} />} />
 
                     {/* <Route path="/iniciarSesion" element={<InicioSesion />} /> */}
@@ -77,21 +77,23 @@ const App = () => {
                     {/* pagina profesor */}
 
                     <Route path="/profesor" element={<Profesor />} />
-                     {/* <Route path="/Profnotas" element={<ProfNotas />} /> */}
-              {/* <Route path="/Profboletin" element={<ProfBoletin />} /> */}
-              <Route path="/Profmaterias" element={<MateriasList />} /> 
+                    {/* <Route path="/Profnotas" element={<ProfNotas />} /> */}
+                    {/* <Route path="/Profboletin" element={<ProfBoletin />} /> */}
+                    <Route path="/Profmaterias" element={<MateriasList />} />
                     <Route path="/ProfAsistencia" element={<AsistenciaList />} />
                     <Route path="/Profnotas" element={<NotasExamenesList />} />
                     {/* <Route path="/Profavisos" element={<ProfAvisos />} />
               <Route path="/Profmensaje" element={<ProfMensaje />} /> */}
-         
-                </Routes>
+
+                    <Route path="/admin" element={<AdminPage />} />
+
+                  </Routes>
+                </div>
               </div>
             </div>
           </div>
+          <Footer className="fixed-bottom" />
         </div>
-        <Footer className="fixed-bottom" />
-      </div>
       </AlumnoProvider>
     </BrowserRouter>
   );

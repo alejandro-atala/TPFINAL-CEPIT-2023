@@ -32,13 +32,16 @@ const InicioSesion = ({ onLogin }) => {
       console.log('Inicio de sesión exitoso:', response.data.nombre);
       onLogin(response.data.nombre);
       setAlumnoLogueado(response.data.id);
-//console.log(response.data.id)
+console.log(response.data.nombre)
       // Redirigir a la ruta correcta según el tipo de usuario
-      if (response.data.tipo === 'Alumno') {
-        navigate('/alumno');
+      if (response.data.nombre === 'Admin' && response.data.tipo === 'Profesor') {
+        navigate('/admin');
       } else if (response.data.tipo === 'Profesor') {
         navigate('/profesor');
+      } else {
+        navigate('/alumno');
       }
+      
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
       setMessage('Error en el inicio de sesión. Verifica tus credenciales.');
