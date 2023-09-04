@@ -32,7 +32,7 @@ const InicioSesion = ({ onLogin }) => {
       console.log('Inicio de sesión exitoso:', response.data.nombre);
       onLogin(response.data.nombre);
       setAlumnoLogueado(response.data.id);
-//console.log(response.data.id)
+
       // Redirigir a la ruta correcta según el tipo de usuario
       if (response.data.tipo === 'Alumno') {
         navigate('/alumno');

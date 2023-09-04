@@ -1,7 +1,9 @@
-import { Controller, Post, Body, Get, Param, Patch, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Patch, Delete, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { AsistenciaService } from './asistencia.service';
 import { CreateAsistenciaDto } from './dto/create-asistencia.dto';
 import { UpdateAsistenciaDto } from './dto/update-asistencia.dto';
+import { MiGuard } from 'src/auth/guard/guard';
+
 
 @Controller('asistencia')
 export class AsistenciaController {
@@ -17,7 +19,7 @@ export class AsistenciaController {
   findAll() {
     return this.asistenciaService.findAll();
   }
-
+  @UseGuards(MiGuard)
   @Get(':id')
   findAsistenciasByAlumno(@Param('id', ParseIntPipe) idAlumno: number) {
     return this.asistenciaService.findAsistenciasByAlumno(idAlumno);

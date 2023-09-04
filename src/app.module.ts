@@ -5,39 +5,44 @@ import { CursoModule } from './curso/curso.module';
 import { AlumnoModule } from './alumno/alumno.module';
 import { MateriaModule } from './materia-curso/materia-curso.module';
 import { AlumnoCursoModule } from './alumno-curso/alumno-curso.module';
-import { UsuarioModule } from './usuario/usuario.module';
 import { MateriaCursoModule } from './materia/materia.module';
 import { AsistenciaModule } from './asistencia/asistencia.module';
 import { NotasExamenesModule } from './notas_examenes/notas_examenes.module';
 import { ProfesorModule } from './profesor/profesor.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsuarioModule } from './usuario/usuario.module';
+import { JwtModule } from '@nestjs/jwt';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [JwtModule.register({
+    secret: 'ProgramadorFullStack2023',
+    signOptions: { expiresIn: '1h' },
+  }),
+  TypeOrmModule.forRoot({
     type: "mysql",
     host: "localhost",
     port: 3306,
     username: "root",
     password: "root",
-    database: "escuela", 
+    database: "escuela",
     entities: [
-      "dist/**/**.entity{.ts,.js}" 
+      "dist/**/**.entity{.ts,.js}", "node_modules/@nestjs/jwt"
     ],
     synchronize: true
   }),
 
-    CursoModule, 
-    AlumnoModule, 
-    MateriaModule, 
-    AlumnoCursoModule, 
-    UsuarioModule, 
+    CursoModule,
+    AlumnoModule,
+    MateriaModule,
+    AlumnoCursoModule,
+    UsuarioModule,
     MateriaCursoModule,
-    AsistenciaModule, 
+    AsistenciaModule,
     NotasExamenesModule,
     ProfesorModule],
 
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

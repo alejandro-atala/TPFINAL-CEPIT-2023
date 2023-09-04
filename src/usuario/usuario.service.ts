@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
 import { Repository } from 'typeorm';
@@ -7,6 +7,7 @@ import { CredencialesDto } from './dto/credenciales.dto';
 import { Alumno } from 'src/alumno/entities/alumno.entity';
 import { Profesor } from 'src/profesor/entities/profesor.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { JwtService } from '@nestjs/jwt';
 
 const saltRounds = 10; // Número de rondas de encriptación
 
@@ -19,9 +20,11 @@ export class UsuarioService {
     private profesorRepository: Repository<Profesor>,
     @InjectRepository(Alumno)
     private alumnoRepository: Repository<Alumno>,
+    private readonly jwtService: JwtService
   ) {}
 
   async iniciarSesion(credenciales: CredencialesDto) {
+
     try {
       const usuario = await this.buscarPorEmail(credenciales.email);
 
@@ -42,10 +45,11 @@ export class UsuarioService {
       if (usuario.tipo !== 'Alumno' && usuario.tipo !== 'Profesor') {
         throw new UnauthorizedException('Tipo de usuario no válido');
       }
-
+   
       // Redirigir a diferentes rutas según el tipo de usuario
       if (usuario.tipo === 'Alumno' || usuario.tipo === 'Profesor') {
         const token = await this.generateToken(usuario);
+
         return {
           tipo: usuario.tipo,
           nombre: usuario.nombre,
@@ -90,10 +94,7 @@ export class UsuarioService {
     return this.usuarioRepository.findOne({ where: { email } });
   }
 
-  async verificarContraseña(
-    credenciales: CredencialesDto,
-    usuario: Usuario,
-  ): Promise<boolean> {
+  async verificarContraseña(credenciales: CredencialesDto, usuario: Usuario,): Promise<boolean> {
     if (!usuario) {
       throw new NotFoundException('Usuario no encontrado');
     }
@@ -111,23 +112,26 @@ export class UsuarioService {
   }
 
   async generateToken(user: Usuario): Promise<string> {
-    const payload = {
-      usuario: user.idUsuario, // User ID
-      email: user.email, // User email or any other relevant information
-    };
-
-    // Implement your token generation logic here
-    // You may use the AuthService for this purpose
-    // Example: const token = await this.authService.generateToken(payload);
-    // Make sure to inject the AuthService and call its generateToken method
-
-    return 'your-token-here'; // Replace with the actual token generation logic
+    try {
+      const payload = {
+        usuario: user.idUsuario,
+        email: user.email,
+        password: user.password
+      };
+  
+      const token = this.jwtService.sign(payload);
+     // console.log(token); // Verifica si se imprime el token
+      return token;
+    } catch (error) {
+      console.error(error); // Agrega un registro de errores
+      throw new HttpException('Error generando el token', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
+  
 
   async asociarAlumno(usuario: Usuario, createUsuarioDto: CreateUsuarioDto) {
     const alumno = new Alumno();
     alumno.nombre = usuario.nombre;
-    // alumno.idAlumno = usuario.idUsuario;
     alumno.curso = createUsuarioDto.curso;
     alumno.usuarioId = usuario.idUsuario;
     return this.alumnoRepository.save(alumno);
