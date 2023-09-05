@@ -1,18 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import SessionExpiration from '../SesionExpired';
 
 
 const Profesor = () => {
   return (
+    <>
+          <div variant="danger" className="mt-3 text-center">
+      <SessionExpiration />
+      {/* Resto de tu componente Profesor */}
+    </div>
     <div className="container mt-4 p-5">
+
     <div className="row row-cols-1 row-cols-md-3 g-4 ">
+      
         <div className="col ">
+          
           <div className="card h-100">
           <img src="https://images4.imagebam.com/ef/e7/3b/MENRF6F_o.jpg" className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Notas de examenes</h5>
               <p className="card-text">Aqui podras ver las notas de los examenes realizados</p>
-              <Link to="/Profnotas" className="btn btn-primary" id="myButton">Ver notas</Link>
+              <Link to="/Profnotas" className="btn btn-primary" id="myButton">Cargar Notas</Link>
             </div>
             <div className="card-footer">
               <small className="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -26,7 +35,7 @@ const Profesor = () => {
             <div className="card-body">
               <h5 className="card-title">Boletin</h5>
               <p className="card-text">Aqui podras ver el boletin </p>
-              <Link to="/Profboletin" className="btn btn-primary" id="myButton">Ver Boletin</Link>
+              <Link to="/Profboletin" className="btn btn-primary" id="myButton">Cargar Boletin</Link>
             </div>
             <div className="card-footer">
               <small className="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -39,7 +48,7 @@ const Profesor = () => {
             <div className="card-body">
               <h5 className="card-title">Materias del año en curso</h5>
               <p className="card-text">Aqui veras las meterias con sus dias y horarios</p>
-              <Link to="/Profmaterias" className="btn btn-primary" id="myButton">Ver Materias</Link>
+              <Link to="/Profmaterias" className="btn btn-primary" id="myButton">Cargar Materias</Link>
             </div>
             <div className="card-footer">
               <small className="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -53,7 +62,7 @@ const Profesor = () => {
               <div className="card-body">
                 <h5 className="card-title">Asistencias</h5>
                 <p className="card-text">Aqui veras las asistencias. </p>
-                <Link to="/ProfAsistencia" className="btn btn-primary" id="myButton">Asistencias</Link>
+                <Link to="/ProfAsistencia" className="btn btn-primary" id="myButton">Cargar Asistencias</Link>
               </div>
               <div className="card-footer">
                 <small className="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -67,7 +76,7 @@ const Profesor = () => {
               <div className="card-body">
                 <h5 className="card-title">Avisos de los profes</h5>
                 <p className="card-text">Aqui veras llos mensajes que envien los profesores a sus alumnos</p>
-                <Link to="/Profavisos" className="btn btn-primary" id="myButton">Ver avisos</Link>
+                <Link to="/Profavisos" className="btn btn-primary" id="myButton">Cargar avisos</Link>
               </div>
               <div className="card-footer">
                 <small className="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -81,7 +90,7 @@ const Profesor = () => {
               <div className="card-body">
                 <h5 className="card-title">Enviar mensaje</h5>
                 <p className="card-text">Aqui podras enviar un mensaje directamente al profesor</p>
-                <Link to="/Profmensaje" className="btn btn-primary" id="myButton">Enviar Mensaje</Link>
+                <Link to="/Profmensaje" className="btn btn-primary" id="myButton">Mensajes</Link>
               </div>
               <div className="card-footer">
                 <small className="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -92,6 +101,7 @@ const Profesor = () => {
 
       </div>
     </div>
+    </>
   )
 }
 

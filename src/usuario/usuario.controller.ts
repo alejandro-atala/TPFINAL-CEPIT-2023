@@ -11,6 +11,7 @@ export class UsuarioController {
   async iniciarSesion(@Body() credenciales: CredencialesDto) {
     try {
       const response = await this.usuarioService.iniciarSesion(credenciales);
+   
       return response;
     } catch (error) {
       throw new UnauthorizedException('Error al iniciar sesión');

@@ -25,7 +25,7 @@ import AsistenciaList from './PaginaProfe/Asistencia/asistenciaList';
 import NotasExamenesList from './PaginaProfe/NotasExamen/notaList';
 import { AlumnoProvider } from './Alumno/AlumnoContext';
 import MateriasList from './PaginaProfe/Materias/materiasList';
-
+import {AuthProvider} from './InicioSesion/tokenContext';
 
 const App = () => {
 
@@ -41,6 +41,7 @@ const App = () => {
   return (
     <BrowserRouter>
         <AlumnoProvider>
+        <AuthProvider>
       <div className="d-flex flex-column min-vh-100">
         <Navbar loggedInUser={loggedInUser} />
         <div className="flex-grow-1">
@@ -92,7 +93,9 @@ const App = () => {
         </div>
         <Footer className="fixed-bottom" />
       </div>
+      </AuthProvider>
       </AlumnoProvider>
+   
     </BrowserRouter>
   );
 };
