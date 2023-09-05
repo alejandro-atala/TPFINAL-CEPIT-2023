@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from './InicioSesion/tokenContext';
 import { Alert } from 'react-bootstrap';
-
+import { useNavigate } from 'react-router-dom';
 
 const SessionExpiration = () => {
   const [sessionExpired, setSessionExpired] = useState(false);
   const { token } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkSessionExpiration = () => {
@@ -17,6 +18,9 @@ const SessionExpiration = () => {
           if (tokenData.exp * 1000 < Date.now()) {
             setSessionExpired(true);
             localStorage.removeItem('token');
+            setTimeout(() => {
+                navigate('/iniciarSesion');
+              }, 3000); 
           }
         }
       }
@@ -54,8 +58,8 @@ const SessionExpiration = () => {
   return (
     <div>
       {sessionExpired && (
-        <Alert className="session-expired-alert">
-          Tu sesión ha expirado. Por favor, inicia sesión nuevamente.
+        <Alert className="alert-danger">
+          Tu sesión ha expirado. Por favor, inicia sesión nuevamente. Redirigiendo...
         </Alert>
       )}
     </div>
