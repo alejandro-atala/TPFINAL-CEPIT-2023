@@ -1,18 +1,28 @@
-import React, { createContext, useContext, useState } from 'react';
+// tokenContext.js
+import { createContext, useContext, useState } from 'react';
 
-// Crea el contexto
 const AuthContext = createContext();
 
-// Crea un proveedor para envolver tu aplicación
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
+
+  const setAuthToken = (newToken) => {
+    setToken(newToken);
+    localStorage.setItem('token', newToken);
+  };
 
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider value={{ token, setToken: setAuthToken }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// Exporta un gancho personalizado para usar el contexto
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+

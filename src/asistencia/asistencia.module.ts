@@ -10,10 +10,7 @@ import { JwtModule } from '@nestjs/jwt';
     TypeOrmModule.forFeature([
       Asistencia
     ]),
-    JwtModule.register({
-      secret: 'ProgramadorFullStack2023', // Tu clave secreta aquí
-      signOptions: { expiresIn: '1h' },
-    }),
+
   ],
   controllers: [AsistenciaController],
   providers: [AsistenciaService],

@@ -2,7 +2,7 @@ import { Controller, Post, Body, Get, Param, Patch, Delete, ParseIntPipe, UseGua
 import { AsistenciaService } from './asistencia.service';
 import { CreateAsistenciaDto } from './dto/create-asistencia.dto';
 import { UpdateAsistenciaDto } from './dto/update-asistencia.dto';
-import { MiGuard } from 'src/auth/guard/guard';
+
 
 
 @Controller('asistencia')
@@ -10,7 +10,7 @@ export class AsistenciaController {
   constructor(private readonly asistenciaService: AsistenciaService) {}
 
   
-  @UseGuards(MiGuard)
+ 
   @Post()
   async create(@Body() createAsistenciaDto: CreateAsistenciaDto[]) {
     await this.asistenciaService.create(createAsistenciaDto);
