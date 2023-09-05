@@ -11,9 +11,7 @@ const SessionExpiration = () => {
   useEffect(() => {
     const checkSessionExpiration = () => {
       if (token) {
-        console.log('si')
         const tokenData = parseToken(token);
-        console.log(tokenData)
         if (tokenData && tokenData.exp) {
           if (tokenData.exp * 1000 < Date.now()) {
             setSessionExpired(true);
