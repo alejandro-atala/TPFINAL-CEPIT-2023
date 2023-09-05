@@ -16,9 +16,12 @@ const AdminPage = () => {
     usuario: {
       name: 'Usuarios',
       columns: [
-        { label: 'ID', key: 'idUsuario' },
         { label: 'Nombre', key: 'nombre' },
         { label: 'DNI', key: 'dni' },
+        { label: 'F. Nacimiento', key: 'fechaNac' },
+        { label: 'Direccion', key: 'direccion' },
+        { label: 'Telefono', key: 'telefono' },
+        { label: 'Email', key: 'email' },
         // Agrega más columnas según tu tabla
       ],
     },
@@ -32,7 +35,7 @@ const AdminPage = () => {
         // Agrega más columnas según tu tabla
       ],
     },
-    usuario: {
+    profesor: {
       name: 'Profesores',
       columns: [
         { label: 'ID Profesor', key: 'idProfesor' },
@@ -41,7 +44,30 @@ const AdminPage = () => {
 
         // Agrega más columnas según tu tabla
       ],
-    },
+    }
+    ,
+    curso: {
+      name: 'Cursos',
+      columns: [
+        { label: 'ID Curso', key: 'idCurso' },
+        { label: 'Año', key: 'anio' },
+       
+
+        // Agrega más columnas según tu tabla
+      ],
+    }
+    ,
+    materias: {
+      name: 'Materias',
+      columns: [
+        { label: 'ID Materia', key: 'idMateria' },
+        { label: 'Materia', key: 'nombre' },
+
+
+        // Agrega más columnas según tu tabla
+      ],
+    }
+ 
     // Agrega más tablas según tus necesidades
   };
 
@@ -102,6 +128,8 @@ const AdminPage = () => {
             <option value="usuario">Usuarios</option>
             <option value="alumno">Alumnos</option>
             <option value="profesor">Profesores</option>
+            <option value="curso">Cursos</option>
+            <option value="materias">Materias</option>
             {/* Agregar más opciones según tus tablas */}
           </select>
 
