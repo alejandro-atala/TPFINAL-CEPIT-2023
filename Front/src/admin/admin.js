@@ -41,12 +41,10 @@ const AdminPage = () => {
 
   const cargarDatos = async () => {
     try {
-
       const response = await axios.get(`http://localhost:3000/${selectedTable}`);
-      console.log(response.data);
       setTableData(response.data);
+      setColumns(Object.keys(response.data[0] || {})); // Obtener automáticamente los nombres de las columnas
       setEditedData(response.data.map((row) => ({ ...row, isEditing: false }))); // Inicialmente, ninguna fila está en modo de edición
-      setColumns(Object.keys(response.data[0])); // Obtener automáticamente los nombres de las columnas
     } catch (error) {
       console.error(`Error al cargar datos de ${selectedTable}:`, error);
     }
@@ -68,24 +66,18 @@ const AdminPage = () => {
 
   const handleDeleteRow = async (rowIndex) => {
     try {
+      let idFieldName = '';
       if (selectedTable === 'materias') {
-        const id = editedData[rowIndex].idMateria; // Reemplaza con la clave primaria adecuada     
-        const url = `http://localhost:3000/${selectedTable}/${id}`;
-        await axios.delete(url);
-      } 
-      // Verifica si estás tratando con una fila de usuario o curso
-      if (selectedTable === 'usuario') {
-        const id = editedData[rowIndex].idUsuario; // Reemplaza con la clave primaria adecuada     
-        const url = `http://localhost:3000/${selectedTable}/${id}`;
-        await axios.delete(url);
-      } 
-      
-      else if (selectedTable === 'curso') {
-        const id = editedData[rowIndex].idCurso; // Reemplaza con la clave primaria adecuad
-        const url = `http://localhost:3000/${selectedTable}/${id}`;
-        await axios.delete(url);
+        idFieldName = 'idMateria';
+      } else if (selectedTable === 'usuario') {
+        idFieldName = 'idUsuario';
+      } else if (selectedTable === 'curso') {
+        idFieldName = 'idCurso';
       }
-  
+      const id = editedData[rowIndex][idFieldName];
+      const url = `http://localhost:3000/${selectedTable}/${id}`;
+      await axios.delete(url);
+
       const updatedData = editedData.filter((row, index) => index !== rowIndex);
       setEditedData(updatedData);
     } catch (error) {
@@ -93,62 +85,45 @@ const AdminPage = () => {
     }
   };
 
-
-  
-
   const handleSaveChanges = async (rowIndex) => {
     try {
-     
       const { isEditing, ...updatedRow } = editedData[rowIndex]; // Elimina 'isEditing'
-      const id = updatedRow.idMateria; //  // Reemplaza con la clave primaria adecuada
+      let idFieldName = '';
+      if (selectedTable === 'materias') {
+        idFieldName = 'idMateria';
+      } else if (selectedTable === 'curso') {
+        idFieldName = 'idCurso';
+      } else if (selectedTable === 'usuario') {
+        idFieldName = 'idUsuario';
+      }
+      const id = updatedRow[idFieldName];
 
       if (selectedTable === 'materias') {
- 
-        // Validación específica para la edición de cursos
-        // Verifica si idCurso y anio están definidos en updatedRow
         if (updatedRow.idMateria === undefined || updatedRow.nombre === undefined) {
-     
           console.error('Completa todos los campos requeridos para la edición de cursos.');
           return;
         }
-        console.log(updatedRow.idMateria);
-
-        // Realiza la lógica de actualización de cursos
         await axios.put(`http://localhost:3000/${selectedTable}/${id}`, {
           idMateria: updatedRow.idMateria,
           nombre: updatedRow.nombre,
-        });        console.log(updatedRow.idMateria, updatedRow.nombre)
-      }
-
-
-    else  if (selectedTable === 'curso') {
-
-      const { isEditing, ...updatedRow } = editedData[rowIndex]; // Elimina 'isEditing'
-      const id = updatedRow.idCurso; // Reemplaza con la clave primaria adecuada
-        // Validación específica para la edición de cursos
-        // Verifica si idCurso y anio están definidos en updatedRow
+        });
+      } else if (selectedTable === 'curso') {
         if (updatedRow.idCurso === undefined || updatedRow.anio === undefined) {
           console.error('Completa todos los campos requeridos para la edición de cursos.');
           return;
         }
-      
-        // Realiza la lógica de actualización de cursos
         await axios.put(`http://localhost:3000/${selectedTable}/${id}`, {
           idCurso: updatedRow.idCurso,
           anio: updatedRow.anio,
         });
-      } else {
-        const id = updatedRow.idUsuario; // Reemplaza con la clave primaria adecuada
-        // Validación para la edición de usuarios (como se mencionó anteriormente)
+      } else if (selectedTable === 'usuario') {
         if (!updatedRow.fechaNac) {
           console.error('La fecha de nacimiento es requerida.');
           return;
         }
-  
-        // Realiza la lógica de actualización de usuarios
         await axios.put(`http://localhost:3000/${selectedTable}/${id}`, updatedRow);
       }
-  
+
       const updatedData = [...editedData];
       updatedData[rowIndex] = updatedRow;
       setEditedData(updatedData);
@@ -156,8 +131,6 @@ const AdminPage = () => {
       console.error('Error al guardar cambios:', error);
     }
   };
-
-
 
   const handleEditRow = (rowIndex) => {
     // Habilita la edición de la fila en el índice especificado
@@ -168,71 +141,49 @@ const AdminPage = () => {
   };
 
   const handleAddRow = async () => {
-    const isDataValid = true;
     try {
-    
+      let requiredFields = [];
       if (selectedTable === 'materias') {
-        // Validación específica para la creación de cursos
-        const requiredFields = ['idMateria', 'nombre'];
-  
-        const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
-   
-        if (!isDataValid) {
-          console.error('Completa todos los campos requeridos para crear un curso.');
-          return;
-        }
+        requiredFields = ['idMateria', 'nombre'];
+      } else if (selectedTable === 'curso') {
+        requiredFields = ['idCurso', 'anio'];
+      } else if (selectedTable === 'usuario') {
+        requiredFields = [
+          'nombre',
+          'dni',
+          'fechaNac',
+          'direccion',
+          'telefono',
+          'email',
+          'password',
+          'tipo',
+          'curso',
+        ];
       }
-
-
-     else if (selectedTable === 'curso') {
-        // Validación específica para la creación de cursos
-        const requiredFields = ['idCurso', 'anio'];
-  
-        const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
-  
-        if (!isDataValid) {
-          console.error('Completa todos los campos requeridos para crear un curso.');
-          return;
-        }
-      } else {
-      
-        // Validación para la creación de usuarios (como se mencionó anteriormente)
-        const requiredFields = ['nombre', 'dni', 'fechaNac', 'direccion', 'telefono', 'email', 'password', 'tipo', 'curso'];
-  
-        const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
-  
-        if (!isDataValid) {
-          console.error('Completa todos los campos requeridos para crear un usuario.');
-          return;
-        }
-      }
+      const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
 
       if (!isDataValid) {
         console.error('Completa todos los campos requeridos.');
         return;
       }
-  
+
       // Envía la nueva fila al servidor para su creación
       const response = await axios.post(`http://localhost:3000/${selectedTable}`, newRowData);
       const addedRow = response.data;
-  
+
       // Agrega la fila completa al estado local
       setEditedData([...editedData, addedRow]);
       setNewRowData({}); // Restablece la nueva fila después de agregarla
-      console.log("Nueva fila agregada con exito.")
+      console.log('Nueva fila agregada con éxito.');
     } catch (error) {
       console.error('Error al agregar una nueva fila:', error);
     }
   };
-  
 
   const handleNewRowInputChange = (e, columnName) => {
     // Actualiza el estado de la nueva fila cuando el usuario completa los campos
     setNewRowData({ ...newRowData, [columnName]: e.target.value });
   };
-
-
-  
 
   return (
     <div className="admin-page d-flex flex-column">
@@ -263,47 +214,57 @@ const AdminPage = () => {
           {selectedTable && (
             <div>
               <table className="table table-bordered table-striped">
-              <tr>
+                <thead>
+                  <tr>
                     {columns.map((column) => (
                       <th key={column}>{column}</th>
                     ))}
                     <th>Acciones</th>
                   </tr>
+                </thead>
                 <tbody>
-                  {editedData.map((row, rowIndex) => (
-                    <tr key={rowIndex}>
-                      {columns.map((column) => (
-                        <td key={column} className={column === 'ID' ? 'w-45' : ''}>
-                          {row.isEditing ? (
-                            <input
-                              type="text"
-                              className="form-control"
-                              value={row[column]}
-                              onChange={(e) => handleCellEdit(e, rowIndex, column)}
-                            />
-                          ) : (
-                            row[column]
-                          )}
-                        </td>
-                      ))}
-                      <td>
-                        {row.isEditing ? (
-                          <div className="btn-group">
-                            <button className="btn btn-primary" onClick={() => handleSaveChanges(rowIndex)}>Guardar</button>
-                            <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
-                          </div>
-                        ) : (
-                          <div className="btn-group">
-                            <button className="btn btn-warning" onClick={() => handleEditRow(rowIndex)}>Editar</button>
-                            <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
-                          </div>
-                        )}
-                      </td>
+                  {tableData.length === 0 ? (
+                    <tr>
+                      <td colSpan={columns.length + 1}>No hay datos disponibles.</td>
                     </tr>
-                  ))}
+                  ) : (
+                    <>
+                      {editedData.map((row, rowIndex) => (
+                        <tr key={rowIndex}>
+                          {columns.map((column) => (
+                            <td key={column}>
+                              {row.isEditing ? (
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  value={row[column]}
+                                  onChange={(e) => handleCellEdit(e, rowIndex, column)}
+                                />
+                              ) : (
+                                row[column]
+                              )}
+                            </td>
+                          ))}
+                          <td>
+                            {row.isEditing ? (
+                              <div className="btn-group">
+                                <button className="btn btn-primary" onClick={() => handleSaveChanges(rowIndex)}>Guardar</button>
+                                <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
+                              </div>
+                            ) : (
+                              <div className="btn-group">
+                                <button className="btn btn-warning" onClick={() => handleEditRow(rowIndex)}>Editar</button>
+                                <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
+                              </div>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </>
+                  )}
                   <tr>
                     {columns.map((column) => (
-                      <td key={column} className={column === 'ID' ? 'w-45' : ''}>
+                      <td key={column}>
                         <input
                           type="text"
                           className="form-control"
@@ -324,7 +285,6 @@ const AdminPage = () => {
       )}
     </div>
   );
-                    }
-  
-  export default AdminPage;
-  
+};
+
+export default AdminPage;
