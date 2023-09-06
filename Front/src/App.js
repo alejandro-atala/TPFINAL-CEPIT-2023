@@ -27,17 +27,32 @@ import { AlumnoProvider } from './Alumno/AlumnoContext';
 import MateriasList from './PaginaProfe/Materias/materiasList';
 import AdminPage from './admin/admin';
 
-const App = () => {
+// const App = () => {
 
+//   // State para almacenar el nombre del usuario que inició sesión
+//   const [loggedInUser, setLoggedInUser] = useState('');
+
+//   // Función para actualizar el nombre del usuario cuando inicie sesión
+//   const handleLogin = (username) => {
+//     setLoggedInUser(username);
+//   };
+
+const App = () => {
   // State para almacenar el nombre del usuario que inició sesión
   const [loggedInUser, setLoggedInUser] = useState('');
+  // State para verificar si el usuario actual es un administrador
+ 
 
-  // Función para actualizar el nombre del usuario cuando inicie sesión
+  // Función para actualizar el nombre del usuario y su rol cuando inicia sesión
   const handleLogin = (username) => {
     setLoggedInUser(username);
-  };
+    
 
 
+  
+
+  }
+  
   return (
     <BrowserRouter>
       <AlumnoProvider>
@@ -46,9 +61,11 @@ const App = () => {
           <div className="flex-grow-1">
             <div className="container-fluid">
               <div className="row">
+              {loggedInUser === "Admin" ? null : (
                 <div className="col-md-3">
                   <Sidebar />
                 </div>
+                 )}
                 <div className="col-md-9">
                   {/* Contenido principal */}
                   <Routes>
