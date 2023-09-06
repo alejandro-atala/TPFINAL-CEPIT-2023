@@ -42,11 +42,10 @@ export class UsuarioController {
 
     return this.usuarioService.update(id, updateUsuarioDto);
   }
-  
   @Delete(':id')
-  async eliminarRegistro(@Param('id') id: number) {
- 
-    await this.usuarioService.eliminarRegistro(id);
+  async eliminarRegistro(@Param('id') id: string): Promise<void> {
+    const registroId = parseInt(id, 10);
+    await this.usuarioService.eliminarRegistro(registroId);
   }
 
 
