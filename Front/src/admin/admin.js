@@ -231,44 +231,53 @@ const AdminPage = () => {
     setNewRowData({ ...newRowData, [columnName]: e.target.value });
   };
 
+
+  
+
   return (
-    <div className="admin-page">
+    <div className="admin-page d-flex flex-column">
       {sessionExpired ? (
         <div className="alert alert-danger">
           Tu sesión ha expirado. Por favor, inicia sesión nuevamente.
         </div>
       ) : (
         <div>
-          <h2>Selector de Tablas</h2>
-          <select onChange={handleTableChange} value={selectedTable}>
-            <option value="">Seleccionar tabla</option>
-            {Object.keys(tableInfo).map((tableName) => (
-              <option key={tableName} value={tableName}>
-                {tableInfo[tableName].name}
-              </option>
-            ))}
-          </select>
-
+          <div className="d-flex justify-content-between align-items-center">
+            <select
+              className="form-select mt-3"
+              style={{ maxWidth: '200px' }}
+              onChange={handleTableChange}
+              value={selectedTable}
+            >
+              <option value="">Seleccionar tabla</option>
+              {Object.keys(tableInfo).map((tableName) => (
+                <option key={tableName} value={tableName}>
+                  {tableInfo[tableName].name}
+                </option>
+              ))}
+            </select>
+            {selectedTable && (
+              <h2>Tabla {tableInfo[selectedTable].name}</h2>
+            )}
+          </div>
           {selectedTable && (
             <div>
-              <h2>Tabla {tableInfo[selectedTable].name}</h2>
-              <table>
-                <thead>
-                  <tr>
+              <table className="table table-bordered table-striped">
+              <tr>
                     {columns.map((column) => (
                       <th key={column}>{column}</th>
                     ))}
                     <th>Acciones</th>
                   </tr>
-                </thead>
                 <tbody>
                   {editedData.map((row, rowIndex) => (
                     <tr key={rowIndex}>
                       {columns.map((column) => (
-                        <td key={column}>
+                        <td key={column} className={column === 'ID' ? 'w-45' : ''}>
                           {row.isEditing ? (
                             <input
                               type="text"
+                              className="form-control"
                               value={row[column]}
                               onChange={(e) => handleCellEdit(e, rowIndex, column)}
                             />
@@ -279,26 +288,32 @@ const AdminPage = () => {
                       ))}
                       <td>
                         {row.isEditing ? (
-                          <button onClick={() => handleSaveChanges(rowIndex)}>Guardar</button>
+                          <div className="btn-group">
+                            <button className="btn btn-primary" onClick={() => handleSaveChanges(rowIndex)}>Guardar</button>
+                            <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
+                          </div>
                         ) : (
-                          <button onClick={() => handleEditRow(rowIndex)}>Editar</button>
+                          <div className="btn-group">
+                            <button className="btn btn-warning" onClick={() => handleEditRow(rowIndex)}>Editar</button>
+                            <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
+                          </div>
                         )}
-                        <button onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
                       </td>
                     </tr>
                   ))}
                   <tr>
                     {columns.map((column) => (
-                      <td key={column}>
+                      <td key={column} className={column === 'ID' ? 'w-45' : ''}>
                         <input
                           type="text"
-                          value={newRowData[column] || ''} // Usa el valor de newRowData si está definido
+                          className="form-control"
+                          value={newRowData[column] || ''}
                           onChange={(e) => handleNewRowInputChange(e, column)}
                         />
                       </td>
                     ))}
                     <td>
-                      <button onClick={handleAddRow}>Agregar</button>
+                      <button className="btn btn-success" onClick={handleAddRow}>Agregar</button>
                     </td>
                   </tr>
                 </tbody>
@@ -309,6 +324,7 @@ const AdminPage = () => {
       )}
     </div>
   );
-};
-
-export default AdminPage;
+                    }
+  
+  export default AdminPage;
+  
