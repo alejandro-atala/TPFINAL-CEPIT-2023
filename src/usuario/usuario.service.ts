@@ -50,7 +50,7 @@ export class UsuarioService {
     }
   
     // Guarda los cambios en la base de datos
-    console.log(usuario);
+  
     return this.usuarioRepository.save(usuario);
   }
   
@@ -107,7 +107,8 @@ export class UsuarioService {
       } else if (createUsuarioDto.tipo === 'Profesor') {
         usuarioAsociado = await this.asociarProfesor(nuevoUsuario, createUsuarioDto);
       }
-      return usuarioAsociado;
+    
+      return nuevoUsuario;
     } catch (error) {
       // Lanza una excepción personalizada con un mensaje informativo
       throw new Error(`Error al crear el usuario: ${error.message}`);

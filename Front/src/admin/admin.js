@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './admin.css'
+import './admin.css';
+
 const AdminPage = () => {
   const [selectedTable, setSelectedTable] = useState('');
   const [tableData, setTableData] = useState([]);
   const [editedData, setEditedData] = useState([]);
+  const [newRowData, setNewRowData] = useState({}); // Estado para la nueva fila
   const [sessionExpired, setSessionExpired] = useState(false);
   const [columns, setColumns] = useState([]);
 
@@ -79,7 +81,7 @@ const AdminPage = () => {
         console.error('La fecha de nacimiento es requerida.');
         return;
       }
-  
+
       const { isEditing, ...updatedRow } = editedData[rowIndex]; // Elimina 'isEditing'
       const id = updatedRow.idUsuario; // Reemplaza con la clave primaria adecuada
       await axios.put(`http://localhost:3000/${selectedTable}/${id}`, updatedRow);
@@ -90,7 +92,6 @@ const AdminPage = () => {
       console.error('Error al guardar cambios:', error);
     }
   };
-  
 
   const handleEditRow = (rowIndex) => {
     // Habilita la edición de la fila en el índice especificado
@@ -102,25 +103,31 @@ const AdminPage = () => {
 
   const handleAddRow = async () => {
     try {
-      const newRow = {
-        idUsuario: '',
-        nombre: '',
-        dni: '',
-        fechaNac: '',
-        direccion: '',
-        telefono: '',
-        email: '',
-        password: '',
-        tipo: '',
-        curso: 0,
-        isEditing: true, // Nueva fila está en modo de edición
-      };
-      const response = await axios.post(`http://localhost:3000/${selectedTable}`, newRow);
+      // Verifica que todos los campos necesarios estén completos
+      const requiredFields = ['nombre', 'dni', 'fechaNac', 'direccion', 'telefono', 'email', 'password', 'tipo', 'curso'];
+      const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
+  
+      if (!isDataValid) {
+        console.error('Completa todos los campos requeridos.');
+        return;
+      }
+  
+      // Envía la nueva fila al servidor para su creación
+      const response = await axios.post(`http://localhost:3000/${selectedTable}`, newRowData);
       const addedRow = response.data;
+  
+      // Agrega la fila completa al estado local
       setEditedData([...editedData, addedRow]);
+      setNewRowData({}); // Restablece la nueva fila después de agregarla
     } catch (error) {
       console.error('Error al agregar una nueva fila:', error);
     }
+  };
+  
+
+  const handleNewRowInputChange = (e, columnName) => {
+    // Actualiza el estado de la nueva fila cuando el usuario completa los campos
+    setNewRowData({ ...newRowData, [columnName]: e.target.value });
   };
 
   return (
@@ -184,8 +191,8 @@ const AdminPage = () => {
                       <td key={column}>
                         <input
                           type="text"
-                          value={editedData[editedData.length - 1][column]}
-                          onChange={(e) => handleCellEdit(e, editedData.length - 1, column)}
+                          value={newRowData[column] || ''} // Usa el valor de newRowData si está definido
+                          onChange={(e) => handleNewRowInputChange(e, column)}
                         />
                       </td>
                     ))}
