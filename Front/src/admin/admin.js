@@ -195,7 +195,7 @@ const AdminPage = () => {
         <div>
           <div className="d-flex justify-content-between align-items-center">
             <select
-              className="form-select mt-3"
+              className="form-select m-3"
               style={{ maxWidth: '200px' }}
               onChange={handleTableChange}
               value={selectedTable}

@@ -41,18 +41,18 @@ const App = () => {
   // State para almacenar el nombre del usuario que inició sesión
   const [loggedInUser, setLoggedInUser] = useState('');
   // State para verificar si el usuario actual es un administrador
- 
+
 
   // Función para actualizar el nombre del usuario y su rol cuando inicia sesión
   const handleLogin = (username) => {
     setLoggedInUser(username);
-    
 
 
-  
+
+
 
   }
-  
+
   return (
     <BrowserRouter>
       <AlumnoProvider>
@@ -61,11 +61,11 @@ const App = () => {
           <div className="flex-grow-1">
             <div className="container-fluid">
               <div className="row">
-              {loggedInUser === "Admin" ? null : (
-                <div className="col-md-3">
-                  <Sidebar />
-                </div>
-                 )}
+                {loggedInUser === "Admin" ? null : (
+                  <div className="col-md-3">
+                    <Sidebar />
+                  </div>
+                )}
                 <div className="col-md-9">
                   {/* Contenido principal */}
                   <Routes>
@@ -102,7 +102,15 @@ const App = () => {
                     {/* <Route path="/Profavisos" element={<ProfAvisos />} />
               <Route path="/Profmensaje" element={<ProfMensaje />} /> */}
 
-                    <Route path="/admin" element={<AdminPage />} />
+                    {/* <Route path="/admin" element={<AdminPage />} /> */}
+                    <Route
+                      path="/admin"
+                      element={
+                        <div className="center-content"> {/* Contenedor para centrar */}
+                          <AdminPage />
+                        </div>
+                      }
+                    />
 
                   </Routes>
                 </div>
