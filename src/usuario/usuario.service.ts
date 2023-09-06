@@ -54,35 +54,34 @@ export class UsuarioService {
   
 
   async eliminarRegistro(usuarioId: number): Promise<void> {
+console.log(usuarioId);
+    const alumno = await this.alumnoRepository.findOne({where: { usuarioId: usuarioId },    });
+    console.log(alumno);
+   if (alumno) {
 
-      const alumno = await this.alumnoRepository.findOne({
-        where: { usuarioId: usuarioId },
-      });
-    
-     if (alumno) {
-
-      await this.alumnoRepository.remove(alumno);
-    }
-
-      const profesor = await this.profesorRepository.findOne({ where: { usuarioId: usuarioId } });
-
-
-      if (profesor) {
-        await this.profesorRepository.remove(profesor);
-    
-    const usuario = await this.usuarioRepository.findOne({where: {idUsuario: usuarioId}});
-
-    if (!usuario) {
-      throw new Error(`Usuario con ID ${usuarioId} no encontrado.`);
-    }
-
-    console.log(usuario);
-    await this.usuarioRepository.remove(usuario);
-
-
+    await this.alumnoRepository.remove(alumno);
   }
-  
+
+    const profesor = await this.profesorRepository.findOne({ where: { usuarioId: usuarioId } });
+    console.log(profesor);
+
+    if (profesor) {
+      await this.profesorRepository.remove(profesor);
+    }
+  const usuario = await this.usuarioRepository.findOne({where: {idUsuario: usuarioId}});
+  console.log(usuario);
+  if (!usuario) {
+    throw new Error(`Usuario con ID ${usuarioId} no encontrado.`);
   }
+
+  console.log(usuario);
+  await this.usuarioRepository.remove(usuario);
+
+
+
+
+}
+
 
 
 

@@ -66,8 +66,19 @@ const AdminPage = () => {
 
   const handleDeleteRow = async (rowIndex) => {
     try {
-      const id = editedData[rowIndex].idUsuario; // Reemplaza con la clave primaria adecuada
-      await axios.delete(`http://localhost:3000/${selectedTable}/${id}`);
+      // Verifica si estás tratando con una fila de usuario o curso
+      if (selectedTable === 'usuario') {
+        const id = editedData[rowIndex].idUsuario; // Reemplaza con la clave primaria adecuada     
+        const url = `http://localhost:3000/${selectedTable}/${id}`;
+        await axios.delete(url);
+      } 
+      
+      else if (selectedTable === 'curso') {
+        const id = editedData[rowIndex].idCurso; // Reemplaza con la clave primaria adecuad
+        const url = `http://localhost:3000/${selectedTable}/${id}`;
+        await axios.delete(url);
+      }
+  
       const updatedData = editedData.filter((row, index) => index !== rowIndex);
       setEditedData(updatedData);
     } catch (error) {
@@ -75,16 +86,39 @@ const AdminPage = () => {
     }
   };
 
+
+  
+
   const handleSaveChanges = async (rowIndex) => {
     try {
-      if (!editedData[rowIndex].fechaNac) {
-        console.error('La fecha de nacimiento es requerida.');
-        return;
-      }
-
       const { isEditing, ...updatedRow } = editedData[rowIndex]; // Elimina 'isEditing'
-      const id = updatedRow.idUsuario; // Reemplaza con la clave primaria adecuada
-      await axios.put(`http://localhost:3000/${selectedTable}/${id}`, updatedRow);
+      const id = updatedRow.idCurso; // Reemplaza con la clave primaria adecuada
+      
+      if (selectedTable === 'curso') {
+        // Validación específica para la edición de cursos
+        // Verifica si idCurso y anio están definidos en updatedRow
+        if (updatedRow.idCurso === undefined || updatedRow.anio === undefined) {
+          console.error('Completa todos los campos requeridos para la edición de cursos.');
+          return;
+        }
+      
+        // Realiza la lógica de actualización de cursos
+        await axios.put(`http://localhost:3000/${selectedTable}/${id}`, {
+          idCurso: updatedRow.idCurso,
+          anio: updatedRow.anio,
+        });
+      } else {
+        const id = updatedRow.idUsuario; // Reemplaza con la clave primaria adecuada
+        // Validación para la edición de usuarios (como se mencionó anteriormente)
+        if (!updatedRow.fechaNac) {
+          console.error('La fecha de nacimiento es requerida.');
+          return;
+        }
+  
+        // Realiza la lógica de actualización de usuarios
+        await axios.put(`http://localhost:3000/${selectedTable}/${id}`, updatedRow);
+      }
+  
       const updatedData = [...editedData];
       updatedData[rowIndex] = updatedRow;
       setEditedData(updatedData);
@@ -92,6 +126,8 @@ const AdminPage = () => {
       console.error('Error al guardar cambios:', error);
     }
   };
+
+
 
   const handleEditRow = (rowIndex) => {
     // Habilita la edición de la fila en el índice especificado
@@ -102,10 +138,29 @@ const AdminPage = () => {
   };
 
   const handleAddRow = async () => {
+    const isDataValid = true;
     try {
-      // Verifica que todos los campos necesarios estén completos
-      const requiredFields = ['nombre', 'dni', 'fechaNac', 'direccion', 'telefono', 'email', 'password', 'tipo', 'curso'];
-      const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
+      if (selectedTable === 'curso') {
+        // Validación específica para la creación de cursos
+        const requiredFields = ['idCurso', 'anio'];
+  
+        const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
+  
+        if (!isDataValid) {
+          console.error('Completa todos los campos requeridos para crear un curso.');
+          return;
+        }
+      } else {
+        // Validación para la creación de usuarios (como se mencionó anteriormente)
+        const requiredFields = ['nombre', 'dni', 'fechaNac', 'direccion', 'telefono', 'email', 'password', 'tipo', 'curso'];
+  
+        const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
+  
+        if (!isDataValid) {
+          console.error('Completa todos los campos requeridos para crear un usuario.');
+          return;
+        }
+      }
   
       if (!isDataValid) {
         console.error('Completa todos los campos requeridos.');
