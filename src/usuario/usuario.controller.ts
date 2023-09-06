@@ -21,6 +21,7 @@ export class UsuarioController {
   @Post()
   async createRegistro(@Body() createUsuarioDto: CreateUsuarioDto) {
     try {
+      console.log("post");
       const usuarioAsociado = await this.usuarioService.createRegistro(
         createUsuarioDto,
       );
@@ -37,6 +38,7 @@ export class UsuarioController {
 
   @Put(':id')
   async update(@Param('id') id: number, @Body() updateUsuarioDto: UpdateUsuarioDto) {
+    console.log(updateUsuarioDto);
     return this.usuarioService.update(id, updateUsuarioDto);
   }
   

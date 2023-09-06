@@ -31,27 +31,29 @@ export class UsuarioService {
 
 
   async update(id: number, updateUsuarioDto: UpdateUsuarioDto): Promise<Usuario> {
-    const usuario = await this.usuarioRepository.findOne({where : {idUsuario: id}}); 
-
+    const usuario = await this.usuarioRepository.findOne({ where: { idUsuario: id } });
+  
     if (!usuario) {
       // Manejar el caso en el que el usuario no se encuentra
       throw new Error('Usuario no encontrado');
     }
-
-    // Actualiza los campos del usuario con los valores del DTO de actualización
-    if (updateUsuarioDto.nombre) {
-      usuario.nombre = updateUsuarioDto.nombre;
+  
+    // Recorre todas las propiedades en updateUsuarioDto
+    for (const prop in updateUsuarioDto) {
+      if (updateUsuarioDto.hasOwnProperty(prop)) {
+        // Verifica si la propiedad existe en el objeto usuario
+        if (usuario.hasOwnProperty(prop)) {
+          // Actualiza el valor de la propiedad en usuario con el valor de updateUsuarioDto
+          usuario[prop] = updateUsuarioDto[prop];
+        }
+      }
     }
-
-    if (updateUsuarioDto.email) {
-      usuario.email = updateUsuarioDto.email;
-    }
-
-    // Puedes agregar más campos aquí
-
+  
     // Guarda los cambios en la base de datos
+    console.log(usuario);
     return this.usuarioRepository.save(usuario);
   }
+  
 
 
 
