@@ -14,7 +14,7 @@ const Inscripcion = () => {
     email: '',
     password: '',
     tipo: '',
-    curso: '', // Almacenaremos los cursos seleccionados como una cadena de números
+    curso: '', // Almacenaremos los cursos seleccionados como una cadena de números o un array
   });
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState([]);
@@ -43,6 +43,11 @@ const Inscripcion = () => {
       updatedCourses.push(course);
     }
     setSelectedCourses(updatedCourses);
+    // Actualiza formData.curso con los cursos seleccionados separados por comas
+    setFormData((prevData) => ({
+      ...prevData,
+      curso: updatedCourses.join(','),
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -58,9 +63,7 @@ const Inscripcion = () => {
     }
 
     try {
-      // Almacena los cursos seleccionados como una cadena de números separados por comas
-      formData.curso = selectedCourses.join(',');
-console.log(formData)
+      console.log(formData)
       const response = await axios.post('http://localhost:3000/usuario', formData);
       console.log('Registro exitoso:', response.data);
       setSuccessMessage('Registro exitoso. ¡Bienvenido!');
@@ -161,12 +164,12 @@ console.log(formData)
                   <label htmlFor="curso">Curso:</label>
                   <select id="curso" className="form-select" value={formData.curso} onChange={handleChange}>
                     <option defaultValue>Elija un curso</option>
-                    <option value="1">Curso 1</option>
-                    <option value="2">Curso 2</option>
-                    <option value="3">Curso 3</option>
-                    <option value="4">Curso 4</option>
-                    <option value="5">Curso 5</option>
-                    <option value="6">Curso 6</option>
+                    <option value="1">Primero</option>
+                    <option value="2">Segundo</option>
+                    <option value="3">Tercero</option>
+                    <option value="4">Cuarto</option>
+                    <option value="5">Quinto</option>
+                    <option value="6">Sexto</option>
                   </select>
                 </div>
               )}
