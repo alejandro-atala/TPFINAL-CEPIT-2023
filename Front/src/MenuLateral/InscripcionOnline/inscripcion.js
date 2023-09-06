@@ -144,7 +144,7 @@ const Inscripcion = () => {
               {isProfessor ? (
                 <div className="form-group">
                   <label>Asigne cursos:</label>
-                  {["1", "2", "3", "4", "5", "6"].map((course, index) => (
+                  {["Primero", "Segundo", "Tercero", "Cuarto", "Quinto", "Sexto"].map((course, index) => (
                     <div key={index} className="form-check">
                       <input
                         type="checkbox"
@@ -154,7 +154,7 @@ const Inscripcion = () => {
                         onChange={() => handleCourseChange(course)}
                       />
                       <label className="form-check-label" htmlFor={`curso${course}`}>
-                        {`Curso ${course}`}
+                        {` ${course}`}
                       </label>
                     </div>
                   ))}
