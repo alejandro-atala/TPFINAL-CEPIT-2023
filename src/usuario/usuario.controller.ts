@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UnauthorizedException, Get, Param, Put } from '@nestjs/common';
+import { Controller, Post, Body, UnauthorizedException, Get, Param, Put, Delete } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { CredencialesDto } from './dto/credenciales.dto';
@@ -43,4 +43,11 @@ export class UsuarioController {
     return this.usuarioService.update(id, updateUsuarioDto);
   }
   
+  @Delete(':id')
+  async eliminarRegistro(@Param('id') id: string): Promise<void> {
+    const registroId = parseInt(id, 10);
+    await this.usuarioService.eliminarRegistro(registroId);
+  }
+
+
 }

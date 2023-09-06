@@ -33,7 +33,7 @@ export class Usuario {
   @Column()
   curso: number;
 
-  @OneToOne(() => Alumno, alumno => alumno.idAlumno) // Define the relationship
+  @OneToOne(() => Alumno, alumno => alumno.idAlumno, {cascade : true}) // Define the relationship
   
   alumno: Alumno; 
 

@@ -49,13 +49,40 @@ export class UsuarioService {
       }
     }
   
-    // Guarda los cambios en la base de datos
-  
     return this.usuarioRepository.save(usuario);
   }
   
 
+  async eliminarRegistro(usuarioId: number): Promise<void> {
 
+      const alumno = await this.alumnoRepository.findOne({
+        where: { usuarioId: usuarioId },
+      });
+    
+     if (alumno) {
+
+      await this.alumnoRepository.remove(alumno);
+    }
+
+      const profesor = await this.profesorRepository.findOne({ where: { usuarioId: usuarioId } });
+
+
+      if (profesor) {
+        await this.profesorRepository.remove(profesor);
+    
+    const usuario = await this.usuarioRepository.findOne({where: {idUsuario: usuarioId}});
+
+    if (!usuario) {
+      throw new Error(`Usuario con ID ${usuarioId} no encontrado.`);
+    }
+
+    console.log(usuario);
+    await this.usuarioRepository.remove(usuario);
+
+
+  }
+  
+  }
 
 
 
@@ -154,19 +181,12 @@ export class UsuarioService {
       usuario: user.idUsuario, // User ID
       email: user.email, // User email or any other relevant information
     };
-
-    // Implement your token generation logic here
-    // You may use the AuthService for this purpose
-    // Example: const token = await this.authService.generateToken(payload);
-    // Make sure to inject the AuthService and call its generateToken method
-
-    return 'your-token-here'; // Replace with the actual token generation logic
+    return 'your-token-here'; 
   }
 
   async asociarAlumno(usuario: Usuario, createUsuarioDto: CreateUsuarioDto) {
     const alumno = new Alumno();
     alumno.nombre = usuario.nombre;
-    // alumno.idAlumno = usuario.idUsuario;
     alumno.curso = createUsuarioDto.curso;
     alumno.usuarioId = usuario.idUsuario;
     return this.alumnoRepository.save(alumno);
