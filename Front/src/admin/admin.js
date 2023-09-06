@@ -41,7 +41,9 @@ const AdminPage = () => {
 
   const cargarDatos = async () => {
     try {
+
       const response = await axios.get(`http://localhost:3000/${selectedTable}`);
+      console.log(response.data);
       setTableData(response.data);
       setEditedData(response.data.map((row) => ({ ...row, isEditing: false }))); // Inicialmente, ninguna fila está en modo de edición
       setColumns(Object.keys(response.data[0])); // Obtener automáticamente los nombres de las columnas
@@ -66,6 +68,11 @@ const AdminPage = () => {
 
   const handleDeleteRow = async (rowIndex) => {
     try {
+      if (selectedTable === 'materias') {
+        const id = editedData[rowIndex].idMateria; // Reemplaza con la clave primaria adecuada     
+        const url = `http://localhost:3000/${selectedTable}/${id}`;
+        await axios.delete(url);
+      } 
       // Verifica si estás tratando con una fila de usuario o curso
       if (selectedTable === 'usuario') {
         const id = editedData[rowIndex].idUsuario; // Reemplaza con la clave primaria adecuada     
@@ -91,10 +98,33 @@ const AdminPage = () => {
 
   const handleSaveChanges = async (rowIndex) => {
     try {
+     
+      const { isEditing, ...updatedRow } = editedData[rowIndex]; // Elimina 'isEditing'
+      const id = updatedRow.idMateria; //  // Reemplaza con la clave primaria adecuada
+
+      if (selectedTable === 'materias') {
+ 
+        // Validación específica para la edición de cursos
+        // Verifica si idCurso y anio están definidos en updatedRow
+        if (updatedRow.idMateria === undefined || updatedRow.nombre === undefined) {
+     
+          console.error('Completa todos los campos requeridos para la edición de cursos.');
+          return;
+        }
+        console.log(updatedRow.idMateria);
+
+        // Realiza la lógica de actualización de cursos
+        await axios.put(`http://localhost:3000/${selectedTable}/${id}`, {
+          idMateria: updatedRow.idMateria,
+          nombre: updatedRow.nombre,
+        });        console.log(updatedRow.idMateria, updatedRow.nombre)
+      }
+
+
+    else  if (selectedTable === 'curso') {
+
       const { isEditing, ...updatedRow } = editedData[rowIndex]; // Elimina 'isEditing'
       const id = updatedRow.idCurso; // Reemplaza con la clave primaria adecuada
-      
-      if (selectedTable === 'curso') {
         // Validación específica para la edición de cursos
         // Verifica si idCurso y anio están definidos en updatedRow
         if (updatedRow.idCurso === undefined || updatedRow.anio === undefined) {
@@ -140,7 +170,21 @@ const AdminPage = () => {
   const handleAddRow = async () => {
     const isDataValid = true;
     try {
-      if (selectedTable === 'curso') {
+    
+      if (selectedTable === 'materias') {
+        // Validación específica para la creación de cursos
+        const requiredFields = ['idMateria', 'nombre'];
+  
+        const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
+   
+        if (!isDataValid) {
+          console.error('Completa todos los campos requeridos para crear un curso.');
+          return;
+        }
+      }
+
+
+     else if (selectedTable === 'curso') {
         // Validación específica para la creación de cursos
         const requiredFields = ['idCurso', 'anio'];
   
@@ -151,6 +195,7 @@ const AdminPage = () => {
           return;
         }
       } else {
+      
         // Validación para la creación de usuarios (como se mencionó anteriormente)
         const requiredFields = ['nombre', 'dni', 'fechaNac', 'direccion', 'telefono', 'email', 'password', 'tipo', 'curso'];
   
@@ -161,7 +206,7 @@ const AdminPage = () => {
           return;
         }
       }
-  
+
       if (!isDataValid) {
         console.error('Completa todos los campos requeridos.');
         return;
@@ -174,6 +219,7 @@ const AdminPage = () => {
       // Agrega la fila completa al estado local
       setEditedData([...editedData, addedRow]);
       setNewRowData({}); // Restablece la nueva fila después de agregarla
+      console.log("Nueva fila agregada con exito.")
     } catch (error) {
       console.error('Error al agregar una nueva fila:', error);
     }
