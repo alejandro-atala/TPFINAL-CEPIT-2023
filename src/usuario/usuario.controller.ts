@@ -20,6 +20,7 @@ export class UsuarioController {
 
   @Post()
   async createRegistro(@Body() createUsuarioDto: CreateUsuarioDto) {
+    console.log(createUsuarioDto);
     try {
       const usuarioAsociado = await this.usuarioService.createRegistro(
         createUsuarioDto,
