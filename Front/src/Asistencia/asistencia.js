@@ -32,7 +32,7 @@ const Asistencia = () => {
             counts.asistencias += 1;
           } else if (asistencia.asistencia === 'ausente') {
             counts.inasistencias += 1;
-          } else if (asistencia.asistencia === 'media falta') {
+          } else if (asistencia.asistencia === 'media-falta') {
             counts.mediaFalta += 1;
           }
           return counts;
