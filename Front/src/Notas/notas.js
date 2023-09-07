@@ -18,7 +18,7 @@ const Notas = () => {
 
 	const fetchNotas = async () => {
 		try {
-			console.log(alumnoLogueado);
+			//console.log(alumnoLogueado);
 			const response = await axios.get(`http://localhost:3000/notas-examenes/${alumnoLogueado}`);
 			const notasData = response.data; // Asumiendo que response.data es un Array de objetos de nota
 			setNotas(notasData);

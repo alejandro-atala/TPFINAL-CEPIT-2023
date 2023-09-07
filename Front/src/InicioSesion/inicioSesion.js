@@ -23,15 +23,25 @@ const InicioSesion = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post('http://localhost:3000/usuario/login', formData);
       const newToken = response.data.token;
       setToken(newToken);
       onLogin(response.data.nombre);
-      setAlumnoLogueado(response.data.id);
-
+      const idUsuario = response.data.id;
+  
       if (response.data.tipo === 'Alumno') {
+
+        // Una vez que tengas el ID del usuario, realiza una solicitud GET para obtener el ID del alumno
+        const resp = await axios.get(`http://localhost:3000/alumno/usuario/${idUsuario}`);
+        const alumnoData = resp.data;
+        console.log(alumnoData)
+        if (alumnoData) {
+          const idDelAlumno = alumnoData.idAlumno; // Suponiendo que el ID del alumno está en la primera entrada
+          console.log("idDelAlumno",idDelAlumno)
+          setAlumnoLogueado(idDelAlumno);
+        }
         navigate('/alumno');
       } else if (response.data.tipo === 'Profesor') {
         navigate('/profesor');
@@ -41,7 +51,7 @@ const InicioSesion = ({ onLogin }) => {
       setMessage('Error en el inicio de sesión. Verifica tus credenciales.');
     }
   };
-
+  
   
 
   const handleChange = (e) => {
