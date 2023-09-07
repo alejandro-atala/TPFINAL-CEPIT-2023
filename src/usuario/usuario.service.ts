@@ -133,7 +133,8 @@ export class UsuarioService {
   async asociarAlumno(usuario: Usuario, createUsuarioDto: CreateUsuarioDto) {
     const alumno = new Alumno();
     alumno.nombre = usuario.nombre;
-    alumno.curso = createUsuarioDto.curso;
+   // alumno.curso = createUsuarioDto.curso;
+   alumno.cursoIdCurso = createUsuarioDto.curso;
     alumno.usuarioId = usuario.idUsuario;
     return this.alumnoRepository.save(alumno);
   }

@@ -13,8 +13,11 @@ export class Alumno {
   @Column()
   usuarioId: number;
 
+  @Column()
+  cursoIdCurso: number;
+
   @OneToOne(() => Usuario, usuario => usuario.alumno)
-  // @JoinColumn({ name: 'usuarioId' })
+  @JoinColumn({ name: 'usuarioId' })
   usuario: number;
 
 
