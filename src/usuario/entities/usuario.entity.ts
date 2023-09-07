@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
 import { Alumno } from 'src/alumno/entities/alumno.entity';
+import { Profesor } from 'src/profesor/entities/profesor.entity';
 
 @Entity()
 export class Usuario {
@@ -33,11 +34,12 @@ export class Usuario {
   @Column()
   curso: string;
 
-  @OneToOne(() => Alumno, alumno => alumno.idAlumno) // Define the relationship
-  
+  @OneToOne(() => Alumno, alumno => alumno.idAlumno) // Define the relationship 
   alumno: Alumno; 
 
+  @OneToOne(() => Profesor, profesor => profesor.idProfesor) // Define the relationship
+  profesor: Profesor; 
 
 
-  // Otros atributos y métodos de la entidad Usuario
+
 } 

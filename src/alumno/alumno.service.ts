@@ -23,8 +23,8 @@ export class AlumnoService {
   async createAlumno(nombre: string, cursoId: number): Promise<Alumno> {
     const nuevoAlumno = new Alumno();
     nuevoAlumno.nombre = nombre;
-    nuevoAlumno.curso = cursoId;
-    
+    //nuevoAlumno.curso = cursoId;
+    nuevoAlumno.cursoIdCurso = cursoId;
     return this.alumnoRepository.save(nuevoAlumno);
   }
 
@@ -49,6 +49,21 @@ export class AlumnoService {
       throw new Error(`Could not find alumno with id: ${id}`);
     }
   }
+
+
+  async findAlumnoByUsuario(id: number): Promise<Alumno > {
+    try {
+      console.log(id)
+      const alumno = await this.alumnoRepository.findOne({ where: { usuarioId: id } });
+      console.log(alumno)
+      return alumno;
+
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Could not find alumno with usuarioId: ${id}`);
+    }
+  }
+  
 
   async update(id: number, updateAlumnoDto: UpdateAlumnoDto): Promise<Alumno | undefined> {
     try {
