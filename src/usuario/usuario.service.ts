@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
-import { Repository } from 'typeorm';
+import { DeepPartial, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { CredencialesDto } from './dto/credenciales.dto';
 import { Alumno } from 'src/alumno/entities/alumno.entity';
@@ -67,11 +67,17 @@ export class UsuarioService {
     try {
       const nuevoUsuario = await this.createUsuario(createUsuarioDto);
       let usuarioAsociado;
-
+  
       // Verificar el tipo de usuario y asociarlo a la tabla correspondiente
       if (createUsuarioDto.tipo === 'Alumno') {
+    
         usuarioAsociado = await this.asociarAlumno(nuevoUsuario, createUsuarioDto);
       } else if (createUsuarioDto.tipo === 'Profesor') {
+        // Convierte el array de cursos en una cadena de números separados por comas
+        const cursosSeparados = createUsuarioDto.curso.join(',');
+        // Asigna la cadena de cursos al nuevo usuario profesor
+        nuevoUsuario.curso = cursosSeparados;
+        // Asocia el usuario profesor a la tabla correspondiente
         usuarioAsociado = await this.asociarProfesor(nuevoUsuario, createUsuarioDto);
       }
       return usuarioAsociado;
@@ -80,16 +86,34 @@ export class UsuarioService {
       throw new Error(`Error al crear el usuario: ${error.message}`);
     }
   }
+  
 
   async createUsuario(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
-    const nuevoUsuario = this.usuarioRepository.create(createUsuarioDto);
+    
+    // Verifica si createUsuarioDto.curso es un array antes de usar join()
+    const cursoArray = Array.isArray(createUsuarioDto.curso) ? createUsuarioDto.curso : [createUsuarioDto.curso];
+    
+    // Convierte el array de cursos en una cadena de texto separada por comas
+    const cursoString = cursoArray.join(',');
+  
+    // Crea un nuevo usuario y asigna la cadena de cursos
+    const nuevoUsuario: DeepPartial<Usuario> = {
+      ...createUsuarioDto,
+      curso: cursoString,
+    };
+
+    // Hash de la contraseña y guarda el usuario
     nuevoUsuario.password = await bcrypt.hash(
       nuevoUsuario.password,
       saltRounds,
     );
+   
+    const savedUsuario = await this.usuarioRepository.save(nuevoUsuario);
 
-    return this.usuarioRepository.save(nuevoUsuario);
+    return savedUsuario; // Devuelve el usuario guardado, no un array de usuarios
   }
+  
+  
 
   async buscarPorEmail(email: string): Promise<Usuario | null> {
     return this.usuarioRepository.findOne({ where: { email } });
@@ -133,9 +157,12 @@ export class UsuarioService {
   async asociarAlumno(usuario: Usuario, createUsuarioDto: CreateUsuarioDto) {
     const alumno = new Alumno();
     alumno.nombre = usuario.nombre;
+
    // alumno.curso = createUsuarioDto.curso;
    alumno.cursoIdCurso = createUsuarioDto.curso;
+
     alumno.usuarioId = usuario.idUsuario;
+    console.log("A",alumno)
     return this.alumnoRepository.save(alumno);
   }
 

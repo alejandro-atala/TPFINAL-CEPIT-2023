@@ -20,7 +20,15 @@ export class UsuarioController {
 
   @Post()
   async createRegistro(@Body() createUsuarioDto: CreateUsuarioDto) {
+   
+    // Verifica si el tipo es Profesor y curso no es un array
+    if (createUsuarioDto.tipo === 'Profesor' && !Array.isArray(createUsuarioDto.curso)) {
+      // Convierte el valor de curso en un array
+      createUsuarioDto.curso = [createUsuarioDto.curso];
+    }
+
     try {
+  
       const usuarioAsociado = await this.usuarioService.createRegistro(
         createUsuarioDto,
       );
@@ -29,4 +37,5 @@ export class UsuarioController {
       throw new Error(`Error al crear el usuario: ${error.message}`);
     }
   }
-}
+  }
+

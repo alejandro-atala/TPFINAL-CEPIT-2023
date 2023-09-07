@@ -32,7 +32,7 @@ export class Usuario {
   tipo: string;
 
   @Column()
-  curso: number;
+  curso: string;
 
   @OneToOne(() => Alumno, alumno => alumno.idAlumno) // Define the relationship 
   alumno: Alumno; 
