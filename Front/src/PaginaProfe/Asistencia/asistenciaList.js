@@ -9,10 +9,11 @@ const AsistenciaList = () => {
   const [alumnos, setAlumnos] = useState([]);
   const [attendanceData, setAttendanceData] = useState([]);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [error, setError] = useState(null);
   const [sessionExpired, setSessionExpired] = useState(false);
 
   const { token } = useAuth();
-  console.log(token);
+
 
   useEffect(() => {
     fetchAnios();
@@ -79,6 +80,10 @@ const AsistenciaList = () => {
     console.log('Guardando asistencias...');
     if (attendanceData.length === 0) {
       console.log('No hay asistencias seleccionadas para guardar.');
+      setError('No hay asistencias seleccionadas para guardar.');
+      setTimeout(() => {
+        setError(null);
+      }, 2000); // 2000 milisegundos (2 segundos)
       return;
     }
 
@@ -92,10 +97,19 @@ const AsistenciaList = () => {
       console.log('Asistencias guardadas');
 
       setShowSuccessAlert(true);
+      setTimeout(() => {
+        setShowSuccessAlert(null);
+      }, 2000); // 2000 milisegundos (2 segundos)
       setAttendanceData([]);
       setAlumnos([]);
+
     } catch (error) {
+
       console.error('Error al guardar asistencias:', error);
+      setError('Error al guardar asistencias. Verifica tu conexión o inténtalo más tarde.');
+      setTimeout(() => {
+        setError(null);
+      }, 2000); // 2000 milisegundos (2 segundos)
 
       // Verificar si la respuesta indica que la sesión ha expirado
       if (error.response && error.response.status === 401) {
@@ -166,6 +180,12 @@ const AsistenciaList = () => {
               Asistencias guardadas exitosamente.
             </Alert>
           )}
+          {error && (
+            <Alert variant="danger" className="mt-3 text-center">
+              {error}
+            </Alert>
+          )}
+
         </div>
       )}
     </div>
