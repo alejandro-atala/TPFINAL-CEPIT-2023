@@ -24,12 +24,6 @@ const AdminPage = () => {
     usuario: {
       name: 'Usuarios',
     },
-    alumno: {
-      name: 'Alumnos',
-    },
-    profesor: {
-      name: 'Profesores',
-    },
     curso: {
       name: 'Cursos',
     },
@@ -42,9 +36,23 @@ const AdminPage = () => {
   const cargarDatos = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/${selectedTable}`);
-      setTableData(response.data);
-      setColumns(Object.keys(response.data[0] || {})); // Obtener automáticamente los nombres de las columnas
-      setEditedData(response.data.map((row) => ({ ...row, isEditing: false }))); // Inicialmente, ninguna fila está en modo de edición
+      const data = response.data;
+  
+      // Verificamos si la tabla está vacía y agregamos una fila vacía con los campos requeridos específicos
+      if (data.length === 0) {
+        let emptyRow = {};
+        if (selectedTable === 'curso') {
+          emptyRow = { idCurso: '', anio: '' };
+        } else if (selectedTable === 'materias') {
+          emptyRow = { idMateria: '', nombre: '' };
+        }
+        
+        data.push(emptyRow);
+      }
+  
+      setTableData(data);
+      setColumns(Object.keys(data[0] || {})); // Obtener automáticamente los nombres de las columnas
+      setEditedData(data.map((row) => ({ ...row, isEditing: false }))); // Inicialmente, ninguna fila está en modo de edición
     } catch (error) {
       console.error(`Error al cargar datos de ${selectedTable}:`, error);
     }
@@ -185,6 +193,8 @@ const AdminPage = () => {
     setNewRowData({ ...newRowData, [columnName]: e.target.value });
   };
 
+  const isTableEmpty = tableData.length === 0;
+
   return (
     <div className="admin-page d-flex flex-column">
       {sessionExpired ? (
@@ -223,45 +233,42 @@ const AdminPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {tableData.length === 0 ? (
+                  {isTableEmpty && (
                     <tr>
                       <td colSpan={columns.length + 1}>No hay datos disponibles.</td>
                     </tr>
-                  ) : (
-                    <>
-                      {editedData.map((row, rowIndex) => (
-                        <tr key={rowIndex}>
-                          {columns.map((column) => (
-                            <td key={column}>
-                              {row.isEditing ? (
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  value={row[column]}
-                                  onChange={(e) => handleCellEdit(e, rowIndex, column)}
-                                />
-                              ) : (
-                                row[column]
-                              )}
-                            </td>
-                          ))}
-                          <td>
-                            {row.isEditing ? (
-                              <div className="btn-group">
-                                <button className="btn btn-primary" onClick={() => handleSaveChanges(rowIndex)}>Guardar</button>
-                                <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
-                              </div>
-                            ) : (
-                              <div className="btn-group">
-                                <button className="btn btn-warning" onClick={() => handleEditRow(rowIndex)}>Editar</button>
-                                <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
-                              </div>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </>
                   )}
+                  {editedData.map((row, rowIndex) => (
+                    <tr key={rowIndex}>
+                      {columns.map((column) => (
+                        <td key={column}>
+                          {row.isEditing ? (
+                            <input
+                              type="text"
+                              className="form-control"
+                              value={row[column]}
+                              onChange={(e) => handleCellEdit(e, rowIndex, column)}
+                            />
+                          ) : (
+                            row[column]
+                          )}
+                        </td>
+                      ))}
+                      <td>
+                        {row.isEditing ? (
+                          <div className="btn-group">
+                            <button className="btn btn-primary" onClick={() => handleSaveChanges(rowIndex)}>Guardar</button>
+                            <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
+                          </div>
+                        ) : (
+                          <div className="btn-group">
+                            <button className="btn btn-warning" onClick={() => handleEditRow(rowIndex)}>Editar</button>
+                            <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
+                          </div>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
                   <tr>
                     {columns.map((column) => (
                       <td key={column}>
