@@ -144,7 +144,7 @@ const Inscripcion = () => {
               {isProfessor ? (
                 <div className="form-group">
                   <label>Asigne cursos:</label>
-                  {["1", "2", "3", "4", "5", "6"].map((course, index) => (
+                  {[1, 2,3, 4, 5, 6].map((course, index) => (
                     <div key={index} className="form-check">
                       <input
                         type="checkbox"
