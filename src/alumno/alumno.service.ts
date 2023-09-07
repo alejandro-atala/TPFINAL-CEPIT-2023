@@ -50,6 +50,21 @@ export class AlumnoService {
     }
   }
 
+
+  async findAlumnoByUsuario(id: number): Promise<Alumno > {
+    try {
+      console.log(id)
+      const alumno = await this.alumnoRepository.findOne({ where: { usuarioId: id } });
+      console.log(alumno)
+      return alumno;
+
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Could not find alumno with usuarioId: ${id}`);
+    }
+  }
+  
+
   async update(id: number, updateAlumnoDto: UpdateAlumnoDto): Promise<Alumno | undefined> {
     try {
       await this.alumnoRepository.update(id, updateAlumnoDto);
