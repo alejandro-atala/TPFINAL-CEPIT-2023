@@ -183,67 +183,65 @@ const AdminPage = () => {
           </div>
           {selectedTable && (
             <div>
-              <table className="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    {requiredFields[selectedTable].map((column) => (
-                      <th key={column}>{column}</th>
-                    ))}
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                
-                  {editedData.map((row, rowIndex) => (
-                    <tr key={rowIndex}>
-                      {requiredFields[selectedTable].map((column) => (
-                        <td key={column}>
-                          {row.isEditing ? (
-                            <input
-                              type="text"
-                              className="form-control"
-                              value={row[column]}
-                              onChange={(e) => handleCellEdit(e, rowIndex, column)}
-                            />
-                          ) : (
-                            row[column]
-                          )}
-                        </td>
-                      ))}
-                      <td>
-                        {row.isEditing ? (
-                          <div className="btn-group">
-                            <button className="btn btn-primary" onClick={() => handleSaveChanges(rowIndex)}>Guardar</button>
-                            <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
-                          </div>
-                        ) : (
-                          <div className="btn-group">
-                            <button className="btn btn-warning" onClick={() => handleEditRow(rowIndex)}>Editar</button>
-                            <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
-                          </div>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                    {isTableEmpty && (
-                    <tr>
-                      {requiredFields[selectedTable].map((field) => (
-                        <td key={field}>
-                          <input
-                            type="text"
-                            className="form-control"
-                            value={newRowData[field] || ''}
-                            onChange={(e) => handleNewRowInputChange(e, field)}
-                          />
-                        </td>
-                      ))}
-                      <td>
-                        <button className="btn btn-success" onClick={handleAddRow}>Agregar</button>
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
+             <table className="table table-bordered table-striped">
+  <thead>
+    <tr>
+      {requiredFields[selectedTable].map((column) => (
+        <th key={column}>{column}</th>
+      ))}
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {editedData.map((row, rowIndex) => (
+      <tr key={rowIndex}>
+        {requiredFields[selectedTable].map((column) => (
+          <td key={column}>
+            {row.isEditing ? (
+              <input
+                type="text"
+                className="form-control"
+                value={row[column]}
+                onChange={(e) => handleCellEdit(e, rowIndex, column)}
+              />
+            ) : (
+              row[column]
+            )}
+          </td>
+        ))}
+        <td>
+          {row.isEditing ? (
+            <div className="btn-group">
+              <button className="btn btn-primary" onClick={() => handleSaveChanges(rowIndex)}>Guardar</button>
+              <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
+            </div>
+          ) : (
+            <div className="btn-group">
+              <button className="btn btn-warning" onClick={() => handleEditRow(rowIndex)}>Editar</button>
+              <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
+            </div>
+          )}
+        </td>
+      </tr>
+    ))}
+    {/* Agrega una fila vacía al final para agregar nuevos datos */}
+    <tr>
+      {requiredFields[selectedTable].map((field) => (
+        <td key={field}>
+          <input
+            type="text"
+            className="form-control"
+            value={newRowData[field] || ''}
+            onChange={(e) => handleNewRowInputChange(e, field)}
+          />
+        </td>
+      ))}
+      <td>
+        <button className="btn btn-success" onClick={handleAddRow}>Agregar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
             </div>
           )}
         </div>
