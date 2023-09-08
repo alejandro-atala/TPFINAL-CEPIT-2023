@@ -10,6 +10,8 @@ const MateriasList = () => {
   const [materias, setMaterias] = useState([]);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [isCursoSelected, setIsCursoSelected] = useState(false);
+
 
   useEffect(() => {
     fetchCursos();
@@ -50,12 +52,13 @@ const MateriasList = () => {
   const handleCursoChange = async (e) => {
     const selectedCursoId = e.target.value;
     setSelectedCurso(selectedCursoId);
-
+  
     if (selectedCursoId) {
+      setIsCursoSelected(true);
       try {
         const response = await axios.get(`http://localhost:3000/materias-curso/${selectedCursoId}`);
         const materiaCursoData = response.data;
-
+  
         if (materiaCursoData.length > 0) {
           const updatedMateriaCursoInputs = materiaCursoData.map((materiaItem) => materiaItem.materia || '');
           setMateriaCursoInputs(updatedMateriaCursoInputs);
@@ -66,11 +69,27 @@ const MateriasList = () => {
         console.error('Error fetching materia data:', error);
       }
     } else {
+      setIsCursoSelected(false);
       setMateriaCursoInputs(Array(25).fill(''));
     }
   };
+  
 
   const handleSaveClick = async () => {
+    if (!isCursoSelected) {
+      setShowErrorAlert(true);
+      setShowSuccessAlert(false);
+
+      setTimeout(() => {
+        setShowErrorAlert(false);
+      }, 2000);
+    
+      
+      return;
+    }
+  
+
+  
     try {
       const daysAndTimes = [
         'Lunes 8:00-9:00', 'Lunes 9:00-10:00', 'Lunes 10:00-11:00', 'Lunes 11:00-12:00', 'Lunes 12:00-13:00',
@@ -85,6 +104,7 @@ const MateriasList = () => {
         diaHora: dayAndTime,
         anio: selectedCurso,
       }));
+      
 
       const response = await axios.post('http://localhost:3000/materias-curso/guardar', materiaData, {
         headers: {
@@ -101,14 +121,21 @@ const MateriasList = () => {
           setShowSuccessAlert(false);
         }, 2000);
       } else {
+
+
         console.error('Error al guardar las materias');
       }
     } catch (error) {
       console.error('Error en la solicitud:', error);
       setShowSuccessAlert(false);
       setShowErrorAlert(true);
+
+      setTimeout(() => {
+        setShowErrorAlert(false);
+      }, 2000);
     }
-  };
+    }
+  
 
   const handleMateriaCursoInputChange = (e, cellIndex) => {
     const updatedMateriaCursoInputs = [...materiaCursoInputs];

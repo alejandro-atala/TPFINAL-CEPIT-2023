@@ -25,9 +25,9 @@ import AsistenciaList from './PaginaProfe/Asistencia/asistenciaList';
 import NotasExamenesList from './PaginaProfe/NotasExamen/notaList';
 import { AlumnoProvider } from './Alumno/AlumnoContext';
 import MateriasList from './PaginaProfe/Materias/materiasList';
-import AdminPage from './admin/admin';
 
-// const App = () => {
+import {AuthProvider} from './InicioSesion/tokenContext';
+
 
 //   // State para almacenar el nombre del usuario que inició sesión
 //   const [loggedInUser, setLoggedInUser] = useState('');
@@ -55,20 +55,20 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <AlumnoProvider>
-        <div className="d-flex flex-column min-vh-100">
-          <Navbar loggedInUser={loggedInUser} />
-          <div className="flex-grow-1">
-            <div className="container-fluid">
-              <div className="row">
-                {loggedInUser === "Admin" ? null : (
-                  <div className="col-md-3">
-                    <Sidebar />
-                  </div>
-                )}
-                <div className="col-md-9">
-                  {/* Contenido principal */}
-                  <Routes>
+        <AlumnoProvider>
+        <AuthProvider>
+      <div className="d-flex flex-column min-vh-100">
+        <Navbar loggedInUser={loggedInUser} />
+        <div className="flex-grow-1">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-md-3">
+                <Sidebar />
+              </div>
+              <div className="col-md-9">
+                {/* Contenido principal */}
+                <Routes>
+          
 
                     <Route path="/iniciarSesion" element={<InicioSesion onLogin={handleLogin} />} />
 
@@ -119,7 +119,13 @@ const App = () => {
           </div>
           <Footer className="fixed-bottom" />
         </div>
+
+        <Footer className="fixed-bottom" />
+      </div>
+      </AuthProvider>
+
       </AlumnoProvider>
+   
     </BrowserRouter>
   );
 };

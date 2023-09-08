@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, ListGroup, Button, Col , Alert} from 'react-bootstrap';
+import { Form, ListGroup, Button, Col, Alert } from 'react-bootstrap';
 import './notas.css';
 import axios from 'axios';
 
@@ -11,7 +11,7 @@ const NotasExamenesList = () => {
   const [selectedMateria, setSelectedMateria] = useState('');
   const [materias, setMaterias] = useState([]); // Agregado
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   useEffect(() => {
     fetchAnios();
@@ -51,13 +51,13 @@ const NotasExamenesList = () => {
     }
   };
 
- 
+
   const handleAnioChange = async (event) => {
     const selectedAnio = event.target.value;
     setSelectedAnio(selectedAnio);
     setSelectedTrimestre(1); // Reiniciar el trimestre seleccionado
     setSelectedMateria('');
-  
+
     if (selectedAnio) {
       setAlumnos([]); // Vaciar la lista de alumnos
       await fetchAlumnosPorAnio(selectedAnio);
@@ -80,6 +80,35 @@ const NotasExamenesList = () => {
   };
 
   const saveNotasExamenes = async () => {
+
+    if (!selectedMateria) {
+      // Mostrar mensaje de error si falta seleccionar materia
+      setShowSuccessAlert(false);
+      setShowErrorAlert(true);
+
+      setTimeout(() => {
+        setShowErrorAlert(false);
+      }, 2000);
+
+      return;
+    }
+
+
+    const notasIncompletas = alumnos.some((alumno) => !alumno.selectedNota);
+
+    if (notasIncompletas) {
+      // Mostrar mensaje de error si faltan notas
+      setShowSuccessAlert(false);
+      setShowErrorAlert(true);
+
+      setTimeout(() => {
+        setShowErrorAlert(false);
+      }, 2000);
+
+      return;
+    }
+
+
     console.log('Guardando notas de exámenes...');
     const notasToSave = alumnos.map((alumno) => ({
       idAlumno: alumno.idAlumno,
@@ -99,18 +128,19 @@ const NotasExamenesList = () => {
       });
       setShowSuccessAlert(true);
       console.log('Notas de exámenes guardadas');
-  
-      
-    setTimeout(() => {
-      setShowSuccessAlert(false);
-      setAlumnos([]);
-      setSelectedAnio('');
-      setSelectedMateria('');
-    }, 2000); 
-  } catch (error) {
-    console.error('Error al guardar notas de exámenes:', error);
-  }
-};
+
+
+      setTimeout(() => {
+        setShowSuccessAlert(false);
+        setAlumnos([]);
+        setSelectedAnio('');
+        setSelectedMateria('');
+      }, 2000);
+    }
+    catch (error) {
+      console.error('Error al guardar notas de exámenes:', error);
+    }
+  };
 
   return (
     <div className="col-9">
@@ -129,18 +159,18 @@ const NotasExamenesList = () => {
         </Form.Group>
       </Form>
       {selectedAnio && (
-  <>
-    <Form.Group controlId="formMateria" className="mx-auto" style={{ maxWidth: '200px' }}>
-      <Form.Label>Seleccionar Materia</Form.Label>
-      <Form.Control as="select" onChange={handleMateriaChange} value={selectedMateria}>
-        <option value="">Seleccione una materia</option>
-        {materias.map((materia) => (
-          <option key={materia.idMateria} value={materia.idMateria}>
-            {materia.nombre}
-          </option>
-        ))}
-      </Form.Control>
-    </Form.Group>
+        <>
+          <Form.Group controlId="formMateria" className="mx-auto" style={{ maxWidth: '200px' }}>
+            <Form.Label>Seleccionar Materia</Form.Label>
+            <Form.Control as="select" onChange={handleMateriaChange} value={selectedMateria}>
+              <option value="">Seleccione una materia</option>
+              {materias.map((materia) => (
+                <option key={materia.idMateria} value={materia.idMateria}>
+                  {materia.nombre}
+                </option>
+              ))}
+            </Form.Control>
+          </Form.Group>
           <div className="text-center mb-3">
             <h3>Fecha: {new Date().toLocaleDateString()}</h3>
             {[1, 2, 3].map((trimestre) => (
@@ -180,15 +210,20 @@ const NotasExamenesList = () => {
             ))}
           </ListGroup>
           <div className="text-center mt-3">
-            <Button variant="primary"  type="button" onClick={saveNotasExamenes}>
+            <Button variant="primary" type="button" onClick={saveNotasExamenes}>
               Guardar Notas de Exámenes
             </Button>
           </div>
           {showSuccessAlert && (
-        <Alert variant="success" className="mt-3 text-center">
-          Notas de exámenes guardadas exitosamente.
-        </Alert>
-      )}
+            <Alert variant="success" className="mt-3 text-center">
+              Notas de exámenes guardadas exitosamente.
+            </Alert>
+          )}
+             {showErrorAlert && (
+            <Alert variant="danger" className="mt-3 text-center">
+              Error al guardar notas. Faltan datos.
+            </Alert>
+          )}
         </>
       )}
     </div>

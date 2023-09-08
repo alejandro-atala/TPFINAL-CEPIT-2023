@@ -34,16 +34,14 @@ export class Usuario {
   @Column()
   curso: number;
 
-  @OneToOne(() => Alumno, alumno => alumno.usuarioId, { cascade: true })
 
-  alumno: Alumno;
-
-  @OneToOne(() => Profesor, profesor => profesor.usuarioId, { cascade: true })
-
-  profesor: Alumno;
-   
+  @OneToOne(() => Alumno, alumno => alumno.idAlumno) // Define the relationship 
+  alumno: Alumno; 
 
 
+  @OneToOne(() => Profesor, profesor => profesor.idProfesor) // Define the relationship
+  profesor: Profesor; 
 
-  // Otros atributos y métodos de la entidad Usuario
+
+
 } 

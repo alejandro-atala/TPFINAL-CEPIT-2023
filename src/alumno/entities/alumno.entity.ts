@@ -10,13 +10,16 @@ export class Alumno {
   @Column()
   nombre: string;
 
-@OneToOne(() => Usuario ,usuario => usuario.idUsuario)
-@JoinColumn({name: 'usuarioId'})
-usuarioId: number;
+  @OneToOne(() => Usuario, usuario => usuario.alumno)
+  @JoinColumn({ name: 'usuarioId' })
+  usuarioId: number;
+
+
+
 
   @ManyToOne(() => Curso, curso => curso.alumnos)
   curso: number;
-  notasExamenes: any;
+
 
 
 }
