@@ -25,110 +25,82 @@ import AsistenciaList from './PaginaProfe/Asistencia/asistenciaList';
 import NotasExamenesList from './PaginaProfe/NotasExamen/notaList';
 import { AlumnoProvider } from './Alumno/AlumnoContext';
 import MateriasList from './PaginaProfe/Materias/materiasList';
+import { AuthProvider } from './InicioSesion/tokenContext';
+import AdminPage from './admin/admin';
 
-import {AuthProvider} from './InicioSesion/tokenContext';
 
-
-//   // State para almacenar el nombre del usuario que inició sesión
-//   const [loggedInUser, setLoggedInUser] = useState('');
-
-//   // Función para actualizar el nombre del usuario cuando inicie sesión
-//   const handleLogin = (username) => {
-//     setLoggedInUser(username);
-//   };
 
 const App = () => {
+
   // State para almacenar el nombre del usuario que inició sesión
   const [loggedInUser, setLoggedInUser] = useState('');
-  // State para verificar si el usuario actual es un administrador
 
-
-  // Función para actualizar el nombre del usuario y su rol cuando inicia sesión
+  // Función para actualizar el nombre del usuario cuando inicie sesión
   const handleLogin = (username) => {
     setLoggedInUser(username);
+  };
 
-
-
-
-
-  }
 
   return (
     <BrowserRouter>
-        <AlumnoProvider>
+      <AlumnoProvider>
         <AuthProvider>
-      <div className="d-flex flex-column min-vh-100">
-        <Navbar loggedInUser={loggedInUser} />
-        <div className="flex-grow-1">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-3">
-                <Sidebar />
-              </div>
-              <div className="col-md-9">
-                {/* Contenido principal */}
-                <Routes>
-          
+          <div className="d-flex flex-column min-vh-100">
+            <Navbar loggedInUser={loggedInUser} />
+            <div className="flex-grow-1">
+              <div className="container-fluid">
+                <div className="row">
+                  {loggedInUser === "Admin" ? null : (
+                    <div className="col-md-3">
+                      <Sidebar />
+                    </div>
+                  )}
+                  <div className="col-md-9">
+                    {/* Contenido principal */}
+                    <Routes>
 
-                    <Route path="/iniciarSesion" element={<InicioSesion onLogin={handleLogin} />} />
+                      <Route path="/iniciarSesion" element={<InicioSesion onLogin={handleLogin} />} />
 
-                    {/* <Route path="/iniciarSesion" element={<InicioSesion />} /> */}
-                    <Route path="/" element={<Home />} />
-                    {/* pagina alumno */}
-                    <Route path="/notas" element={<Notas />} />
-                    <Route path="/boletin" element={<Boletin />} />
-                    <Route path="/materias" element={<Materias />} />
 
-                    <Route path="/Asistencia" element={<Asistencia />} />
+                      <Route path="/" element={<Home />} />
+                      {/* pagina alumno */}
+                      <Route path="/notas" element={<Notas />} />
+                      <Route path="/boletin" element={<Boletin />} />
+                      <Route path="/materias" element={<Materias />} />
+                      <Route path="/Asistencia" element={<Asistencia />} />
+                      <Route path="/avisos" element={<Avisos />} />
+                      <Route path="/mensaje" element={<Mensaje />} />
 
-                    <Route path="/avisos" element={<Avisos />} />
-                    <Route path="/mensaje" element={<Mensaje />} />
+                      <Route path="/plan-de-estudio" element={<PlanDeEstudios />} />
+                      <Route path="/beneficios" element={<Beneficios />} />
+                      <Route path="/inscripcion-online" element={<Inscripcion />} />
+                      <Route path="/directivos" element={<Directivos />} />
+                      <Route path="/talleres" element={<Talleres />} />
+                      <Route path="/proximos-eventos" element={<ProximosEventos />} />
+                      <Route path="/alumno" element={<Alumno />} />
+                      {/* pagina profesor */}
 
-                    <Route path="/plan-de-estudio" element={<PlanDeEstudios />} />
-                    <Route path="/beneficios" element={<Beneficios />} />
-                    <Route path="/inscripcion-online" element={<Inscripcion />} />
-                    <Route path="/directivos" element={<Directivos />} />
-                    <Route path="/talleres" element={<Talleres />} />
-                    <Route path="/proximos-eventos" element={<ProximosEventos />} />
-                    <Route path="/alumno" element={<Alumno />} />
-                    {/* pagina profesor */}
+                      <Route path="/profesor" element={<Profesor />} />
+                      <Route path="/Profmaterias" element={<MateriasList />} />
+                      <Route path="/ProfAsistencia" element={<AsistenciaList />} />
+                      <Route path="/Profnotas" element={<NotasExamenesList />} />
 
-                    <Route path="/profesor" element={<Profesor />} />
-                    {/* <Route path="/Profnotas" element={<ProfNotas />} /> */}
-                    {/* <Route path="/Profboletin" element={<ProfBoletin />} /> */}
-                    <Route path="/Profmaterias" element={<MateriasList />} />
-                    <Route path="/ProfAsistencia" element={<AsistenciaList />} />
-                    <Route path="/Profnotas" element={<NotasExamenesList />} />
-                    {/* <Route path="/Profavisos" element={<ProfAvisos />} />
-              <Route path="/Profmensaje" element={<ProfMensaje />} /> */}
 
-                    {/* <Route path="/admin" element={<AdminPage />} /> */}
-                    <Route
-                      path="/admin"
-                      element={
-                        <div className="center-content"> {/* Contenedor para centrar */}
-                          <AdminPage />
-                        </div>
-                      }
-                    />
+                      <Route path="/admin" element={ <div className="center-content"> <AdminPage /> </div> }/>
 
-                  </Routes>
+
+                    </Routes>
+                  </div>
                 </div>
               </div>
             </div>
+            <Footer className="fixed-bottom" />
           </div>
-          <Footer className="fixed-bottom" />
-        </div>
-
-        <Footer className="fixed-bottom" />
-      </div>
-      </AuthProvider>
-
+        </AuthProvider>
       </AlumnoProvider>
-   
+
     </BrowserRouter>
   );
 };
 
 export default App;
-

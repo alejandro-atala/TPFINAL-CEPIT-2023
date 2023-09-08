@@ -8,6 +8,7 @@ import { Alumno } from 'src/alumno/entities/alumno.entity';
 import { Profesor } from 'src/profesor/entities/profesor.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
 
 const saltRounds = 10; // Número de rondas de encriptación

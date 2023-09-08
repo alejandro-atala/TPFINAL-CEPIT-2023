@@ -31,8 +31,13 @@ const InicioSesion = ({ onLogin }) => {
       onLogin(response.data.nombre);
 
       const idUsuario = response.data.id;
+      console.log(response.data.nombre, response.data.tipo)
+      if (response.data.nombre === 'Admin' && response.data.tipo === 'Profesor') {
+        console.log("si")
+        navigate('/admin');
+      }
   
-      if (response.data.tipo === 'Alumno') {
+     else if (response.data.tipo === 'Alumno') {
 
         // Una vez que tengas el ID del usuario, realiza una solicitud GET para obtener el ID del alumno
         const resp = await axios.get(`http://localhost:3000/alumno/usuario/${idUsuario}`);
