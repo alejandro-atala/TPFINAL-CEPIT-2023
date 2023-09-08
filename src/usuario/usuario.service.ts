@@ -9,6 +9,7 @@ import { Profesor } from 'src/profesor/entities/profesor.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 
+
 const saltRounds = 10; // Número de rondas de encriptación
 
 @Injectable()
@@ -22,6 +23,68 @@ export class UsuarioService {
     private alumnoRepository: Repository<Alumno>,
     private readonly jwtService: JwtService
   ) {}
+
+
+
+  async findAll(): Promise<Usuario[]> {
+    return this.usuarioRepository.find();
+  }
+
+
+
+  async update(id: number, updateUsuarioDto: UpdateUsuarioDto): Promise<Usuario> {
+    const usuario = await this.usuarioRepository.findOne({ where: { idUsuario: id } });
+  
+    if (!usuario) {
+      // Manejar el caso en el que el usuario no se encuentra
+      throw new Error('Usuario no encontrado');
+    }
+  
+    // Recorre todas las propiedades en updateUsuarioDto
+    for (const prop in updateUsuarioDto) {
+      if (updateUsuarioDto.hasOwnProperty(prop)) {
+        // Verifica si la propiedad existe en el objeto usuario
+        if (usuario.hasOwnProperty(prop)) {
+          // Actualiza el valor de la propiedad en usuario con el valor de updateUsuarioDto
+          usuario[prop] = updateUsuarioDto[prop];
+        }
+      }
+    }
+  
+    return this.usuarioRepository.save(usuario);
+  }
+  
+
+  async eliminarRegistro(usuarioId: number): Promise<void> {
+
+    const alumno = await this.alumnoRepository.findOne({
+      where: { usuarioId: usuarioId },
+    });
+
+   if (alumno) {
+
+    await this.alumnoRepository.remove(alumno);
+  }
+
+    const profesor = await this.profesorRepository.findOne({ where: { usuarioId: usuarioId } });
+
+
+    if (profesor) {
+      await this.profesorRepository.remove(profesor);
+    }
+  const usuario = await this.usuarioRepository.findOne({where: {idUsuario: usuarioId}});
+
+  if (!usuario) {
+    throw new Error(`Usuario con ID ${usuarioId} no encontrado.`);
+  }
+
+  console.log(usuario);
+  await this.usuarioRepository.remove(usuario);
+
+}
+
+
+
 
   async iniciarSesion(credenciales: CredencialesDto) {
 
@@ -74,7 +137,8 @@ export class UsuarioService {
       } else if (createUsuarioDto.tipo === 'Profesor') {
         usuarioAsociado = await this.asociarProfesor(nuevoUsuario, createUsuarioDto);
       }
-      return usuarioAsociado;
+    
+      return nuevoUsuario;
     } catch (error) {
       // Lanza una excepción personalizada con un mensaje informativo
       throw new Error(`Error al crear el usuario: ${error.message}`);
@@ -113,6 +177,7 @@ export class UsuarioService {
   }
 
   async generateToken(user: Usuario): Promise<string> {
+
     try {
       const payload = {
         // usuario: user.idUsuario,
@@ -127,6 +192,7 @@ export class UsuarioService {
       console.error(error); // Agrega un registro de errores
       throw new HttpException('Error generando el token', HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
   }
   
 

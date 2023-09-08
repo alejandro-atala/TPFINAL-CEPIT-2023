@@ -7,7 +7,7 @@ import Footer from './Footer/footer';
 import Asistencia from './Asistencia/asistencia';
 import Notas from './Notas/notas';
 import Boletin from './Boletin/boletin';
-import Materias from './Materias/materias'; 
+import Materias from './Materias/materias';
 import Avisos from './Avisos/avisos';
 import Mensaje from './Mensaje/mensaje';
 import InicioSesion from './InicioSesion/inicioSesion';
@@ -25,18 +25,33 @@ import AsistenciaList from './PaginaProfe/Asistencia/asistenciaList';
 import NotasExamenesList from './PaginaProfe/NotasExamen/notaList';
 import { AlumnoProvider } from './Alumno/AlumnoContext';
 import MateriasList from './PaginaProfe/Materias/materiasList';
+
 import {AuthProvider} from './InicioSesion/tokenContext';
 
-const App = () => {
 
+//   // State para almacenar el nombre del usuario que inició sesión
+//   const [loggedInUser, setLoggedInUser] = useState('');
+
+//   // Función para actualizar el nombre del usuario cuando inicie sesión
+//   const handleLogin = (username) => {
+//     setLoggedInUser(username);
+//   };
+
+const App = () => {
   // State para almacenar el nombre del usuario que inició sesión
   const [loggedInUser, setLoggedInUser] = useState('');
+  // State para verificar si el usuario actual es un administrador
 
-  // Función para actualizar el nombre del usuario cuando inicie sesión
+
+  // Función para actualizar el nombre del usuario y su rol cuando inicia sesión
   const handleLogin = (username) => {
     setLoggedInUser(username);
-  };
 
+
+
+
+
+  }
 
   return (
     <BrowserRouter>
@@ -54,6 +69,7 @@ const App = () => {
                 {/* Contenido principal */}
                 <Routes>
           
+
                     <Route path="/iniciarSesion" element={<InicioSesion onLogin={handleLogin} />} />
 
                     {/* <Route path="/iniciarSesion" element={<InicioSesion />} /> */}
@@ -78,22 +94,36 @@ const App = () => {
                     {/* pagina profesor */}
 
                     <Route path="/profesor" element={<Profesor />} />
-                     {/* <Route path="/Profnotas" element={<ProfNotas />} /> */}
-              {/* <Route path="/Profboletin" element={<ProfBoletin />} /> */}
-              <Route path="/Profmaterias" element={<MateriasList />} /> 
+                    {/* <Route path="/Profnotas" element={<ProfNotas />} /> */}
+                    {/* <Route path="/Profboletin" element={<ProfBoletin />} /> */}
+                    <Route path="/Profmaterias" element={<MateriasList />} />
                     <Route path="/ProfAsistencia" element={<AsistenciaList />} />
                     <Route path="/Profnotas" element={<NotasExamenesList />} />
                     {/* <Route path="/Profavisos" element={<ProfAvisos />} />
               <Route path="/Profmensaje" element={<ProfMensaje />} /> */}
-         
-                </Routes>
+
+                    {/* <Route path="/admin" element={<AdminPage />} /> */}
+                    <Route
+                      path="/admin"
+                      element={
+                        <div className="center-content"> {/* Contenedor para centrar */}
+                          <AdminPage />
+                        </div>
+                      }
+                    />
+
+                  </Routes>
+                </div>
               </div>
             </div>
           </div>
+          <Footer className="fixed-bottom" />
         </div>
+
         <Footer className="fixed-bottom" />
       </div>
       </AuthProvider>
+
       </AlumnoProvider>
    
     </BrowserRouter>

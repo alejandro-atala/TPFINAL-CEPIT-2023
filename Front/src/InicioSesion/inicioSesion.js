@@ -29,6 +29,7 @@ const InicioSesion = ({ onLogin }) => {
       const newToken = response.data.token;
       setToken(newToken);
       onLogin(response.data.nombre);
+
       const idUsuario = response.data.id;
   
       if (response.data.tipo === 'Alumno') {
@@ -43,9 +44,13 @@ const InicioSesion = ({ onLogin }) => {
           setAlumnoLogueado(idDelAlumno);
         }
         navigate('/alumno');
+
       } else if (response.data.tipo === 'Profesor') {
         navigate('/profesor');
+      } else {
+        navigate('/alumno');
       }
+      
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
       setMessage('Error en el inicio de sesión. Verifica tus credenciales.');

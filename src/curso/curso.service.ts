@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Curso } from './entities/curso.entity';
@@ -10,8 +10,7 @@ export class CursoService {
   constructor(
     @InjectRepository(Curso) private cursoRepository: Repository<Curso>,
   ) {}
-  
-  
+
   async getAnios(): Promise<Curso[]> {
     return this.cursoRepository
       .createQueryBuilder('curso')
@@ -19,26 +18,36 @@ export class CursoService {
       .getRawMany();
   }
 
-  
-  create(createCursoDto: CreateCursoDto) {
-    return 'This action adds a new curso';
+  async create(createCursoDto: CreateCursoDto): Promise<Curso> {
+    const nuevoCurso = this.cursoRepository.create(createCursoDto);
+    return this.cursoRepository.save(nuevoCurso);
   }
 
-
-  async getAllCursos() {
-    const cursos = await this.cursoRepository.find();
-    return cursos;
+  async getAllCursos(): Promise<Curso[]> {
+    return this.cursoRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} curso`;
+  async findOne(id: number): Promise<Curso> {
+    const curso = await this.cursoRepository.findOne({where: {idCurso: id}});
+    if (!curso) {
+      throw new NotFoundException(`Curso con ID ${id} no encontrado.`);
+    }
+    return curso;
   }
 
-  update(id: number, updateCursoDto: UpdateCursoDto) {
-    return `This action updates a #${id} curso`;
+  async update(id: number, updateCursoDto: UpdateCursoDto): Promise<Curso> {
+    console.log(id)
+    await this.findOne(id); // Verificar si el curso existe
+    await this.cursoRepository.update(id, updateCursoDto);
+    return this.cursoRepository.findOne({where: {idCurso: id}});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} curso`;
+  async remove(id: number): Promise<void> {
+    const curso = await this.findOne(id); 
+   // console.log(curso)// Verificar si el curso existe
+    if (!curso) {
+      throw new Error(`El curso con ID ${id} no existe.`);
+    }
+    await this.cursoRepository.remove(curso);
   }
 }
