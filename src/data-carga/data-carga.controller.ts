@@ -18,16 +18,15 @@ export class UploadController {
       destination: path.join(__dirname, '../..', 'uploads'), // Utiliza una ruta absoluta
       filename: (req, file, callback) => {
 
-        const randomName = Array(8).fill(null).map(() => (Math.random() * 16).toString(16)).join('');
-        // const randomName = "imagen";
-        console.log('Nombre de archivo:', `${randomName}${extname(file.originalname)}`);
-        callback(null, `${randomName}${extname(file.originalname)}`);
+        const randomName = file.originalname;
+
+        callback(null, `${randomName}`);
       },
     }),
   }))
   uploadFile(@UploadedFile() file) {
-    console.log('Datos de la imagen:', file);
-    return { filename: file.filename };
+
+    return { filename: file.originalname };
   }
 
   @Get()
