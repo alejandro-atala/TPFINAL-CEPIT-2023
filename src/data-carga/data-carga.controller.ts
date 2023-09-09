@@ -36,7 +36,7 @@ export class UploadController {
   }
 
   @Post('text')
-  create(@Body() createTexto: CreateDataCargaDto) {
+  create(@Body() createTexto: CreateDataCargaDto) { 
     //console.log(createTexto);
     return this.textosService.create(createTexto);
   }
@@ -48,6 +48,6 @@ export class UploadController {
 
   @Get(':referencia')
   findByReferencia(@Param('referencia') referencia: string) {
-    return this.textosService.findByReferencia(referencia);
+    return this.textosService.findByReferencia(referencia); 
   }
 }

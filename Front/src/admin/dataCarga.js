@@ -24,7 +24,6 @@ const BloqueDeCarga = () => {
     // Realiza una solicitud GET para obtener el texto por su referencia
     axios.get(`http://localhost:3000/carga/${referenciaSeleccionada}`)
       .then((response) => {
-        console.log(response.data);
         setTextoSeleccionado(response.data);
       })
       .catch((error) => {
@@ -33,8 +32,8 @@ const BloqueDeCarga = () => {
   };
 
   const handleGuardarTexto = () => {
-    // Realiza una solicitud POST para crear un nuevo texto con nombre de referencia
-    axios.post('http://localhost:3000/carga/text', { referencia: Referencia, texto: nuevoTexto })
+    // Utiliza los valores de textoSeleccionado al guardar un nuevo texto
+    axios.post('http://localhost:3000/carga/text', { referencia: textoSeleccionado.Referencia, texto: textoSeleccionado.texto })
       .then((response) => {
         setTextos([...textos, response.data]);
         setNuevoTexto('');
@@ -104,7 +103,7 @@ const BloqueDeCarga = () => {
         <input
           type="text"
           placeholder="Nombre de Referencia"
-          value={textoSeleccionado.referencia}
+          value={textoSeleccionado.Referencia}
           onChange={(e) => setTextoSeleccionado({ ...textoSeleccionado, Referencia: e.target.value })}
         />
         <input
@@ -113,6 +112,7 @@ const BloqueDeCarga = () => {
           value={textoSeleccionado.texto}
           onChange={(e) => setTextoSeleccionado({ ...textoSeleccionado, texto: e.target.value })}
         />
+
         <button onClick={handleGuardarTexto}>Guardar Texto</button>
         <button onClick={() => handleBorrarTexto(textoSeleccionado.id)}>Borrar Texto</button>
       </div>
