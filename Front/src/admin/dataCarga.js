@@ -7,9 +7,10 @@ const BloqueDeCarga = () => {
   const [Referencia, setNombreReferencia] = useState('');
   const [imagen, setImagen] = useState(null);
   const [textoSeleccionado, setTextoSeleccionado] = useState({ Referencia: '', texto: '' });
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    // Realiza una solicitud GET para obtener todos los textos al cargar el componente
     axios.get('http://localhost:3000/carga')
       .then((response) => {
         setTextos(response.data);
@@ -19,9 +20,7 @@ const BloqueDeCarga = () => {
       });
   }, []);
 
-  // Función para cargar los detalles del texto seleccionado
   const cargarDetalleTexto = (referenciaSeleccionada) => {
-    // Realiza una solicitud GET para obtener el texto por su referencia
     axios.get(`http://localhost:3000/carga/${referenciaSeleccionada}`)
       .then((response) => {
         setTextoSeleccionado(response.data);
@@ -32,38 +31,42 @@ const BloqueDeCarga = () => {
   };
 
   const handleGuardarTexto = () => {
-    // Utiliza los valores de textoSeleccionado al guardar un nuevo texto
     axios.post('http://localhost:3000/carga/text', { referencia: textoSeleccionado.Referencia, texto: textoSeleccionado.texto })
       .then((response) => {
         setTextos([...textos, response.data]);
         setNuevoTexto('');
         setNombreReferencia('');
+        setSuccessMessage('Texto guardado con éxito');
+        setErrorMessage('');
       })
       .catch((error) => {
         console.error('Error al crear un texto:', error);
+        setErrorMessage('Error al guardar el texto');
+        setSuccessMessage('');
       });
   };
 
   const handleBorrarTexto = (id) => {
-    // Realiza una solicitud DELETE para eliminar un texto por su ID
     axios.delete(`http://localhost:3000/carga/${id}`)
       .then(() => {
         const updatedTextos = textos.filter((texto) => texto.id !== id);
         setTextos(updatedTextos);
-        setTextoSeleccionado({ Referencia: '', texto: '' }); // Limpia el texto seleccionado después de borrarlo
+        setTextoSeleccionado({ Referencia: '', texto: '' });
+        setSuccessMessage('Texto borrado con éxito');
+        setErrorMessage('');
       })
       .catch((error) => {
         console.error('Error al borrar un texto:', error);
+        setErrorMessage('Error al borrar el texto');
+        setSuccessMessage('');
       });
   };
 
   const handleGuardarImagen = async () => {
     try {
-      // Crea un objeto FormData para enviar la imagen al servidor
       const formData = new FormData();
       formData.append('imagen', imagen);
 
-      // Realiza una solicitud POST para guardar la imagen
       const response = await axios.post('http://localhost:3000/carga/img', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -71,11 +74,12 @@ const BloqueDeCarga = () => {
       });
 
       console.log('Imagen guardada con éxito:', response.data);
-
-      // Puedes manejar la URL de la imagen guardada si es necesario.
-
+      setSuccessMessage('Imagen guardada con éxito');
+      setErrorMessage('');
     } catch (error) {
       console.error('Error al guardar la imagen:', error);
+      setErrorMessage('Error al guardar la imagen');
+      setSuccessMessage('');
     }
   };
 
@@ -85,12 +89,23 @@ const BloqueDeCarga = () => {
   };
 
   const handleSeleccionarTexto = (referenciaSeleccionada) => {
-    // Cargar los detalles del texto seleccionado
     cargarDetalleTexto(referenciaSeleccionada);
   };
 
   return (
     <div>
+       {successMessage && (
+        <div className="alert alert-success text-center d-flex align-items-center" role="alert">
+          {successMessage}
+        </div>
+      )}
+
+      {errorMessage && (
+        <div className="alert alert-danger text-center d-flex align-items-center" role="alert">
+          {errorMessage}
+        </div>
+      )}
+
       <div>
         <select onChange={(e) => handleSeleccionarTexto(e.target.value)}>
           <option value="">Selecciona un texto</option>
