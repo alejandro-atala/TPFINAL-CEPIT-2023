@@ -12,15 +12,19 @@ export class DataCargaService {
   ) {}
 
   async create(createTextosDto: CreateDataCargaDto): Promise<Textos> {
-    const { texto } = createTextosDto;
-    console.log(texto);
-    const newTexto = this.dataCargaRepository.create({ texto }); // Crea una nueva instancia de Textos
+    const { referencia, texto } = createTextosDto;
+
+    const newTexto = this.dataCargaRepository.create({referencia, texto }); // Crea una nueva instancia de Textos
     console.log(newTexto);
     return await this.dataCargaRepository.save(newTexto);
   }
 
   async findAll(): Promise<Textos[]> {
     return await this.dataCargaRepository.find();
+  }
+
+  async findByReferencia(referencia: string): Promise<Textos | undefined> {
+    return await this.dataCargaRepository.findOne({where: {referencia: referencia}} );
   }
 
   async findOne(id: number): Promise<Textos | undefined> {

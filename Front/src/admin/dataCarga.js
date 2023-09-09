@@ -3,12 +3,14 @@ import axios from 'axios';
 
 const BloqueDeCarga = () => {
   const [textos, setTextos] = useState([]);
-  const [nuevoTexto, setNuevoTexto] = useState(''); // Agregado para el nuevo texto
-  const [imagen, setImagen] = useState(null); // Agregado para la imagen
+  const [nuevoTexto, setNuevoTexto] = useState('');
+  const [Referencia, setNombreReferencia] = useState('');
+  const [imagen, setImagen] = useState(null);
+  const [textoSeleccionado, setTextoSeleccionado] = useState({ Referencia: '', texto: '' });
 
   useEffect(() => {
     // Realiza una solicitud GET para obtener todos los textos al cargar el componente
-    axios.get('http://localhost:3000/carga/text')
+    axios.get('http://localhost:3000/carga')
       .then((response) => {
         setTextos(response.data);
       })
@@ -17,13 +19,26 @@ const BloqueDeCarga = () => {
       });
   }, []);
 
+  // Función para cargar los detalles del texto seleccionado
+  const cargarDetalleTexto = (referenciaSeleccionada) => {
+    // Realiza una solicitud GET para obtener el texto por su referencia
+    axios.get(`http://localhost:3000/carga/${referenciaSeleccionada}`)
+      .then((response) => {
+        console.log(response.data);
+        setTextoSeleccionado(response.data);
+      })
+      .catch((error) => {
+        console.error('Error al obtener el detalle del texto:', error);
+      });
+  };
+
   const handleGuardarTexto = () => {
-    // Realiza una solicitud POST para crear un nuevo texto
-    //console.log( nuevoTexto)
-    axios.post('http://localhost:3000/carga/text',  { texto: nuevoTexto })
+    // Realiza una solicitud POST para crear un nuevo texto con nombre de referencia
+    axios.post('http://localhost:3000/carga/text', { referencia: Referencia, texto: nuevoTexto })
       .then((response) => {
         setTextos([...textos, response.data]);
-        setNuevoTexto(''); // Limpia el campo de texto después de guardar
+        setNuevoTexto('');
+        setNombreReferencia('');
       })
       .catch((error) => {
         console.error('Error al crear un texto:', error);
@@ -36,6 +51,7 @@ const BloqueDeCarga = () => {
       .then(() => {
         const updatedTextos = textos.filter((texto) => texto.id !== id);
         setTextos(updatedTextos);
+        setTextoSeleccionado({ Referencia: '', texto: '' }); // Limpia el texto seleccionado después de borrarlo
       })
       .catch((error) => {
         console.error('Error al borrar un texto:', error);
@@ -51,15 +67,13 @@ const BloqueDeCarga = () => {
       // Realiza una solicitud POST para guardar la imagen
       const response = await axios.post('http://localhost:3000/carga/img', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Importante establecer el encabezado correcto
+          'Content-Type': 'multipart/form-data',
         },
       });
 
-      // Si la solicitud se completa con éxito, puedes manejar la respuesta si es necesario.
       console.log('Imagen guardada con éxito:', response.data);
 
-      // Aquí debes decidir cómo manejar la URL de la imagen guardada, si es necesario.
-      // Puedes guardarla en el estado o realizar alguna otra acción.
+      // Puedes manejar la URL de la imagen guardada si es necesario.
 
     } catch (error) {
       console.error('Error al guardar la imagen:', error);
@@ -71,18 +85,38 @@ const BloqueDeCarga = () => {
     setImagen(file);
   };
 
+  const handleSeleccionarTexto = (referenciaSeleccionada) => {
+    // Cargar los detalles del texto seleccionado
+    cargarDetalleTexto(referenciaSeleccionada);
+  };
+
   return (
     <div>
-      {/* Sección de texto */}
       <div>
-        <input type="text" placeholder="Texto" value={nuevoTexto} onChange={(e) => setNuevoTexto(e.target.value)} />
+        <select onChange={(e) => handleSeleccionarTexto(e.target.value)}>
+          <option value="">Selecciona un texto</option>
+          {textos.map((texto) => (
+            <option key={texto.id} value={texto.Referencia}>
+              {texto.referencia}
+            </option>
+          ))}
+        </select>
+        <input
+          type="text"
+          placeholder="Nombre de Referencia"
+          value={textoSeleccionado.referencia}
+          onChange={(e) => setTextoSeleccionado({ ...textoSeleccionado, Referencia: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Texto"
+          value={textoSeleccionado.texto}
+          onChange={(e) => setTextoSeleccionado({ ...textoSeleccionado, texto: e.target.value })}
+        />
         <button onClick={handleGuardarTexto}>Guardar Texto</button>
-        {/* Agrega el botón de Editar Texto y su lógica si lo deseas */}
-        {/* <button onClick={() => handleEditarTexto()}>Editar Texto</button> */}
-        <button onClick={() => handleBorrarTexto()}>Borrar Texto</button>
+        <button onClick={() => handleBorrarTexto(textoSeleccionado.id)}>Borrar Texto</button>
       </div>
 
-      {/* Sección de imagen */}
       <div>
         <input type="file" accept="image/*" onChange={handleImagenChange} />
         <button onClick={handleGuardarImagen}>Guardar Imagen</button>
