@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './admin.css';
+import BloqueDeCarga from './dataCarga';
+
 
 const AdminPage = () => {
   const [selectedTable, setSelectedTable] = useState('');
@@ -265,6 +267,7 @@ const AdminPage = () => {
           )}
         </div>
       )}
+      <BloqueDeCarga />
     </div>
   );
 };
