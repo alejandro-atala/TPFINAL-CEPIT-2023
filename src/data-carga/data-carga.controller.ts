@@ -36,7 +36,6 @@ export class UploadController {
 
   @Post('text')
   create(@Body() createTexto: CreateDataCargaDto) { 
-    //console.log(createTexto);
     return this.textosService.create(createTexto);
   }
 

@@ -17,7 +17,7 @@ const HomePage = () => {
     axios.get('http://localhost:3000/carga/id/1')
       .then((response) => {
         setTexto(response.data.texto); // Almacena el texto en el estado
-        console.log(response.data)
+  
       })
       .catch((error) => {
         console.error('Error al obtener el texto:', error);

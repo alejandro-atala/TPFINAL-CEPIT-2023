@@ -15,7 +15,6 @@ export class DataCargaService {
     const { referencia, texto } = createTextosDto;
 
     const newTexto = this.dataCargaRepository.create({referencia, texto }); // Crea una nueva instancia de Textos
-    console.log(newTexto);
     return await this.dataCargaRepository.save(newTexto);
   }
 
@@ -31,7 +30,7 @@ export class DataCargaService {
     return await this.dataCargaRepository.findOne({where: {id: id}} );
   }
 
-  
+
   async update(id: number, updateDataCargaDto: CreateDataCargaDto): Promise<Textos | undefined> {
     await this.dataCargaRepository.update(id, updateDataCargaDto);
     return await this.dataCargaRepository.findOne({where: {id: id}});
