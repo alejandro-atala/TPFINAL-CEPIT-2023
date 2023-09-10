@@ -1,15 +1,13 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
-import { Repository } from 'typeorm';
+import { DeepPartial, Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { CredencialesDto } from './dto/credenciales.dto';
 import { Alumno } from 'src/alumno/entities/alumno.entity';
 import { Profesor } from 'src/profesor/entities/profesor.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
-import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-
 
 const saltRounds = 10; // Número de rondas de encriptación
 
@@ -24,68 +22,6 @@ export class UsuarioService {
     private alumnoRepository: Repository<Alumno>,
     private readonly jwtService: JwtService
   ) {}
-
-
-
-  async findAll(): Promise<Usuario[]> {
-    return this.usuarioRepository.find();
-  }
-
-
-
-  async update(id: number, updateUsuarioDto: UpdateUsuarioDto): Promise<Usuario> {
-    const usuario = await this.usuarioRepository.findOne({ where: { idUsuario: id } });
-  
-    if (!usuario) {
-      // Manejar el caso en el que el usuario no se encuentra
-      throw new Error('Usuario no encontrado');
-    }
-  
-    // Recorre todas las propiedades en updateUsuarioDto
-    for (const prop in updateUsuarioDto) {
-      if (updateUsuarioDto.hasOwnProperty(prop)) {
-        // Verifica si la propiedad existe en el objeto usuario
-        if (usuario.hasOwnProperty(prop)) {
-          // Actualiza el valor de la propiedad en usuario con el valor de updateUsuarioDto
-          usuario[prop] = updateUsuarioDto[prop];
-        }
-      }
-    }
-  
-    return this.usuarioRepository.save(usuario);
-  }
-  
-
-  async eliminarRegistro(usuarioId: number): Promise<void> {
-
-    const alumno = await this.alumnoRepository.findOne({
-      where: { usuarioId: usuarioId },
-    });
-
-   if (alumno) {
-
-    await this.alumnoRepository.remove(alumno);
-  }
-
-    const profesor = await this.profesorRepository.findOne({ where: { usuarioId: usuarioId } });
-
-
-    if (profesor) {
-      await this.profesorRepository.remove(profesor);
-    }
-  const usuario = await this.usuarioRepository.findOne({where: {idUsuario: usuarioId}});
-
-  if (!usuario) {
-    throw new Error(`Usuario con ID ${usuarioId} no encontrado.`);
-  }
-
-  console.log(usuario);
-  await this.usuarioRepository.remove(usuario);
-
-}
-
-
-
 
   async iniciarSesion(credenciales: CredencialesDto) {
 
@@ -131,30 +67,53 @@ export class UsuarioService {
     try {
       const nuevoUsuario = await this.createUsuario(createUsuarioDto);
       let usuarioAsociado;
-
+  
       // Verificar el tipo de usuario y asociarlo a la tabla correspondiente
       if (createUsuarioDto.tipo === 'Alumno') {
+    
         usuarioAsociado = await this.asociarAlumno(nuevoUsuario, createUsuarioDto);
       } else if (createUsuarioDto.tipo === 'Profesor') {
+        // Convierte el array de cursos en una cadena de números separados por comas
+        const cursosSeparados = createUsuarioDto.curso.join(',');
+        // Asigna la cadena de cursos al nuevo usuario profesor
+        nuevoUsuario.curso = cursosSeparados;
+        // Asocia el usuario profesor a la tabla correspondiente
         usuarioAsociado = await this.asociarProfesor(nuevoUsuario, createUsuarioDto);
-      }
-    
-      return nuevoUsuario;
+      } 
+      return usuarioAsociado;
     } catch (error) {
       // Lanza una excepción personalizada con un mensaje informativo
       throw new Error(`Error al crear el usuario: ${error.message}`);
     }
   }
+  
 
   async createUsuario(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
-    const nuevoUsuario = this.usuarioRepository.create(createUsuarioDto);
+    
+    // Verifica si createUsuarioDto.curso es un array antes de usar join()
+    const cursoArray = Array.isArray(createUsuarioDto.curso) ? createUsuarioDto.curso : [createUsuarioDto.curso];
+    
+    // Convierte el array de cursos en una cadena de texto separada por comas
+    const cursoString = cursoArray.join(',');
+  
+    // Crea un nuevo usuario y asigna la cadena de cursos
+    const nuevoUsuario: DeepPartial<Usuario> = {
+      ...createUsuarioDto,
+      curso: cursoString,
+    };
+
+    // Hash de la contraseña y guarda el usuario
     nuevoUsuario.password = await bcrypt.hash(
       nuevoUsuario.password,
       saltRounds,
     );
+   
+    const savedUsuario = await this.usuarioRepository.save(nuevoUsuario);
 
-    return this.usuarioRepository.save(nuevoUsuario);
+    return savedUsuario; // Devuelve el usuario guardado, no un array de usuarios
   }
+  
+  
 
   async buscarPorEmail(email: string): Promise<Usuario | null> {
     return this.usuarioRepository.findOne({ where: { email } });
@@ -178,7 +137,6 @@ export class UsuarioService {
   }
 
   async generateToken(user: Usuario): Promise<string> {
-
     try {
       const payload = {
         // usuario: user.idUsuario,
@@ -193,15 +151,18 @@ export class UsuarioService {
       console.error(error); // Agrega un registro de errores
       throw new HttpException('Error generando el token', HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
   }
   
 
   async asociarAlumno(usuario: Usuario, createUsuarioDto: CreateUsuarioDto) {
     const alumno = new Alumno();
     alumno.nombre = usuario.nombre;
-    alumno.curso = createUsuarioDto.curso;
+
+   // alumno.curso = createUsuarioDto.curso;
+   alumno.curso = createUsuarioDto.curso[0];
+
     alumno.usuarioId = usuario.idUsuario;
+    console.log("A",alumno)
     return this.alumnoRepository.save(alumno);
   }
 
