@@ -86,7 +86,7 @@ const App = () => {
                       <Route path="/Profnotas" element={<NotasExamenesList />} />
 
 
-                      <Route path="/admin" element={ <div className="center-content"> <AdminPage /> </div> }/>
+                      <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
 
 
                     </Routes>
@@ -94,7 +94,11 @@ const App = () => {
                 </div>
               </div>
             </div>
-            <Footer className="fixed-bottom" />
+            {loggedInUser === "Admin" ? null : (
+              <div className="col-md-3">
+                <Footer />
+              </div>
+            )}
           </div>
         </AuthProvider>
       </AlumnoProvider>
