@@ -167,14 +167,14 @@ const AdminPage = () => {
   const isTableEmpty = tableData.length === 0;
 
   return (
-    <div className="admin-page d-flex flex-column">
+    <div className="admin-page d-flex flex-column ">
       {sessionExpired ? (
         <div className="alert alert-danger">
           Tu sesión ha expirado. Por favor, inicia sesión nuevamente.
         </div>
       ) : (
         <div>
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="d-flex justify-content-between align-items-center ">
             <select
               className="form-select m-3"
               style={{ maxWidth: '200px' }}
@@ -188,9 +188,7 @@ const AdminPage = () => {
                 </option>
               ))}
             </select>
-            {selectedTable && (
-              <h2>Tabla {tableInfo[selectedTable].name}</h2>
-            )}
+            
           </div>
           {selectedTable && (
             <div>
