@@ -203,7 +203,7 @@ const BloqueDeCarga = () => {
   };
 
   return (
-    <div className="container mt-5 ">
+    <div className="container mt-5">
       <div className="row">
         <div className="col-md-12">
           <h4>Seleccione un campo para cargar su texto</h4>
@@ -242,10 +242,8 @@ const BloqueDeCarga = () => {
           <button onClick={() => handleBorrarTexto(textoSeleccionado.id)} className="btn btn-danger mt-3 ms-2">
             Borrar Texto
           </button>
-        </div>
 
-        <div className="col-md-12 mt-3">
-          <h4>Seleccione una imagen y su destino</h4>
+          <h4 className="mt-3">Seleccione una imagen y su destino</h4>
           <input
             type="file"
             accept="image/*"
@@ -267,19 +265,15 @@ const BloqueDeCarga = () => {
           <button onClick={handleGuardarImagen} className="btn btn-success mt-3">
             Guardar Imagen
           </button>
-        </div>
-      </div>
 
-      <div className="row mt-3">
-        <div className="col-md-12">
+        </div>
+        <div className='mt-2 '>
+
           {successMessage && (
             <Alert variant="success" className="text-center">
               {successMessage}
             </Alert>
           )}
-        </div>
-
-        <div className="col-md-12 mt-3">
           {errorMessage && (
             <Alert variant="danger" className="text-center">
               {errorMessage}
@@ -292,8 +286,5 @@ const BloqueDeCarga = () => {
 };
 
 export default BloqueDeCarga;
-
-
-
 
 
