@@ -13,26 +13,18 @@ const HomePage = () => {
   const [textoId2, setTextoId2] = useState('');
 
   useEffect(() => {
- 
-    // Realiza una solicitud GET al servidor para obtener el texto con el ID 1
-    axios
-      .get('http://localhost:3000/carga/id/1')
-      .then((response) => {
-        setTextoId1(response.data.texto);
-      })
-      .catch((error) => {
-        console.error('Error al obtener el texto con ID 1:', error);
-      });
+    const obtenerTextoPorId = async (id, setTexto) => {
+      try {
+        const response = await axios.get(`http://localhost:3000/carga/id/${id}`);
+        setTexto(response.data.texto);
+      } catch (error) {
+        console.error(`Error al obtener el texto con ID ${id}:`, error);
+      }
+    };
 
-    // Obtener el texto con ID 2
-    axios
-      .get('http://localhost:3000/carga/id/2')
-      .then((response) => {
-        setTextoId2(response.data.texto);
-      })
-      .catch((error) => {
-        console.error('Error al obtener el texto con ID 2:', error);
-      });
+    // Obtener textos para ID 1 y ID 2
+    obtenerTextoPorId(1, setTextoId1);
+    obtenerTextoPorId(2, setTextoId2);
   }, []);
 
 
