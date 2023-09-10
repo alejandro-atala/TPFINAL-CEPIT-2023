@@ -75,15 +75,32 @@ const BloqueDeCarga = () => {
       .then(() => {
         setSuccessMessage('Texto actualizado con éxito');
         setErrorMessage('');
+        // Ocultar el mensaje de éxito después de 2 segundos
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 2000);
       })
       .catch(() => {
         setErrorMessage('Error al guardar el texto');
         setSuccessMessage('');
+        // Ocultar el mensaje de error después de 2 segundos
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 2000);
       });
   }
 
   const handleGuardarTexto = () => {
- 
+    if (!textoSeleccionado.texto.trim() || !referencia) {
+      // El textarea está vacío, muestra un mensaje de error
+      setErrorMessage('La referencia/texto no puede estar vacío');
+      setSuccessMessage('');
+      // Ocultar el mensaje de error después de 2 segundos
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 2000);
+      return; 
+    }
       axios
         .post('http://localhost:3000/carga/text', {
           referencia: referencia, // Usa el valor de referencia seleccionado
@@ -95,11 +112,19 @@ const BloqueDeCarga = () => {
           setReferencia(''); // Limpia la referencia después de guardar
           setSuccessMessage('Texto guardado con éxito');
           setErrorMessage('');
+          // Ocultar el mensaje de éxito después de 2 segundos
+          setTimeout(() => {
+            setSuccessMessage('');
+          }, 2000);
         })
         .catch((error) => {
           console.error('Error al crear un texto:', error);
           setErrorMessage('Error al guardar el texto');
           setSuccessMessage('');
+          // Ocultar el mensaje de error después de 2 segundos
+          setTimeout(() => {
+            setErrorMessage('');
+          }, 2000);
         });
     }
 
@@ -112,12 +137,18 @@ const BloqueDeCarga = () => {
         setTextoSeleccionado({ referencia: '', texto: '' });
         setSuccessMessage('Texto borrado con éxito');
         setErrorMessage('');
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 2000);
         setEditing(false); // Deshabilitar la edición después de borrar
       })
       .catch((error) => {
         console.error('Error al borrar un texto:', error);
         setErrorMessage('Error al borrar el texto');
         setSuccessMessage('');
+         setTimeout(() => {
+          setErrorMessage('');
+        }, 2000);
       });
   };
 
@@ -158,9 +189,6 @@ const BloqueDeCarga = () => {
     setImagen(file);
   };
 
-  // const handleSeleccionarTexto = (referenciaSeleccionada) => {
-  //   cargarDetalleTexto(referenciaSeleccionada);
-  // };
 
   return (
     <div>
