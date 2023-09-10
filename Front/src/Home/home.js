@@ -9,18 +9,29 @@ import {useState, useEffect} from 'react'
 const HomePage = () => {
 
 
-  const [texto, setTexto] = useState(''); // Estado para almacenar el texto
+  const [textoId1, setTextoId1] = useState('');
+  const [textoId2, setTextoId2] = useState('');
 
   useEffect(() => {
  
     // Realiza una solicitud GET al servidor para obtener el texto con el ID 1
-    axios.get('http://localhost:3000/carga/id/1')
+    axios
+      .get('http://localhost:3000/carga/id/1')
       .then((response) => {
-        setTexto(response.data.texto); // Almacena el texto en el estado
-  
+        setTextoId1(response.data.texto);
       })
       .catch((error) => {
-        console.error('Error al obtener el texto:', error);
+        console.error('Error al obtener el texto con ID 1:', error);
+      });
+
+    // Obtener el texto con ID 2
+    axios
+      .get('http://localhost:3000/carga/id/2')
+      .then((response) => {
+        setTextoId2(response.data.texto);
+      })
+      .catch((error) => {
+        console.error('Error al obtener el texto con ID 2:', error);
       });
   }, []);
 
@@ -28,7 +39,7 @@ const HomePage = () => {
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center min-vh-100">
-    <h1>Instituto Secundario NN</h1>
+    <h1>{textoId1}</h1>
     <div className="container plan-de-estudios mt-5">
       <div className="row">
         <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
@@ -59,7 +70,7 @@ const HomePage = () => {
             </button>
           </div>
           <h2>Estudia en nuestro Instituto</h2>
-          <p>{texto}</p>
+          <p>{textoId2}</p>
         </div>
       </div>
     </div>

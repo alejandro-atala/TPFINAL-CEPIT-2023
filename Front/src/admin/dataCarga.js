@@ -19,10 +19,20 @@ const BloqueDeCarga = () => {
 
 
   const nombresDeReferencia = {
-    Home: 'Home',
-    Portada: 'Portada',
+    Titulo_instituto: 'Nombre Instituto',
+    Descripcion: 'Descripcion',
     Beneficios: 'Beneficios',
-    Talleres: 'Talleres',
+    Directora: 'Directora',
+    Secretaria: 'Secretaria',
+    Representante: 'Representante',
+    Actos: 'Actos',
+    Eventos: 'Eventos',
+    Taller_1: 'Taller 1',
+    Taller_2: 'Taller 2',
+    Taller_3: 'Taller 3',
+    Taller_4: 'Taller 4',
+    Taller_5: 'Taller 5',
+    Taller_6: 'Taller 6',
     // Agrega más nombres de referencia según tus necesidades
   };
 

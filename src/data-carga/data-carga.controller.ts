@@ -51,7 +51,6 @@ export class UploadController {
 
   @Get('/id/:id')
   findById(@Param('id') id: number) {
-    console.log(id)
     return this.textosService.findById(id); 
   }
 
