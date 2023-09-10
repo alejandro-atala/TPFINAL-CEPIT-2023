@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { MateriaService } from './materia.service';
 import { CreateMateriaDto } from './dto/create-materia.dto';
 import { UpdateMateriaDto } from './dto/update-materia.dto';
@@ -12,7 +12,6 @@ export class MateriaController {
   async create(@Body() createMateriaDto: CreateMateriaDto): Promise<Materia> {
     return await this.materiaService.create(createMateriaDto);
   }
-  
 
   @Get()
   async findAll(): Promise<Materia[]> {
@@ -24,16 +23,13 @@ export class MateriaController {
     return await this.materiaService.findOneByNombre(nombre);
   }
 
-  @Put(':id')
-  async updateById(@Param('id') id: number, @Body() updateMateriaDto: UpdateMateriaDto): Promise<Materia | undefined> {
-    console.log(id)
-    return await this.materiaService.updateById(id, updateMateriaDto);
+  @Patch(':nombre')
+  async update(@Param('nombre') nombre: string, @Body() updateMateriaDto: UpdateMateriaDto): Promise<Materia | undefined> {
+    return await this.materiaService.update(nombre, updateMateriaDto);
   }
-  
 
   @Delete(':id')
-  async removeById(@Param('id') id: number): Promise<void> {
-    await this.materiaService.removeById(id);
+  async remove(@Param('id') id: string): Promise<void> {
+    await this.materiaService.remove(+id);
   }
-  
 }

@@ -23,8 +23,8 @@ export class AlumnoService {
   async createAlumno(nombre: string, cursoId: number): Promise<Alumno> {
     const nuevoAlumno = new Alumno();
     nuevoAlumno.nombre = nombre;
-    nuevoAlumno.curso = cursoId;
-    
+    //nuevoAlumno.curso = cursoId;
+    nuevoAlumno.cursoIdCurso = cursoId;
     return this.alumnoRepository.save(nuevoAlumno);
   }
 
