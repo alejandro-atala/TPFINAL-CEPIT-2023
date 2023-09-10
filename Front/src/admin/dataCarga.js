@@ -202,77 +202,98 @@ const BloqueDeCarga = () => {
     setImagen(file);
   };
 
-
   return (
-    <div>
-      <div>
-        <h4>Seleccione un campo para cargar su texto</h4>
-        <select
-          value={referencia}
-          onChange={(e) => {
-            setReferencia(e.target.value);
-            cargarDetalleTexto(e.target.value);
-          }}
-        >
-          <option value="">Selecciona un campo</option>
-          {Object.keys(nombresDeReferencia).map((nombre) => (
-            <option key={nombre} value={nombre}>
-              {nombre}
-            </option>
-          ))}
-        </select>
+    <div className="container mt-5 ">
+      <div className="row">
+        <div className="col-md-12">
+          <h4>Seleccione un campo para cargar su texto</h4>
+          <select
+            value={referencia}
+            onChange={(e) => {
+              setReferencia(e.target.value);
+              cargarDetalleTexto(e.target.value);
+            }}
+            className="form-select mb-3"
+          >
+            <option value="">Selecciona un campo</option>
+            {Object.keys(nombresDeReferencia).map((nombre) => (
+              <option key={nombre} value={nombre}>
+                {nombre}
+              </option>
+            ))}
+          </select>
 
-        <br /><br />
+          <textarea
+            type="text"
+            placeholder="Texto"
+            value={textoSeleccionado.texto}
+            onChange={(e) => setTextoSeleccionado({ ...textoSeleccionado, texto: e.target.value })}
+            className="form-control"
+            style={{ height: '200px' }}
+          />
 
-        <textarea
-          type="text"
-          placeholder="Texto"
-          value={textoSeleccionado.texto}
-          onChange={(e) => setTextoSeleccionado({ ...textoSeleccionado, texto: e.target.value })}
-          style={{ width: '100%', height: '200px' }}
-        />
+          <button
+            onClick={handleGuardarEditarTexto}
+            className="btn btn-primary mt-3"
+          >
+            {editMode ? 'Guardar Edición' : 'Guardar'}
+          </button>
 
-        <button
-          onClick={handleGuardarEditarTexto}
-        >
-          {editMode ? 'Guardar Edición' : 'Guardar'}
-        </button>
+          <button onClick={() => handleBorrarTexto(textoSeleccionado.id)} className="btn btn-danger mt-3 ms-2">
+            Borrar Texto
+          </button>
+        </div>
 
-        <button onClick={() => handleBorrarTexto(textoSeleccionado.id)}>Borrar Texto</button>
+        <div className="col-md-12 mt-3">
+          <h4>Seleccione una imagen y su destino</h4>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImagenChange}
+            className="form-control-file"
+          />
+
+          <select
+            value={nombreImagen}
+            onChange={(e) => setNombreImagen(e.target.value)}
+            className="form-select mt-3"
+          >
+            <option value="Portada">Portada</option>
+            <option value="Home">Home</option>
+            <option value="Beneficios">Beneficios</option>
+            <option value="Talleres">Talleres</option>
+          </select>
+
+          <button onClick={handleGuardarImagen} className="btn btn-success mt-3">
+            Guardar Imagen
+          </button>
+        </div>
       </div>
-      <br /><br />
-      <div>
-        <h4>Seleccione una imagen y su destino</h4>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImagenChange}
-        />
-        <select
-          value={nombreImagen}
-          onChange={(e) => setNombreImagen(e.target.value)}
-        >
-          <option value="Portada">Portada</option>
-          <option value="Home">Home</option>
-          <option value="Beneficios">Beneficios</option>
-          <option value="Talleres">Talleres</option>
-          {/* Agrega más opciones según tus necesidades */}
-        </select>
-        <button onClick={handleGuardarImagen}>Guardar Imagen</button>
-      </div>
-      {successMessage && (
-        <Alert variant="success" className="mt-3 text-center">
-          {successMessage}
-        </Alert>
-      )}
 
-      {errorMessage && (
-        <Alert variant="danger" className="mt-3 text-center">
-          {errorMessage}
-        </Alert>
-      )}
+      <div className="row mt-3">
+        <div className="col-md-12">
+          {successMessage && (
+            <Alert variant="success" className="text-center">
+              {successMessage}
+            </Alert>
+          )}
+        </div>
+
+        <div className="col-md-12 mt-3">
+          {errorMessage && (
+            <Alert variant="danger" className="text-center">
+              {errorMessage}
+            </Alert>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
 
 export default BloqueDeCarga;
+
+
+
+
+

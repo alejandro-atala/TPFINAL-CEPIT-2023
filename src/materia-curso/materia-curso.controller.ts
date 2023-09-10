@@ -31,4 +31,4 @@ export class MateriasCursoController {
   async getAllMaterias() {
     return this.materiasCursoService.findAll();
   }
-}
+} 
