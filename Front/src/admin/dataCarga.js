@@ -12,6 +12,7 @@ const BloqueDeCarga = () => {
   const [editing, setEditing] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [editMode, setEditMode] = useState(false);
 
 
 
@@ -23,7 +24,7 @@ const BloqueDeCarga = () => {
     // Agrega más nombres de referencia según tus necesidades
   };
 
-  
+
 
 
   useEffect(() => {
@@ -37,17 +38,45 @@ const BloqueDeCarga = () => {
   }, []);
 
   const cargarDetalleTexto = (referenciaSeleccionada) => {
-    console.log(referenciaSeleccionada);
+
     axios.get(`http://localhost:3000/carga/${referenciaSeleccionada}`)
       .then((response) => {
         setTextoSeleccionado(response.data);
         setEditing(false);
-        console.log(response.data);
+        if (response.data.texto) {
+
+          setEditMode(true);
+        }
       })
       .catch((error) => {
         console.error('Error al obtener el detalle del texto:', error);
       });
   };
+
+
+  const handleGuardarEditarTexto = () => {
+    if (editMode) {
+      editarDetalleTexto();
+    } else {
+      handleGuardarTexto();
+    }
+  };
+
+
+
+  const editarDetalleTexto = (referenciaSeleccionada) => {
+    axios
+      .put(`http://localhost:3000/carga/${textoSeleccionado.id}`, {
+        referencia: referencia, // Usa el valor de referencia seleccionado
+        texto: textoSeleccionado.texto,
+      })
+      .then((response) => {
+        // ...
+      })
+      .catch((error) => {
+        // ...
+      });
+  }
 
   const handleGuardarTexto = () => {
     if (editing) {
@@ -116,13 +145,13 @@ const BloqueDeCarga = () => {
       const formData = new FormData();
       formData.append('imagen', imagen);
       formData.append('nombreImagen', nombreImagen); // Agregar el nombre de la imagen
-  
+
       const response = await axios.post('http://localhost:3000/carga/img', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-  
+
       console.log('Imagen guardada con éxito:', response.data);
       setSuccessMessage('Imagen guardada con éxito');
       setErrorMessage('');
@@ -140,8 +169,8 @@ const BloqueDeCarga = () => {
       }, 2000);
     }
   };
-  
-  
+
+
 
   const handleImagenChange = (e) => {
     const file = e.target.files[0];
@@ -155,23 +184,23 @@ const BloqueDeCarga = () => {
   return (
     <div>
       <div>
-      <select
-  value={referencia}
-  onChange={(e) => {
-    setReferencia(e.target.value);
-    cargarDetalleTexto(e.target.value); // Llama a la función para cargar el texto correspondiente
-  }}
->
-  <option value="">Selecciona un nombre de referencia</option>
-  {Object.keys(nombresDeReferencia).map((nombre) => (
-    <option key={nombre} value={nombre}>
-      {nombre}
-    </option>
-  ))}
-</select>
+        <select
+          value={referencia}
+          onChange={(e) => {
+            setReferencia(e.target.value);
+            cargarDetalleTexto(e.target.value); // Llama a la función para cargar el texto correspondiente
+          }}
+        >
+          <option value="">Selecciona un nombre de referencia</option>
+          {Object.keys(nombresDeReferencia).map((nombre) => (
+            <option key={nombre} value={nombre}>
+              {nombre}
+            </option>
+          ))}
+        </select>
 
         <br /><br />
-       
+
         <textarea
           type="text"
           placeholder="Texto"
@@ -180,7 +209,13 @@ const BloqueDeCarga = () => {
           style={{ width: '100%', height: '200px' }}
         />
 
-        <button onClick={handleGuardarTexto}>Guardar Texto</button>
+        <button
+          onClick={handleGuardarEditarTexto}
+          // disabled={editMode}
+        >
+          {editMode ? 'Guardar Edicion' : 'Guardar'}
+        </button>
+
         <button onClick={() => handleBorrarTexto(textoSeleccionado.id)}>Borrar Texto</button>
       </div>
       <br /><br />

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -55,4 +55,10 @@ export class UploadController {
     console.log(id)
     return this.textosService.findById(id); 
   }
+
+  @Put(':id') // Utiliza el ID del registro a actualizar en la URL
+update(@Param('id') id: number, @Body() updateTexto: CreateDataCargaDto) {
+  return this.textosService.update(id, updateTexto);
+}
+
 }
