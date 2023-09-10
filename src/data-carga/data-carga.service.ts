@@ -23,8 +23,8 @@ export class DataCargaService {
     return await this.dataCargaRepository.find();
   }
 
-  async findByReferencia(id: number): Promise<Textos | undefined> {
-    return await this.dataCargaRepository.findOne({where: {id: id}} );
+  async findByReferencia(referencia: string): Promise<Textos | undefined> {
+    return await this.dataCargaRepository.findOne({where: {referencia: referencia}} );
   }
 
   async findOne(id: number): Promise<Textos | undefined> {

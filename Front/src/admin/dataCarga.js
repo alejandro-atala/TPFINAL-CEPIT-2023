@@ -37,10 +37,12 @@ const BloqueDeCarga = () => {
   }, []);
 
   const cargarDetalleTexto = (referenciaSeleccionada) => {
+    console.log(referenciaSeleccionada);
     axios.get(`http://localhost:3000/carga/${referenciaSeleccionada}`)
       .then((response) => {
         setTextoSeleccionado(response.data);
         setEditing(false);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error('Error al obtener el detalle del texto:', error);
@@ -153,9 +155,12 @@ const BloqueDeCarga = () => {
   return (
     <div>
       <div>
-        <select
+      <select
   value={referencia}
-  onChange={(e) => setReferencia(e.target.value)}
+  onChange={(e) => {
+    setReferencia(e.target.value);
+    cargarDetalleTexto(e.target.value); // Llama a la función para cargar el texto correspondiente
+  }}
 >
   <option value="">Selecciona un nombre de referencia</option>
   {Object.keys(nombresDeReferencia).map((nombre) => (
