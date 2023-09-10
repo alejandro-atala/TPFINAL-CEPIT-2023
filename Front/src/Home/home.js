@@ -3,8 +3,27 @@ import escuela1 from '../ImagenesDescargadas/ESCUELA2.jpg';
 import escuela2 from '../ImagenesDescargadas/ESCUELA.jpg';
 import escuela3 from '../ImagenesDescargadas/ESCUELA3.jpg';
 import './home.css';
+import axios from "axios";
+import {useState, useEffect} from 'react'
 
 const HomePage = () => {
+
+
+  const [texto, setTexto] = useState(''); // Estado para almacenar el texto
+
+  useEffect(() => {
+    // Realiza una solicitud GET al servidor para obtener el texto con el ID 1
+    axios.get('http://localhost:3000/carga/1')
+      .then((response) => {
+        setTexto(response.data.texto); // Almacena el texto en el estado
+      })
+      .catch((error) => {
+        console.error('Error al obtener el texto:', error);
+      });
+  }, []);
+
+
+
   return (
     <div className="d-flex flex-column justify-content-center align-items-center min-vh-100">
     <h1>Instituto Secundario NN</h1>
@@ -38,16 +57,7 @@ const HomePage = () => {
             </button>
           </div>
           <h2>Estudia en nuestro Instituto</h2>
-          <p>¡Descubre un mundo de aprendizaje emocionante en nuestra escuela secundaria!
-             En nuestro campus, la curiosidad se convierte en conocimiento y las amistades perduran 
-             para toda la vida. Con un equipo de educadores apasionados y programas educativos de vanguardia,
-              estamos comprometidos a nutrir tus habilidades y potencial al máximo. 
-              Desde laboratorios científicos hasta actividades artísticas, 
-              deportes en equipo hasta proyectos comunitarios, encontrarás infinitas oportunidades 
-              para crecer y brillar. Únete a nuestra familia escolar y prepárate
-               para un emocionante viaje hacia el éxito académico y personal.
-                Tu futuro comienza aquí, en Nuestro Instituto. 
-                ¡Inscribe hoy y haz tus sueños realidad con nosotros!</p>
+          <p>{texto}</p>
         </div>
       </div>
     </div>

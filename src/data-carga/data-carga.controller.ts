@@ -45,8 +45,8 @@ export class UploadController {
     return this.textosService.remove(id);
   }
 
-  @Get(':referencia')
-  findByReferencia(@Param('referencia') referencia: string) {
-    return this.textosService.findByReferencia(referencia); 
+  @Get(':id')
+  findByReferencia(@Param('id') id: number) {
+    return this.textosService.findByReferencia(id); 
   }
 }
