@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Alert } from 'react-bootstrap';
+import { Alert, Form } from 'react-bootstrap';
+
+
 
 const BloqueDeCarga = () => {
   const [textos, setTextos] = useState([]);
@@ -68,10 +70,10 @@ const BloqueDeCarga = () => {
 
 
   const editarDetalleTexto = () => {
- axios.put(`http://localhost:3000/carga/${textoSeleccionado.id}`, {
-        referencia: referencia, // Usa el valor de referencia seleccionado
-        texto: textoSeleccionado.texto,
-      })
+    axios.put(`http://localhost:3000/carga/${textoSeleccionado.id}`, {
+      referencia: referencia, // Usa el valor de referencia seleccionado
+      texto: textoSeleccionado.texto,
+    })
       .then(() => {
         setSuccessMessage('Texto actualizado con éxito');
         setErrorMessage('');
@@ -99,34 +101,34 @@ const BloqueDeCarga = () => {
       setTimeout(() => {
         setErrorMessage('');
       }, 2000);
-      return; 
+      return;
     }
-      axios
-        .post('http://localhost:3000/carga/text', {
-          referencia: referencia, // Usa el valor de referencia seleccionado
-          texto: textoSeleccionado.texto,
-        })
-        .then((response) => {
-          setTextos([...textos, response.data]);
-          setNuevoTexto('');
-          setReferencia(''); // Limpia la referencia después de guardar
-          setSuccessMessage('Texto guardado con éxito');
-          setErrorMessage('');
-          // Ocultar el mensaje de éxito después de 2 segundos
-          setTimeout(() => {
-            setSuccessMessage('');
-          }, 2000);
-        })
-        .catch((error) => {
-          console.error('Error al crear un texto:', error);
-          setErrorMessage('Error al guardar el texto');
+    axios
+      .post('http://localhost:3000/carga/text', {
+        referencia: referencia, // Usa el valor de referencia seleccionado
+        texto: textoSeleccionado.texto,
+      })
+      .then((response) => {
+        setTextos([...textos, response.data]);
+        setNuevoTexto('');
+        setReferencia(''); // Limpia la referencia después de guardar
+        setSuccessMessage('Texto guardado con éxito');
+        setErrorMessage('');
+        // Ocultar el mensaje de éxito después de 2 segundos
+        setTimeout(() => {
           setSuccessMessage('');
-          // Ocultar el mensaje de error después de 2 segundos
-          setTimeout(() => {
-            setErrorMessage('');
-          }, 2000);
-        });
-    }
+        }, 2000);
+      })
+      .catch((error) => {
+        console.error('Error al crear un texto:', error);
+        setErrorMessage('Error al guardar el texto');
+        setSuccessMessage('');
+        // Ocultar el mensaje de error después de 2 segundos
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 2000);
+      });
+  }
 
 
   const handleBorrarTexto = (id) => {
@@ -146,7 +148,7 @@ const BloqueDeCarga = () => {
         console.error('Error al borrar un texto:', error);
         setErrorMessage('Error al borrar el texto');
         setSuccessMessage('');
-         setTimeout(() => {
+        setTimeout(() => {
           setErrorMessage('');
         }, 2000);
       });
@@ -193,14 +195,15 @@ const BloqueDeCarga = () => {
   return (
     <div>
       <div>
+        <h4>Seleccione un campo para cargar su texto</h4>
         <select
           value={referencia}
           onChange={(e) => {
             setReferencia(e.target.value);
-            cargarDetalleTexto(e.target.value); // Llama a la función para cargar el texto correspondiente
+            cargarDetalleTexto(e.target.value);
           }}
         >
-          <option value="">Selecciona un nombre de referencia</option>
+          <option value="">Selecciona un campo</option>
           {Object.keys(nombresDeReferencia).map((nombre) => (
             <option key={nombre} value={nombre}>
               {nombre}
@@ -220,15 +223,15 @@ const BloqueDeCarga = () => {
 
         <button
           onClick={handleGuardarEditarTexto}
-          // disabled={editMode}
         >
-          {editMode ? 'Guardar Edicion' : 'Guardar'}
+          {editMode ? 'Guardar Edición' : 'Guardar'}
         </button>
 
         <button onClick={() => handleBorrarTexto(textoSeleccionado.id)}>Borrar Texto</button>
       </div>
       <br /><br />
       <div>
+        <h4>Seleccione una imagen y su destino</h4>
         <input
           type="file"
           accept="image/*"
