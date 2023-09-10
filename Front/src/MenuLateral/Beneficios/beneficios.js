@@ -21,7 +21,7 @@ const Beneficios = () => {
       }
     };
 
-    // Obtener textos para ID 1 y ID 2
+   
     obtenerTextoPorId(3, setTextoId3);
 
   }, []);
