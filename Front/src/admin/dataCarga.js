@@ -46,6 +46,9 @@ const BloqueDeCarga = () => {
         if (response.data.texto) {
 
           setEditMode(true);
+        } else {
+          setTextoSeleccionado({ referencia: '', texto: '' });
+          setEditMode(false);
         }
       })
       .catch((error) => {
@@ -64,45 +67,23 @@ const BloqueDeCarga = () => {
 
 
 
-  const editarDetalleTexto = (referenciaSeleccionada) => {
-    axios
-      .put(`http://localhost:3000/carga/${textoSeleccionado.id}`, {
+  const editarDetalleTexto = () => {
+ axios.put(`http://localhost:3000/carga/${textoSeleccionado.id}`, {
         referencia: referencia, // Usa el valor de referencia seleccionado
         texto: textoSeleccionado.texto,
       })
-      .then((response) => {
-        // ...
+      .then(() => {
+        setSuccessMessage('Texto actualizado con éxito');
+        setErrorMessage('');
       })
-      .catch((error) => {
-        // ...
+      .catch(() => {
+        setErrorMessage('Error al guardar el texto');
+        setSuccessMessage('');
       });
   }
 
   const handleGuardarTexto = () => {
-    if (editing) {
-      axios
-        .put(`http://localhost:3000/carga/${textoSeleccionado.id}`, {
-          referencia: referencia, // Usa el valor de referencia seleccionado
-          texto: textoSeleccionado.texto,
-        })
-        .then((response) => {
-          const updatedTextos = textos.map((texto) => {
-            if (texto.id === textoSeleccionado.id) {
-              return response.data;
-            }
-            return texto;
-          });
-          setTextos(updatedTextos);
-          setSuccessMessage('Texto actualizado con éxito');
-          setErrorMessage('');
-          setEditing(false);
-        })
-        .catch((error) => {
-          console.error('Error al actualizar el texto:', error);
-          setErrorMessage('Error al guardar el texto');
-          setSuccessMessage('');
-        });
-    } else {
+ 
       axios
         .post('http://localhost:3000/carga/text', {
           referencia: referencia, // Usa el valor de referencia seleccionado
@@ -121,7 +102,7 @@ const BloqueDeCarga = () => {
           setSuccessMessage('');
         });
     }
-  };
+
 
   const handleBorrarTexto = (id) => {
     axios.delete(`http://localhost:3000/carga/${id}`)
@@ -177,9 +158,9 @@ const BloqueDeCarga = () => {
     setImagen(file);
   };
 
-  const handleSeleccionarTexto = (referenciaSeleccionada) => {
-    cargarDetalleTexto(referenciaSeleccionada);
-  };
+  // const handleSeleccionarTexto = (referenciaSeleccionada) => {
+  //   cargarDetalleTexto(referenciaSeleccionada);
+  // };
 
   return (
     <div>
