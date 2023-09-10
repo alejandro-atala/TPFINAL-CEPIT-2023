@@ -5,13 +5,26 @@ import { Alert } from 'react-bootstrap';
 const BloqueDeCarga = () => {
   const [textos, setTextos] = useState([]);
   const [nuevoTexto, setNuevoTexto] = useState('');
-  const [referencia, setNombreReferencia] = useState('');
+  const [referencia, setReferencia] = useState(''); // Estado para la referencia seleccionada
   const [imagen, setImagen] = useState(null);
-  const [nombreImagen, setNombreImagen] = useState(''); // Estado para el nombre de la imagen
+  const [nombreImagen, setNombreImagen] = useState('');
   const [textoSeleccionado, setTextoSeleccionado] = useState({ referencia: '', texto: '' });
-  const [editing, setEditing] = useState(false); // Estado para habilitar la edición
+  const [editing, setEditing] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+
+
+  const nombresDeReferencia = {
+    Home: 'Home',
+    Portada: 'Portada',
+    Beneficios: 'Beneficios',
+    Talleres: 'Talleres',
+    // Agrega más nombres de referencia según tus necesidades
+  };
+
+  
+
 
   useEffect(() => {
     axios.get('http://localhost:3000/carga')
@@ -27,7 +40,7 @@ const BloqueDeCarga = () => {
     axios.get(`http://localhost:3000/carga/${referenciaSeleccionada}`)
       .then((response) => {
         setTextoSeleccionado(response.data);
-        setEditing(false); // Deshabilitar la edición al seleccionar un nuevo texto
+        setEditing(false);
       })
       .catch((error) => {
         console.error('Error al obtener el detalle del texto:', error);
@@ -36,14 +49,12 @@ const BloqueDeCarga = () => {
 
   const handleGuardarTexto = () => {
     if (editing) {
-      // Realizar una solicitud PUT para actualizar el texto existente
       axios
         .put(`http://localhost:3000/carga/${textoSeleccionado.id}`, {
-          referencia: textoSeleccionado.referencia,
+          referencia: referencia, // Usa el valor de referencia seleccionado
           texto: textoSeleccionado.texto,
         })
         .then((response) => {
-          // Actualizar el estado después de guardar los cambios
           const updatedTextos = textos.map((texto) => {
             if (texto.id === textoSeleccionado.id) {
               return response.data;
@@ -53,7 +64,7 @@ const BloqueDeCarga = () => {
           setTextos(updatedTextos);
           setSuccessMessage('Texto actualizado con éxito');
           setErrorMessage('');
-          setEditing(false); // Deshabilitar la edición después de guardar
+          setEditing(false);
         })
         .catch((error) => {
           console.error('Error al actualizar el texto:', error);
@@ -61,16 +72,15 @@ const BloqueDeCarga = () => {
           setSuccessMessage('');
         });
     } else {
-      // Crear un nuevo texto
       axios
         .post('http://localhost:3000/carga/text', {
-          referencia: textoSeleccionado.referencia,
+          referencia: referencia, // Usa el valor de referencia seleccionado
           texto: textoSeleccionado.texto,
         })
         .then((response) => {
           setTextos([...textos, response.data]);
           setNuevoTexto('');
-          setNombreReferencia('');
+          setReferencia(''); // Limpia la referencia después de guardar
           setSuccessMessage('Texto guardado con éxito');
           setErrorMessage('');
         })
@@ -143,21 +153,20 @@ const BloqueDeCarga = () => {
   return (
     <div>
       <div>
-        <select onChange={(e) => handleSeleccionarTexto(e.target.value)}>
-          <option value="">Selecciona un texto</option>
-          {textos.map((texto) => (
-            <option key={texto.id} value={texto.referencia}>
-              {texto.referencia}
-            </option>
-          ))}
-        </select>
+        <select
+  value={referencia}
+  onChange={(e) => setReferencia(e.target.value)}
+>
+  <option value="">Selecciona un nombre de referencia</option>
+  {Object.keys(nombresDeReferencia).map((nombre) => (
+    <option key={nombre} value={nombre}>
+      {nombre}
+    </option>
+  ))}
+</select>
+
         <br /><br />
-        <input
-          type="text"
-          placeholder="Nombre de Referencia"
-          value={textoSeleccionado.referencia}
-          onChange={(e) => setTextoSeleccionado({ ...textoSeleccionado, referencia: e.target.value })}
-        />
+       
         <textarea
           type="text"
           placeholder="Texto"
