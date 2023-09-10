@@ -12,10 +12,12 @@ const HomePage = () => {
   const [texto, setTexto] = useState(''); // Estado para almacenar el texto
 
   useEffect(() => {
+ 
     // Realiza una solicitud GET al servidor para obtener el texto con el ID 1
-    axios.get('http://localhost:3000/carga/1')
+    axios.get('http://localhost:3000/carga/id/1')
       .then((response) => {
         setTexto(response.data.texto); // Almacena el texto en el estado
+        console.log(response.data)
       })
       .catch((error) => {
         console.error('Error al obtener el texto:', error);

@@ -27,10 +27,11 @@ export class DataCargaService {
     return await this.dataCargaRepository.findOne({where: {referencia: referencia}} );
   }
 
-  async findOne(id: number): Promise<Textos | undefined> {
-    return await this.dataCargaRepository.findOne({where: {id: id}});
+  async findById(id: number): Promise<Textos | undefined> {
+    return await this.dataCargaRepository.findOne({where: {id: id}} );
   }
 
+  
   async update(id: number, updateDataCargaDto: CreateDataCargaDto): Promise<Textos | undefined> {
     await this.dataCargaRepository.update(id, updateDataCargaDto);
     return await this.dataCargaRepository.findOne({where: {id: id}});

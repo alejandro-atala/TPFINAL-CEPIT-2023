@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -48,5 +48,11 @@ export class UploadController {
   @Get(':referencia')
   findByReferencia(@Param('referencia') referencia: string) {
     return this.textosService.findByReferencia(referencia); 
+  }
+
+  @Get('/id/:id')
+  findById(@Param('id') id: number) {
+    console.log(id)
+    return this.textosService.findById(id); 
   }
 }
