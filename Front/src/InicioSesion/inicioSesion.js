@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './inicioSesion.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAlumno } from '../Alumno/AlumnoContext';
 import { useAuth } from './tokenContext';
-
 import { Routes, Route } from 'react-router-dom';
 
 const InicioSesion = ({ onLogin }) => {
-  const {  setToken } = useAuth();
+  const { setToken } = useAuth();
   const navigate = useNavigate();
   const { setAlumnoLogueado } = useAlumno();
   const [formData, setFormData] = useState({
@@ -18,12 +17,12 @@ const InicioSesion = ({ onLogin }) => {
 
   const [message, setMessage] = useState('');
   const [sessionExpired, setSessionExpired] = useState(false);
+  //setAlumnoLogueado('');
 
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axios.post('http://localhost:3000/usuario/login', formData);
       const newToken = response.data.token;
@@ -37,8 +36,8 @@ const InicioSesion = ({ onLogin }) => {
 
         navigate('/admin');
       }
-  
-     else if (response.data.tipo === 'Alumno') {
+
+      else if (response.data.tipo === 'Alumno') {
 
         // Una vez que tengas el ID del usuario, realiza una solicitud GET para obtener el ID del alumno
         const resp = await axios.get(`http://localhost:3000/alumno/usuario/${idUsuario}`);
@@ -55,14 +54,14 @@ const InicioSesion = ({ onLogin }) => {
       } else {
         navigate('/alumno');
       }
-      
+
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
       setMessage('Error en el inicio de sesión. Verifica tus credenciales.');
     }
   };
-  
-  
+
+
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -72,10 +71,7 @@ const InicioSesion = ({ onLogin }) => {
     }));
   };
 
-  const handleLogout = () => {
-    setToken(null);
-    navigate('/inicio-sesion');
-  };
+
 
   return (
     <div className="container rounded text-center col-xs-12 col-md-4 col-sm-3 p-5 mt-4 bg-sesion">

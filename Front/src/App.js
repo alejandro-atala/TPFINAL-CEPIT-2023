@@ -27,7 +27,7 @@ import { AlumnoProvider } from './Alumno/AlumnoContext';
 import MateriasList from './PaginaProfe/Materias/materiasList';
 import { AuthProvider } from './InicioSesion/tokenContext';
 import AdminPage from './admin/admin';
-import { useNavigate } from 'react-router-dom';
+
 
 
 const App = () => {
@@ -41,12 +41,15 @@ const App = () => {
   };
 
   const logout = () => {
-// Elimina el token del almacenamiento local
-localStorage.removeItem('token');
+    // Elimina el token del almacenamiento local
+    localStorage.removeItem('token');
+    // Limpia loggedInUser
+    setLoggedInUser('');
 
-    setLoggedInUser(null);
-
+    // Redirige a /iniciarSesion
+    window.location.href = '/iniciarSesion'; // Utiliza window.location.href para redirigir
   };
+  
 
 
   return (
