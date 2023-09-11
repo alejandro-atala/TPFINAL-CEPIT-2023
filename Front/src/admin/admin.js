@@ -16,6 +16,7 @@ const AdminPage = () => {
     curso: ['idCurso', 'anio'],
     materias: ['idMateria', 'nombre'],
     usuario: [
+      'idUsuario',
       'nombre',
       'dni',
       'fechaNac',
@@ -64,7 +65,7 @@ const AdminPage = () => {
     try {
       const response = await axios.get(`http://localhost:3000/${selectedTable}`);
       const data = response.data;
-
+console.log(data);
       setTableData(data);
       setColumns(Object.keys(data[0] || {}));
       setEditedData(data.map((row) => ({ ...row, isEditing: false })));
@@ -89,7 +90,14 @@ const AdminPage = () => {
 
   const handleDeleteRow = async (rowIndex) => {
     try {
-      const idFieldName = selectedTable === 'materias' ? 'idMateria' : 'idCurso';
+      let idFieldName = '';
+      if (selectedTable === 'materias') {
+      idFieldName = 'idMateria';
+    } else if (selectedTable === 'usuario') {
+      idFieldName = 'idUsuario';
+    } else if (selectedTable === 'curso') {
+      idFieldName = 'idCurso';
+    }
       const id = editedData[rowIndex][idFieldName];
       const url = `http://localhost:3000/${selectedTable}/${id}`;
       await axios.delete(url);
@@ -104,23 +112,26 @@ const AdminPage = () => {
   const handleSaveChanges = async (rowIndex) => {
     try {
       const { isEditing, ...updatedRow } = editedData[rowIndex];
-      const idFieldName = selectedTable === 'materias' ? 'idMateria' : 'idCurso';
+  
+      // Obtén el nombre del campo ID genéricamente
+      const idFieldName = requiredFields[selectedTable][0]; // El primer campo es el ID
+  
       const id = updatedRow[idFieldName];
-
+  
       const isDataValid = requiredFields[selectedTable].every(
         (field) => updatedRow[field] !== undefined && updatedRow[field] !== ''
       );
-
+  
       if (!isDataValid) {
         console.error('Completa todos los campos requeridos.');
         return;
       }
-
+ 
       const response = await axios.put(
         `http://localhost:3000/${selectedTable}/${id}`,
         updatedRow
       );
-
+  
       const updatedData = [...editedData];
       updatedData[rowIndex] = response.data;
       setEditedData(updatedData);
@@ -128,6 +139,7 @@ const AdminPage = () => {
       console.error('Error al guardar cambios:', error);
     }
   };
+  
 
   const handleEditRow = (rowIndex) => {
     const updatedRow = { ...editedData[rowIndex], isEditing: true };
