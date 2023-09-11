@@ -112,10 +112,8 @@ console.log(data);
   const handleSaveChanges = async (rowIndex) => {
     try {
       const { isEditing, ...updatedRow } = editedData[rowIndex];
-  
-      // Obtén el nombre del campo ID genéricamente
+      
       const idFieldName = requiredFields[selectedTable][0]; // El primer campo es el ID
-  
       const id = updatedRow[idFieldName];
   
       const isDataValid = requiredFields[selectedTable].every(
@@ -126,19 +124,25 @@ console.log(data);
         console.error('Completa todos los campos requeridos.');
         return;
       }
- 
-      const response = await axios.put(
-        `http://localhost:3000/${selectedTable}/${id}`,
-        updatedRow
-      );
+  
+      // Crear un objeto con los campos a actualizar
+      const fieldsToUpdate = {};
+      for (const field in updatedRow) {
+        if (requiredFields[selectedTable].includes(field)) {
+          fieldsToUpdate[field] = updatedRow[field];
+        }
+      }
+  
+      await axios.put(`http://localhost:3000/${selectedTable}/${id}`, fieldsToUpdate);
   
       const updatedData = [...editedData];
-      updatedData[rowIndex] = response.data;
+      updatedData[rowIndex] = updatedRow;
       setEditedData(updatedData);
     } catch (error) {
       console.error('Error al guardar cambios:', error);
     }
   };
+  
   
 
   const handleEditRow = (rowIndex) => {
@@ -150,27 +154,48 @@ console.log(data);
 
   const handleAddRow = async () => {
     try {
-      const isDataValid = requiredFields[selectedTable].every(
-        (field) => newRowData[field] !== ''
-      );
-
-      if (!isDataValid) {
-        console.error('Completa todos los campos requeridos.');
-        return;
-      }
-
-      const response = await axios.post(
-        `http://localhost:3000/${selectedTable}`,
-        newRowData
-      );
-
-      setEditedData([...editedData, response.data]);
-      setNewRowData({});
-      console.log('Nueva fila agregada con éxito.');
-    } catch (error) {
-      console.error('Error al agregar una nueva fila:', error);
+    let requiredFields = [];
+    if (selectedTable === 'materias') {
+      requiredFields = ['idMateria', 'nombre'];
+    } else if (selectedTable === 'curso') {
+      requiredFields = ['idCurso', 'anio'];
+    } else if (selectedTable === 'usuario') {
+      requiredFields = [
+        'nombre',
+        'dni',
+        'fechaNac',
+        'direccion',
+        'telefono',
+        'email',
+        'password',
+        'tipo',
+        'curso',
+      ];
     }
-  };
+    const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
+
+    if (!isDataValid) {
+      console.error('Completa todos los campos requeridos.');
+      return;
+    }
+
+console.log(selectedTable)
+    // Envía la nueva fila al servidor para su creación
+    const response = await axios.post(`http://localhost:3000/${selectedTable}`, newRowData);
+    const addedRow = response.data;
+
+    // Agrega la fila completa al estado local
+    setEditedData([...editedData, addedRow]);
+    setNewRowData({}); // Restablece la nueva fila después de agregarla
+
+    // Después de agregar la fila, puedes recargar los datos nuevamente desde el servidor para asegurarte de que estén actualizados
+    cargarDatos(); // Llama a la función que carga los datos nuevamente
+  } catch (error) {
+    console.error('Error al agregar una nueva fila:', error);
+  }
+};
+  
+  
 
   const handleNewRowInputChange = (e, columnName) => {
     setNewRowData({ ...newRowData, [columnName]: e.target.value });
