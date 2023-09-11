@@ -70,7 +70,7 @@ const App = () => {
                     {/* Contenido principal */}
                     <Routes>
 
-                      <Route path="/iniciarSesion" element={<InicioSesion onLogin={handleLogin} />} />
+                      <Route path="/iniciarSesion/*" element={<InicioSesion onLogin={handleLogin} />} />
 
 
                       <Route path="/" element={<Home />} />

@@ -9,6 +9,8 @@ const SessionExpiration = () => {
   const { token, handleLogout } = useAuth();
   const { setAlumnoLogueado } = useAlumno();
 
+
+
   useEffect(() => {
     const checkSessionExpiration = () => {
       if (token) {
@@ -23,6 +25,7 @@ const SessionExpiration = () => {
             setAlumnoLogueado(null);
 
             setTimeout(() => {
+        
               window.location.href = '/iniciarSesion';
             }, 3000);
            

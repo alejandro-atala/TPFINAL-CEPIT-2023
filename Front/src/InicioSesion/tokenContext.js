@@ -5,7 +5,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
-  const [loggedInUser, setLoggedInUser] = useState('');
+
 
   const setAuthToken = (newToken) => {
     setToken(newToken);
@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     console.log("logout")
     localStorage.removeItem('token');
-    setLoggedInUser('');
+
   };
 
   return (
