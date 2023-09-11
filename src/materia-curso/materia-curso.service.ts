@@ -13,7 +13,7 @@ export class MateriasCursoService {
   ) {}
 
   async guardarMateriasCurso(materiaCursoData: CreateMateriaCursoDto[]) {
-    console.log(materiaCursoData);
+
     const existingMateriasCurso = await this.getMateriasCursoByCursoNombre(materiaCursoData[0].anio);
 
     for (const data of materiaCursoData) {

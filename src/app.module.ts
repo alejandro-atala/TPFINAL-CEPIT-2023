@@ -12,13 +12,11 @@ import { ProfesorModule } from './profesor/profesor.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioModule } from './usuario/usuario.module';
 import { JwtModule } from '@nestjs/jwt';
+import { DataCargaModule } from './data-carga/data-carga.module';
 
 
 @Module({
-  imports: [JwtModule.register({
-    secret: 'ProgramadorFullStack2023',
-    signOptions: { expiresIn: '1h' },
-  }),
+  imports: [
   TypeOrmModule.forRoot({
     type: "mysql",
     host: "localhost",
@@ -40,7 +38,8 @@ import { JwtModule } from '@nestjs/jwt';
     MateriaCursoModule,
     AsistenciaModule,
     NotasExamenesModule,
-    ProfesorModule],
+    ProfesorModule,
+    DataCargaModule],
 
   controllers: [AppController],
   providers: [AppService],

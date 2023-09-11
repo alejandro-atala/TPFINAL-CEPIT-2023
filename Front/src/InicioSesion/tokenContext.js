@@ -6,13 +6,22 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
 
+
   const setAuthToken = (newToken) => {
     setToken(newToken);
     localStorage.setItem('token', newToken);
   };
 
+  const handleLogout = () => {
+    // Limpiar el token y cualquier otro estado relacionado con la sesión al hacer logout
+    setToken(null);
+    console.log("logout")
+    localStorage.removeItem('token');
+
+  };
+
   return (
-    <AuthContext.Provider value={{ token, setToken: setAuthToken }}>
+    <AuthContext.Provider value={{ token, setToken: setAuthToken, handleLogout }}>
       {children}
     </AuthContext.Provider>
   );
@@ -25,4 +34,3 @@ export const useAuth = () => {
   }
   return context;
 };
-

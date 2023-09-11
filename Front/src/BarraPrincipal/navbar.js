@@ -3,7 +3,7 @@ import './navbar.css';
 import { Link } from 'react-router-dom';
 
 
-const Navbar = ({ loggedInUser }) => {
+const Navbar = ({ loggedInUser, onLogout  }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-pink">
       <div className="container justify-content-center text-center">
@@ -37,14 +37,18 @@ const Navbar = ({ loggedInUser }) => {
               <Link to="/" className="nav-link">Contacto</Link>
             </li>
             {loggedInUser ? (
-              <li className="nav-item">
-                <span className="nav-link hola-usuario">Hola {loggedInUser}</span>
-              </li>
-            ) : null}
-            
-            <li className="nav-item">
-              <Link to="/iniciarSesion" className="nav-link sesion">Iniciar Sesion</Link>
-            </li>
+  <li className="nav-item">
+    <span className="nav-link hola-usuario">Hola {loggedInUser}</span>
+  </li>
+) : null}
+
+<li className="nav-item">
+  {loggedInUser ? (
+    <button className="nav-link sesion" onClick={onLogout}>Cerrar Sesión</button>
+  ) : (
+    <Link to="/iniciarSesion" className="nav-link sesion">Iniciar Sesión</Link>
+  )}
+</li>
           </ul>
         </div>
       </div>

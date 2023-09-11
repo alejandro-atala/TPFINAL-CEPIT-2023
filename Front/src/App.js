@@ -40,13 +40,24 @@ const App = () => {
     setLoggedInUser(username);
   };
 
+  const logout = () => {
+    // Elimina el token del almacenamiento local
+    localStorage.removeItem('token');
+    // Limpia loggedInUser
+    setLoggedInUser('');
+
+    // Redirige a /iniciarSesion
+    window.location.href = '/iniciarSesion'; // Utiliza window.location.href para redirigir
+  };
+  
+
 
   return (
     <BrowserRouter>
       <AlumnoProvider>
         <AuthProvider>
           <div className="d-flex flex-column min-vh-100">
-            <Navbar loggedInUser={loggedInUser} />
+            <Navbar loggedInUser={loggedInUser}  onLogout={logout} />
             <div className="flex-grow-1">
               <div className="container-fluid">
                 <div className="row">
@@ -59,7 +70,7 @@ const App = () => {
                     {/* Contenido principal */}
                     <Routes>
 
-                      <Route path="/iniciarSesion" element={<InicioSesion onLogin={handleLogin} />} />
+                      <Route path="/iniciarSesion/*" element={<InicioSesion onLogin={handleLogin} />} />
 
 
                       <Route path="/" element={<Home />} />
@@ -81,12 +92,12 @@ const App = () => {
                       {/* pagina profesor */}
 
                       <Route path="/profesor" element={<Profesor />} />
-                      <Route path="/Profmaterias" element={<MateriasList />} />
+                      {/* <Route path="/Profmaterias" element={<MateriasList />} /> */}
                       <Route path="/ProfAsistencia" element={<AsistenciaList />} />
                       <Route path="/Profnotas" element={<NotasExamenesList />} />
 
 
-                      <Route path="/admin" element={ <div className="center-content"> <AdminPage /> </div> }/>
+                      <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
 
 
                     </Routes>
@@ -94,7 +105,11 @@ const App = () => {
                 </div>
               </div>
             </div>
-            <Footer className="fixed-bottom" />
+            {loggedInUser !== "Admin" && (
+    <div className="footer">
+      <Footer />
+    </div>
+  )}
           </div>
         </AuthProvider>
       </AlumnoProvider>

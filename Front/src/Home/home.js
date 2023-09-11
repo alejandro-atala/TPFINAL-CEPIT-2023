@@ -3,11 +3,35 @@ import escuela1 from '../ImagenesDescargadas/ESCUELA2.jpg';
 import escuela2 from '../ImagenesDescargadas/ESCUELA.jpg';
 import escuela3 from '../ImagenesDescargadas/ESCUELA3.jpg';
 import './home.css';
+import axios from "axios";
+import {useState, useEffect} from 'react'
 
 const HomePage = () => {
+
+
+  const [textoId1, setTextoId1] = useState('');
+  const [textoId2, setTextoId2] = useState('');
+
+  useEffect(() => {
+    const obtenerTextoPorId = async (id, setTexto) => {
+      try {
+        const response = await axios.get(`http://localhost:3000/carga/id/${id}`);
+        setTexto(response.data.texto);
+      } catch (error) {
+        console.error(`Error al obtener el texto con ID ${id}:`, error);
+      }
+    };
+
+    // Obtener textos para ID 1 y ID 2
+    obtenerTextoPorId(1, setTextoId1);
+    obtenerTextoPorId(2, setTextoId2);
+  }, []);
+
+
+
   return (
     <div className="d-flex flex-column justify-content-center align-items-center min-vh-100">
-    <h1>Instituto Secundario NN</h1>
+    <h1>{textoId1}</h1>
     <div className="container plan-de-estudios mt-5">
       <div className="row">
         <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
@@ -38,16 +62,7 @@ const HomePage = () => {
             </button>
           </div>
           <h2>Estudia en nuestro Instituto</h2>
-          <p>¡Descubre un mundo de aprendizaje emocionante en nuestra escuela secundaria!
-             En nuestro campus, la curiosidad se convierte en conocimiento y las amistades perduran 
-             para toda la vida. Con un equipo de educadores apasionados y programas educativos de vanguardia,
-              estamos comprometidos a nutrir tus habilidades y potencial al máximo. 
-              Desde laboratorios científicos hasta actividades artísticas, 
-              deportes en equipo hasta proyectos comunitarios, encontrarás infinitas oportunidades 
-              para crecer y brillar. Únete a nuestra familia escolar y prepárate
-               para un emocionante viaje hacia el éxito académico y personal.
-                Tu futuro comienza aquí, en Nuestro Instituto. 
-                ¡Inscribe hoy y haz tus sueños realidad con nosotros!</p>
+          <p>{textoId2}</p>
         </div>
       </div>
     </div>
