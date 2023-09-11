@@ -1,6 +1,6 @@
 {
   "name": "front",
-  "homepage": "https://alejandro-atala.github.io/Repo_Prueba_TPFINAL/tree/front",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
