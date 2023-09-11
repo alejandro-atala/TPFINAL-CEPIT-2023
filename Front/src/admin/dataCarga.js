@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Alert, Form } from 'react-bootstrap';
-
+import MateriasList from '../PaginaProfe/Materias/materiasList';
 
 
 const BloqueDeCarga = () => {
@@ -268,7 +268,7 @@ const BloqueDeCarga = () => {
 
         </div>
         <div className='mt-2 '>
-
+        <MateriasList />
           {successMessage && (
             <Alert variant="success" className="text-center">
               {successMessage}
