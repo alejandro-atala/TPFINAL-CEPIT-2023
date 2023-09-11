@@ -27,7 +27,7 @@ import { AlumnoProvider } from './Alumno/AlumnoContext';
 import MateriasList from './PaginaProfe/Materias/materiasList';
 import { AuthProvider } from './InicioSesion/tokenContext';
 import AdminPage from './admin/admin';
-
+import { useNavigate } from 'react-router-dom';
 
 
 const App = () => {
@@ -40,13 +40,21 @@ const App = () => {
     setLoggedInUser(username);
   };
 
+  const logout = () => {
+// Elimina el token del almacenamiento local
+localStorage.removeItem('token');
+
+    setLoggedInUser(null);
+
+  };
+
 
   return (
     <BrowserRouter>
       <AlumnoProvider>
         <AuthProvider>
           <div className="d-flex flex-column min-vh-100">
-            <Navbar loggedInUser={loggedInUser} />
+            <Navbar loggedInUser={loggedInUser}  onLogout={logout} />
             <div className="flex-grow-1">
               <div className="container-fluid">
                 <div className="row">

@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 const SessionExpiration = () => {
   const [sessionExpired, setSessionExpired] = useState(false);
-  const { token } = useAuth();
+  const { token, handleLogout } = useAuth();
+  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,6 +20,7 @@ const SessionExpiration = () => {
           if (tokenData.exp * 1000 < Date.now()) {
             setSessionExpired(true);
             localStorage.removeItem('token');
+            handleLogout();
             setTimeout(() => {
                 navigate('/iniciarSesion');
               }, 3000); 
