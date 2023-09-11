@@ -1,8 +1,7 @@
-import { Controller, Post, Body, UnauthorizedException, Get, Param, Put, Delete } from '@nestjs/common';
+import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { CredencialesDto } from './dto/credenciales.dto';
-import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
 @Controller('usuario')
 export class UsuarioController {
@@ -22,8 +21,14 @@ export class UsuarioController {
   @Post()
   async createRegistro(@Body() createUsuarioDto: CreateUsuarioDto) {
    
+    // Verifica si el tipo es Profesor y curso no es un array
+    if (createUsuarioDto.tipo === 'Profesor' && !Array.isArray(createUsuarioDto.curso)) {
+      // Convierte el valor de curso en un array
+      createUsuarioDto.curso = [createUsuarioDto.curso];
+    }
+
     try {
-      console.log("post");
+  
       const usuarioAsociado = await this.usuarioService.createRegistro(
         createUsuarioDto,
       );
@@ -32,22 +37,5 @@ export class UsuarioController {
       throw new Error(`Error al crear el usuario: ${error.message}`);
     }
   }
-
-  @Get()
-  async findAll() {
-    return this.usuarioService.findAll();
   }
 
-  @Put(':id')
-  async update(@Param('id') id: number, @Body() updateUsuarioDto: UpdateUsuarioDto) {
-
-    return this.usuarioService.update(id, updateUsuarioDto);
-  }
-  @Delete(':id')
-  async eliminarRegistro(@Param('id') id: string): Promise<void> {
-    const registroId = parseInt(id, 10);
-    await this.usuarioService.eliminarRegistro(registroId);
-  }
-
-
-}

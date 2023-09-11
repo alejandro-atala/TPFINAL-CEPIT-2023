@@ -22,7 +22,7 @@ export class Usuario {
   @Column()
   telefono: string;
 
-  @Column({unique: true})
+  @Column()
   email: string;
 
   @Column()
@@ -32,12 +32,10 @@ export class Usuario {
   tipo: string;
 
   @Column()
-  curso: number;
-
+  curso: string;
 
   @OneToOne(() => Alumno, alumno => alumno.idAlumno) // Define the relationship 
   alumno: Alumno; 
-
 
   @OneToOne(() => Profesor, profesor => profesor.idProfesor) // Define the relationship
   profesor: Profesor; 

@@ -13,15 +13,10 @@ export class MateriaService {
   ) {}
 
   async create(createMateriaDto: CreateMateriaDto): Promise<Materia> {
-    const nuevaMateria = new Materia();
-    // Configura las propiedades de la nueva materia utilizando los datos de createMateriaDto
-    if (createMateriaDto.nombre) {
-      nuevaMateria.nombre = createMateriaDto.nombre;
-    }
-    // Continúa configurando otras propiedades según tus necesidades
-    return await this.materiaRepository.save(nuevaMateria);
+    const materia = new Materia();
+    // Configura las propiedades de la materia utilizando los datos de createMateriaDto
+    return await this.materiaRepository.save(materia);
   }
-  
 
   async findAll(): Promise<Materia[]> {
     return await this.materiaRepository.find();
@@ -33,25 +28,16 @@ export class MateriaService {
   
   
 
-  async updateById(id: number, updateMateriaDto: UpdateMateriaDto): Promise<Materia | undefined> {
-    console.log(id)
-    const materia = await this.materiaRepository.findOne({where: { idMateria:id } });
-    console.log(materia)
+  async update(nombre:string, updateMateriaDto: UpdateMateriaDto): Promise<Materia | undefined> {
+    const materia = await this.materiaRepository.findOne({ where: { nombre } });
     if (!materia) {
-      return undefined; // La materia no existe
+      return undefined;
     }
     // Actualiza las propiedades de la materia utilizando los datos de updateMateriaDto
-    if (updateMateriaDto.nombre) {
-      materia.nombre = updateMateriaDto.nombre;
-    }
-    // Continúa actualizando otras propiedades según tus necesidades
     return await this.materiaRepository.save(materia);
   }
-  
 
-
-  async removeById(id: number): Promise<void> {
+  async remove(id: number): Promise<void> {
     await this.materiaRepository.delete(id);
   }
-  
 }
