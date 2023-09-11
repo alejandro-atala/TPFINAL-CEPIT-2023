@@ -8,7 +8,8 @@ import { Textos } from './entities/data-carga.entity';
   imports: [
     TypeOrmModule.forFeature([
       Textos
-    ])
+    ]),
+    
   ],
   controllers: [UploadController],
   providers: [DataCargaService],

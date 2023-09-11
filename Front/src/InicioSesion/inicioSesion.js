@@ -28,12 +28,13 @@ const InicioSesion = ({ onLogin }) => {
       const response = await axios.post('http://localhost:3000/usuario/login', formData);
       const newToken = response.data.token;
       setToken(newToken);
+
       onLogin(response.data.nombre);
 
       const idUsuario = response.data.id;
-      console.log(response.data.nombre, response.data.tipo)
+
       if (response.data.nombre === 'Admin' && response.data.tipo === 'Profesor') {
-        console.log("si")
+
         navigate('/admin');
       }
   
@@ -42,10 +43,9 @@ const InicioSesion = ({ onLogin }) => {
         // Una vez que tengas el ID del usuario, realiza una solicitud GET para obtener el ID del alumno
         const resp = await axios.get(`http://localhost:3000/alumno/usuario/${idUsuario}`);
         const alumnoData = resp.data;
-        console.log(alumnoData)
+
         if (alumnoData) {
           const idDelAlumno = alumnoData.idAlumno; // Suponiendo que el ID del alumno está en la primera entrada
-          console.log("idDelAlumno",idDelAlumno)
           setAlumnoLogueado(idDelAlumno);
         }
         navigate('/alumno');

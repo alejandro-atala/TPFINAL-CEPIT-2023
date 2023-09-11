@@ -11,8 +11,10 @@ const SessionExpiration = () => {
   useEffect(() => {
     const checkSessionExpiration = () => {
       if (token) {
+
         const tokenData = parseToken(token);
         if (tokenData && tokenData.exp) {
+        
           if (tokenData.exp * 1000 < Date.now()) {
             setSessionExpired(true);
             localStorage.removeItem('token');
@@ -51,6 +53,7 @@ const SessionExpiration = () => {
       return null; // Error al decodificar el payload JSON
     }
   };
+  
   
 
   return (

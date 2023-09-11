@@ -16,10 +16,7 @@ import { DataCargaModule } from './data-carga/data-carga.module';
 
 
 @Module({
-  imports: [JwtModule.register({
-    secret: 'ProgramadorFullStack2023',
-    signOptions: { expiresIn: '1h' },
-  }),
+  imports: [
   TypeOrmModule.forRoot({
     type: "mysql",
     host: "localhost",
