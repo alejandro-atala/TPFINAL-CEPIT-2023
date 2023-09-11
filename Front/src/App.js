@@ -94,11 +94,11 @@ const App = () => {
                 </div>
               </div>
             </div>
-            {loggedInUser === "Admin" ? null : (
-              <div className="col-md-3">
-                <Footer />
-              </div>
-            )}
+            {loggedInUser !== "Admin" && (
+    <div className="footer">
+      <Footer />
+    </div>
+  )}
           </div>
         </AuthProvider>
       </AlumnoProvider>
