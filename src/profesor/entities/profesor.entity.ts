@@ -11,6 +11,9 @@ export class Profesor {
   @Column()
   nombre: string;
 
+  @Column()
+  usuarioId: number;
+
   @ManyToMany(() => Curso, (curso) => curso.profesores)
   cursos: Curso[];
 
@@ -24,7 +27,7 @@ export class Profesor {
 
   @OneToOne(() => Usuario, usuario => usuario.idUsuario)
   @JoinColumn({ name: 'usuarioId' })
-  usuarioId: number;
+  usuario: number;
 
   
   // @ManyToOne(() => Curso, curso => curso.alumnos)

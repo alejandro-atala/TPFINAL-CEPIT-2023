@@ -27,6 +27,7 @@ import { AlumnoProvider } from './Alumno/AlumnoContext';
 import MateriasList from './PaginaProfe/Materias/materiasList';
 import { AuthProvider } from './InicioSesion/tokenContext';
 import AdminPage from './admin/admin';
+import { ProfesorProvider } from './PaginaProfe/profesorContext';
 
 
 
@@ -44,6 +45,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <AlumnoProvider>
+       <ProfesorProvider>
         <AuthProvider>
           <div className="d-flex flex-column min-vh-100">
             <Navbar loggedInUser={loggedInUser} />
@@ -97,6 +99,7 @@ const App = () => {
             <Footer className="fixed-bottom" />
           </div>
         </AuthProvider>
+        </ProfesorProvider>
       </AlumnoProvider>
 
     </BrowserRouter>
