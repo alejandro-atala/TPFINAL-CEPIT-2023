@@ -13,6 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioModule } from './usuario/usuario.module';
 import { JwtModule } from '@nestjs/jwt';
 import { DataCargaModule } from './data-carga/data-carga.module';
+import { ImagenesModule } from './imagenes/imagenes.module';
 
 
 @Module({
@@ -39,7 +40,8 @@ import { DataCargaModule } from './data-carga/data-carga.module';
     AsistenciaModule,
     NotasExamenesModule,
     ProfesorModule,
-    DataCargaModule],
+    DataCargaModule,
+    ImagenesModule],
 
   controllers: [AppController],
   providers: [AppService],

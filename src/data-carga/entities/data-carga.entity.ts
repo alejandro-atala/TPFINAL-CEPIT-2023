@@ -14,4 +14,5 @@ export class Textos {
   @Column({type : 'text'})
   texto: string; 
 
+  
 } 
