@@ -44,7 +44,9 @@ const NotasExamenesList = () => {
 
   const fetchAlumnosPorAnio = async (anio) => {
     try {
+
       const response = await axios.get(`http://localhost:3000/alumno/por-anio/${anio}`);
+
       setAlumnos(response.data);
     } catch (error) {
       console.error(`Error fetching alumnos del año ${anio}:`, error);

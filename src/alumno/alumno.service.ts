@@ -14,9 +14,10 @@ export class AlumnoService {
   ) {}
 
   async getAlumnosPorAnio(anio: string): Promise<Alumno[]> {
+  
     return this.alumnoRepository
       .createQueryBuilder('alumno')
-      .innerJoinAndSelect('alumno.curso', 'curso', 'curso.anio = :anio', { anio })
+      .innerJoinAndSelect('alumno.cursoIdCurso', 'curso', 'curso.anio = :anio', { anio })
       .getMany();
   }
 

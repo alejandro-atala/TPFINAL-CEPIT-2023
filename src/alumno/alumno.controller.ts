@@ -9,6 +9,7 @@ export class AlumnoController {
 
   @Get('por-anio/:anio')
   async getAlumnosPorAnio(@Param('anio') anio: string) {
+
     return this.alumnoService.getAlumnosPorAnio(anio);
   }
 
