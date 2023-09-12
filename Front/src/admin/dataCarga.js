@@ -323,9 +323,9 @@ const BloqueDeCarga = () => {
             <option value="home1">Home 1</option>
             <option value="home2">Home 2</option>
             <option value="home3">Home 3</option>
-            <option value="portada">Portada</option>
-            <option value="beneficios">Beneficios</option>
-            <option value="talleres">Talleres</option>
+            <option value="directora">Directora</option>
+            <option value="secretaria">Secretaria</option>
+            <option value="representante">Representante</option>
           </select>
 
           <input
