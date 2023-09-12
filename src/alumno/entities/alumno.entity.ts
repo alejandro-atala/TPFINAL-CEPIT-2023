@@ -22,6 +22,7 @@ export class Alumno {
 
 
   @ManyToOne(() => Curso, curso => curso.alumnos)
+  @JoinColumn({ name: 'curso' })
   cursoIdCurso: number;
 
 
