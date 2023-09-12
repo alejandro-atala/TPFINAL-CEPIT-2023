@@ -9,13 +9,14 @@ const BloqueDeCarga = () => {
   const [nuevoTexto, setNuevoTexto] = useState('');
   const [referencia, setReferencia] = useState(''); // Estado para la referencia seleccionada
   const [imagen, setImagen] = useState(null);
-  const [nombreImagen, setNombreImagen] = useState('');
+  const [nombrePagina, setNombrePagina] = useState('');
   const [textoSeleccionado, setTextoSeleccionado] = useState({ referencia: '', texto: '' });
   const [editing, setEditing] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [editMode, setEditMode] = useState(false);
-
+  const [imagenUrl, setImagenUrl] = useState('');
+  const [nombreImagenABorrar, setNombreImagenABorrar] = useState('');
 
 
   const nombresDeReferencia = {
@@ -166,29 +167,51 @@ const BloqueDeCarga = () => {
   };
 
   const handleGuardarImagen = async () => {
-    try {
-      const formData = new FormData();
-      formData.append('imagen', imagen);
-      formData.append('nombreImagen', nombreImagen); // Agregar el nombre de la imagen
+    if (!imagen || !nombrePagina) {
+      // Verificar si no se ha seleccionado una imagen o asignado un nombre
+      setErrorMessage('Debes seleccionar una imagen y asignar un nombre antes de guardarla');
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 2000);
+      return;
+    }
 
-      const response = await axios.post('http://localhost:3000/carga/img', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+    try {
+
+      const formData = new FormData();
+      formData.append('file', imagen);
+      formData.append('upload_preset', 'dgmwrypk');
+
+
+      const response = await axios.post(
+        'https://api.cloudinary.com/v1_1/difggjfxn/image/upload/',
+        formData
+      );
 
       console.log('Imagen guardada con éxito:', response.data);
+
+      const imageUrl = response.data.secure_url;
+      console.log(nombrePagina, imageUrl);
+
+      const responseDB = await axios.post('http://localhost:3000/imagenes', {
+        nombre: nombrePagina,
+        url: imageUrl,
+      });
+      console.log(responseDB);
+
       setSuccessMessage('Imagen guardada con éxito');
       setErrorMessage('');
-      // Ocultar el mensaje de éxito después de 2 segundos
+      setImagenUrl(imageUrl);
+
       setTimeout(() => {
         setSuccessMessage('');
       }, 2000);
     } catch (error) {
+
       console.error('Error al guardar la imagen:', error);
       setErrorMessage('Error al guardar la imagen');
       setSuccessMessage('');
-      // Ocultar el mensaje de error después de 2 segundos
+
       setTimeout(() => {
         setErrorMessage('');
       }, 2000);
@@ -196,6 +219,45 @@ const BloqueDeCarga = () => {
   };
 
 
+  const handleBorrarImagen = async () => {
+    if (!nombrePagina) {
+      // Verificar si se ha seleccionado una imagen para borrar
+      setErrorMessage('Debes seleccionar una imagen para borrar');
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 2000);
+      return;
+    }
+  
+    try {
+      // Realiza una solicitud DELETE a la API para eliminar la imagen por nombre
+      const response = await axios.delete(`http://localhost:3000/imagenes/nombre/${nombrePagina}`);
+      console.log('Imagen borrada con éxito:', response.data);
+  
+      // Actualiza los mensajes de éxito y error
+      setSuccessMessage('Imagen borrada con éxito');
+      setErrorMessage('');
+  
+      // Limpia el nombre de la imagen seleccionada
+      setNombrePagina('');
+  
+      // Oculta el mensaje de éxito después de 2 segundos
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 2000);
+    } catch (error) {
+      // Si ocurre un error al borrar la imagen, muestra un mensaje de error
+      console.error('Error al borrar la imagen:', error);
+      setErrorMessage('Error al borrar la imagen');
+      setSuccessMessage('');
+  
+      // Oculta el mensaje de error después de 2 segundos
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 2000);
+    }
+  };
+  
 
   const handleImagenChange = (e) => {
     const file = e.target.files[0];
@@ -243,7 +305,29 @@ const BloqueDeCarga = () => {
             Borrar Texto
           </button>
 
-          <h4 className="mt-3">Seleccione una imagen y su destino</h4>
+
+
+
+        </div>
+        <div className='mt-2 '>
+
+        <br></br><br></br><br></br>
+
+<h4>Carga de imagenes</h4>
+          <select
+            value={nombrePagina}
+            onChange={(e) => setNombrePagina(e.target.value)}
+            className="form-select mb-3"
+          >
+            <option value="">Selecciona una página</option>
+            <option value="home1">Home 1</option>
+            <option value="home2">Home 2</option>
+            <option value="home3">Home 3</option>
+            <option value="portada">Portada</option>
+            <option value="beneficios">Beneficios</option>
+            <option value="talleres">Talleres</option>
+          </select>
+
           <input
             type="file"
             accept="image/*"
@@ -251,24 +335,16 @@ const BloqueDeCarga = () => {
             className="form-control-file"
           />
 
-          <select
-            value={nombreImagen}
-            onChange={(e) => setNombreImagen(e.target.value)}
-            className="form-select mt-3"
-          >
-            <option value="Portada">Portada</option>
-            <option value="Home">Home</option>
-            <option value="Beneficios">Beneficios</option>
-            <option value="Talleres">Talleres</option>
-          </select>
+<br></br>
 
-          <button onClick={handleGuardarImagen} className="btn btn-success mt-3">
+<button onClick={handleGuardarImagen} className="btn btn-success mt-3">
             Guardar Imagen
           </button>
 
-        </div>
-        <div className='mt-2 '>
-        <MateriasList />
+          <button onClick={handleBorrarImagen} className="btn btn-danger mt-3">
+  Borrar Imagen
+</button>
+
           {successMessage && (
             <Alert variant="success" className="text-center">
               {successMessage}
@@ -279,6 +355,10 @@ const BloqueDeCarga = () => {
               {errorMessage}
             </Alert>
           )}
+
+<br></br><br></br>
+          <MateriasList />
+
         </div>
       </div>
     </div>
