@@ -156,9 +156,9 @@ console.log(data);
     try {
     let requiredFields = [];
     if (selectedTable === 'materias') {
-      requiredFields = ['idMateria', 'nombre'];
+      requiredFields = [ 'nombre'];
     } else if (selectedTable === 'curso') {
-      requiredFields = ['idCurso', 'anio'];
+      requiredFields = [ 'anio'];
     } else if (selectedTable === 'usuario') {
       requiredFields = [
         'nombre',
