@@ -15,7 +15,7 @@ const BloqueDeCarga = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [editMode, setEditMode] = useState(false);
-
+  const [imagenUrl, setImagenUrl] = useState('');
 
 
   const nombresDeReferencia = {
@@ -167,33 +167,47 @@ const BloqueDeCarga = () => {
 
   const handleGuardarImagen = async () => {
     try {
+      // Crea un objeto FormData y agrega la imagen y el upload preset
       const formData = new FormData();
-      formData.append('imagen', imagen);
-      formData.append('nombreImagen', nombreImagen); // Agregar el nombre de la imagen
-
-      const response = await axios.post('http://localhost:3000/carga/img', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
+      formData.append('file', imagen); // 'imagen' debe ser el archivo seleccionado
+      formData.append('upload_preset', 'dgmwrypk'); // Reemplaza con tu upload preset
+  
+      // Realiza una solicitud POST a la API de Cloudinary para cargar la imagen
+      const response = await axios.post(
+        'https://api.cloudinary.com/v1_1/difggjfxn/image/upload',
+        formData
+      );
+  
+      // Si la carga es exitosa, Cloudinary debería devolver información sobre la imagen
       console.log('Imagen guardada con éxito:', response.data);
+  
+      // La respuesta de Cloudinary debe contener la URL pública de la imagen
+      const imageUrl = response.data.secure_url;
+  
+      // Actualiza los mensajes de éxito y error
       setSuccessMessage('Imagen guardada con éxito');
       setErrorMessage('');
-      // Ocultar el mensaje de éxito después de 2 segundos
+  
+      // Actualiza la URL de la imagen en tu estado local (si es necesario)
+      setImagenUrl(imageUrl); // Debes tener un estado para almacenar la URL de la imagen
+  
+      // Oculta el mensaje de éxito después de 2 segundos
       setTimeout(() => {
         setSuccessMessage('');
       }, 2000);
     } catch (error) {
+      // Si ocurre un error al cargar la imagen, muestra un mensaje de error
       console.error('Error al guardar la imagen:', error);
       setErrorMessage('Error al guardar la imagen');
       setSuccessMessage('');
-      // Ocultar el mensaje de error después de 2 segundos
+  
+      // Oculta el mensaje de error después de 2 segundos
       setTimeout(() => {
         setErrorMessage('');
       }, 2000);
     }
   };
+  
 
 
 
@@ -243,28 +257,18 @@ const BloqueDeCarga = () => {
             Borrar Texto
           </button>
 
-          <h4 className="mt-3">Seleccione una imagen y su destino</h4>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImagenChange}
-            className="form-control-file"
-          />
-
-          <select
-            value={nombreImagen}
-            onChange={(e) => setNombreImagen(e.target.value)}
-            className="form-select mt-3"
-          >
-            <option value="Portada">Portada</option>
-            <option value="Home">Home</option>
-            <option value="Beneficios">Beneficios</option>
-            <option value="Talleres">Talleres</option>
-          </select>
-
           <button onClick={handleGuardarImagen} className="btn btn-success mt-3">
-            Guardar Imagen
-          </button>
+  Guardar Imagen
+</button>
+
+<input
+  type="file"
+  accept="image/*"
+  onChange={handleImagenChange}
+  className="form-control-file"
+/>
+
+
 
         </div>
         <div className='mt-2 '>
