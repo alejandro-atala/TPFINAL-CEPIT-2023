@@ -127,7 +127,7 @@ const CargaImagenes = () => {
           <select
             value={nombrePagina}
             onChange={(e) => setNombrePagina(e.target.value)}
-            className="form-select mb-3"
+            className="form-select mb-3 w-25"
           >
             <option value="">Selecciona una página</option>
             <option value="home1">Home 1</option>

@@ -231,7 +231,7 @@ const MateriasList = () => {
           </tbody>
         </table>
       </div>
-      <button className="btn btn-primary" onClick={handleSaveClick}>
+      <button className="btn btn-success" onClick={handleSaveClick}>
         Guardar Materias
       </button>
 

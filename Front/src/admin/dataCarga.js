@@ -178,7 +178,7 @@ const BloqueDeCarga = () => {
               setReferencia(e.target.value);
               cargarDetalleTexto(e.target.value);
             }}
-            className="form-select mb-3"
+            className="form-select mb-3 w-25"
           >
             <option value="">Selecciona un campo</option>
             {Object.keys(nombresDeReferencia).map((nombre) => (
@@ -193,7 +193,7 @@ const BloqueDeCarga = () => {
             placeholder="Texto"
             value={textoSeleccionado.texto}
             onChange={(e) => setTextoSeleccionado({ ...textoSeleccionado, texto: e.target.value })}
-            className="form-control"
+            className="form-control "
             style={{ height: '200px' }}
           />
 
