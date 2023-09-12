@@ -17,6 +17,7 @@ const InicioSesion = ({ onLogin }) => {
 
   const [message, setMessage] = useState('');
   const [sessionExpired, setSessionExpired] = useState(false);
+
   //setAlumnoLogueado('');
 
 
@@ -44,7 +45,8 @@ const InicioSesion = ({ onLogin }) => {
         const alumnoData = resp.data;
 
         if (alumnoData) {
-          const idDelAlumno = alumnoData.idAlumno; // Suponiendo que el ID del alumno está en la primera entrada
+          const idDelAlumno = alumnoData; // Suponiendo que el ID del alumno está en la primera entrada
+          console.log(idDelAlumno);
           setAlumnoLogueado(idDelAlumno);
         }
         navigate('/alumno');

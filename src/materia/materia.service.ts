@@ -34,9 +34,9 @@ export class MateriaService {
   
 
   async updateById(id: number, updateMateriaDto: UpdateMateriaDto): Promise<Materia | undefined> {
-    console.log(id)
+ 
     const materia = await this.materiaRepository.findOne({where: { idMateria:id } });
-    console.log(materia)
+  
     if (!materia) {
       return undefined; // La materia no existe
     }
