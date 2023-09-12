@@ -28,4 +28,9 @@ async findByNombre(nombre: string): Promise<Imagenes | undefined> {
 
   return this.imagenesRepository.findOne({ where: { nombre: nombre } });
 }
+
+async deleteByNombre(nombre: string): Promise<void> {
+  await this.imagenesRepository.delete({ nombre: nombre });
+}
+
 }

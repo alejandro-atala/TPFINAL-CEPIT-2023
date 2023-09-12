@@ -23,4 +23,10 @@ export class ImagenesController {
   async findByNombre(@Param('nombre') nombre: string): Promise<Imagenes> {
     return this.imagenesService.findByNombre(nombre);
   }
+
+  @Delete('nombre/:nombre')
+async deleteByNombre(@Param('nombre') nombre: string): Promise<void> {
+  await this.imagenesService.deleteByNombre(nombre);
+}
+
 }
