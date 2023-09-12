@@ -4,6 +4,9 @@ import { Alert, Form } from 'react-bootstrap';
 import MateriasList from '../PaginaProfe/Materias/materiasList';
 import CargaImagenes from './cargaImagenes';
 
+
+
+
 const BloqueDeCarga = () => {
   const [textos, setTextos] = useState([]);
   const [nuevoTexto, setNuevoTexto] = useState('');
@@ -196,10 +199,12 @@ const BloqueDeCarga = () => {
 
           <button
             onClick={handleGuardarEditarTexto}
-            className="btn btn-primary mt-3"
+            className={`btn ${editMode ? 'btn-primary' : 'btn-success'} mt-3`}
           >
             {editMode ? 'Guardar Edición' : 'Guardar'}
           </button>
+
+
 
           <button onClick={() => handleBorrarTexto(textoSeleccionado.id)} className="btn btn-danger mt-3 ms-2">
             Borrar Texto
@@ -227,7 +232,7 @@ const BloqueDeCarga = () => {
           <br></br><br></br>
 
           <MateriasList />
-
+          <br></br><br></br><br></br>
         </div>
       </div>
     </div>
