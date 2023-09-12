@@ -26,7 +26,7 @@ export class MateriaController {
 
   @Put(':id')
   async updateById(@Param('id') id: number, @Body() updateMateriaDto: UpdateMateriaDto): Promise<Materia | undefined> {
-    console.log(id)
+
     return await this.materiaService.updateById(id, updateMateriaDto);
   }
   

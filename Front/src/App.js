@@ -76,7 +76,7 @@ const App = () => {
                       <Route path="/" element={<Home />} />
                       {/* pagina alumno */}
                       <Route path="/notas" element={<Notas />} />
-                      <Route path="/boletin" element={<Boletin />} />
+                      <Route path="/boletin" element={<Boletin loggedInUser={loggedInUser}/>}  />
                       <Route path="/materias" element={<Materias />} />
                       <Route path="/Asistencia" element={<Asistencia />} />
                       <Route path="/avisos" element={<Avisos />} />
