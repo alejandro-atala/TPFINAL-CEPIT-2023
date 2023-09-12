@@ -14,7 +14,6 @@ export class AlumnoController {
   }
 
 
-
   @Get()
   async getAllAlumnos() {
     const alumnos = await this.alumnoService.getAllAlumnos();

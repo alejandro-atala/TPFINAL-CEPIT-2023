@@ -27,6 +27,7 @@ import { AlumnoProvider } from './Alumno/AlumnoContext';
 import MateriasList from './PaginaProfe/Materias/materiasList';
 import { AuthProvider } from './InicioSesion/tokenContext';
 import AdminPage from './admin/admin';
+import { ProfesorProvider } from './PaginaProfe/profesorContext';
 
 
 
@@ -55,6 +56,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <AlumnoProvider>
+        <ProfesorProvider>
         <AuthProvider>
           <div className="d-flex flex-column min-vh-100">
             <Navbar loggedInUser={loggedInUser}  onLogout={logout} />
@@ -92,7 +94,7 @@ const App = () => {
                       {/* pagina profesor */}
 
                       <Route path="/profesor" element={<Profesor />} />
-                      {/* <Route path="/Profmaterias" element={<MateriasList />} /> */}
+                      <Route path="/Profmaterias" element={<Materias />} /> 
                       <Route path="/ProfAsistencia" element={<AsistenciaList />} />
                       <Route path="/Profnotas" element={<NotasExamenesList />} />
 
@@ -112,6 +114,7 @@ const App = () => {
   )}
           </div>
         </AuthProvider>
+        </ProfesorProvider>
       </AlumnoProvider>
 
     </BrowserRouter>

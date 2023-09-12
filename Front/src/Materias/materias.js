@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './materias.css';
 import axios from 'axios';
 import { Alert } from 'react-bootstrap';
+import { useAlumno } from '../Alumno/AlumnoContext';
 
 const Materias = () => {
   const [selectedCurso, setSelectedCurso] = useState('');
   const [materiaCursoInputs, setMateriaCursoInputs] = useState(Array(25).fill(''));
   const [cursos, setCursos] = useState([]);
   const [materias, setMaterias] = useState([]);
+  const { setAlumnoLogueado } = useAlumno();
   const [showSuccessAlert, setShowSuccessAlert] = useState(false); // State for success alert
   const [showErrorAlert, setShowErrorAlert] = useState(false); // State for error alert
   const [materiasDelAnio, setMateriasDelAnio] = useState([]); // Estado para almacenar las materias del año seleccionado
@@ -17,12 +19,23 @@ const Materias = () => {
     fetchMaterias();
   }, []);
 
-  const fetchCursos = async () => {
+  const fetchCursosPorProfesor = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/curso/anios');
+     
+      const profesorId = setProfesorLogueado();
+  
+      if (!profesorId) {
+        console.error('No se ha identificado al profesor logueado.');
+        return;
+      }
+  
+      // Hacer una solicitud al servidor para obtener los cursos asignados al profesor logueado.
+      const response = await axios.get(`http://localhost:3000/curso/asignados?profesorId=${profesorId}`);
       const data = response.data;
-
+  
       if (Array.isArray(data)) {
+        // Aquí puedes manejar los datos de los cursos obtenidos
+        // Por ejemplo, establecerlos en un estado o realizar otras acciones.
         setCursos(data);
       } else {
         console.error('Received data is not an array:', data);
@@ -31,6 +44,41 @@ const Materias = () => {
       console.error('Error fetching cursos:', error);
     }
   };
+  
+  // Llamar a la función fetchCursos para obtener los cursos asignados al profesor logueado.
+  fetchCursosPorProfesor();
+  
+
+
+  const fetchCursoParaAlumno = async () => {
+    try {
+     
+      const alumnoId = setAlumnoLogueado();
+  
+      if (!alumnoId) {
+        console.error('No se ha identificado al alumno logueado.');
+        return;
+      }
+  
+      // Hacer una solicitud al servidor para obtener el curso asignado al alumno logueado.
+      const response = await axios.get(`http://localhost:3000/alumno/curso?alumnoId=${alumnoId}&anio=${anio}`);
+      const data = response.data;
+  
+      if (data && data.curso) {
+        // Aquí puedes manejar los datos del curso obtenido
+        // Por ejemplo, establecerlos en un estado o realizar otras acciones.
+        setCurso(data.curso);
+      } else {
+        console.error('No se encontró un curso asignado para el alumno logueado.');
+      }
+    } catch (error) {
+      console.error('Error fetching curso:', error);
+    }
+  };
+  
+  // Llamar a la función fetchCursoParaAlumno para obtener el curso asignado al alumno logueado.
+  fetchCursoParaAlumno();
+  
 
   useEffect(() => {
     fetchMaterias();
