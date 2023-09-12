@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Alert, Form } from 'react-bootstrap';
 import MateriasList from '../PaginaProfe/Materias/materiasList';
-
+import CargaImagenes from './cargaImagenes';
 
 const BloqueDeCarga = () => {
   const [textos, setTextos] = useState([]);
@@ -191,13 +191,13 @@ const BloqueDeCarga = () => {
       console.log('Imagen guardada con éxito:', response.data);
 
       const imageUrl = response.data.secure_url;
-      console.log(nombrePagina, imageUrl);
+
 
       const responseDB = await axios.post('http://localhost:3000/imagenes', {
         nombre: nombrePagina,
         url: imageUrl,
       });
-      console.log(responseDB);
+
 
       setSuccessMessage('Imagen guardada con éxito');
       setErrorMessage('');
@@ -312,7 +312,7 @@ const BloqueDeCarga = () => {
         <div className='mt-2 '>
 
         <br></br><br></br><br></br>
-
+{/* 
 <h4>Carga de imagenes</h4>
           <select
             value={nombrePagina}
@@ -349,7 +349,9 @@ const BloqueDeCarga = () => {
 
           <button onClick={handleBorrarImagen} className="btn btn-danger mt-3">
   Borrar Imagen
-</button>
+</button> */}
+
+<CargaImagenes />
 
           {successMessage && (
             <Alert variant="success" className="text-center">

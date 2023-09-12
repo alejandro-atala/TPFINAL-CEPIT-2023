@@ -65,7 +65,7 @@ const AdminPage = () => {
     try {
       const response = await axios.get(`http://localhost:3000/${selectedTable}`);
       const data = response.data;
-console.log(data);
+
       setTableData(data);
       setColumns(Object.keys(data[0] || {}));
       setEditedData(data.map((row) => ({ ...row, isEditing: false })));
@@ -179,7 +179,7 @@ console.log(data);
       return;
     }
 
-console.log(selectedTable)
+
     // Envía la nueva fila al servidor para su creación
     const response = await axios.post(`http://localhost:3000/${selectedTable}`, newRowData);
     const addedRow = response.data;
