@@ -14,6 +14,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { JwtModule } from '@nestjs/jwt';
 import { DataCargaModule } from './data-carga/data-carga.module';
 import { ImagenesModule } from './imagenes/imagenes.module';
+import { ChatModule } from './chat/chat.module';
 
 
 @Module({
@@ -41,7 +42,8 @@ import { ImagenesModule } from './imagenes/imagenes.module';
     NotasExamenesModule,
     ProfesorModule,
     DataCargaModule,
-    ImagenesModule],
+    ImagenesModule,
+    ChatModule],
 
   controllers: [AppController],
   providers: [AppService],

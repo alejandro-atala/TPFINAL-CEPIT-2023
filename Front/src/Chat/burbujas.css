@@ -1,0 +1,22 @@
+/* Chat.css */
+
+/* Estilo para las burbujas de chat */
+.chat-bubble {
+    padding: 10px;
+    border-radius: 20px;
+    margin: 10px;
+    max-width: 70%;
+  }
+  
+  .user-bubble {
+    background-color: #007bff;
+    color: #fff;
+    float: right;
+  }
+  
+  .other-bubble {
+    background-color: #f0f0f0;
+    color: #333;
+    float: left;
+  }
+  

@@ -1,11 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
+import Chat from '../Chat/chat';
 
 const Alumno = () => {
   return (
-    <div className="container mt-4 p-5">
+    <div className="container mt-4 p-5"><Chat />
     <div className="row row-cols-1 row-cols-md-3 g-4 ">
+
+
+
         <div className="col ">
           <div className="card h-100">
           <img src="https://images4.imagebam.com/ef/e7/3b/MENRF6F_o.jpg" className="card-img-top" alt="..." />

@@ -21,7 +21,7 @@ export class ProfesorService {
     return this.profesorRepository.save(nuevoProfesor);
   }
 
-  async findAllProfesores(): Promise<Profesor[]> {
+  async findAll(): Promise<Profesor[]> {
     return this.profesorRepository.find();
   }
 
