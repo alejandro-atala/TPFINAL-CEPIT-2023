@@ -23,13 +23,13 @@ const Materias = () => {
 
   const fetchCursosPorProfesor = async () => {
     try {
-      const idDelProfeor= profesorLogueado().idProfesor;
+      const idDelProfesor= profesorLogueado().idProfesor;
       console.log(profesorLogueado);
-      if (!idDelProfeor) {
+      if (!idDelProfesor) {
         console.error('No se ha identificado al profesor logueado.');
         return;
       }
-      const response = await axios.get(`http://localhost:3000/curso/asignados/${idDelProfeor}`);
+      const response = await axios.get(`http://localhost:3000/curso/asignados/${idDelProfesor}`);
       const data = response.data;
       console.log('Cursos:', data);
       if (Array.isArray(data)) {
