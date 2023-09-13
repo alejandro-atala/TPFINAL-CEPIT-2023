@@ -7,6 +7,9 @@ import { UpdateCursoDto } from './dto/update-curso.dto';
 
 @Injectable()
 export class CursoService {
+  static getCursosPorProfesor(profesorId: number) {
+    throw new Error('Method not implemented.');
+  }
   constructor(
     @InjectRepository(Curso) private cursoRepository: Repository<Curso>,
   ) {}
@@ -34,6 +37,17 @@ export class CursoService {
     }
     return curso;
   }
+
+  async getCursosAsignadosPorProfesor(id: number) {
+    const cursosAsignados = await this.cursoRepository
+    .createQueryBuilder('curso')
+    .innerJoinAndSelect('curso.profesores', 'profesor')
+    .where('profesor.id = :profesorId', { id })
+    .getMany();
+  
+    return cursosAsignados;
+  }
+
 
   async update(id: number, updateCursoDto: UpdateCursoDto): Promise<Curso> {
     console.log(id)

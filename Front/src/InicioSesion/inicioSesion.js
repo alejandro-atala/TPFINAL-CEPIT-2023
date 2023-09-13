@@ -56,6 +56,7 @@ const InicioSesion = ({ onLogin }) => {
       } else if (response.data.tipo === 'Profesor') {
         const resp = await axios.get(`http://localhost:3000/profesor/usuario/${idUsuario}`);
         const profesorData = resp.data;
+        
 
         if (profesorData) {
           const idDelprofesor = profesorData.idProfesor; 

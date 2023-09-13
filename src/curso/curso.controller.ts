@@ -1,20 +1,28 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put, Query, ParseIntPipe } from '@nestjs/common';
 import { CursoService } from './curso.service';
 import { CreateCursoDto } from './dto/create-curso.dto';
 import { UpdateCursoDto } from './dto/update-curso.dto';
 
 @Controller('curso')
 export class CursoController {
-  constructor(private readonly cursoService: CursoService) {}
+  constructor(private readonly cursoService: CursoService) { }
+  
+  @Post()
+  create(@Body() createCursoDto: CreateCursoDto) {
+    return this.cursoService.create(createCursoDto);
+  }
+
   @Get('anios')
   async getAnios() {
     const anios = await this.cursoService.getAnios();
     return anios.map(curso => curso.anio); // Extrae solo los valores de "anio"
   }
 
-  @Post()
-  create(@Body() createCursoDto: CreateCursoDto) {
-    return this.cursoService.create(createCursoDto);
+  @Get('asignados/:id')
+  getCursosAsignadosPorProfesor(
+    @Query('profesorId', ParseIntPipe) profesorId: number,
+  ) {
+    return this.cursoService.getCursosAsignadosPorProfesor(profesorId);
   }
 
   @Get()
