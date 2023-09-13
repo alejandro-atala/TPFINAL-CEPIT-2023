@@ -56,7 +56,11 @@ const App = () => {
   return (
     <BrowserRouter>
       <AlumnoProvider>
+<<<<<<< HEAD
         <ProfesorProvider>
+=======
+       <ProfesorProvider>
+>>>>>>> cd1e83b (agrego cambio de idUsuario por idProfesor)
         <AuthProvider>
           <div className="d-flex flex-column min-vh-100">
             <Navbar loggedInUser={loggedInUser}  onLogout={logout} />
