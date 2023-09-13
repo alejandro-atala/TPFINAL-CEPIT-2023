@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChatBubble from './burbujas';
+import { useAlumno } from '../Alumno/AlumnoContext';
+
 
 const Chat = () => {
   const [inputMessage, setInputMessage] = useState('');
@@ -11,12 +13,16 @@ const Chat = () => {
   ]);
   const [professors, setProfessors] = useState([]); // Lista de profesores
   const [selectedProfessor, setSelectedProfessor] = useState(null);
+  const { alumnoLogueado } = useAlumno(); // Acceder a la información del usuario desde el contexto
+
+console.log(alumnoLogueado)
 
   useEffect(() => {
     // Realizar una solicitud GET para obtener la lista de profesores
     axios.get('http://localhost:3000/profesor') // Ajusta la URL según tu ruta en el servidor
       .then((response) => {
         setProfessors(response.data);
+   
       })
       .catch((error) => {
         console.error('Error al obtener la lista de profesores:', error);
@@ -27,11 +33,11 @@ const Chat = () => {
     e.preventDefault();
     if (inputMessage.trim() === '' || selectedProfessor === null) return;
 
-    try {
+    try {console.log(selectedProfessor)
       const response = await axios.post('http://localhost:3000/chat/', {
         content: inputMessage,
-        idAlumno: '0',
-        idProfesor: selectedProfessor.id, // Envía el ID del profesor seleccionado
+        idAlumno: alumnoLogueado.idAlumno, //.idAlumno
+        idProfesor: selectedProfessor.idProfesor, // Envía el ID del profesor seleccionado
       });
 
       setChatMessages([...chatMessages, response.data]);
@@ -51,13 +57,13 @@ const Chat = () => {
               className="form-control"
               value={selectedProfessor ? selectedProfessor.id : ''}
               onChange={(e) => {
-                const selectedProf = professors.find((prof) => prof.id === parseInt(e.target.value));
+                const selectedProf = professors.find((prof) => prof.idProfesor === parseInt(e.target.value));
                 setSelectedProfessor(selectedProf);
               }}
             >
               <option value="">Selecciona un profesor</option>
               {professors.map((prof) => (
-                <option key={prof.id} value={prof.id}>
+                <option key={prof.idProfesor} value={prof.idProfesor}>
                   {prof.nombre} {/* Ajusta el nombre del profesor según tus datos */}
                 </option>
               ))}
