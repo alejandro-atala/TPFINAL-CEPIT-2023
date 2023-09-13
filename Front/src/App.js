@@ -57,10 +57,14 @@ const App = () => {
     <BrowserRouter>
       <AlumnoProvider>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <ProfesorProvider>
 =======
        <ProfesorProvider>
 >>>>>>> cd1e83b (agrego cambio de idUsuario por idProfesor)
+=======
+       <ProfesorProvider>
+>>>>>>> cd1e83b8526b9a3b62b8c85d005b6f36dc14b8b4
         <AuthProvider>
           <div className="d-flex flex-column min-vh-100">
             <Navbar loggedInUser={loggedInUser}  onLogout={logout} />
