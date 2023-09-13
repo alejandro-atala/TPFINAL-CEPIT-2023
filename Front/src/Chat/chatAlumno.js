@@ -4,7 +4,7 @@ import ChatBubble from './burbujas';
 import { useAlumno } from '../Alumno/AlumnoContext';
 
 
-const Chat = () => {
+const ChatAlumno = () => {
   const [inputMessage, setInputMessage] = useState('');
   const [chatMessages, setChatMessages] = useState([
     { message: 'Hola, soy un alumno.', type: 'user' },
@@ -91,4 +91,4 @@ console.log(alumnoLogueado)
   );
 }
 
-export default Chat;
+export default ChatAlumno;

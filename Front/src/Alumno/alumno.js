@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Chat from '../Chat/chat';
+
 
 const Alumno = () => {
   return (
-    <div className="container mt-4 p-5"><Chat />
+    <div className="container mt-4 p-5">
     <div className="row row-cols-1 row-cols-md-3 g-4 ">
 
 

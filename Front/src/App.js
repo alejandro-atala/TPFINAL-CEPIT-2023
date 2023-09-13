@@ -24,7 +24,7 @@ import Profesor from './PaginaProfe/profesor';
 import AsistenciaList from './PaginaProfe/Asistencia/asistenciaList';
 import NotasExamenesList from './PaginaProfe/NotasExamen/notaList';
 import { AlumnoProvider } from './Alumno/AlumnoContext';
-import MateriasList from './PaginaProfe/Materias/materiasList';
+import ChatProfesor from './Chat/chatProfesor';
 import { AuthProvider } from './InicioSesion/tokenContext';
 import AdminPage from './admin/admin';
 
@@ -57,7 +57,7 @@ const App = () => {
       <AlumnoProvider>
         <AuthProvider>
           <div className="d-flex flex-column min-vh-100">
-            <Navbar loggedInUser={loggedInUser}  onLogout={logout} />
+            <Navbar loggedInUser={loggedInUser.nombre}  onLogout={logout} />
             <div className="flex-grow-1">
               <div className="container-fluid">
                 <div className="row">
@@ -95,8 +95,8 @@ const App = () => {
                       {/* <Route path="/Profmaterias" element={<MateriasList />} /> */}
                       <Route path="/ProfAsistencia" element={<AsistenciaList />} />
                       <Route path="/Profnotas" element={<NotasExamenesList />} />
-
-
+                      <Route path="/ProfMensaje" element={<ChatProfesor loggedInUser={loggedInUser.nombre} />} />
+                      
                       <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
 
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import SessionExpiration from '../SesionExpired';
+import ChatProfesor from '../Chat/chatProfesor';
 
 
 const Profesor = () => {

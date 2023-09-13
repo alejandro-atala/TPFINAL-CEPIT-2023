@@ -28,8 +28,8 @@ const InicioSesion = ({ onLogin }) => {
       const response = await axios.post('http://localhost:3000/usuario/login', formData);
       const newToken = response.data.token;
       setToken(newToken);
-
-      onLogin(response.data.nombre);
+console.log(response.data);
+      onLogin(response.data); //envio todos loas datos del usuario
 
       const idUsuario = response.data.id;
 
