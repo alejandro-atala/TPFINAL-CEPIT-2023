@@ -22,7 +22,7 @@ const Asistencia = () => {
   const fetchAsistencias = async () => {
     try {
       console.log(alumnoLogueado);
-      const response = await axios.get(`http://localhost:3000/asistencia/${alumnoLogueado}`);
+      const response = await axios.get(`http://localhost:3000/asistencia/${alumnoLogueado.idAlumno}`);
       const asistenciasData = response.data;
       setAsistencias(asistenciasData);
       // Calcular los contadores
