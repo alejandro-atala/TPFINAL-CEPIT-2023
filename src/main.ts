@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 import * as express from 'express';
 import * as path from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 
 async function bootstrap() {
@@ -17,6 +18,14 @@ async function bootstrap() {
 
   app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
+  const config = new DocumentBuilder()
+  .setTitle('Demostracion API')
+  .setDescription('Backend API Dorrego')
+  .setVersion('1.0')
+  .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+ SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
 }
