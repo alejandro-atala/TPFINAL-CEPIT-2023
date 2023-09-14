@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Alert, Form } from 'react-bootstrap';
-import MateriasList from '../PaginaProfe/Materias/materiasList';
+import MateriasList from '../PaginaProfe/MateriasList/materiasList';
 import CargaImagenes from './cargaImagenes';
 
 

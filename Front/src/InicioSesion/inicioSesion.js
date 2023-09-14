@@ -47,9 +47,9 @@ const InicioSesion = ({ onLogin }) => {
         const alumnoData = resp.data;
 
         if (alumnoData) {
-          const idDelAlumno = alumnoData; // Suponiendo que el ID del alumno está en la primera entrada
+     
 
-          setAlumnoLogueado(idDelAlumno);
+          setAlumnoLogueado(alumnoData);
         }
         navigate('/alumno');
 
@@ -59,9 +59,9 @@ const InicioSesion = ({ onLogin }) => {
 
 
         if (profesorData) {
-          const idDelprofesor = profesorData.idProfesor; 
-     
-          setProfesorLogueado(idDelprofesor);
+    
+     console.log(profesorData)
+          setProfesorLogueado(profesorData);
         }
         navigate('/profesor');
       } else {
