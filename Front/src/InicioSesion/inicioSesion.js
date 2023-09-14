@@ -3,6 +3,7 @@ import './inicioSesion.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAlumno } from '../Alumno/AlumnoContext';
+import { useProfesor } from '../PaginaProfe/profesorContext';
 import { useAuth } from './tokenContext';
 import { Routes, Route } from 'react-router-dom';
 
@@ -10,6 +11,7 @@ const InicioSesion = ({ onLogin }) => {
   const { setToken } = useAuth();
   const navigate = useNavigate();
   const { setAlumnoLogueado } = useAlumno();
+  const { setProfesorLogueado } = useProfesor();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -46,12 +48,21 @@ const InicioSesion = ({ onLogin }) => {
 
         if (alumnoData) {
           const idDelAlumno = alumnoData; // Suponiendo que el ID del alumno está en la primera entrada
-          console.log(idDelAlumno);
+
           setAlumnoLogueado(idDelAlumno);
         }
         navigate('/alumno');
 
       } else if (response.data.tipo === 'Profesor') {
+        const resp = await axios.get(`http://localhost:3000/profesor/usuario/${idUsuario}`);
+        const profesorData = resp.data;
+
+
+        if (profesorData) {
+          const idDelprofesor = profesorData.idProfesor; 
+     
+          setProfesorLogueado(idDelprofesor);
+        }
         navigate('/profesor');
       } else {
         navigate('/alumno');
