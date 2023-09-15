@@ -29,8 +29,8 @@ import { AuthProvider } from './InicioSesion/tokenContext';
 import AdminPage from './admin/admin';
 import { ProfesorProvider } from './PaginaProfe/profesorContext';
 import MateriasProf from './PaginaProfe/Materias/materiasProf';
-import { UsuarioProvider} from '../src/usuarioContext'
-
+import { UsuarioProvider } from '../src/usuarioContext'
+import Contacto from './Contacto/Contacto';
 
 const App = () => {
 
@@ -51,73 +51,74 @@ const App = () => {
     // Redirige a /iniciarSesion
     window.location.href = '/iniciarSesion'; // Utiliza window.location.href para redirigir
   };
-  
+
 
 
   return (
     <BrowserRouter>
-    <UsuarioProvider>
-    <ProfesorProvider>
-      <AlumnoProvider>
-        <AuthProvider>
-          <div className="d-flex flex-column min-vh-100">
-            <Navbar loggedInUser={loggedInUser}  onLogout={logout} />
-            <div className="flex-grow-1">
-              <div className="container-fluid">
-                <div className="row">
-                  {loggedInUser === "Admin" ? null : (
-                    <div className="col-md-3">
-                      <Sidebar />
+      <UsuarioProvider>
+        <ProfesorProvider>
+          <AlumnoProvider>
+            <AuthProvider>
+              <div className="d-flex flex-column min-vh-100">
+                <Navbar loggedInUser={loggedInUser} onLogout={logout} />
+                <div className="flex-grow-1">
+                  <div className="container-fluid">
+                    <div className="row">
+                      {loggedInUser === "Admin" ? null : (
+                        <div className="col-md-3">
+                          <Sidebar />
+                        </div>
+                      )}
+                      <div className="col-md-9">
+                        {/* Contenido principal */}
+                        <Routes>
+
+                          <Route path="/iniciarSesion/*" element={<InicioSesion onLogin={handleLogin} />} />
+
+
+                          <Route path="/" element={<Home />} />
+                          {/* pagina alumno */}
+                          <Route path="/notas" element={<Notas />} />
+                          <Route path="/boletin" element={<Boletin loggedInUser={loggedInUser} />} />
+                          <Route path="/materias" element={<Materias />} />
+                          <Route path="/Asistencia" element={<Asistencia />} />
+                          <Route path="/avisos" element={<Avisos />} />
+                          <Route path="/mensaje" element={<Mensaje />} />
+
+                          <Route path="/contacto" element={<Contacto />} />
+                          <Route path="/plan-de-estudio" element={<PlanDeEstudios />} />
+                          <Route path="/beneficios" element={<Beneficios />} />
+                          <Route path="/inscripcion-online" element={<Inscripcion />} />
+                          <Route path="/directivos" element={<Directivos />} />
+                          <Route path="/talleres" element={<Talleres />} />
+                          <Route path="/proximos-eventos" element={<ProximosEventos />} />
+                          <Route path="/alumno" element={<Alumno />} />
+                          {/* pagina profesor */}
+
+                          <Route path="/profesor" element={<Profesor />} />
+                          <Route path="/Profmaterias" element={<MateriasProf />} />
+                          <Route path="/ProfAsistencia" element={<AsistenciaList />} />
+                          <Route path="/Profnotas" element={<NotasExamenesList />} />
+
+
+                          <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
+
+
+                        </Routes>
+                      </div>
                     </div>
-                  )}
-                  <div className="col-md-9">
-                    {/* Contenido principal */}
-                    <Routes>
-
-                      <Route path="/iniciarSesion/*" element={<InicioSesion onLogin={handleLogin} />} />
-
-
-                      <Route path="/" element={<Home />} />
-                      {/* pagina alumno */}
-                      <Route path="/notas" element={<Notas />} />
-                      <Route path="/boletin" element={<Boletin loggedInUser={loggedInUser}/>}  />
-                      <Route path="/materias" element={<Materias />} />
-                      <Route path="/Asistencia" element={<Asistencia />} />
-                      <Route path="/avisos" element={<Avisos />} />
-                      <Route path="/mensaje" element={<Mensaje />} />
-
-                      <Route path="/plan-de-estudio" element={<PlanDeEstudios />} />
-                      <Route path="/beneficios" element={<Beneficios />} />
-                      <Route path="/inscripcion-online" element={<Inscripcion />} />
-                      <Route path="/directivos" element={<Directivos />} />
-                      <Route path="/talleres" element={<Talleres />} />
-                      <Route path="/proximos-eventos" element={<ProximosEventos />} />
-                      <Route path="/alumno" element={<Alumno />} />
-                      {/* pagina profesor */}
-
-                      <Route path="/profesor" element={<Profesor />} />
-                      <Route path="/Profmaterias" element={<MateriasProf />} />
-                      <Route path="/ProfAsistencia" element={<AsistenciaList />} />
-                      <Route path="/Profnotas" element={<NotasExamenesList />} />
-
-
-                      <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
-
-
-                    </Routes>
                   </div>
                 </div>
+                {loggedInUser !== "Admin" && (
+                  <div className="footer">
+                    <Footer />
+                  </div>
+                )}
               </div>
-            </div>
-            {loggedInUser !== "Admin" && (
-    <div className="footer">
-      <Footer />
-    </div>
-  )}
-          </div>
-        </AuthProvider>
-      </AlumnoProvider>
-      </ProfesorProvider>
+            </AuthProvider>
+          </AlumnoProvider>
+        </ProfesorProvider>
       </UsuarioProvider>
     </BrowserRouter>
   );

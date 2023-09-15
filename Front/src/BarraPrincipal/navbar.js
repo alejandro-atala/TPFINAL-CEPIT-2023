@@ -34,7 +34,7 @@ const Navbar = ({ loggedInUser, onLogout  }) => {
               <Link to="/" className="nav-link">Estatuto y Reglamento</Link>
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-link">Contacto</Link>
+              <Link to="/contacto" className="nav-link">Contacto</Link>
             </li>
             {loggedInUser ? (
   <li className="nav-item">
