@@ -31,6 +31,8 @@ import { ProfesorProvider } from './PaginaProfe/profesorContext';
 import MateriasProf from './PaginaProfe/Materias/materiasProf';
 import { UsuarioProvider } from '../src/usuarioContext'
 import Contacto from './Contacto/Contacto';
+import NotasExamen from './PaginaProfe/NotasExamen/notasExamen';
+
 
 const App = () => {
 
@@ -101,8 +103,8 @@ const App = () => {
                           <Route path="/profesor" element={<Profesor />} />
                           <Route path="/Profmaterias" element={<MateriasProf />} />
                           <Route path="/ProfAsistencia" element={<AsistenciaList />} />
-                          <Route path="/Profnotas" element={<NotasExamenesList />} />
-
+                          <Route path="/Profnotas" element={<NotasExamen />} />
+                          <Route path="/ProfTrimestre" element={<NotasExamenesList />} />
 
                           <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
 

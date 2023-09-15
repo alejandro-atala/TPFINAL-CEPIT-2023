@@ -33,9 +33,9 @@ const Profesor = () => {
           <div className="card h-100">
           <img src="https://images4.imagebam.com/75/42/5c/MENRF62_o.jpg" className="card-img-top" alt="..." />
             <div className="card-body">
-              <h5 className="card-title">Boletin</h5>
-              <p className="card-text">Aqui podras ver el boletin </p>
-              <Link to="/Profboletin" className="btn btn-primary" id="myButton">Cargar Boletin</Link>
+              <h5 className="card-title">Trimestre</h5>
+              <p className="card-text">Aqui podras cargar las notas trimestrales </p>
+              <Link to="/ProfTrimestre" className="btn btn-primary" id="myButton">Cargar Notas trimestre</Link>
             </div>
             <div className="card-footer">
               <small className="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
