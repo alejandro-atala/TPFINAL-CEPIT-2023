@@ -3,7 +3,11 @@ import { ImagenesService } from './imagenes.service';
 import { CreateImageneDto } from './dto/create-imagene.dto';
 import { UpdateImageneDto } from './dto/update-imagene.dto';
 import { Imagenes } from './entities/imagene.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+
+
+@ApiTags('imagenes')
 @Controller('imagenes')
 export class ImagenesController {
   constructor(private readonly imagenesService: ImagenesService) {}

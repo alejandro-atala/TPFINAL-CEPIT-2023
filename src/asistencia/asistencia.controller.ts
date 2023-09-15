@@ -2,9 +2,11 @@ import { Controller, Post, Body, Get, Param, Patch, Delete, ParseIntPipe, UseGua
 import { AsistenciaService } from './asistencia.service';
 import { CreateAsistenciaDto } from './dto/create-asistencia.dto';
 import { UpdateAsistenciaDto } from './dto/update-asistencia.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 
 
+@ApiTags('asistencia')
 @Controller('asistencia')
 export class AsistenciaController {
   constructor(private readonly asistenciaService: AsistenciaService) {}

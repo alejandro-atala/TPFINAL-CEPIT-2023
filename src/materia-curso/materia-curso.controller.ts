@@ -1,9 +1,11 @@
 // src/materias/materias.controller.ts
 import { Controller, Post, Get, Body, Param } from '@nestjs/common';
 import { MateriasCursoService } from './materia-curso.service';
+import { ApiTags } from '@nestjs/swagger';
 
 
 
+@ApiTags('materias-curso')
 @Controller('materias-curso')
 export class MateriasCursoController {
   constructor(private readonly materiasCursoService: MateriasCursoService) {}

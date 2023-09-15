@@ -5,7 +5,11 @@ import { extname } from 'path';
 import * as path from 'path';
 import { DataCargaService } from './data-carga.service';
 import { CreateDataCargaDto } from './dto/create-data-carga.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+
+
+@ApiTags('carga')
 @Controller('carga')
 export class UploadController {
   constructor(private readonly textosService: DataCargaService) {}

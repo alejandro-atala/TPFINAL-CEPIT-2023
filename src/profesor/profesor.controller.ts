@@ -1,8 +1,11 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ProfesorService } from './profesor.service';
 import { UpdateProfesorDto } from './dto/update-profesor.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 
+
+@ApiTags('profesor')
 @Controller('profesor')
 export class ProfesorController {
   constructor(private readonly profesorService: ProfesorService) {}

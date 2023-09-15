@@ -3,7 +3,11 @@ import { MateriaService } from './materia.service';
 import { CreateMateriaDto } from './dto/create-materia.dto';
 import { UpdateMateriaDto } from './dto/update-materia.dto';
 import { Materia } from './entities/materia.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+
+
+@ApiTags('materias')
 @Controller('materias')
 export class MateriaController {
   constructor(private readonly materiaService: MateriaService) {}
