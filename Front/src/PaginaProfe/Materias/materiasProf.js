@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import './materiasProf.css';
 import axios from 'axios';
-import { useProfesor } from '../profesorContext';
+import { useUsuario } from '../../usuarioContext';
 
 const MateriasProf = () => {
   const [materiaCursoInputs, setMateriaCursoInputs] = useState(Array(25).fill(''));
-  const { profesorLogueado } = useProfesor();
+  const { usuarioLogueado } = useUsuario();
 
-
+console.log("cursos",usuarioLogueado.curso)
 
   useEffect(() => {
     fetchMaterias();
-  }, [profesorLogueado]);
+  }, [usuarioLogueado]);
 
   const fetchMaterias = async () => {
     try {
-      if (profesorLogueado && profesorLogueado.curso) {
+      if (usuarioLogueado && usuarioLogueado.curso) {
         let cursoString;
 
-        switch (profesorLogueado.curso) {
+        switch (usuarioLogueado.curso) {
           case 1:
             cursoString = "primero";
             break;
@@ -40,7 +40,10 @@ const MateriasProf = () => {
           default:
             cursoString = "desconocido";
         }
-
+        // if (response.data.tipo === 'Profesor') {
+        //   const resp = await axios.get(`http://localhost:3000/usuario/${idUsuario}`);
+        //   const profesorData = resp.data;
+  
         const response = await axios.get(`http://localhost:3000/materias-curso/${cursoString}`);
         const materiaCursoData = response.data;
 

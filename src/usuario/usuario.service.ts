@@ -116,6 +116,7 @@ export class UsuarioService {
           tipo: usuario.tipo,
           nombre: usuario.nombre,
           id: usuario.idUsuario,
+          curso: usuario.curso,
           token,
         };
    

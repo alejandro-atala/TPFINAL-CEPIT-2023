@@ -3,7 +3,7 @@ import './inicioSesion.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAlumno } from '../Alumno/AlumnoContext';
-import { useProfesor } from '../PaginaProfe/profesorContext';
+import { useUsuario } from '../usuarioContext';
 import { useAuth } from './tokenContext';
 import { Routes, Route } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ const InicioSesion = ({ onLogin }) => {
   const { setToken } = useAuth();
   const navigate = useNavigate();
   const { setAlumnoLogueado } = useAlumno();
-  const { setProfesorLogueado } = useProfesor();
+  const { setUsuarioLogueado } = useUsuario();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -30,9 +30,9 @@ const InicioSesion = ({ onLogin }) => {
       const response = await axios.post('http://localhost:3000/usuario/login', formData);
       const newToken = response.data.token;
       setToken(newToken);
-
+console.log("inicio",response.data)
       onLogin(response.data.nombre);
-
+      setUsuarioLogueado(response.data);
       const idUsuario = response.data.id;
 
       if (response.data.nombre === 'Admin' && response.data.tipo === 'Profesor') {
@@ -61,7 +61,7 @@ const InicioSesion = ({ onLogin }) => {
         if (profesorData) {
     
      console.log(profesorData)
-          setProfesorLogueado(profesorData);
+          // setProfesorLogueado(profesorData);
         }
         navigate('/profesor');
       } else {

@@ -29,7 +29,7 @@ import { AuthProvider } from './InicioSesion/tokenContext';
 import AdminPage from './admin/admin';
 import { ProfesorProvider } from './PaginaProfe/profesorContext';
 import MateriasProf from './PaginaProfe/Materias/materiasProf';
-
+import { UsuarioProvider} from '../src/usuarioContext'
 
 
 const App = () => {
@@ -56,6 +56,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+    <UsuarioProvider>
     <ProfesorProvider>
       <AlumnoProvider>
         <AuthProvider>
@@ -117,6 +118,7 @@ const App = () => {
         </AuthProvider>
       </AlumnoProvider>
       </ProfesorProvider>
+      </UsuarioProvider>
     </BrowserRouter>
   );
 };
