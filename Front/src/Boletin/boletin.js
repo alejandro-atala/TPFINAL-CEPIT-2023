@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table } from 'react-bootstrap';
+import { Table, Alert } from 'react-bootstrap';
 import { useAlumno } from '../Alumno/AlumnoContext';
 
 const Boletin = () => {
@@ -44,6 +44,30 @@ const Boletin = () => {
     return isNaN(promedio) ? '-' : promedio.toFixed(2); // Mostrar '-' si no se puede calcular el promedio
   };
 
+  const calcularPromedioAnual = () => {
+    const promediosPorMateria = materias.map((materia) => {
+      const notasMateria = notas.filter((nota) => nota.materia.idMateria === materia.idMateria);
+  
+      if (notasMateria.length === 0) {
+        return null; // Indicar que no hay notas para esta materia
+      }
+  
+      const sumaNotas = notasMateria.reduce((suma, nota) => suma + nota.nota, 0);
+      return sumaNotas / notasMateria.length;
+    }).filter((promedio) => promedio !== null); // Filtrar las materias sin notas
+  
+    if (promediosPorMateria.length === 0) {
+      return '-'; // Si no hay materias con notas, mostrar '-'
+    }
+  
+    const sumaPromedios = promediosPorMateria.reduce((suma, promedio) => suma + promedio, 0);
+    const promedioAnual = sumaPromedios / promediosPorMateria.length;
+  
+    return promedioAnual.toFixed(2);
+  };
+  
+  
+
   return (
     <div>
       <h2>Boletín de Notas</h2>
@@ -75,6 +99,10 @@ const Boletin = () => {
           ))}
         </tbody>
       </Table>
+      <Alert variant="success" className="col-md-4 mx-auto mt-4">
+  <h4 className="text-center">Su nota final del año es: {calcularPromedioAnual()}</h4>
+</Alert>
+
     </div>
   );
 };
