@@ -35,7 +35,7 @@ const BloqueDeCarga = () => {
     Taller_5: 'Taller 5',
     Taller_6: 'Taller 6',
     Contacto_Talleres: 'Contacto',
-    Contacto_General: 'Contacto General',
+    Contacto_General: 'Contacto_General',
     Facebook: 'Facebook',
     Instagram: 'Instagram',
     // Agrega más nombres de referencia según tus necesidades

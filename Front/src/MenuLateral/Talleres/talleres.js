@@ -40,7 +40,7 @@ const Talleres = () => {
     obtenerTextoEImagenPorReferencia('taller4', setTextoTaller4, setImagenTaller4);
     obtenerTextoEImagenPorReferencia('taller5', setTextoTaller5, setImagenTaller5);
     obtenerTextoEImagenPorReferencia('taller6', setTextoTaller6, setImagenTaller6);
-    obtenerTextoEImagenPorReferencia('Contacto', setTextoTelefono);
+    obtenerTextoEImagenPorReferencia('Contacto_Talleres', setTextoTelefono);
   }, []);
 
   const titulo = 'Talleres disponibles en nuestras instalaciones';
