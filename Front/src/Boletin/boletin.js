@@ -69,7 +69,7 @@ const Boletin = () => {
   
 
   return (
-    <div>
+    <div className='mt-5'>
       <h2>Boletín de Notas</h2>
       <Table striped bordered hover>
         <thead>
