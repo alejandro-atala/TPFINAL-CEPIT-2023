@@ -34,7 +34,7 @@ const BloqueDeCarga = () => {
     Taller_4: 'Taller 4',
     Taller_5: 'Taller 5',
     Taller_6: 'Taller 6',
-    Contacto_Talleres: 'Contacto',
+    Contacto_Talleres: 'Contacto_Talleres',
     Contacto_General: 'Contacto_General',
     Facebook: 'Facebook',
     Instagram: 'Instagram',

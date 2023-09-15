@@ -86,6 +86,7 @@ const App = () => {
                           <Route path="/avisos" element={<Avisos />} />
                           <Route path="/mensaje" element={<Mensaje />} />
 
+                          {/* pagina Home */}
                           <Route path="/contacto" element={<Contacto />} />
                           <Route path="/plan-de-estudio" element={<PlanDeEstudios />} />
                           <Route path="/beneficios" element={<Beneficios />} />
@@ -94,8 +95,9 @@ const App = () => {
                           <Route path="/talleres" element={<Talleres />} />
                           <Route path="/proximos-eventos" element={<ProximosEventos />} />
                           <Route path="/alumno" element={<Alumno />} />
-                          {/* pagina profesor */}
 
+
+                          {/* pagina profesor */}
                           <Route path="/profesor" element={<Profesor />} />
                           <Route path="/Profmaterias" element={<MateriasProf />} />
                           <Route path="/ProfAsistencia" element={<AsistenciaList />} />
