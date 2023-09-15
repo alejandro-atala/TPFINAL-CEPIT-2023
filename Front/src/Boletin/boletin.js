@@ -45,26 +45,45 @@ const Boletin = () => {
   };
 
   const calcularPromedioAnual = () => {
-    const promediosPorMateria = materias.map((materia) => {
-      const notasMateria = notas.filter((nota) => nota.materia.idMateria === materia.idMateria);
+    const promediosFinales = materias.map((materia) => {
+      // Obtener las notas de los trimestres 1, 2 y 3 para la materia actual
+      const notasMateria = [1, 2, 3].flatMap((trimestre) => obtenerNotasPorMateriaYTrimestre(materia.idMateria, trimestre));
   
       if (notasMateria.length === 0) {
-        return null; // Indicar que no hay notas para esta materia
+        return null; // No hay notas para estos trimestres
       }
   
-      const sumaNotas = notasMateria.reduce((suma, nota) => suma + nota.nota, 0);
-      return sumaNotas / notasMateria.length;
-    }).filter((promedio) => promedio !== null); // Filtrar las materias sin notas
+      // Filtrar solo las notas que son válidas
+      const notasValidas = notasMateria
+        .filter((nota) => !isNaN(parseFloat(nota.nota)))
+        .map((nota) => parseFloat(nota.nota)); // Obtener solo las notas como números
   
-    if (promediosPorMateria.length === 0) {
-      return '-'; // Si no hay materias con notas, mostrar '-'
+      if (notasValidas.length === 0) {
+        return null; // No hay notas válidas para estos trimestres
+      }
+  
+      // Calcular el promedio de las notas válidas
+      const sumaNotas = notasValidas.reduce((suma, nota) => suma + nota, 0);
+      const promedioTrimestres123 = sumaNotas / notasValidas.length;
+  
+      return promedioTrimestres123;
+    }).filter((promedio) => promedio !== null);
+  
+    if (promediosFinales.length === 0) {
+      return '-';
     }
   
-    const sumaPromedios = promediosPorMateria.reduce((suma, promedio) => suma + promedio, 0);
-    const promedioAnual = sumaPromedios / promediosPorMateria.length;
+    const sumaPromedios = promediosFinales.reduce((suma, promedio) => suma + promedio, 0);
+    const promedioAnual = sumaPromedios / promediosFinales.length;
   
     return promedioAnual.toFixed(2);
   };
+  
+  
+  
+  
+  
+  
   
   
 
