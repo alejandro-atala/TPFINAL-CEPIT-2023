@@ -48,7 +48,7 @@ const Profesor = () => {
             <div className="card-body">
               <h5 className="card-title">Materias del año en curso</h5>
               <p className="card-text">Aqui veras las meterias con sus dias y horarios</p>
-              <Link to="/Profmaterias" className="btn btn-primary" id="myButton">Cargar Materias</Link>
+              <Link to="/Profmaterias" className="btn btn-primary" id="myButton">Ver Materias de mis cursos</Link>
             </div>
             <div className="card-footer">
               <small className="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>
