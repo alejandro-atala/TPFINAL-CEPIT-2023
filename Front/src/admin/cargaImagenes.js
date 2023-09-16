@@ -20,7 +20,28 @@ const CargaImagenes = () => {
   const [nombreImagenABorrar, setNombreImagenABorrar] = useState('');
   const [imagenThumbnailUrl, setImagenThumbnailUrl] = useState(null); // Nuevo estado para la miniatura de la imagen
   const [miniaturaVisible, setMiniaturaVisible] = useState(true); // Estado para controlar la visibilidad de la miniatura
+  const [imagenMiniaturaUrl, setImagenMiniaturaUrl] = useState('');
 
+
+
+  const obtenerUrlImagenExistente = async (nombrePagina) => {
+    try {
+      const response = await axios.get(`http://localhost:3000/imagenes/nombre/${nombrePagina}`);
+
+      if (response.data) {
+        const imageUrl = response.data.url; // Suponiendo que obtenemos la URL de la primera imagen encontrada
+        console.log(response.data.url);
+        setImagenThumbnailUrl(imageUrl); // Actualiza la miniatura con la URL obtenida
+      }else setImagenThumbnailUrl('')
+
+      
+    } catch (error) {
+      console.error('Error al obtener la URL de la imagen existente:', error);
+    }
+  };
+
+  
+  
   const handleGuardarImagen = async () => {
     if (!imagen || !nombrePagina) {
       // Verificar si no se ha seleccionado una imagen o asignado un nombre
@@ -119,29 +140,40 @@ const CargaImagenes = () => {
     const file = e.target.files[0];
     setImagen(file);
     setMiniaturaVisible(true); // Mostrar la miniatura al seleccionar una nueva imagen
-
+    setImagenThumbnailUrl(null); // Reinicia la miniatura al seleccionar una nueva imagen
     const reader = new FileReader();
     reader.onload = (event) => {
-      setImagenThumbnailUrl(event.target.result);
+      setImagenMiniaturaUrl(event.target.result); // Actualizar la miniatura de la imagen
     };
     reader.readAsDataURL(file);
   };
+  
 
-
+  const handleNombrePaginaChange = (e) => {
+    const selectedName = e.target.value;
+    setNombrePagina(selectedName);
+    if (selectedName) {
+      obtenerUrlImagenExistente(selectedName);
+    } else {
+      setImagenThumbnailUrl(null); // Si no hay nombre seleccionado, reinicia la miniatura
+    }
+  };
+  
 
   return (
     <div>
 
       <h4>Carga de imagenes</h4>
       <select
-        value={nombrePagina}
-        onChange={(e) => setNombrePagina(e.target.value)}
-        className="form-select mb-3 w-25"
-      >
+  value={nombrePagina}
+  onChange={handleNombrePaginaChange} // Llama a la función al cambiar el nombre de la página
+  className="form-select mb-3 w-25"
+>
+
         <option value="">Selecciona una página</option>
-        <option value="home1">Home 1</option>
-        <option value="home2">Home 2</option>
-        <option value="home3">Home 3</option>
+        <option value="Home1">Home 1</option>
+        <option value="Home2">Home 2</option>
+        <option value="Home3">Home 3</option>
         <option value="directora">Directora</option>
         <option value="secretaria">Secretaria</option>
         <option value="representante">Representante</option>
