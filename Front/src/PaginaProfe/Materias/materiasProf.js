@@ -1,58 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import './materiasProf.css';
 import axios from 'axios';
 import { useUsuario } from '../../usuarioContext';
 
 const MateriasProf = () => {
   const [materiaCursoInputs, setMateriaCursoInputs] = useState(Array(25).fill(''));
+  const [cursos, setCursos] = useState([]);
+  const [selectedCurso, setSelectedCurso] = useState(''); // State to hold the selected curso
   const { usuarioLogueado } = useUsuario();
 
-console.log("cursos",usuarioLogueado.curso)
-
   useEffect(() => {
-    fetchMaterias();
+    // Initialize cursos when usuarioLogueado changes
+    if (usuarioLogueado && usuarioLogueado.curso) {
+      const cursoIds = usuarioLogueado.curso.split(',').map((id) => id.trim());
+      const cursoTexts = cursoIds.map((id) => convertCursoIdToText(id));
+      setCursos(cursoTexts);
+    } else {
+      // Reset cursos when usuarioLogueado is empty or curso is empty
+      setCursos([]);
+    }
   }, [usuarioLogueado]);
 
-  const fetchMaterias = async () => {
+  const fetchMaterias = async (cursoText) => {
     try {
-      if (usuarioLogueado && usuarioLogueado.curso) {
-        let cursoString;
+      const response = await axios.get(`http://localhost:3000/materias-curso/${cursoText}`);
+      const materiaCursoData = response.data;
 
-        switch (usuarioLogueado.curso) {
-          case 1:
-            cursoString = "primero";
-            break;
-          case 2:
-            cursoString = "segundo";
-            break;
-          case 3:
-            cursoString = "tercero";
-            break;
-          case 4:
-            cursoString = "cuarto";
-            break;
-          case 5:
-            cursoString = "quinto";
-            break;
-          case 6:
-            cursoString = "sexto";
-            break;
-          default:
-            cursoString = "desconocido";
-        }
-        // if (response.data.tipo === 'Profesor') {
-        //   const resp = await axios.get(`http://localhost:3000/usuario/${idUsuario}`);
-        //   const profesorData = resp.data;
-  
-        const response = await axios.get(`http://localhost:3000/materias-curso/${cursoString}`);
-        const materiaCursoData = response.data;
-
-        if (materiaCursoData.length > 0) {
-          const updatedMateriaCursoInputs = materiaCursoData.map((materiaItem) => materiaItem.materia || '');
-          setMateriaCursoInputs(updatedMateriaCursoInputs);
-        } else {
-          setMateriaCursoInputs(Array(25).fill(''));
-        }
+      if (materiaCursoData.length > 0) {
+        const updatedMateriaCursoInputs = materiaCursoData.map((materiaItem) => materiaItem.materia || '');
+        setMateriaCursoInputs(updatedMateriaCursoInputs);
       } else {
         setMateriaCursoInputs(Array(25).fill(''));
       }
@@ -63,20 +38,55 @@ console.log("cursos",usuarioLogueado.curso)
 
   const renderNonEditableCell = (cellIndex, materia) => {
     return (
-      <td>
+      <td key={cellIndex}>
         <div>{materia}</div>
       </td>
     );
+  };
+
+  const handleCursoChange = (e) => {
+    const selectedCurso = e.target.value;
+    setSelectedCurso(selectedCurso);
+    fetchMaterias(selectedCurso);
   };
 
   const horarios = [
     '8:00-9:00', '9:00-10:00', '10:00-11:00', '11:00-12:00', '12:00-13:00'
   ];
 
+  const convertCursoIdToText = (cursoId) => {
+    switch (cursoId) {
+      case '1':
+        return 'Primero';
+      case '2':
+        return 'Segundo';
+      case '3':
+        return 'Tercero';
+      case '4':
+        return 'Cuarto';
+      case '5':
+        return 'Quinto';
+      case '6':
+        return 'Sexto';
+      default:
+        return 'Desconocido';
+    }
+  };
+
   return (
     <div className="container d-flex flex-column justify-content-center">
-      <br></br>
       <h4 className="mb-4">Aquí podrás ver las materias según los días y horarios</h4>
+      <div className="mb-3">
+        <label>Seleccione un curso:</label>
+        <select className="form-select" onChange={handleCursoChange} value={selectedCurso}>
+          <option value="">Seleccione un curso</option>
+          {cursos.map((cursoText) => (
+            <option key={cursoText} value={cursoText}>
+              {cursoText}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className="table-responsive mb-4">
         <table className="table table-bordered">
           <thead>

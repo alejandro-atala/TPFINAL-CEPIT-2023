@@ -20,7 +20,7 @@ const Profesor = () => {
           <img src="https://images4.imagebam.com/ef/e7/3b/MENRF6F_o.jpg" className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Notas de examenes</h5>
-              <p className="card-text">Aqui podras ver las notas de los examenes realizados</p>
+              <p className="card-text">Aqui podras cargar las notas de los examenes realizados</p>
               <Link to="/Profnotas" className="btn btn-primary" id="myButton">Cargar Notas</Link>
             </div>
             <div className="card-footer">
