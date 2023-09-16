@@ -58,9 +58,9 @@ const Materias = () => {
 
   const renderNonEditableCell = (cellIndex, materia) => {
     return (
-      <td>
+
         <div>{materia}</div>
-      </td>
+
     );
   };
 
@@ -73,30 +73,31 @@ const Materias = () => {
       <br></br>
       <h4 className="mb-4">Aquí podrás ver las materias según los días y horarios</h4>
       <div className="table-responsive mb-4">
-        <table className="table table-bordered">
-          <thead>
-            <tr>
-              <th className="column-header">Horario</th>
-              <th className="column-header">Lunes</th>
-              <th className="column-header">Martes</th>
-              <th className="column-header">Miércoles</th>
-              <th className="column-header">Jueves</th>
-              <th className="column-header">Viernes</th>
-            </tr>
-          </thead>
-          <tbody>
-            {horarios.map((horario, index) => (
-              <tr key={index}>
-                <td>{horario}</td>
-                {renderNonEditableCell(index, materiaCursoInputs[index])}
-                {renderNonEditableCell(index + 5, materiaCursoInputs[index + 5])}
-                {renderNonEditableCell(index + 10, materiaCursoInputs[index + 10])}
-                {renderNonEditableCell(index + 15, materiaCursoInputs[index + 15])}
-                {renderNonEditableCell(index + 20, materiaCursoInputs[index + 20])}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <table className="table table-bordered">
+  <thead>
+    <tr>
+      <th className="column-header">Horario</th>
+      <th className="column-header">Lunes</th>
+      <th className="column-header">Martes</th>
+      <th className="column-header">Miércoles</th>
+      <th className="column-header">Jueves</th>
+      <th className="column-header">Viernes</th>
+    </tr>
+  </thead>
+  <tbody>
+    {horarios.map((horario, index) => (
+      <tr key={index}>
+        <td>{horario}</td>
+        {['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'].map((day, dayIndex) => (
+          <td key={dayIndex}>
+            {renderNonEditableCell(index * 5 + dayIndex, materiaCursoInputs[index * 5 + dayIndex])}
+          </td>
+        ))}
+      </tr>
+    ))}
+  </tbody>
+</table>
+
       </div>
     </div>
   );
