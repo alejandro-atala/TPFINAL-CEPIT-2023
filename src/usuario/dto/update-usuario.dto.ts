@@ -11,4 +11,5 @@ export class UpdateUsuarioDto  {
     public email? :string;
     public password?: string;
     public tipo ?:string;
+    public curso? :string;
 }

@@ -31,14 +31,14 @@ export class Profesor {
   @OneToMany(() => Materia, materia => materia.idMateria)
   materias: Materia[];
 
-  // @Column()
-  // usuarioId: number;
+  @Column()
+  usuarioId: number;
 
 
 
   @OneToOne(() => Usuario, usuario => usuario.idUsuario)
   @JoinColumn({ name: 'usuarioId' })
-  usuarioId: number;
+  usuario: number;
 
   
   // @ManyToOne(() => Curso, curso => curso.alumnos)

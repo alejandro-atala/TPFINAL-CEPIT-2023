@@ -5,5 +5,5 @@ export class UpdateProfesorDto extends PartialType(CreateProfesorDto) {
 
     public idProfesor?: number;
     public nombre?: string;
-
+    public curso?: string;
 }
