@@ -51,7 +51,7 @@ const Notas = () => {
           {notasTrimestre0.map((nota, index) => (
             <tr key={index}>
               <td>{formatDate(nota.fechaNota)}</td>
-              <td>{nota.materia.materia}</td>
+              <td>{nota.materia.nombre}</td>
               <td>{nota.nota}</td>
               <td> {nota.nota !== null ? (nota.nota >= 7 ? 'Aprobado' : 'Desaprobado') : '-'}</td>
               <td>{nota.nota !== null && nota.nota < 7 ? formatDate(nota.fechaRecuperatorio) : '-'}</td>
