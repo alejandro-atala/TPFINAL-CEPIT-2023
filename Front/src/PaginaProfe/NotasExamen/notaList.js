@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Form, ListGroup, Button, Col, Alert } from 'react-bootstrap';
 import './notas.css';
 import axios from 'axios';
+import { useUsuario } from '../../usuarioContext';
+
 
 const NotasExamenesList = () => {
   const [anios, setAnios] = useState([]);
@@ -12,11 +14,20 @@ const NotasExamenesList = () => {
   const [materias, setMaterias] = useState([]); // Agregado
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const { usuarioLogueado } = useUsuario();
+  const [cursos, setCursos] = useState([]);
 
-  useEffect(() => {
-    fetchAnios();
-    fetchMaterias(); // Agregado
-  }, []);
+useEffect(() => {
+    // Initialize cursos when usuarioLogueado changes
+    if (usuarioLogueado && usuarioLogueado.curso) {
+      const cursoIds = usuarioLogueado.curso.split(',').map((id) => id.trim());
+      const cursoTexts = cursoIds.map((id) => convertCursoIdToText(id));
+      setCursos(cursoTexts);
+    } else {
+      // Reset cursos when usuarioLogueado is empty or curso is empty
+      setCursos([]);
+    }
+  }, [usuarioLogueado]);
 
   const fetchAnios = async () => {
     try {
@@ -144,6 +155,25 @@ const NotasExamenesList = () => {
     }
   };
 
+  const convertCursoIdToText = (cursoId) => {
+    switch (cursoId) {
+      case '1':
+        return 'Primero';
+      case '2':
+        return 'Segundo';
+      case '3':
+        return 'Tercero';
+      case '4':
+        return 'Cuarto';
+      case '5':
+        return 'Quinto';
+      case '6':
+        return 'Sexto';
+      default:
+        return 'Desconocido';
+    }
+  };
+
   return (
     <div className="col-9">
       <h2>Registro de Notas de Exámenes</h2>
@@ -152,7 +182,7 @@ const NotasExamenesList = () => {
           <Form.Label>Seleccionar Año</Form.Label>
           <Form.Control as="select" onChange={handleAnioChange} value={selectedAnio}>
             <option value="">Seleccione un año</option>
-            {anios.map((anio) => (
+            {cursos.map((anio) => (
               <option key={anio} value={anio}>
                 {anio}
               </option>
