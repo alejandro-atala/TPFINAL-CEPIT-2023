@@ -72,15 +72,16 @@ const CargaImagenes = () => {
       setMiniaturaVisible(true); // Make thumbnail visible
   
       setTimeout(() => {
+        setImagenThumbnailUrl('');
         setMiniaturaVisible(false); // Hide the image after 2 seconds
-      }, 2000);
+      }, 3000);
   
       setImagen(null); // Limpia la imagen actual después de guardar
       setNombrePagina('');
 
       setTimeout(() => {
         setSuccessMessage('');
-      }, 2000);
+      }, 3000);
     } catch (error) {
       console.error('Error al guardar la imagen:', error);
       setErrorMessage('Error al guardar la imagen');
@@ -198,7 +199,7 @@ const CargaImagenes = () => {
         className="form-control-file"
       />
         
-        <h6>Imagen cargada previamente</h6>
+        {imagenThumbnailUrl && <h6>Imagen cargada </h6>}
       {imagenThumbnailUrl && (
         <img
           src={imagenThumbnailUrl}
