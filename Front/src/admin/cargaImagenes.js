@@ -6,100 +6,92 @@ import { Alert, Form } from 'react-bootstrap';
 
 const CargaImagenes = () => {
 
-  const [textos, setTextos] = useState([]);
-  const [nuevoTexto, setNuevoTexto] = useState('');
-  const [referencia, setReferencia] = useState(''); // Estado para la referencia seleccionada
+
+
   const [imagen, setImagen] = useState(null);
   const [nombrePagina, setNombrePagina] = useState('');
-  const [textoSeleccionado, setTextoSeleccionado] = useState({ referencia: '', texto: '' });
-  const [editing, setEditing] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [editMode, setEditMode] = useState(false);
   const [imagenUrl, setImagenUrl] = useState('');
-  const [nombreImagenABorrar, setNombreImagenABorrar] = useState('');
   const [imagenThumbnailUrl, setImagenThumbnailUrl] = useState(null); // Nuevo estado para la miniatura de la imagen
   const [miniaturaVisible, setMiniaturaVisible] = useState(true); // Estado para controlar la visibilidad de la miniatura
   const [imagenMiniaturaUrl, setImagenMiniaturaUrl] = useState('');
+  // const [forceRerender, setForceRerender] = useState(false);
 
 
 
   const obtenerUrlImagenExistente = async (nombrePagina) => {
     try {
       const response = await axios.get(`http://localhost:3000/imagenes/nombre/${nombrePagina}`);
-
+  
       if (response.data) {
-        const imageUrl = response.data.url; // Suponiendo que obtenemos la URL de la primera imagen encontrada
-        console.log(response.data.url);
-        setImagenThumbnailUrl(imageUrl); // Actualiza la miniatura con la URL obtenida
-      }else setImagenThumbnailUrl('')
-
-      
+        const imageUrl = response.data.url;
+        console.log(imageUrl);
+  
+        // Actualiza la miniatura con la URL obtenida
+        setImagenThumbnailUrl(imageUrl);
+      } else {
+        setImagenThumbnailUrl(''); // Si no hay URL, limpia la miniatura
+      }
     } catch (error) {
       console.error('Error al obtener la URL de la imagen existente:', error);
     }
   };
 
-  
-  
   const handleGuardarImagen = async () => {
     if (!imagen || !nombrePagina) {
-      // Verificar si no se ha seleccionado una imagen o asignado un nombre
       setErrorMessage('Debes seleccionar una imagen y asignar un nombre antes de guardarla');
       setTimeout(() => {
         setErrorMessage('');
       }, 2000);
       return;
     }
-
+  
     try {
-
       const formData = new FormData();
       formData.append('file', imagen);
       formData.append('upload_preset', 'dgmwrypk');
-
-
+  
       const response = await axios.post(
         'https://api.cloudinary.com/v1_1/difggjfxn/image/upload/',
         formData
       );
-
+  
       console.log('Imagen guardada con éxito:', response.data);
-
+  
       const imageUrl = response.data.secure_url;
-
-
+  
       const responseDB = await axios.post('http://localhost:3000/imagenes', {
         nombre: nombrePagina,
         url: imageUrl,
       });
 
-
       setSuccessMessage('Imagen guardada con éxito');
       setErrorMessage('');
       setImagenUrl(imageUrl);
       setMiniaturaVisible(false);
-
+      setImagen(null); // Limpia la imagen actual después de guardar
+      setImagenThumbnailUrl(null); // Limpia la miniatura
+  
       setTimeout(() => {
         setSuccessMessage('');
       }, 2000);
     } catch (error) {
-
       console.error('Error al guardar la imagen:', error);
       setErrorMessage('Error al guardar la imagen');
       setSuccessMessage('');
-
+  
       setTimeout(() => {
         setErrorMessage('');
       }, 2000);
     }
   };
-
+  
 
   const handleBorrarImagen = async () => {
-    if (!nombrePagina) {
+    if (!nombrePagina || !imagenThumbnailUrl) {
       // Verificar si se ha seleccionado una imagen para borrar
-      setErrorMessage('Debes seleccionar una imagen para borrar');
+      setErrorMessage('Debes seleccionar una imagen para borrar ó no hay imagenes cargadas');
       setTimeout(() => {
         setErrorMessage('');
       }, 2000);
@@ -117,7 +109,9 @@ const CargaImagenes = () => {
 
       // Limpia el nombre de la imagen seleccionada
       setNombrePagina('');
-
+      setMiniaturaVisible(false);
+      setImagenThumbnailUrl(null); // Limpia la miniatura
+  
       // Oculta el mensaje de éxito después de 2 segundos
       setTimeout(() => {
         setSuccessMessage('');
@@ -139,25 +133,36 @@ const CargaImagenes = () => {
   const handleImagenChange = (e) => {
     const file = e.target.files[0];
     setImagen(file);
-    setMiniaturaVisible(true); // Mostrar la miniatura al seleccionar una nueva imagen
-    setImagenThumbnailUrl(null); // Reinicia la miniatura al seleccionar una nueva imagen
+    setMiniaturaVisible(true);
+    setImagenThumbnailUrl(null);
     const reader = new FileReader();
     reader.onload = (event) => {
-      setImagenMiniaturaUrl(event.target.result); // Actualizar la miniatura de la imagen
+      setImagenMiniaturaUrl(event.target.result);
     };
     reader.readAsDataURL(file);
   };
   
+  
+  // useEffect(() => {
+  //   console.log('forceRerender actualizado:', forceRerender);
+  // }, [forceRerender]);
+  
+  
+  
 
   const handleNombrePaginaChange = (e) => {
+    setMiniaturaVisible(true);
     const selectedName = e.target.value;
     setNombrePagina(selectedName);
     if (selectedName) {
+    
       obtenerUrlImagenExistente(selectedName);
     } else {
       setImagenThumbnailUrl(null); // Si no hay nombre seleccionado, reinicia la miniatura
     }
   };
+  
+  
   
 
   return (
@@ -191,9 +196,17 @@ const CargaImagenes = () => {
         onChange={handleImagenChange}
         className="form-control-file"
       />
-       {miniaturaVisible && imagenThumbnailUrl && (
-        <img src={imagenThumbnailUrl} alt="Miniatura de la imagen" style={{ width: '150px', height: '100px' }} />
+        
+        <h6>Imagen cargada previamente</h6>
+      {imagenThumbnailUrl && (
+        <img
+          // key={forceRerender}
+          src={imagenThumbnailUrl}
+          alt="Miniatura de la imagen"
+          style={{ width: '150px', height: '100px' }}
+        />
       )}
+
 
       <br></br>
 
