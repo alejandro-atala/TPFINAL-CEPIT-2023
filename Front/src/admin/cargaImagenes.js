@@ -77,7 +77,8 @@ const CargaImagenes = () => {
       }, 2000);
   
       setImagen(null); // Limpia la imagen actual después de guardar
-  
+      setNombrePagina('');
+      
       setTimeout(() => {
         setSuccessMessage('');
       }, 2000);
