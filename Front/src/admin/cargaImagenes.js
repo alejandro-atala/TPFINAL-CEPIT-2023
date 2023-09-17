@@ -16,7 +16,7 @@ const CargaImagenes = () => {
   const [imagenThumbnailUrl, setImagenThumbnailUrl] = useState(null); // Nuevo estado para la miniatura de la imagen
   const [miniaturaVisible, setMiniaturaVisible] = useState(true); // Estado para controlar la visibilidad de la miniatura
   const [imagenMiniaturaUrl, setImagenMiniaturaUrl] = useState('');
-  // const [forceRerender, setForceRerender] = useState(false);
+
 
 
 
@@ -26,7 +26,6 @@ const CargaImagenes = () => {
   
       if (response.data) {
         const imageUrl = response.data.url;
-        console.log(imageUrl);
   
         // Actualiza la miniatura con la URL obtenida
         setImagenThumbnailUrl(imageUrl);
@@ -78,7 +77,7 @@ const CargaImagenes = () => {
   
       setImagen(null); // Limpia la imagen actual después de guardar
       setNombrePagina('');
-      
+
       setTimeout(() => {
         setSuccessMessage('');
       }, 2000);
@@ -150,12 +149,7 @@ const CargaImagenes = () => {
   };
   
   
-  // useEffect(() => {
-  //   console.log('forceRerender actualizado:', forceRerender);
-  // }, [forceRerender]);
-  
-  
-  
+
 
   const handleNombrePaginaChange = (e) => {
     setMiniaturaVisible(true);
@@ -207,7 +201,6 @@ const CargaImagenes = () => {
         <h6>Imagen cargada previamente</h6>
       {imagenThumbnailUrl && (
         <img
-          // key={forceRerender}
           src={imagenThumbnailUrl}
           alt="Miniatura de la imagen"
           style={{ width: '150px', height: '100px' }}
