@@ -65,13 +65,18 @@ const CargaImagenes = () => {
         nombre: nombrePagina,
         url: imageUrl,
       });
-
+  
       setSuccessMessage('Imagen guardada con éxito');
       setErrorMessage('');
       setImagenUrl(imageUrl);
-      setMiniaturaVisible(false);
+      setImagenThumbnailUrl(imageUrl); // Set thumbnail URL to the saved image
+      setMiniaturaVisible(true); // Make thumbnail visible
+  
+      setTimeout(() => {
+        setMiniaturaVisible(false); // Hide the image after 2 seconds
+      }, 2000);
+  
       setImagen(null); // Limpia la imagen actual después de guardar
-      setImagenThumbnailUrl(null); // Limpia la miniatura
   
       setTimeout(() => {
         setSuccessMessage('');
@@ -86,6 +91,7 @@ const CargaImagenes = () => {
       }, 2000);
     }
   };
+  
   
 
   const handleBorrarImagen = async () => {
