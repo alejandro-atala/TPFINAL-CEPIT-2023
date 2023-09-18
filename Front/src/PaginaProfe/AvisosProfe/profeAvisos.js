@@ -195,8 +195,7 @@ const AvisosProfe = () => {
       {avisos.map((aviso) => (
   <div key={aviso.idAviso} className="card">
             <div className="card-body">
-              <h5 className="card-title">Aviso del profesor: <span className="nombre-profesor">{usuarioLogueado.nombre}</span></h5>
-              <h6>Dirigido al Curso:  <span className="numero-curso">{aviso.curso}</span></h6>
+              <h5>Aviso dirigido al Curso:  <span className="numero-curso">{aviso.curso}</span></h5>
         {aviso.idAviso === avisoEditId ? (
           <div>
             <input
