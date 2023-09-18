@@ -1,6 +1,7 @@
 export class CreateAvisoDto {
   contenido: string;
   fecha: Date;
-  curso: number; 
+  curso: string; 
   profesorIdProfesor: number;
+  nombreProfesor: string;
 }

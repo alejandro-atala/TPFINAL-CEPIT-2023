@@ -4,3 +4,13 @@
 .card-title {
     margin-Bottom: 20px;
 }
+
+.nombre-profesor {
+  margin-left: 30px; /* Puedes ajustar este valor según tu preferencia para el espaciado */
+}
+.numero-curso {
+  margin-left: 30px; /* Puedes ajustar este valor según tu preferencia para el espaciado */
+}
+.contenido-aviso {
+  margin-top: 10px; /* Puedes ajustar este valor según tu preferencia para el espaciado */
+}

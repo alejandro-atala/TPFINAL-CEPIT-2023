@@ -14,10 +14,13 @@ export class Aviso {
   fecha: Date;
 
   @Column()
-  curso: number;
+  curso: string;
 
   @Column()
   profesorIdProfesor: number;
+
+  @Column()
+  nombreProfesor: string;
 
   @ManyToOne(() => Profesor)
   @JoinColumn({ name: 'profesorIdProfesor' })

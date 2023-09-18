@@ -17,6 +17,7 @@ export class AvisosService {
     nuevoAviso.contenido = createAvisoDto.contenido;
     nuevoAviso.curso = createAvisoDto.curso; 
     nuevoAviso.profesorIdProfesor = createAvisoDto.profesorIdProfesor; 
+    nuevoAviso.nombreProfesor = createAvisoDto.nombreProfesor; 
   
     return await this.avisoRepository.save(nuevoAviso);
   }
