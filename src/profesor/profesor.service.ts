@@ -12,9 +12,7 @@ export class ProfesorService {
   remove(arg0: number) {
     throw new Error('Method not implemented.');
   }
-  findOne(arg0: number) {
-    throw new Error('Method not implemented.');
-  }
+  
   constructor(
     @InjectRepository(Profesor)
     private profesorRepository: Repository<Profesor>,
@@ -31,6 +29,14 @@ export class ProfesorService {
 
   async getAllProfesores(): Promise<Profesor[]> {
     return this.profesorRepository.find();
+  }
+
+  async findAll(): Promise<Profesor[]> {
+    return this.profesorRepository.find();
+  }
+
+  async findOne(id: number): Promise<Profesor | undefined> {
+    return await this.profesorRepository.findOne({ where: { usuarioId: id } });
   }
 
   async findProfesorByUsuario(id: number): Promise<Profesor> {
