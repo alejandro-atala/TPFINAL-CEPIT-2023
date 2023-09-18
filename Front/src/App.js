@@ -24,10 +24,10 @@ import Profesor from './PaginaProfe/profesor';
 import AsistenciaList from './PaginaProfe/Asistencia/asistenciaList';
 import NotasExamenesList from './PaginaProfe/NotasExamen/notaList';
 import { AlumnoProvider } from './Alumno/AlumnoContext';
-import MateriasList from './PaginaProfe/MateriasList/materiasList';
 import { AuthProvider } from './InicioSesion/tokenContext';
 import AdminPage from './admin/admin';
-import { ProfesorProvider } from './PaginaProfe/profesorContext';
+import { ProfesorProvider } from './PaginaProfe/ProfesorContext';
+import ProfeAvisos from './PaginaProfe/AvisosProfe/profeAvisos';
 import MateriasProf from './PaginaProfe/Materias/materiasProf';
 import { UsuarioProvider } from '../src/usuarioContext'
 import Contacto from './Contacto/Contacto';
@@ -105,6 +105,8 @@ const App = () => {
                           <Route path="/ProfAsistencia" element={<AsistenciaList />} />
                           <Route path="/Profnotas" element={<NotasExamen />} />
                           <Route path="/ProfTrimestre" element={<NotasExamenesList />} />
+                          <Route path="/ProfAvisos" element={<ProfeAvisos />} />
+                          <Route path="/Profesor" element={<ProfesorProvider />} />
 
                           <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
 

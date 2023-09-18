@@ -21,6 +21,11 @@ export class ProfesorController {
     return this.profesorService.findProfesorByUsuario(id);
   }
 
+  @Get() 
+  findAll() {
+    return this.profesorService.findAll();
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateProfesorDto: UpdateProfesorDto) {
     return this.profesorService.update(+id, updateProfesorDto);

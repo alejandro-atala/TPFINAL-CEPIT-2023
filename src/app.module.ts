@@ -14,6 +14,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { JwtModule } from '@nestjs/jwt';
 import { DataCargaModule } from './data-carga/data-carga.module';
 import { ImagenesModule } from './imagenes/imagenes.module';
+import { AvisosModule } from './avisos/aviso.module';
 
 
 @Module({
@@ -23,7 +24,7 @@ import { ImagenesModule } from './imagenes/imagenes.module';
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "root",
+    password: "12345678",
     database: "escuela",
     entities: [
       "dist/**/**.entity{.ts,.js}", "node_modules/@nestjs/jwt"
@@ -41,7 +42,8 @@ import { ImagenesModule } from './imagenes/imagenes.module';
     NotasExamenesModule,
     ProfesorModule,
     DataCargaModule,
-    ImagenesModule],
+    ImagenesModule,
+    AvisosModule],
 
   controllers: [AppController],
   providers: [AppService],
