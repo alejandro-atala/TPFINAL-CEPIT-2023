@@ -26,7 +26,7 @@ import NotasExamenesList from './PaginaProfe/NotasExamen/notaList';
 import { AlumnoProvider } from './Alumno/AlumnoContext';
 import { AuthProvider } from './InicioSesion/tokenContext';
 import AdminPage from './admin/admin';
-import { ProfesorProvider } from './PaginaProfe/ProfesorContext';
+import { ProfesorProvider } from './PaginaProfe/profesorContext';
 import ProfeAvisos from './PaginaProfe/AvisosProfe/profeAvisos';
 import MateriasProf from './PaginaProfe/Materias/materiasProf';
 import { UsuarioProvider } from '../src/usuarioContext'

@@ -181,7 +181,7 @@ const AvisosProfe = () => {
   <option value="">Seleccionar Curso</option> {/* Opción vacía o leyenda */}
   {cursos.map((curso) => (
     <option key={curso} value={curso}>
-      {curso}
+     {cursosNombres[curso]}
     </option>
   ))}
 </select>
