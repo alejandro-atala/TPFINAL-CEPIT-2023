@@ -26,7 +26,7 @@ import NotasExamenesList from './PaginaProfe/NotasExamen/notaList';
 import { AlumnoProvider } from './Alumno/AlumnoContext';
 import { AuthProvider } from './InicioSesion/tokenContext';
 import AdminPage from './admin/admin';
-import { ProfesorProvider } from './PaginaProfe/ProfesorContext';
+import { ProfesorProvider } from './PaginaProfe/profesorContext';
 import ProfeAvisos from './PaginaProfe/AvisosProfe/profeAvisos';
 import MateriasProf from './PaginaProfe/Materias/materiasProf';
 import { UsuarioProvider } from '../src/usuarioContext'
@@ -34,10 +34,14 @@ import Contacto from './Contacto/Contacto';
 import NotasExamen from './PaginaProfe/NotasExamen/notasExamen';
 
 
+
 const App = () => {
 
   // State para almacenar el nombre del usuario que inició sesión
   const [loggedInUser, setLoggedInUser] = useState('');
+
+  const unreadAvisosCount = 0;
+  const marcarAvisosComoLeidos = async () => {};
 
   // Función para actualizar el nombre del usuario cuando inicie sesión
   const handleLogin = (username) => {
@@ -63,7 +67,9 @@ const App = () => {
           <AlumnoProvider>
             <AuthProvider>
               <div className="d-flex flex-column min-vh-100">
-                <Navbar loggedInUser={loggedInUser} onLogout={logout} />
+                <Navbar loggedInUser={loggedInUser} onLogout={logout}unreadAvisosCount={unreadAvisosCount} // Asegúrate de pasar el valor aquí
+  marcarAvisosComoLeidos={marcarAvisosComoLeidos}
+/>
                 <div className="flex-grow-1">
                   <div className="container-fluid">
                     <div className="row">

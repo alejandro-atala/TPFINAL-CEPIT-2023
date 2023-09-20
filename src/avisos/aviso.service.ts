@@ -22,6 +22,35 @@ export class AvisosService {
     return await this.avisoRepository.save(nuevoAviso);
   }
 
+  async marcarAvisosComoLeidos(): Promise<void> {
+    try {
+      // Consulta todos los avisos no leídos (donde 'leido' es false)
+      const avisosNoLeidos = await this.avisoRepository.find({ where: { leido: false } });
+  
+      if (avisosNoLeidos.length === 0) {
+        // No hay avisos no leídos, no se realiza ninguna actualización
+        return;
+      }
+  
+      // Marca todos los avisos no leídos como leídos
+      avisosNoLeidos.forEach((aviso) => {
+        aviso.leido = true;
+      });
+  
+      // Guarda las actualizaciones en la base de datos
+      await this.avisoRepository.save(avisosNoLeidos);
+    } catch (error) {
+      // Maneja errores aquí
+      console.error('Error al marcar avisos como leídos:', error);
+    }
+  }
+
+  async getUnreadAvisosCount(): Promise<number> {
+    // Consulta la base de datos para contar los avisos no leídos (donde 'leido' es false)
+    const unreadAvisosCount = await this.avisoRepository.count({ where: { leido: false } });
+    return unreadAvisosCount;
+  }
+
   async findAll(): Promise<Aviso[]> {
     return await this.avisoRepository.find();
   }
