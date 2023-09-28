@@ -1,8 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
+import './Alumno.css'
 
 const Alumno = () => {
+
+  const isCardDisabled = true; // Set this based on your logic
+
+
+
   return (
     <div className="container mt-4 p-5">
     <div className="row row-cols-1 row-cols-md-3 g-4 ">
@@ -75,10 +80,10 @@ const Alumno = () => {
             </div>
           </div>
 
-          <div className="col">
+          <div className={`card h-100 ${isCardDisabled ? 'disabled' : ''}`}>
             <div className="card h-100">
             <img src="https://images4.imagebam.com/d5/79/59/MENRF6I_o.jpg" className="card-img-top" alt="..." />
-              <div className="card-body">
+              <div className="card-body disabled">
                 <h5 className="card-title">Enviar mensaje</h5>
                 <p className="card-text">Aqui podras enviar un mensaje directamente al profesor</p>
                 <Link to="/mensaje" className="btn btn-primary" id="myButton">Enviar Mensaje</Link>
