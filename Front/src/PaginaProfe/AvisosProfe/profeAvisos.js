@@ -162,7 +162,10 @@ const AvisosProfe = () => {
         </form>
       </div>
       <div>
-        {avisos.map((aviso) => {
+        
+        {avisos .slice()  // Crear una copia para no modificar el estado original
+    .reverse()  // Revertir el orden de los avisos (los más recientes primero)
+    .map((aviso) => {
           // Verificar si aviso.idAviso es una clave válida y única
           if (aviso.idAviso) {
             return (

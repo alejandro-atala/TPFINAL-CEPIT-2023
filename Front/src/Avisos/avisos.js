@@ -41,7 +41,7 @@ const Avisos = () => {
           // Compara el curso del aviso con el curso del alumno (ambos en minúsculas)
           return cursoAviso === cursoAlumno.toLowerCase();
         });
-
+        avisosFiltrados.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
         console.log('Avisos Filtrados:', avisosFiltrados);
 
         setAvisos(avisosFiltrados);
