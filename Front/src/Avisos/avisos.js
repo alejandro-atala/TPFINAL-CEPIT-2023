@@ -63,7 +63,7 @@ const Avisos = () => {
       </div>
       <div>
         {avisos.map((aviso) => (
-          <div key={aviso.idAviso} className="card">
+          <div key={aviso.idAviso} className="card mt-3">
             <div className="card-body">
               <h5 className="card-title">Aviso del profesor: <span className="nombre-profesor">{aviso.nombreProfesor}</span></h5>
               <h6>Información para el Curso:  <span className="numero-curso">{aviso.curso}</span></h6>

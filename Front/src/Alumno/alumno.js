@@ -4,6 +4,7 @@ import { useAlumno } from './AlumnoContext';
 import { useNotificaciones } from './NotificacionesContext';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import './alumno.css'
 
 const Alumno = () => {
   const [unreadAvisosCount, setUnreadAvisosCount] = useState(0);
@@ -181,28 +182,32 @@ const Alumno = () => {
           </div>
         </div>
         <div className="col">
-          <div className="card h-100">
-            <img src="https://images4.imagebam.com/d5/79/59/MENRF6I_o.jpg" className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Avisos de los profesores</h5>
-              <p className="card-text">Aquí verás los mensajes que envían los profesores a sus alumnos.</p>
-              
-              <Link
-                to="/avisos"
-                className="btn btn-primary"
-                onClick={() => {
-                  marcarAvisosVistos();
-                  guardarAvisosLeidos(avisosSinLeer, alumnoLogueado.idAlumno);
-                }}
-              >
-                Ver avisos ({unreadAvisosCount} no leídos)
-              </Link>
-            </div>
-            <div className="card-footer">
-              <small className="text-body-secondary">Last updated <span id="elapsedTime"></span> mins ago</small>
-            </div>
-          </div>
-        </div>
+  <div className="card h-100">
+    <img src="https://images4.imagebam.com/d5/79/59/MENRF6I_o.jpg" className="card-img-top" alt="..." />
+    <div className="card-body">
+      <h5 className="card-title">
+        Avisos de los profesores
+        <span className={`notification-badge ${unreadAvisosCount > 0 ? 'show' : 'hide'}`}>🔔</span>
+      </h5>
+      <p className="card-text">Aquí verás los mensajes que envían los profesores a sus alumnos.</p>
+      
+      <Link
+        to="/avisos"
+        className="btn btn-primary"
+        onClick={() => {
+          marcarAvisosVistos();
+          guardarAvisosLeidos(avisosSinLeer, alumnoLogueado.idAlumno);
+        }}
+      >
+        Ver avisos ({unreadAvisosCount} no leídos)
+      </Link>
+    </div>
+    <div className="card-footer">
+      <small className="text-body-secondary">Last updated <span id="elapsedTime"></span> mins ago</small>
+    </div>
+  </div>
+</div>
+
         <div className="col">
           <div className="card h-100">
             <img src="https://images4.imagebam.com/96/d2/c0/MENRF61_o.jpg" className="card-img-top" alt="..." />

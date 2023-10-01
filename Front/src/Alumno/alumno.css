@@ -21,3 +21,19 @@
     font-size: 20px; 
   } */
   
+
+  .notification-badge {
+    display: none;
+    font-size: 20px;
+    color: red;
+    margin-left: 5px;
+  }
+  
+  .show {
+    display: inline-block;
+  }
+  
+  .hide {
+    display: none;
+  }
+  

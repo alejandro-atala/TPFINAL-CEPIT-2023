@@ -11,7 +11,7 @@ const AvisosProfe = () => {
   const [avisoEditText, setAvisoEditText] = useState('');
   const [selectedCurso, setSelectedCurso] = useState('');
   const [avisoEnviado, setAvisoEnviado] = useState(false);
-
+  const [avisoEliminado, setAvisoEliminado] = useState(false);
 
   useEffect(() => {
     fetchProfesorId();
@@ -63,11 +63,15 @@ const AvisosProfe = () => {
       setAvisos([...avisos, nuevoAviso]);
       setAvisoContent('');
       setAvisoEnviado(true);
+      setTimeout(() => {
+        setAvisoEnviado(false);
+      }, 2000);
       // También puedes restablecer el contenido del aviso u otros estados según sea necesario.
       setAvisoContent('');
     } catch (error) {
       console.error('Error al enviar el aviso:', error);
     }
+    fetchProfesorId();
   };
 
   const handleEditarClick = (id, contenido) => {
@@ -97,6 +101,7 @@ const AvisosProfe = () => {
     } catch (error) {
       console.error('Error al editar el aviso:', error);
     }
+
   };
 
   const handleEliminarClick = async (id) => {
@@ -104,6 +109,10 @@ const AvisosProfe = () => {
       await axios.delete(`http://localhost:3000/avisos/${id}`);
       const avisosActualizados = avisos.filter((aviso) => aviso.idAviso !== id);
       setAvisos(avisosActualizados);
+      setAvisoEliminado(true);  // Mostrar el mensaje de aviso eliminado
+      setTimeout(() => {
+        setAvisoEliminado(false);
+      }, 2000);
     } catch (error) {
       console.error('Error al eliminar el aviso:', error);
     }
@@ -143,6 +152,13 @@ const AvisosProfe = () => {
           <button type="submit" className="btn btn-primary">
             Cargar Aviso
           </button>
+          {avisoEnviado && (
+  <div className="alert alert-success text-center mt-3">Aviso enviado correctamente</div>
+
+)}
+               {avisoEliminado && (
+      <div className="alert alert-success text-center mt-3">Aviso eliminado correctamente</div>
+    )}
         </form>
       </div>
       <div>
@@ -150,7 +166,7 @@ const AvisosProfe = () => {
           // Verificar si aviso.idAviso es una clave válida y única
           if (aviso.idAviso) {
             return (
-              <div key={aviso.idAviso} className="card">
+              <div key={aviso.idAviso} className="card mt-3">
                 <div className="card-body">
                   <h5>Aviso dirigido al Curso: <span className="numero-curso">{aviso.curso}</span></h5>
                   {aviso.idAviso === avisoEditId ? (
@@ -170,9 +186,7 @@ const AvisosProfe = () => {
                       <p className="card-text">Fecha: {new Date(aviso.fecha).toLocaleString()}</p>
                       <button onClick={() => handleEditarClick(aviso.idAviso, aviso.contenido)}>Editar</button>
                       <button onClick={() => handleEliminarClick(aviso.idAviso)}>Borrar</button>
-                      {avisoEnviado && (
-  <div className="alert alert-success">Aviso enviado correctamente</div>
-)}
+       
                     </div>
                   )}
                 </div>
