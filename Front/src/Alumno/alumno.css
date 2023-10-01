@@ -23,11 +23,27 @@
   
 
   .notification-badge {
-    display: none;
+    display: inline-block;
     font-size: 20px;
     color: red;
     margin-left: 5px;
+    opacity: 0;
+    animation: fadeInOut 1s infinite; /* Duración más larga */
   }
+  
+  @keyframes fadeInOut {
+    0% { /* Estado inicial */
+      opacity: 0.1;
+    }
+    50% { /* Estado final */
+      opacity: 1;
+    }
+    100% { /* Estado final */
+      opacity: 0.1;
+    }
+  }
+  
+  
   
   .show {
     display: inline-block;
