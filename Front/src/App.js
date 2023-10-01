@@ -32,6 +32,7 @@ import MateriasProf from './PaginaProfe/Materias/materiasProf';
 import { UsuarioProvider } from '../src/usuarioContext'
 import Contacto from './Contacto/Contacto';
 import NotasExamen from './PaginaProfe/NotasExamen/notasExamen';
+import { NotificacionesProvider } from './Alumno/NotificacionesContext';
 
 
 
@@ -63,11 +64,12 @@ const App = () => {
   return (
     <BrowserRouter>
       <UsuarioProvider>
+      <NotificacionesProvider>
         <ProfesorProvider>
           <AlumnoProvider>
             <AuthProvider>
               <div className="d-flex flex-column min-vh-100">
-                <Navbar loggedInUser={loggedInUser} onLogout={logout}unreadAvisosCount={unreadAvisosCount} // Asegúrate de pasar el valor aquí
+                <Navbar loggedInUser={loggedInUser} onLogout={logout}unreadAvisosCount={unreadAvisosCount}
   marcarAvisosComoLeidos={marcarAvisosComoLeidos}
 />
                 <div className="flex-grow-1">
@@ -131,6 +133,7 @@ const App = () => {
             </AuthProvider>
           </AlumnoProvider>
         </ProfesorProvider>
+        </NotificacionesProvider>
       </UsuarioProvider>
     </BrowserRouter>
   );

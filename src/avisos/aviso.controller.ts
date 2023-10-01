@@ -24,17 +24,6 @@ export class AvisosController {
     return await this.avisosService.findAll();
   }
 
-  @Get('no-leidos')
-  async getUnreadAvisosCount(): Promise<{ unreadCount: number }> {
-    const unreadCount = await this.avisosService.getUnreadAvisosCount(); // Debes implementar este método en tu servicio
-    return { unreadCount };
-  }
-
-  @Put('marcar-leidos')
-  async marcarAvisosComoLeidos(): Promise<void> {
-    await this.avisosService.marcarAvisosComoLeidos();
-  }
-
   @Put(':id')
   async updateById(@Param('id') id: number, @Body() updateAvisoDto: UpdateAvisoDto): Promise<Aviso | undefined> {
 

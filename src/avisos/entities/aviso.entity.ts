@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Profesor } from 'src/profesor/entities/profesor.entity';
 import { Curso } from 'src/curso/entities/curso.entity';
+import { AlumnoAviso } from 'src/alumno-aviso/entities/alumno-aviso.entity';
 
 @Entity()
 export class Aviso {
@@ -21,10 +22,6 @@ export class Aviso {
 
   @Column()
   nombreProfesor: string;
-
-  @Column({ default: false }) // Agrega esta línea para el campo 'leido'
-  leido: boolean;
-
   @ManyToOne(() => Profesor)
   @JoinColumn({ name: 'profesorIdProfesor' })
   profesor: Profesor;

@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useAlumno } from './AlumnoContext';
+import { useNotificaciones } from './NotificacionesContext';
 
 const AvisosNotificationBadge = () => {
-  const [unreadAvisosCount, setUnreadAvisosCount] = useState(0);
+  const { avisosVistos, markAvisoComoLeido, alumnoLogueado } = useAlumno();
+  const { unreadAvisosCount, setUnreadAvisosCount, notificaciones } = useNotificaciones();
+
+  useEffect(() => {
+    console.log("Avisos Recibidos:", notificaciones);
+    fetchUnreadAvisosCount();
+  }, [notificaciones]);
 
   const fetchUnreadAvisosCount = async () => {
     try {
-      const response = await fetch('http://localhost:3000/avisos/no-leidos');
-      if (response.status === 200) {
-        const data = await response.json();
-        setUnreadAvisosCount(data.unreadCount);
-        console.log('Avisos no leídos obtenidos:', data.unreadCount);
-      } else {
-        console.error('Error al obtener mensajes no leídos. Respuesta del servidor:', response);
-      }
+      const avisosSinLeer = avisosVistos.filter((aviso) => !aviso.leido);
+      setUnreadAvisosCount(avisosSinLeer.length);
+      console.log("avisosSinLeer:", avisosSinLeer);
     } catch (error) {
       console.error('Error al obtener mensajes no leídos:', error);
     }
@@ -22,37 +25,48 @@ const AvisosNotificationBadge = () => {
 
   const markAvisosComoLeidos = async () => {
     try {
-      const response = await axios.put('http://localhost:3000/avisos/marcar-leidos', {});
-      if (response.status === 200) {
-        // Marcar los mensajes como leídos en el servidor tuvo éxito
-        console.log('Avisos marcados como leídos con éxito');
-        // Actualizar el estado local
-        setUnreadAvisosCount(0);
-      } else {
-        console.error('Error al marcar avisos como leídos:', response.statusText);
+      if (!alumnoLogueado || !alumnoLogueado.idAlumno) {
+        console.error('ID de alumno no válido.');
+        return;
       }
+
+      const avisosSinLeer = avisosVistos.filter((aviso) => !aviso.leido);
+      const promises = avisosSinLeer.map(async (aviso) => {
+        const idAviso = aviso.idAviso;
+        const idAlumno = alumnoLogueado.idAlumno;
+
+        try {
+          const response = await axios.get(`http://localhost:3000/alumno-aviso/existe/${idAviso}/${idAlumno}`);
+          const existeAviso = response.data;
+
+          if (!existeAviso) {
+            const responseMarcarLeido = await axios.put(`http://localhost:3000/alumno-aviso/marcar-leidos/${idAviso}/${alumnoLogueado.idAlumno}`);
+            if (responseMarcarLeido.status === 200) {
+              console.log(`Aviso ${idAviso} marcado como leído con éxito`);
+              markAvisoComoLeido(idAviso);
+            } else {
+              console.error('Error al marcar aviso como leído:', responseMarcarLeido.statusText);
+            }
+          }
+        } catch (error) {
+          console.error('Error al verificar la existencia de aviso o marcarlo como leído:', error);
+        }
+      });
+
+      await Promise.all(promises);
+
+      setUnreadAvisosCount(0);
     } catch (error) {
       console.error('Error al marcar avisos como leídos:', error);
     }
   };
 
-  useEffect(() => {
-    fetchUnreadAvisosCount();
-
-    const intervalId = setInterval(() => {
-      fetchUnreadAvisosCount();
-    }, 60000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
   return (
     <Link to="/avisos" className={`campanita-usuario ${unreadAvisosCount > 0 ? 'unread' : ''}`} onClick={markAvisosComoLeidos}>
-      <i className="fa fa-bell" aria-hidden="true">
-        {unreadAvisosCount > 0 && (
-          <span className="contador-avisos">{unreadAvisosCount}</span>
-        )}
-      </i>
+      <i className="fa fa-bell" aria-hidden="true"></i>
+      {unreadAvisosCount > 0 && (
+        <span className="contador-avisos">{unreadAvisosCount}</span>
+      )}
     </Link>
   );
 };

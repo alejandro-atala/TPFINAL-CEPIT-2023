@@ -2,6 +2,8 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn
 import { Alumno } from 'src/alumno/entities/alumno.entity';
 import { Profesor } from 'src/profesor/entities/profesor.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { Aviso } from 'src/avisos/entities/aviso.entity';
+import { AlumnoAviso } from 'src/alumno-aviso/entities/alumno-aviso.entity';
 
 
 @Entity()
@@ -91,7 +93,5 @@ export class Usuario {
 
   @OneToOne(() => Profesor, profesor => profesor.idProfesor) // Define the relationship
   profesor: Profesor; 
-
-
 
 } 
