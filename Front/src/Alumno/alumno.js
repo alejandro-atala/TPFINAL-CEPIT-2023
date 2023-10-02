@@ -4,6 +4,7 @@ import { useAlumno } from './AlumnoContext';
 import { useNotificaciones } from './NotificacionesContext';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+
 import './alumno.css'
 
 const Alumno = () => {
@@ -125,6 +126,7 @@ const Alumno = () => {
   };
 
 
+
   return (
    
     <div className="container mt-4 p-5">
@@ -216,8 +218,10 @@ const Alumno = () => {
               <p className="card-text">Aquí podrás enviar un mensaje directamente al profesor.</p>
               <Link to="/mensaje" className="btn btn-primary" id="myButton">Enviar Mensaje</Link>
             </div>
+
             <div className="card-footer">
               <small className="text-body-secondary">Last updated <span id="elapsedTime"></span> mins ago</small>
+
             </div>
           </div>
         </div>

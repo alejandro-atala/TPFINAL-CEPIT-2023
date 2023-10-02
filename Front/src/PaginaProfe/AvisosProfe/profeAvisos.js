@@ -135,6 +135,7 @@ const AvisosProfe = () => {
           </div>
           <div className="mb-3">
             <select
+
               id="curso"
               className="form-select"
               value={selectedCurso}
@@ -148,6 +149,7 @@ const AvisosProfe = () => {
               <option value="Quinto">Quinto</option>
               <option value="Sexto">Sexto</option>
             </select>
+
           </div>
           <button type="submit" className="btn btn-primary">
             Cargar Aviso
