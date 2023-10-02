@@ -53,3 +53,15 @@
     display: none;
   }
   
+
+  .custom-card {
+    width: 200px; /* Cambia el ancho según lo necesario */
+    height: 300px; /* Cambia la altura según lo necesario */
+  }
+  
+  .disabled-card {
+    background-color: #e0e0e0; /* Cambia el color de fondo a gris */
+    pointer-events: none; /* Deshabilita la interacción con el elemento */
+    opacity: 0.5;
+  }
+  

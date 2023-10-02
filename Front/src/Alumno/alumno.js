@@ -14,7 +14,8 @@ const Alumno = () => {
   const [avisos, setAvisos] = useState([]);
   const [avisosSinLeer, setAvisosSinLeer] = useState([]);
   const location = useLocation();
-
+  const [isCardDisabled, setIsCardDisabled] = useState(true);
+  
   useEffect(() => {
     const fetchAvisos = async () => {
       if (!alumnoLogueado) {
@@ -129,10 +130,10 @@ const Alumno = () => {
 
   return (
    
-    <div className="container mt-4 p-5">
-      <div className="row row-cols-1 row-cols-md-3 g-4">
+    <div className="container mt-4 p-5 ">
+      <div className="row row-cols-1 row-cols-md-3 g-4 ">
         <div className="col">
-          <div className="card h-100">
+          <div className="card h-100 ">
             <img src="https://images4.imagebam.com/ef/e7/3b/MENRF6F_o.jpg" className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">Notas de exámenes</h5>
@@ -210,21 +211,23 @@ const Alumno = () => {
   </div>
 </div>
 
-        <div className="col">
-          <div className="card h-100">
-            <img src="https://images4.imagebam.com/96/d2/c0/MENRF61_o.jpg" className="card-img-top" alt="..." />
-            <div className="card-body">
-              <h5 className="card-title">Enviar mensaje</h5>
-              <p className="card-text">Aquí podrás enviar un mensaje directamente al profesor.</p>
-              <Link to="/mensaje" className="btn btn-primary" id="myButton">Enviar Mensaje</Link>
-            </div>
+<div className={`col ${isCardDisabled ? 'disabled-card' : ''}`}>
+  <div className="card h-100">
+    <img src="https://images4.imagebam.com/96/d2/c0/MENRF61_o.jpg" className="card-img-top" alt="..." />
+    <div className="card-body">
+      <h5 className="card-title">Enviar mensaje</h5>
+      <p className="card-text">Aquí podrás enviar un mensaje directamente al profesor.</p>
+      <Link to="/mensaje" className="btn btn-primary" id="myButton" disabled>
+        Enviar Mensaje
+      </Link>
+    </div>
+    <div className="card-footer">
+      <small className="text-body-secondary">Last updated <span id="elapsedTime"></span> mins ago</small>
+    </div>
+  </div>
+</div>
 
-            <div className="card-footer">
-              <small className="text-body-secondary">Last updated <span id="elapsedTime"></span> mins ago</small>
-
-            </div>
-          </div>
-        </div>
+   
         </div>
     </div>
   
