@@ -32,12 +32,17 @@ import MateriasProf from './PaginaProfe/Materias/materiasProf';
 import { UsuarioProvider } from '../src/usuarioContext'
 import Contacto from './Contacto/Contacto';
 import NotasExamen from './PaginaProfe/NotasExamen/notasExamen';
+import { NotificacionesProvider } from './Alumno/NotificacionesContext';
+
 
 
 const App = () => {
 
   // State para almacenar el nombre del usuario que inició sesión
   const [loggedInUser, setLoggedInUser] = useState('');
+
+  const unreadAvisosCount = 0;
+  const marcarAvisosComoLeidos = async () => {};
 
   // Función para actualizar el nombre del usuario cuando inicie sesión
   const handleLogin = (username) => {
@@ -59,11 +64,14 @@ const App = () => {
   return (
     <BrowserRouter>
       <UsuarioProvider>
+      <NotificacionesProvider>
         <ProfesorProvider>
           <AlumnoProvider>
             <AuthProvider>
               <div className="d-flex flex-column min-vh-100">
-                <Navbar loggedInUser={loggedInUser} onLogout={logout} />
+                <Navbar loggedInUser={loggedInUser} onLogout={logout}unreadAvisosCount={unreadAvisosCount}
+  marcarAvisosComoLeidos={marcarAvisosComoLeidos}
+/>
                 <div className="flex-grow-1">
                   <div className="container-fluid">
                     <div className="row">
@@ -125,6 +133,7 @@ const App = () => {
             </AuthProvider>
           </AlumnoProvider>
         </ProfesorProvider>
+        </NotificacionesProvider>
       </UsuarioProvider>
     </BrowserRouter>
   );

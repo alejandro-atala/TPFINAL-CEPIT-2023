@@ -15,6 +15,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { DataCargaModule } from './data-carga/data-carga.module';
 import { ImagenesModule } from './imagenes/imagenes.module';
 import { AvisosModule } from './avisos/aviso.module';
+import { AlumnoAvisoModule } from './alumno-aviso/alumno-aviso.module';
 
 
 @Module({
@@ -43,7 +44,8 @@ import { AvisosModule } from './avisos/aviso.module';
     ProfesorModule,
     DataCargaModule,
     ImagenesModule,
-    AvisosModule],
+    AvisosModule,
+    AlumnoAvisoModule],
 
   controllers: [AppController],
   providers: [AppService],

@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, OneToOne,
 import { Curso } from 'src/curso/entities/curso.entity';  // Asegúrate de importar correctamente
 import { Usuario } from 'src/usuario/entities/usuario.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { AlumnoAviso } from 'src/alumno-aviso/entities/alumno-aviso.entity';
 
 @Entity()
 export class Alumno {
@@ -43,8 +44,7 @@ export class Alumno {
   @JoinColumn({ name: 'curso' })
   cursoIdCurso: number;
 
-
-
+  
 }
 
 

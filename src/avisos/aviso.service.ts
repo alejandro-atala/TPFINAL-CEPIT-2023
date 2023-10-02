@@ -13,13 +13,21 @@ export class AvisosService {
   ) {}
 
   async create(createAvisoDto: CreateAvisoDto): Promise<Aviso> {
-    const nuevoAviso = new Aviso();
-    nuevoAviso.contenido = createAvisoDto.contenido;
-    nuevoAviso.curso = createAvisoDto.curso; 
-    nuevoAviso.profesorIdProfesor = createAvisoDto.profesorIdProfesor; 
-    nuevoAviso.nombreProfesor = createAvisoDto.nombreProfesor; 
-  
-    return await this.avisoRepository.save(nuevoAviso);
+    try {
+      // Agrega un console.log para verificar el contenido de createAvisoDto
+      console.log('createAvisoDto:', createAvisoDto);
+
+      const nuevoAviso = new Aviso();
+      nuevoAviso.contenido = createAvisoDto.contenido;
+      nuevoAviso.curso = createAvisoDto.curso; 
+      nuevoAviso.profesorIdProfesor = createAvisoDto.profesorIdProfesor; 
+      nuevoAviso.nombreProfesor = createAvisoDto.nombreProfesor; 
+
+      return await this.avisoRepository.save(nuevoAviso);
+    } catch (error) {
+      console.error('Error en create:', error);
+      throw error;
+    }
   }
 
   async findAll(): Promise<Aviso[]> {
