@@ -141,6 +141,7 @@ const AdminPage = () => {
     } catch (error) {
       console.error('Error al guardar cambios:', error);
     }
+    cargarDatos();
   };
   
   
@@ -150,6 +151,7 @@ const AdminPage = () => {
     const updatedData = [...editedData];
     updatedData[rowIndex] = updatedRow;
     setEditedData(updatedData);
+
   };
 
   const handleAddRow = async () => {

@@ -42,11 +42,18 @@ export class UsuarioService {
     for (const prop in updateUsuarioDto) {
       if (updateUsuarioDto.hasOwnProperty(prop)) {
         if (usuario.hasOwnProperty(prop)) {
-          usuario[prop] = updateUsuarioDto[prop];
+          if (prop === 'password') {
+            const hashedPassword = await bcrypt.hash(
+              usuario.password,
+              saltRounds,
+            );
+            usuario[prop] = hashedPassword;
+        } else {
+            usuario[prop] = updateUsuarioDto[prop];
         }
       }
     }
-
+  }
     // Guarda el usuario actualizado
     const updatedUsuario = await this.usuarioRepository.save(usuario);
 
@@ -58,6 +65,7 @@ export class UsuarioService {
         // Actualiza los datos del alumno
         alumno.nombre = updateUsuarioDto.nombre;  // Puedes actualizar otros campos según necesites
         alumno.curso = Number(updateUsuarioDto.curso);
+        
         await this.alumnoRepository.save(alumno);
       }
     }
