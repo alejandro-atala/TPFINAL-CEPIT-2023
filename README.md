@@ -50,7 +50,7 @@ Características y Funcionalidades
 3. Iniciar la aplicación con el comando: `npm start`.
 4. Acceder a la aplicación a través de la URL proporcionada.
 5. Registrar un usuario con nombre Admin y del tipo Profesor, para generar un Rol Administrador y asi poder cargar los Cursos, Materias, Fotos y textos de toda la pagina.
-6. Por ultimo se pueden registrar los ALumnos y Profesores.
+6. Por ultimo se pueden registrar los Alumnos y Profesores.
 
 ## Contribuciones
 
