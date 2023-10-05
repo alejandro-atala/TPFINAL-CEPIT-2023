@@ -186,7 +186,7 @@ const Alumno = () => {
         </div>
         <div className="col">
   <div className="card h-100">
-    <img src="https://images4.imagebam.com/d5/79/59/MENRF6I_o.jpg" className="card-img-top" alt="..." />
+    <img src="https://images4.imagebam.com/96/d2/c0/MENRF61_o.jpg" className="card-img-top" alt="..." />
     <div className="card-body">
       <h5 className="card-title">
         Avisos de los profesores
@@ -213,7 +213,7 @@ const Alumno = () => {
 
 <div className={`col ${isCardDisabled ? 'disabled-card' : ''}`}>
   <div className="card h-100">
-    <img src="https://images4.imagebam.com/96/d2/c0/MENRF61_o.jpg" className="card-img-top" alt="..." />
+    <img src="https://images4.imagebam.com/d5/79/59/MENRF6I_o.jpg" className="card-img-top" alt="..." />
     <div className="card-body">
       <h5 className="card-title">Enviar mensaje</h5>
       <p className="card-text">Aquí podrás enviar un mensaje directamente al profesor.</p>
