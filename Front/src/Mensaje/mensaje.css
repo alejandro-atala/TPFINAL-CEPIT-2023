@@ -1,0 +1,62 @@
+/* Estilo para el mensaje propio del usuario */
+.Message--own {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* Estilo para el mensaje del chat */
+  .Message--chat {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  /* Estilo para el contenido del mensaje propio del usuario */
+  .Message-content--own {
+    background-color: #f8faf6; /* Color de fondo verde para mensajes enviados */
+    border-top-right-radius: 0;
+  }
+  
+  /* Estilo para el contenido del mensaje del chat */
+  .Message-content--chat {
+    background-color: #ffc107; /* Color de fondo amarillo para mensajes recibidos */
+    border-top-left-radius: 0;
+  }
+  .Chat {
+    max-width: 400px; /* Establece un ancho máximo para el contenedor del chat */
+    margin: 0 auto;
+    background-color: #f8faf6;
+    padding: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .InputContainer {
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+  }
+  
+  .TextInput {
+    flex: 1; /* Permite que el input se expanda para llenar el espacio disponible */
+    padding: 10px; /* Añade espacio entre el input y el botón */
+    border: 1px solid #e5e5e5; /* Agrega un borde al input */
+    border-radius: 10px; /* Bordes redondeados */
+    color: #333; /* Color de texto */
+  }
+  
+  .SendButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  
+  
+  

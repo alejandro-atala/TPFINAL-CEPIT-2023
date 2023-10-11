@@ -211,7 +211,7 @@ const Alumno = () => {
   </div>
 </div>
 
-<div className={`col ${isCardDisabled ? 'disabled-card' : ''}`}>
+<div >
   <div className="card h-100">
     <img src="https://images4.imagebam.com/d5/79/59/MENRF6I_o.jpg" className="card-img-top" alt="..." />
     <div className="card-body">

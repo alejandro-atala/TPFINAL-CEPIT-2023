@@ -90,7 +90,7 @@ const Profesor = () => {
               <div className="card-body">
                 <h5 className="card-title">Enviar mensaje</h5>
                 <p className="card-text">Aqui podras enviar un mensaje directamente al profesor</p>
-                <Link to="/Profmensaje" className="btn btn-primary" id="myButton">Mensajes</Link>
+                <Link to="/mensaje" className="btn btn-primary" id="myButton">Mensajes</Link>
               </div>
               <div className="card-footer">
                 <small className="text-body-secondary" >Last updated <span id="elapsedTime"></span> mins ago</small>

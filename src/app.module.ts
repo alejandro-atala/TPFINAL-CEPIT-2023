@@ -16,7 +16,7 @@ import { DataCargaModule } from './data-carga/data-carga.module';
 import { ImagenesModule } from './imagenes/imagenes.module';
 import { AvisosModule } from './avisos/aviso.module';
 import { AlumnoAvisoModule } from './alumno-aviso/alumno-aviso.module';
-
+import { ChatGateway } from './chat-gateway';
 
 @Module({
   imports: [
@@ -25,7 +25,7 @@ import { AlumnoAvisoModule } from './alumno-aviso/alumno-aviso.module';
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "Vicky.63-router",
+    password: "12345678",
     database: "escuela",
     entities: [
       "dist/**/**.entity{.ts,.js}", "node_modules/@nestjs/jwt"
@@ -48,6 +48,6 @@ import { AlumnoAvisoModule } from './alumno-aviso/alumno-aviso.module';
     AlumnoAvisoModule],
 
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ChatGateway],
 })
 export class AppModule { }
