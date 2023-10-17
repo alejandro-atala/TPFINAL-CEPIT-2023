@@ -49,6 +49,11 @@ export class UsuarioController {
     return this.usuarioService.findAll();
   }
 
+  @Get('email/:email') // Use 'email/:email' to define a route parameter 'email'
+  async buscarPorEmail(@Param('email') email: string) {
+    return this.usuarioService.buscarPorEmail(email);
+  }
+
   @Put(':id')
   async update(@Param('id') id: number, @Body() updateUsuarioDto: UpdateUsuarioDto) {
 

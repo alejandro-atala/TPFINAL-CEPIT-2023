@@ -36,29 +36,38 @@ const InicioSesion = ({ onLogin }) => {
       }, 2000); // 2000 milisegundos (2 segundos)
       return;
     }
-    setShowSuccessAlert({ message: 'Enviando email......' });
 
     try {
-      const response = await axios.post('http://localhost:3000/email', {
+      // Check if the email exists in the database
+      const checkEmailResponse = await axios.get(
+      `http://localhost:3000/usuario/email/${formData.email}`
+      );
+  console.log(checkEmailResponse.data)
+      if (checkEmailResponse.data.email.length > 0) {
+
+
+     setShowSuccessAlert({ message: 'Enviando email......' });
+
+      const sendEmailResponse = await axios.post('http://localhost:3000/email', {
         email: formData.email,
       });
 
-      console.log('Solicitud POST exitosa:', response.data);
-      if (response.data === 'Correo electrónico enviado correctamente!') {
+      console.log('Solicitud POST exitosa:', sendEmailResponse.data);
+      if (sendEmailResponse.data === 'Correo electrónico enviado correctamente!') {
         setShowSuccessAlert({ message: 'Email enviado exitosamente.' });
       } else {
-        setErrorAlert('Error al enviar el email.');
+        setErrorAlert('Error al enviar el email. No existe.');
       }
 
       setTimeout(() => {
         setShowSuccessAlert(null);
         setErrorAlert(null);
       }, 2000); // 2000 milisegundos (2 segundos)
-
+    }
 
     } catch (error) {
       console.error('Error al enviar la solicitud POST:', error);
-      setErrorAlert('Error al enviar el email.');
+      setErrorAlert('Error al enviar el email. No existe');
 
       setTimeout(() => {
         setShowSuccessAlert(null);
