@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import './inicioSesion.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { useAlumno } from '../Alumno/AlumnoContext';
 import { useUsuario } from '../usuarioContext';
 import { useAuth } from './tokenContext';
 import { Routes, Route } from 'react-router-dom';
-import {  Alert } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 
 
 const InicioSesion = ({ onLogin }) => {
@@ -32,24 +32,24 @@ const InicioSesion = ({ onLogin }) => {
       emailInputRef.current.focus();
       setShowEmailWarning(true);
       setTimeout(() => {
-      setShowEmailWarning(false);
-    }, 2000); // 2000 milisegundos (2 segundos)
+        setShowEmailWarning(false);
+      }, 2000); // 2000 milisegundos (2 segundos)
       return;
     }
     setShowSuccessAlert({ message: 'Enviando email......' });
-  
+
     try {
       const response = await axios.post('http://localhost:3000/email', {
         email: formData.email,
       });
-  
+
       console.log('Solicitud POST exitosa:', response.data);
       if (response.data === 'Correo electrónico enviado correctamente!') {
         setShowSuccessAlert({ message: 'Email enviado exitosamente.' });
       } else {
         setErrorAlert('Error al enviar el email.');
       }
-  
+
       setTimeout(() => {
         setShowSuccessAlert(null);
         setErrorAlert(null);
@@ -66,13 +66,13 @@ const InicioSesion = ({ onLogin }) => {
       }, 2000); // 2000 milisegundos (2 segundos)
     }
   };
-  
-
-  
 
 
 
- 
+
+
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,7 +81,7 @@ const InicioSesion = ({ onLogin }) => {
       const response = await axios.post('http://localhost:3000/usuario/login', formData);
       const newToken = response.data.token;
       setToken(newToken);
-console.log("inicio",response.data)
+      console.log("inicio", response.data)
       onLogin(response.data.nombre);
       setUsuarioLogueado(response.data);
       const idUsuario = response.data.id;
@@ -98,7 +98,7 @@ console.log("inicio",response.data)
         const alumnoData = resp.data;
 
         if (alumnoData) {
-     
+
 
           setAlumnoLogueado(alumnoData);
         }
@@ -110,8 +110,8 @@ console.log("inicio",response.data)
 
 
         if (profesorData) {
-    
-     console.log(profesorData)
+
+          console.log(profesorData)
           // setProfesorLogueado(profesorData);
         }
         navigate('/profesor');
@@ -178,35 +178,35 @@ console.log("inicio",response.data)
               Iniciar sesión
             </button>
             <button
-  type="button"
-  id="btn-pass"
-  className="btn btn-secondary btn-block m-2"
-  onClick={() => {
-    handlePasswordReset();
-    
-  }}
->
-  Olvidé mi contraseña
-</button>
+              type="button"
+              id="btn-pass"
+              className="btn btn-secondary btn-block m-2"
+              onClick={() => {
+                handlePasswordReset();
 
-     
+              }}
+            >
+              Olvidé mi contraseña
+            </button>
+
+
           </form>
           <div className="App">
-          {showSuccessAlert && (
-        <Alert variant="success" className="mt-3 text-center">
-          {showSuccessAlert.message}
-        </Alert>
-      )}
-      {errorAlert && (
-          <Alert variant="danger" className="mt-3 text-center">
-            {errorAlert}
-          </Alert>
-        )}
-        {showEmailWarning && (
-  <Alert variant="danger" className="mt-3 text-center">
-    Debes ingresar tu correo electrónico.
-  </Alert>
-)}
+            {showSuccessAlert && (
+              <Alert variant="success" className="mt-3 text-center">
+                {showSuccessAlert.message}
+              </Alert>
+            )}
+            {errorAlert && (
+              <Alert variant="danger" className="mt-3 text-center">
+                {errorAlert}
+              </Alert>
+            )}
+            {showEmailWarning && (
+              <Alert variant="danger" className="mt-3 text-center">
+                Debes ingresar tu correo electrónico.
+              </Alert>
+            )}
             <Routes>
               <Route path="/inicio-sesion" element={<InicioSesion />} />
             </Routes>
@@ -214,7 +214,7 @@ console.log("inicio",response.data)
         </div>
       </div>
 
-  
+
     </div>
   );
 };

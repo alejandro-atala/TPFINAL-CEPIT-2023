@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {  Alert } from 'react-bootstrap';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const YourComponent = () => {
+const ResetPass = () => {
 
 
     const [ email, setEmail ] = useState();
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
-
+    const navigate = useNavigate();
   const [passwordResetData, setPasswordResetData] = useState({
     newPassword: '',
     confirmPassword: ''
@@ -61,7 +62,9 @@ const YourComponent = () => {
         setShowSuccessAlert(true);
         setTimeout(() => {
           setShowSuccessAlert(null);
+          navigate('/iniciarSesion');
         }, 2000); // 2000 milisegundos (2 segundos)
+       
       } catch (error) {
         console.error('Error al restablecer la contraseña:', error.response.data);
         setShowErrorAlert(true);
@@ -119,4 +122,4 @@ const YourComponent = () => {
   );
 };
 
-export default YourComponent;
+export default ResetPass;
