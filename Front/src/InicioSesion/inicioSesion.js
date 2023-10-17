@@ -119,7 +119,11 @@ console.log("inicio",response.data)
 
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
+
       setMessage('Error en el inicio de sesión. Verifica tus credenciales.');
+      setTimeout(() => {
+        setMessage(null)
+      }, 2000); // 2000 milisegundos (2 segundos)
     }
   };
 
