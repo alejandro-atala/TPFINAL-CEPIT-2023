@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import './inicioSesion.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -23,11 +23,13 @@ const InicioSesion = ({ onLogin }) => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(null);
   const [showEmailWarning, setShowEmailWarning] = useState(false);
+  const emailInputRef = useRef(null);
 
 
   const handlePasswordReset = async () => {
     if (formData.email.trim() === '') {
       console.log("trim password")
+      emailInputRef.current.focus();
       setShowEmailWarning(true);
       setTimeout(() => {
       setShowEmailWarning(false);
@@ -152,6 +154,7 @@ console.log("inicio",response.data)
                 type="email"
                 className="form-control"
                 id="email"
+                ref={emailInputRef}
                 value={formData.email}
                 onChange={handleChange}
               />
