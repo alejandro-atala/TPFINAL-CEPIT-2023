@@ -21,28 +21,50 @@ const InicioSesion = ({ onLogin }) => {
 
   const [message, setMessage] = useState('');
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [errorAlert, setErrorAlert] = useState(null);
+  const [showEmailWarning, setShowEmailWarning] = useState(false);
 
- 
 
   const handlePasswordReset = async () => {
+    if (formData.email.trim() === '') {
+      console.log("trim password")
+      setShowEmailWarning(true);
+      setTimeout(() => {
+      setShowEmailWarning(false);
+    }, 2000); // 2000 milisegundos (2 segundos)
+      return;
+    }
     setShowSuccessAlert({ message: 'Enviando email......' });
+  
     try {
-      // Envia los datos en la solicitud POST
-     let response = await axios.post('http://localhost:3000/email', {
-        email: formData.email, 
-       
+      const response = await axios.post('http://localhost:3000/email', {
+        email: formData.email,
       });
+  
+      console.log('Solicitud POST exitosa:', response.data);
+      if (response.data === 'Correo electrónico enviado correctamente!') {
+        setShowSuccessAlert({ message: 'Email enviado exitosamente.' });
+      } else {
+        setErrorAlert('Error al enviar el email.');
+      }
+  
+      setTimeout(() => {
+        setShowSuccessAlert(null);
+        setErrorAlert(null);
+      }, 2000); // 2000 milisegundos (2 segundos)
 
-  console.log('Solicitud POST exitosa:', response.data);
-  setShowSuccessAlert({ message: 'Email enviado exitosamente.' });
-  setTimeout(() => {
-    setShowSuccessAlert(null);
-  }, 2000); // 2000 milisegundos (2 segundos)
-  // Realiza las acciones que necesites después de enviar los datos
-} catch (error) {
-  console.error('Error al enviar la solicitud POST:', error);
-}
-  }
+
+    } catch (error) {
+      console.error('Error al enviar la solicitud POST:', error);
+      setErrorAlert('Error al enviar el email.');
+
+      setTimeout(() => {
+        setShowSuccessAlert(null);
+        setErrorAlert(null);
+      }, 2000); // 2000 milisegundos (2 segundos)
+    }
+  };
+  
 
   
 
@@ -148,14 +170,17 @@ console.log("inicio",response.data)
             <button type="submit" id="btn-iniciar" className="btn btn-primary btn-block">
               Iniciar sesión
             </button>
-                <button
-        type="button"
-        id="btn-pass"
-        className="btn btn-secondary btn-block m-2"
-        onClick={handlePasswordReset}
-      >
-        Olvidé mi contraseña
-      </button>
+            <button
+  type="button"
+  id="btn-pass"
+  className="btn btn-secondary btn-block m-2"
+  onClick={() => {
+    handlePasswordReset();
+    
+  }}
+>
+  Olvidé mi contraseña
+</button>
 
      
           </form>
@@ -165,6 +190,16 @@ console.log("inicio",response.data)
           {showSuccessAlert.message}
         </Alert>
       )}
+      {errorAlert && (
+          <Alert variant="danger" className="mt-3 text-center">
+            {errorAlert}
+          </Alert>
+        )}
+        {showEmailWarning && (
+  <Alert variant="danger" className="mt-3 text-center">
+    Debes ingresar tu correo electrónico.
+  </Alert>
+)}
             <Routes>
               <Route path="/inicio-sesion" element={<InicioSesion />} />
             </Routes>
