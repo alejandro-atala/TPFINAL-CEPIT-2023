@@ -6,6 +6,8 @@ import { useAlumno } from '../Alumno/AlumnoContext';
 import { useUsuario } from '../usuarioContext';
 import { useAuth } from './tokenContext';
 import { Routes, Route } from 'react-router-dom';
+import {  Alert } from 'react-bootstrap';
+
 
 const InicioSesion = ({ onLogin }) => {
   const { setToken } = useAuth();
@@ -18,10 +20,35 @@ const InicioSesion = ({ onLogin }) => {
   });
 
   const [message, setMessage] = useState('');
-  const [sessionExpired, setSessionExpired] = useState(false);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
-  //setAlumnoLogueado('');
+ 
 
+  const handlePasswordReset = async () => {
+    setShowSuccessAlert({ message: 'Enviando email......' });
+    try {
+      // Envia los datos en la solicitud POST
+     let response = await axios.post('http://localhost:3000/email', {
+        email: formData.email, 
+       
+      });
+
+  console.log('Solicitud POST exitosa:', response.data);
+  setShowSuccessAlert({ message: 'Email enviado exitosamente.' });
+  setTimeout(() => {
+    setShowSuccessAlert(null);
+  }, 2000); // 2000 milisegundos (2 segundos)
+  // Realiza las acciones que necesites después de enviar los datos
+} catch (error) {
+  console.error('Error al enviar la solicitud POST:', error);
+}
+  }
+
+  
+
+
+
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -121,19 +148,31 @@ console.log("inicio",response.data)
             <button type="submit" id="btn-iniciar" className="btn btn-primary btn-block">
               Iniciar sesión
             </button>
+                <button
+        type="button"
+        id="btn-pass"
+        className="btn btn-secondary btn-block m-2"
+        onClick={handlePasswordReset}
+      >
+        Olvidé mi contraseña
+      </button>
+
+     
           </form>
           <div className="App">
-            {sessionExpired && (
-              <div className="session-expired-alert">
-                Tu sesión ha expirado. Por favor, inicia sesión nuevamente.
-              </div>
-            )}
+          {showSuccessAlert && (
+        <Alert variant="success" className="mt-3 text-center">
+          {showSuccessAlert.message}
+        </Alert>
+      )}
             <Routes>
               <Route path="/inicio-sesion" element={<InicioSesion />} />
             </Routes>
           </div>
         </div>
       </div>
+
+  
     </div>
   );
 };

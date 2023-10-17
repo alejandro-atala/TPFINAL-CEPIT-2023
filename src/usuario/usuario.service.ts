@@ -270,4 +270,21 @@ export class UsuarioService {
     profesor.usuarioId = usuario.idUsuario;
     return this.profesorRepository.save(profesor);
   }
+
+  async resetPassword(email: string, newPassword: string): Promise<void> {
+    const usuario = await this.usuarioRepository.findOne({ where: { email } });
+  console.log(usuario);
+    if (!usuario) {
+      throw new Error('Usuario no encontrado');
+    }
+  
+    usuario.password = await bcrypt.hash(newPassword, saltRounds);
+  
+    await this.usuarioRepository.save(usuario);
+  }
+  
+  
+  
+
+
 }

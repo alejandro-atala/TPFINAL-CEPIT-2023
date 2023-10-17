@@ -33,6 +33,7 @@ import { UsuarioProvider } from '../src/usuarioContext'
 import Contacto from './Contacto/Contacto';
 import NotasExamen from './PaginaProfe/NotasExamen/notasExamen';
 import { NotificacionesProvider } from './Alumno/NotificacionesContext';
+import ResetPass from './ResetPass/resetpass';
 
 
 
@@ -118,6 +119,7 @@ const App = () => {
 
                           <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
 
+                          <Route path="/resetpass" element={<ResetPass />} />
 
                         </Routes>
                       </div>

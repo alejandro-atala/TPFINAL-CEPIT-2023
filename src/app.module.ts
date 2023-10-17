@@ -16,6 +16,7 @@ import { DataCargaModule } from './data-carga/data-carga.module';
 import { ImagenesModule } from './imagenes/imagenes.module';
 import { AvisosModule } from './avisos/aviso.module';
 import { AlumnoAvisoModule } from './alumno-aviso/alumno-aviso.module';
+import { EmailModule } from './email/email.module';
 
 
 @Module({
@@ -45,7 +46,8 @@ import { AlumnoAvisoModule } from './alumno-aviso/alumno-aviso.module';
     DataCargaModule,
     ImagenesModule,
     AvisosModule,
-    AlumnoAvisoModule],
+    AlumnoAvisoModule,
+    EmailModule],
 
   controllers: [AppController],
   providers: [AppService],
