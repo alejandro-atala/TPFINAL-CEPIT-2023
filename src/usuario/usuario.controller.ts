@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UnauthorizedException, Get, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, UnauthorizedException, Get, Put, Param, Delete, BadRequestException } from '@nestjs/common';
 import { UsuarioService } from './usuario.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { CredencialesDto } from './dto/credenciales.dto';
@@ -60,6 +60,23 @@ export class UsuarioController {
     const registroId = parseInt(id, 10);
     await this.usuarioService.eliminarRegistro(registroId);
   }
+
+  @Post('resetpassword/email')
+  async resetPassword(
+    @Body('email') email: string,
+    @Body() newPasswordData: { newPassword: string }
+  ) {
+   
+    try {
+      // Llama a la función que maneja el restablecimiento de contraseña en el servicio
+      await this.usuarioService.resetPassword(email, newPasswordData.newPassword);
+      return { message: 'Contraseña actualizada con éxito.' };
+    } catch (error) {
+      console.error('Error al restablecer la contraseña:', error);
+      throw new BadRequestException('No se pudo restablecer la contraseña.');
+    }
+  }
+  
 
 
   }

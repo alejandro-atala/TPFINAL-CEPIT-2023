@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { DataCargaController } from './data-carga.controller';
+import { UploadController } from './data-carga.controller';
 import { DataCargaService } from './data-carga.service';
 
 describe('DataCargaController', () => {
-  let controller: DataCargaController;
+  let controller: UploadController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [DataCargaController],
+      controllers: [UploadController],
       providers: [DataCargaService],
     }).compile();
 
-    controller = module.get<DataCargaController>(DataCargaController);
+    controller = module.get<UploadController>(UploadController);
   });
 
   it('should be defined', () => {

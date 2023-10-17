@@ -42,11 +42,18 @@ export class UsuarioService {
     for (const prop in updateUsuarioDto) {
       if (updateUsuarioDto.hasOwnProperty(prop)) {
         if (usuario.hasOwnProperty(prop)) {
-          usuario[prop] = updateUsuarioDto[prop];
+          if (prop === 'password') {
+            const hashedPassword = await bcrypt.hash(
+              usuario.password,
+              saltRounds,
+            );
+            usuario[prop] = hashedPassword;
+        } else {
+            usuario[prop] = updateUsuarioDto[prop];
         }
       }
     }
-
+  }
     // Guarda el usuario actualizado
     const updatedUsuario = await this.usuarioRepository.save(usuario);
 
@@ -58,6 +65,7 @@ export class UsuarioService {
         // Actualiza los datos del alumno
         alumno.nombre = updateUsuarioDto.nombre;  // Puedes actualizar otros campos según necesites
         alumno.curso = Number(updateUsuarioDto.curso);
+        
         await this.alumnoRepository.save(alumno);
       }
     }
@@ -262,4 +270,21 @@ export class UsuarioService {
     profesor.usuarioId = usuario.idUsuario;
     return this.profesorRepository.save(profesor);
   }
+
+  async resetPassword(email: string, newPassword: string): Promise<void> {
+    const usuario = await this.usuarioRepository.findOne({ where: { email } });
+  console.log(usuario);
+    if (!usuario) {
+      throw new Error('Usuario no encontrado');
+    }
+  
+    usuario.password = await bcrypt.hash(newPassword, saltRounds);
+  
+    await this.usuarioRepository.save(usuario);
+  }
+  
+  
+  
+
+
 }
