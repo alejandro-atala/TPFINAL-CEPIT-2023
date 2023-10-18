@@ -1,7 +1,5 @@
-
-  
-
-  .bg-registro{
-    background-color: rgb(255, 121, 143);
+ .bg-registro{
+  background-color: #45ceba;
     margin-left:220px;
+    border-radius: 10%;
 }

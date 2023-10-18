@@ -1,11 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faTwitter, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import './footer.css'; // Importa tu archivo CSS personalizado
 
 const Footer = () => {
   return (
-    <footer className="bg-light py-4 bg ">
+    <footer className="py-4 bg">
       <div className="container-footer ">
         <div className="social-icons-container ">
           <div className="social-icons text-center ">
@@ -17,6 +17,9 @@ const Footer = () => {
             </a>
             <a href="#">
               <FontAwesomeIcon icon={faInstagram} />
+            </a>
+            <a href="#">
+              <FontAwesomeIcon icon={faWhatsapp} />
             </a>
           </div>
         </div>

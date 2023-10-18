@@ -21,11 +21,12 @@ const Beneficios = () => {
   }, []);
 
   return (
-    <div className="container componente-beneficios mt-5 contenido">
+    <div className="container text-center componente-beneficios mt-5 contenido">
       <div className="row">
-        <div className="">
           <div className="col align-self-center cuadro-beneficios">
-            <h2 className="titulo">Beneficios</h2>
+            <h2 className="tituloBeneficios">Beneficios</h2>
+            <h5 className='subtitulo-beneficios'> ¿Por qué estudiar con Nosotros? </h5>
+            <div className='lista-beneficios'>
             <div>{textoBeneficios}</div>
           </div>
         </div>

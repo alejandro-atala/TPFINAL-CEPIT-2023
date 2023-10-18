@@ -4,8 +4,8 @@
     max-width: 1200px;
     padding: 20px;
     position: relative;
-    background-color: #f2f2f2;
-
+    background-color: #45ceba;
+    border-radius: 10%;
   }
   
   h1 {
@@ -15,8 +15,11 @@
   .materias {
     margin-top: 10px;
     padding-top: 10px;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #578ee5;
   }
+ 
+  
+
   
 
   

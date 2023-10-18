@@ -30,7 +30,7 @@ const InicioSesion = ({ onLogin }) => {
       const response = await axios.post('http://localhost:3000/usuario/login', formData);
       const newToken = response.data.token;
       setToken(newToken);
-console.log("inicio",response.data)
+      console.log("inicio", response.data)
       onLogin(response.data.nombre);
       setUsuarioLogueado(response.data);
       const idUsuario = response.data.id;
@@ -47,7 +47,7 @@ console.log("inicio",response.data)
         const alumnoData = resp.data;
 
         if (alumnoData) {
-     
+
 
           setAlumnoLogueado(alumnoData);
         }
@@ -59,8 +59,8 @@ console.log("inicio",response.data)
 
 
         if (profesorData) {
-    
-     console.log(profesorData)
+
+          console.log(profesorData)
           // setProfesorLogueado(profesorData);
         }
         navigate('/profesor');
@@ -87,55 +87,57 @@ console.log("inicio",response.data)
 
 
   return (
-    <div className="container rounded text-center col-xs-12 col-md-4 col-sm-3 p-5 mt-4 bg-sesion">
-      <div className="row align-items-center">
-        <div className="">
-          <h2 className="text-center">Iniciar sesión</h2>
-          {message && <div className="alert alert-danger">{message}</div>}
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Correo electrónico:</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Contraseña:</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="checkbox">
-              <label>
-                <input type="checkbox" /> Recordarme
-              </label>
-            </div>
-            <button type="submit" id="btn-iniciar" className="btn btn-primary btn-block">
-              Iniciar sesión
-            </button>
-          </form>
-          <div className="App">
-            {sessionExpired && (
-              <div className="session-expired-alert">
-                Tu sesión ha expirado. Por favor, inicia sesión nuevamente.
+    <div className="justify-content-center">
+      <div className="container rounded text-center col-xs-12 col-md-3 col-sm-2 p-5 mt-4 bg-sesion">
+        <div className="row align-items-center">
+          <div className="col">
+            <h2 className="text-center">Iniciar sesión</h2>
+            {message && <div className="alert alert-danger">{message}</div>}
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="email">Correo electrónico:</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
               </div>
-            )}
-            <Routes>
-              <Route path="/inicio-sesion" element={<InicioSesion />} />
-            </Routes>
+              <div className="form-group">
+                <label htmlFor="password">Contraseña:</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="checkbox">
+                <label>
+                  <input type="checkbox" /> Recordarme
+                </label>
+              </div>
+              <button type="submit" id="btn-iniciar" className="btn btn-primary btn-block">
+                Iniciar sesión
+              </button>
+            </form>
+            <div className="App">
+              {sessionExpired && (
+                <div className="session-expired-alert">
+                  Tu sesión ha expirado. Por favor, inicia sesión nuevamente.
+                </div>
+              )}
+              <Routes>
+                <Route path="/inicio-sesion" element={<InicioSesion />} />
+              </Routes>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+      </div>
+      );
 };
 
-export default InicioSesion;
+      export default InicioSesion;

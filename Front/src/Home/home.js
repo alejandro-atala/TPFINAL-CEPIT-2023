@@ -44,8 +44,8 @@ const HomePage = () => {
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center min-vh-100">
-      <h1>{textoId1}</h1>
-      <div className="container plan-de-estudios mt-5">
+      <h1 className="tituloPrincipal">{textoId1}</h1>
+      <div className="container principal mt-5">
         <div className="row">
           <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-inner">

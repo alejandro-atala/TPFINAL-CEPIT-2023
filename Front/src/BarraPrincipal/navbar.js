@@ -9,10 +9,9 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-pink">
-      <div className="container justify-content-center text-center">
-        <Link className="navbar-brand" to="/">
+      <div className="container">
+        <Link to="/logo" className="navbar-brand">
           <img src="https://images4.imagebam.com/9c/af/6d/MENQMV5_o.png" alt="Logo" className="navbar-logo" />
-          Home
         </Link>
         <button
           className="navbar-toggler"
@@ -25,16 +24,19 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse " id="navbarNav">
-          <ul className="navbar-nav ">
+        <div className="collapse navbar-collapse justify-content-center">
+          <ul className="navbar-nav">
             <li className="nav-item">
-              <Link to="/" className="nav-link">Proyecto Institucional</Link>
+              <Link to="/" className="nav-link">Home</Link>
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-link">Historial</Link>
+              <Link to="/proyectos" className="nav-link">Proyectos</Link>
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-link">Estatuto y Reglamento</Link>
+              <Link to="/historial" className="nav-link">Historial</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/reglamento" className="nav-link">Reglamentos</Link>
             </li>
             <li className="nav-item">
               <Link to="/contacto" className="nav-link">Contacto</Link>
@@ -44,18 +46,21 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
                 <span className="nav-link hola-usuario">Hola {loggedInUser}</span>
               </li>
             ) : null}
-            <li className="nav-item">
+          </ul>
+        </div>
+          <div className="navbar-nav">
+            <li className="nav-item sesion">
               {loggedInUser ? (
                 <button className="nav-link sesion" onClick={onLogout}>Cerrar Sesión</button>
               ) : (
                 <Link to="/iniciarSesion" className="nav-link sesion">Iniciar Sesión</Link>
               )}
             </li>
-          </ul>
-        </div>
+          </div>
       </div>
     </nav>
   );
-};
+}
+
 
 export default Navbar;

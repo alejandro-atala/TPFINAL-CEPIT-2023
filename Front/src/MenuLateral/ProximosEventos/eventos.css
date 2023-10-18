@@ -4,8 +4,10 @@
     max-width: 1200px;
     padding: 20px;
     position: relative;
-    background-color: #f2f2f2;
+    background-color: #45ceba;
+    border-radius: 10%;
   }
+
   
   h1 {
     margin-bottom: 20px; 

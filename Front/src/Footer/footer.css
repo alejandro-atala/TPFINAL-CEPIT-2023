@@ -1,8 +1,8 @@
-/* Footer.css */
-.container-footer {
-  background-color: rgb(255, 121, 143);
 
-  padding: 20px 0; /* Ajusta el espacio interior según necesites */
+.container-footer {
+  background-color: rgb(58, 244, 154);
+
+  padding: 20px 0; 
 }
 
 .social-icons {
@@ -13,10 +13,10 @@
 .social-icons a {
   font-size: 24px;
   margin: 0 10px;
-  color: #333; /* Cambia el color según tus necesidades */
-  transition: color 0.3s; /* Transición de color suave */
+  color: #333; 
+  transition: color 0.3s; 
 }
 
 .social-icons a:hover {
-  color: white; /* Cambia el color al pasar el cursor sobre los íconos */
+  color: white; 
 }

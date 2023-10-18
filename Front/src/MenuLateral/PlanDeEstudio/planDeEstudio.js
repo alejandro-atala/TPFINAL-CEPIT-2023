@@ -36,7 +36,7 @@ const PlanDeEstudios = () => {
   }, []);
 
   return (
-    <div className="container plan-de-estudios mt-5">
+    <div className="container d-flex justify-content-center plan-de-estudios mt-5">
       <h1>Plan de Estudio Por Año</h1>
       <div className="row">
         {Object.keys(materiasPorCurso).map((curso) => (

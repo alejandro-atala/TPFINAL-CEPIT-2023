@@ -1,30 +1,41 @@
 .bg-pink {
-
-  background-color: rgb(255, 121, 143);
+  background-color: rgb(58, 244, 154);
+  font-size: 20px;
 }
 
 .navbar-logo {
-  width: 50px;
+  width: 100px;
   height: auto;
-  margin-right: 10px;
+  margin-right: 200px;
+  margin-left: 100px;
 }
 
 .sesion {
   transition: color 0.3s ease, background-color 0.3s ease;
+}
 
-  margin-left: 100px;
+.iniciar{
+  margin-right: 100px;
+  margin-left: 300px;
+}
 
+.nav-item {
+  margin-top: 10px;
+  margin-right: 10px; 
+  margin-left: 10px;
+  letter-spacing: 1.2px;
 }
 
 
 .nav-link {
   transition: color 0.3s ease, background-color 0.3s ease;
-  border-radius: 5px;;
+  border-radius: 5px;
+  color: black;
 }
 
 .nav-link:hover {
   color: #fff;
-  background-color: #ee6e82;
+  background-color: rgb(76, 129, 244);
 
 }
 
@@ -33,7 +44,7 @@
   margin-top: -5px;
   font-family:'Times New Roman', Times, serif;
   font-size: 20px;
-  background-color: rgb(250, 148, 148);
+  background-color:rgb(76, 129, 244);
   text-decoration: underline;
   width: 150px;
 }
