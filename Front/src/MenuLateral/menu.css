@@ -7,8 +7,8 @@
 
 .side-menu {
   width: 250px;
-  background-image: linear-gradient(to bottom, rgba(23, 162, 184, 0.8), rgba(23, 162, 184, 0.4));
-  color: white;
+  background-image: linear-gradient(to bottom, rgb(58, 244, 154), rgba(51, 225, 63, 0.4));
+  color: rgb(9, 8, 8);
   padding: 20px;
   border-radius: 10px;
   margin-top: 30px;
@@ -26,9 +26,11 @@
   justify-content: space-between;
   align-items: center;
   position: relative; /* Agregar esta línea */
-  border-bottom: 3px solid #4e4e4e; /* Agregar línea divisoria */
+  border-bottom: 3px solid rgb(76, 129, 244); 
   margin-top: 15px;
 }
+
+
 
 
 

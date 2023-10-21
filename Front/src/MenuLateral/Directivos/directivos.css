@@ -1,38 +1,37 @@
 .component-directivos {
 
-    padding: 100px;
+  padding: 100px;
 
-  }
-  
-  .directivos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-  }
-  
-  /* .directivo {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-  } */
-  
-  .cuadro-imagen {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 10px;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-  
-  .cuadro-imagen img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-  
-  /* .descripcion {
-    font-size: 14px;
-  } */
-  
+}
+
+.directivos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+/* .directivo {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+} */
+
+.cuadro-imagen {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.cuadro-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* .descripcion {
+  font-size: 14px;
+} */

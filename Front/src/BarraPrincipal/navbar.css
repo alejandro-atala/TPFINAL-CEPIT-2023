@@ -1,6 +1,6 @@
 .bg-pink {
 
-  background-color: rgb(255, 121, 143);
+  background-color: rgb(58, 244, 154);
 }
 
 .navbar-logo {
@@ -24,7 +24,7 @@
 
 .nav-link:hover {
   color: #fff;
-  background-color: #ee6e82;
+  background-color: rgb(76, 129, 244);
 
 }
 
