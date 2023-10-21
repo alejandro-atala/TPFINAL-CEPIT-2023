@@ -52,13 +52,15 @@ function Venta() {
         <div className="container mt-5">
           <div className="row">
             <div className="col-md-6">
-              <h1>VSA</h1>
-              <p>El Sistema de Gestión Escolar para Escuela Secundaria es una herramienta integral diseñada para simplificar y 
+              <h1>Gestion Integral para Escuelas</h1>
+              <p>El Sistema de Gestión Escolar para Escuelas Secundarias es una herramienta integral diseñada para simplificar y 
                 optimizar la administración y operación de una institución educativa de nivel secundario. Este sistema proporciona a
-                 directores, maestros, personal administrativo, padres y estudiantes las herramientas necesarias para llevar a cabo una
+                 directores, maestros, personal administrativo, y estudiantes las herramientas necesarias para llevar a cabo una
                   gestión eficiente de la escuela y mejorar la experiencia educativa en su conjunto.</p>
                   <br></br>
                   <p>Para mas informacion suscribase y un representante le ayudará</p>
+                  <br></br>    <br></br>
+                  <p>VSA Desarrollos</p>
             </div>
             <div className="col-md-6">
               <form onSubmit={handleSubmit}>
