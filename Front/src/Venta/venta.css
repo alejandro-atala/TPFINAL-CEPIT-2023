@@ -1,0 +1,34 @@
+.ventas-page {
+    background-image: url('https://vinculotic.com/wp-content/uploads/2020/08/Machine-learning-y-LMS-01.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+  
+  .overlay {
+    background: rgba(0, 0, 0, 0.7); /* Fondo oscurecido */
+    padding: 20px;
+    color : #fff;
+    border-radius: 10px;
+  }
+  
+  /* Puedes ajustar los estilos según tus preferencias */
+  .loader {
+    border: 4px solid rgb(255, 255, 255);
+    border-top: 4px solid #007bff; /* Color de acento */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite; /* Animación de giro */
+    display: inline-block;
+    margin-left: 0px; /* Espacio entre el círculo y el texto "Suscribirse" */
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

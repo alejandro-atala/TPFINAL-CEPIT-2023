@@ -53,9 +53,39 @@ export class EmailService {
 
     console.log('enviando mail...',emailContent)
     let mailOptions = {
-      from: 'micapsicologa@gmail.com',
+      from: 'aledorrego89@gmail.com',
       to: para, 
       subject: 'Restablecer contraseña',
+      html: emailContent
+    };
+console.log(mailOptions);
+    await transporter.sendMail(mailOptions);
+
+
+  }
+
+
+
+  async sendEmailSuscripcion(para: string): Promise<void> {
+
+
+    const emailContent = `
+    <div style="background-color:rgba(78, 202, 155, 0.618); padding: 20px;">
+      <div style="background-color: white; border-radius: 10px; padding: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="color: #333;">Gracias por contactarse</h2>
+        <p>A la brevedad un representante se contactara para brindarle mas informacion sobre el sistema de gestion de escuelas, brindandole 
+        detalles de costos y funcionamiento</p>
+       
+      </div>
+    </div>
+  `;
+
+
+    console.log('enviando mail...',emailContent)
+    let mailOptions = {
+      from: 'aledorrego89@gmail.com',
+      to: para, 
+      subject: 'Suscripcion exitosa',
       html: emailContent
     };
 console.log(mailOptions);
