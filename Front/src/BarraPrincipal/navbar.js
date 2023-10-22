@@ -9,7 +9,7 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-pink">
-      <div className="container justify-content-center text-center">
+      <div className="container  justify-content-center text-center">
         <Link className="navbar-brand" to="/">
           <img src="https://images4.imagebam.com/9c/af/6d/MENQMV5_o.png" alt="Logo" className="navbar-logo" />
           Home
