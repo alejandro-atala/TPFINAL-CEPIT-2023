@@ -63,9 +63,6 @@ const App = () => {
     window.location.href = '/iniciarSesion'; // Utiliza window.location.href para redirigir
   };
 
-  const currentPath = window.location.pathname;
-  const showSidebar = currentPath === '/';
-
 
   return (
     <BrowserRouter>
@@ -82,7 +79,7 @@ const App = () => {
                     <div className="flex-grow-1">
                       <div className="container-fluid">
                         <div className="row">
-                          {loggedInUser === "Admin" ? null : (
+                          {loggedInUser === "Admin" ? null || window.location.pathname === "/" : (
                             <div className="col-md-3">
                               <Sidebar />
                             </div>

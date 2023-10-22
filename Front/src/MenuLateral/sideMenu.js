@@ -47,24 +47,8 @@ import MenuItem from './menuItem';
 import Collapse from 'react-bootstrap/Collapse';
 
 const SideMenu = () => {
-  const location = useLocation();
-  const [open, setOpen] = useState(false);
-
-  const isHomePage = location.pathname === '/';
-
-  const toggleMenu = () => setOpen(!open);
-
   return (
-    <div className={`side-menu d-flex flex-column ${!isHomePage && 'collapsed-menu'}`}>
-      <button
-        className="btn btn-primary mb-2"
-        onClick={toggleMenu}
-        aria-controls="example-collapse-text"
-        aria-expanded={open}
-      >
-        Toggle Menu
-      </button>
-      <Collapse in={open}>
+    <div className={`side-menu d-flex flex-column`}>
         <div id="example-collapse-text">
           <Link to="/plan-de-estudio">
             <MenuItem text="Plan de Estudio" />
@@ -85,7 +69,6 @@ const SideMenu = () => {
             <MenuItem text="Talleres" />
           </Link>
         </div>
-      </Collapse>
     </div>
   );
 };
