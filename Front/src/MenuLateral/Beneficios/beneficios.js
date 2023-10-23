@@ -10,7 +10,9 @@ const Beneficios = () => {
     const obtenerTextoPorReferencia = async (referencia, setTexto) => {
       try {
         const response = await axios.get(`http://localhost:3000/carga/${referencia}`);
-        setTexto(response.data.texto);
+        var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
+
+        setTexto(textoConSaltosDeLinea);
       } catch (error) {
         console.error(`Error al obtener el texto con referencia ${referencia}:`, error);
       }
@@ -20,13 +22,16 @@ const Beneficios = () => {
     obtenerTextoPorReferencia('Beneficios', setTextoBeneficios);
   }, []);
 
+  // Crear un objeto con el HTML procesado
+  const htmlProcesado = { __html: textoBeneficios };
+
   return (
     <div className="container componente-beneficios mt-5 contenido">
       <div className="row">
         <div className="">
           <div className="col align-self-center cuadro-beneficios">
             <h2 className="titulo">Beneficios</h2>
-            <div>{textoBeneficios}</div>
+            <div dangerouslySetInnerHTML={htmlProcesado}></div>
           </div>
         </div>
       </div>
