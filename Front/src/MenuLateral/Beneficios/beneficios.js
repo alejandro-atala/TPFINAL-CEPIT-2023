@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './beneficios.css';
@@ -10,7 +12,9 @@ const Beneficios = () => {
     const obtenerTextoPorReferencia = async (referencia, setTexto) => {
       try {
         const response = await axios.get(`http://localhost:3000/carga/${referencia}`);
-        setTexto(response.data.texto);
+        var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
+
+        setTexto(textoConSaltosDeLinea);
       } catch (error) {
         console.error(`Error al obtener el texto con referencia ${referencia}:`, error);
       }
@@ -20,14 +24,16 @@ const Beneficios = () => {
     obtenerTextoPorReferencia('Beneficios', setTextoBeneficios);
   }, []);
 
+  // Crear un objeto con el HTML procesado
+  const htmlProcesado = { __html: textoBeneficios };
+
   return (
-    <div className="container text-center componente-beneficios mt-5 contenido">
+    <div className="container componente-beneficios mt-5 contenido">
       <div className="row">
+        <div className="">
           <div className="col align-self-center cuadro-beneficios">
-            <h2 className="tituloBeneficios">Beneficios</h2>
-            <h5 className='subtitulo-beneficios'> ¿Por qué estudiar con Nosotros? </h5>
-            <div className='lista-beneficios'>
-            <div>{textoBeneficios}</div>
+            <h2 className="titulo">Beneficios</h2>
+            <div dangerouslySetInnerHTML={htmlProcesado}></div>
           </div>
         </div>
       </div>

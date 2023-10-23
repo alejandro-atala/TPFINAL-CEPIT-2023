@@ -11,7 +11,9 @@ const ProximosEventos = () => {
     const obtenerTextoPorReferencia = async (referencia, setTexto) => {
       try {
         const response = await axios.get(`http://localhost:3000/carga/${referencia}`);
-        setTexto(response.data.texto);
+        var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
+
+        setTexto(textoConSaltosDeLinea);
       } catch (error) {
         console.error(`Error al obtener el texto con referencia ${referencia}:`, error);
       }
@@ -24,6 +26,9 @@ const ProximosEventos = () => {
 
   const titulo = 'Eventos del Instituto';
 
+  // Crear objetos con el HTML procesado
+  const htmlProcesadoActos = { __html: textoActos };
+  const htmlProcesadoEventos = { __html: textoEventos };
 
   return (
     <div className="container proximos-eventos mt-5">
@@ -37,9 +42,7 @@ const ProximosEventos = () => {
           <div className="card shadow">
             <div className="card-body">
               <h2 className="card-title">Actos</h2>
-              <div className="evento">
-              {textoActos}
-              </div>
+              <div className="evento" dangerouslySetInnerHTML={htmlProcesadoActos}></div>
             </div>
           </div>
         </div>
@@ -47,10 +50,7 @@ const ProximosEventos = () => {
           <div className="card shadow">
             <div className="card-body">
               <h2 className="card-title">Eventos</h2>
-              <div className="evento">
-              <p>  {textoEventos}</p>
-               
-              </div>
+              <div className="evento" dangerouslySetInnerHTML={htmlProcesadoEventos}></div>
             </div>
           </div>
         </div>
