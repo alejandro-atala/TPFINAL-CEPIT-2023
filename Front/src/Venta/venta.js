@@ -4,10 +4,6 @@ import './venta.css'; // Importa el archivo CSS para estilizar
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
-
-
 function Venta() {
   const [formData, setFormData] = useState({ email: '' });
   const [isLoading, setIsLoading] = useState(false);
