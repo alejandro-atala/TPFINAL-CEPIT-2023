@@ -50,6 +50,7 @@ export class UploadController {
 
   @Get(':referencia')
   findByReferencia(@Param('referencia') referencia: string) {
+    
     return this.textosService.findByReferencia(referencia); 
   }
 

@@ -22,6 +22,7 @@ const Talleres = () => {
     const obtenerTextoEImagenPorReferencia = async (referencia, setTexto, setImagen) => {
       try {
         const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
+        console.log(responseTexto.data.texto)
         setTexto(responseTexto.data.texto);
 
         const responseImagen = await axios.get(`http://localhost:3000/imagenes/nombre/${referencia}`);
@@ -34,12 +35,12 @@ const Talleres = () => {
     };
 
     // Obtener texto e imagen por referencia para cada taller
-    obtenerTextoEImagenPorReferencia('taller1', setTextoTaller1, setImagenTaller1);
-    obtenerTextoEImagenPorReferencia('taller2', setTextoTaller2, setImagenTaller2);
-    obtenerTextoEImagenPorReferencia('taller3', setTextoTaller3, setImagenTaller3);
-    obtenerTextoEImagenPorReferencia('taller4', setTextoTaller4, setImagenTaller4);
-    obtenerTextoEImagenPorReferencia('taller5', setTextoTaller5, setImagenTaller5);
-    obtenerTextoEImagenPorReferencia('taller6', setTextoTaller6, setImagenTaller6);
+    obtenerTextoEImagenPorReferencia('taller_1', setTextoTaller1, setImagenTaller1);
+    obtenerTextoEImagenPorReferencia('taller_2', setTextoTaller2, setImagenTaller2);
+    obtenerTextoEImagenPorReferencia('taller_3', setTextoTaller3, setImagenTaller3);
+    obtenerTextoEImagenPorReferencia('taller_4', setTextoTaller4, setImagenTaller4);
+    obtenerTextoEImagenPorReferencia('taller_5', setTextoTaller5, setImagenTaller5);
+    obtenerTextoEImagenPorReferencia('taller_6', setTextoTaller6, setImagenTaller6);
     obtenerTextoEImagenPorReferencia('Contacto_Talleres', setTextoTelefono);
   }, []);
 
