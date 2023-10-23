@@ -79,7 +79,7 @@ const App = () => {
                     <div className="flex-grow-1">
                       <div className="container-fluid">
                         <div className="row">
-                          {loggedInUser === "Admin" ? null || window.location.pathname === "/" : (
+                          {loggedInUser === "Admin" ? null : (
                             <div className="col-md-3">
                               <Sidebar />
                             </div>

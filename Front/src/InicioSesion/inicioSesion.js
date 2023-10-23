@@ -87,7 +87,6 @@ const InicioSesion = ({ onLogin }) => {
 
 
   return (
-    <div className="justify-content-center">
       <div className="container rounded text-center col-xs-12 col-md-3 col-sm-2 p-5 mt-4 bg-sesion">
         <div className="row align-items-center">
           <div className="col">
@@ -135,7 +134,6 @@ const InicioSesion = ({ onLogin }) => {
             </div>
           </div>
         </div>
-      </div>
       </div>
       );
 };

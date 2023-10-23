@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import './proyectos.css';
 import axios from "axios";
 
+
 const Proyectos = () => {
     const [textoProyecto, setTextoProyecto] = useState('');
     const [textoProyecto2, setTextoProyecto2] = useState('');
@@ -13,10 +14,12 @@ const Proyectos = () => {
     const [proyectoIMages3, setproyectoImages3] = useState(null);
 
     useEffect(() => {
-        const obtenerTextoEImagenPorReferencia = async (referencia, setTexto, setImagen) => {
+        const obtenerImagenPorReferencia = async (referencia, setTexto, setImagen) => {
             try {
+                console.log(referencia);
                 const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
                 setTexto(responseTexto.data.texto);
+                console.log(responseTexto.data);
 
                 const responseImagen = await axios.get(`http://localhost:3000/imagenes/nombre/${referencia}`);
 
@@ -30,23 +33,23 @@ const Proyectos = () => {
         };
 
 
-        const obtenerTextoPorId = async (id, setTexto) => {
+        const obtenerTextoPorReferencia = async (referencia, setTexto) => {
             try {
-                const response = await axios.get(`http://localhost:3000/carga/id/${id}`);
+                const response = await axios.get(`http://localhost:3000/carga/${referencia}`);
                 setTexto(response.data.texto);
             } catch (error) {
-                console.error(`Error al obtener el texto con ID ${id}:`, error);
+                console.error(`Error al obtener el texto con ID ${referencia}:`, error);
             }
 
         };
 
-        obtenerTextoPorId(1, setTextoProyecto);
-        obtenerTextoPorId(2, setTextoProyecto2);
+        obtenerTextoPorReferencia('textoProyecto', setTextoProyecto);
+        obtenerTextoPorReferencia('textoProyecto2', setTextoProyecto2);
 
         // Obtener texto e imagen por referencia para cada directivo
-        obtenerTextoEImagenPorReferencia('proyectoImagen1', settextoDescripcionProyecto1, setproyectoImages1);
-        obtenerTextoEImagenPorReferencia('proyectoImagen2', settextoDescripcionProyecto2, setproyectoImages2);
-        obtenerTextoEImagenPorReferencia('proyectoImagen3', settextoDescripcionProyecto3, setproyectoImages3);
+        obtenerImagenPorReferencia('proyectoImagen1', settextoDescripcionProyecto1, setproyectoImages1);
+        obtenerImagenPorReferencia('proyectoImagen2', settextoDescripcionProyecto2, setproyectoImages2);
+        obtenerImagenPorReferencia('proyectoImagen3', settextoDescripcionProyecto3, setproyectoImages3);
     }, []);
 
     return (
