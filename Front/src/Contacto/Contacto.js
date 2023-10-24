@@ -1,3 +1,59 @@
+// import React, { useState, useEffect } from 'react';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import axios from 'axios';
+
+// const Contacto = () => {
+//     const [telefono, setTelefono] = useState('');
+//     const [facebookURL, setFacebookURL] = useState('');
+//     const [instagramURL, setInstagramURL] = useState('');
+
+//     useEffect(() => {
+//         const cargarDatosPorReferencia = async (referencia, setDato) => {
+//             try {
+//                 const response = await axios.get(`http://localhost:3000/carga/${referencia}`);
+//                 setDato(response.data.texto);
+//             } catch (error) {
+//                 console.error(`Error al cargar los datos de ${referencia}:`, error);
+//             }
+//         };
+
+//         cargarDatosPorReferencia('Contacto_General', setTelefono);
+//         cargarDatosPorReferencia('Facebook', setFacebookURL);
+//         cargarDatosPorReferencia('Instagram', setInstagramURL);
+//     }, []);
+
+//     // Función para abrir una URL en una nueva pestaña
+//     const abrirURL = (url) => {
+//         console.log(url);
+//         window.open(url, '_blank');
+//     };
+
+//     return (
+// <div className="container mt-4 d-flex flex-column justify-content-center align-items-center" style={{ height: '50vh' }}>
+//   <div className="card">
+//     <div className="card-body">
+//       <h1 className="card-title">¡Contáctanos!</h1>
+//       <p className="card-text">
+//         Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
+//       </p>
+//       <p className="card-text">Teléfono: {telefono} </p>
+
+//       <div className="redes-sociales">
+//         <button className="btn btn-primary mx-2" onClick={() => abrirURL(facebookURL)}>
+//           Facebook
+//         </button>
+
+//         <button className="btn btn-primary mx-2" onClick={() => abrirURL(instagramURL)}>
+//           Instagram
+//         </button>
+//       </div>
+//     </div>
+//   </div>
+// </div>
+//     )}
+// export default Contacto;
+
+
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
@@ -6,6 +62,8 @@ const Contacto = () => {
     const [telefono, setTelefono] = useState('');
     const [facebookURL, setFacebookURL] = useState('');
     const [instagramURL, setInstagramURL] = useState('');
+    const [direccion, setDireccion] = useState('');
+    const [imagenFondo, setImagenFondo] = useState('');
 
     useEffect(() => {
         const cargarDatosPorReferencia = async (referencia, setDato) => {
@@ -20,35 +78,48 @@ const Contacto = () => {
         cargarDatosPorReferencia('Contacto_General', setTelefono);
         cargarDatosPorReferencia('Facebook', setFacebookURL);
         cargarDatosPorReferencia('Instagram', setInstagramURL);
+        cargarDatosPorReferencia('Direccion', setDireccion);
+        cargarDatosPorReferencia('Imagen_Fondo', setImagenFondo);
     }, []);
 
-    // Función para abrir una URL en una nueva pestaña
     const abrirURL = (url) => {
-        console.log(url);
         window.open(url, '_blank');
     };
 
     return (
-<div className="container mt-4 d-flex flex-column justify-content-center align-items-center" style={{ height: '50vh' }}>
-  <div className="card">
-    <div className="card-body">
-      <h1 className="card-title">¡Contáctanos!</h1>
-      <p className="card-text">
-        Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
-      </p>
-      <p className="card-text">Teléfono: {telefono} </p>
+        <div className="container mt-4 d-flex flex-column justify-content-center align-items-center" style={{ height: '50vh' }}>
+            <div className="card">
+                <div className="card-body">
+                    <h1 className="card-title">¡Contáctanos!</h1>
+                    <p className="card-text">
+                        Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
+                    </p>
+                    <p className="card-text">Teléfono: {telefono} </p>
 
-      <div className="redes-sociales">
-        <button className="btn btn-primary mx-2" onClick={() => abrirURL(facebookURL)}>
-          Facebook
-        </button>
+                    <div className="redes-sociales">
+                        <button className="btn btn-primary mx-2" onClick={() => abrirURL(facebookURL)}>
+                            Facebook
+                        </button>
 
-        <button className="btn btn-primary mx-2" onClick={() => abrirURL(instagramURL)}>
-          Instagram
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-    )}
+                        <button className="btn btn-primary mx-2" onClick={() => abrirURL(instagramURL)}>
+                            Instagram
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {/* Agrega el segundo cuadro para el mapa y la imagen de fondo */}
+            <div className="mt-4">
+                <div className="card" style={{ width: '100%', height: '300px' }}>
+                    <div className="card-body" style={{ backgroundImage: `url(${imagenFondo})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+                        <h5>Dirección:</h5>
+                        <p>{direccion}</p>
+                        {/* Agrega aquí el componente del mapa si es necesario */}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export default Contacto;

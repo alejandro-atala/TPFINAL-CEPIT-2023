@@ -190,6 +190,7 @@ const CargaImagenes = () => {
         <option value="taller4">Taller 4</option>
         <option value="taller5">Taller 5</option>
         <option value="taller6">Taller 6</option>
+        <option value='proyectoImagen1'> Proyecto Imagen 1</option>
       </select>
 
       <input

@@ -18,7 +18,6 @@ const BloqueDeCarga = () => {
   const [editMode, setEditMode] = useState(false);
 
 
-
   const nombresDeReferencia = {
     Titulo_instituto: 'Nombre Instituto',
     Descripcion: 'Descripcion',
@@ -38,6 +37,8 @@ const BloqueDeCarga = () => {
     Contacto_General: 'Contacto_General',
     Facebook: 'Facebook',
     Instagram: 'Instagram',
+    textoProyecto: 'Nombre del proyecto 1',
+    reglamento1: 'Titulo reglamento',
     // Agrega más nombres de referencia según tus necesidades
   };
 
