@@ -1,6 +1,0 @@
-/* Add this to your CSS file or style block */
-.card.disabled {
-    opacity: 0.5; /* Adjust the opacity to control the level of grayed-out effect */
-    pointer-events: none; /* Disable pointer events to make it unclickable */
-  }
-  
