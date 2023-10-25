@@ -5,22 +5,20 @@ import axios from "axios";
 
 const Proyectos = () => {
     const [textoProyecto, setTextoProyecto] = useState('');
-    const [textoProyecto2, setTextoProyecto2] = useState('');
+    const [descripcionProyecto, setDescripcionProyecto] = useState('');
+    const [tituloProyecto1, setTituloProyecto1] = useState('');
+    const [tituloProyecto2, setTituloProyecto2] = useState('');
+    const [tituloProyecto3, setTituloProyecto3] = useState('');
     const [textoDescripcionProyecto1, settextoDescripcionProyecto1] = useState('');
     const [textoDescripcionProyecto2, settextoDescripcionProyecto2] = useState('');
     const [textoDescripcionProyecto3, settextoDescripcionProyecto3] = useState('');
     const [proyectoImages1, setproyectoImages1] = useState(null);
     const [proyectoImages2, setproyectoImages2] = useState(null);
-    const [proyectoIMages3, setproyectoImages3] = useState(null);
+    const [proyectoImages3, setproyectoImages3] = useState(null);
 
     useEffect(() => {
-        const obtenerImagenPorReferencia = async (referencia, setTexto, setImagen) => {
+        const obtenerImagenPorReferencia = async (referencia, setImagen) => {
             try {
-                console.log(referencia);
-                const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
-                setTexto(responseTexto.data.texto);
-                console.log(responseTexto.data);
-
                 const responseImagen = await axios.get(`http://localhost:3000/imagenes/nombre/${referencia}`);
 
                 if (responseImagen.data) {
@@ -43,48 +41,61 @@ const Proyectos = () => {
 
         };
 
-        obtenerTextoPorReferencia('textoProyecto', setTextoProyecto);
-        obtenerTextoPorReferencia('textoProyecto2', setTextoProyecto2);
+        obtenerTextoPorReferencia('Texto_Proyecto', setTextoProyecto);
+        obtenerTextoPorReferencia('Descripcion_Proyecto', setDescripcionProyecto);
+
+        obtenerTextoPorReferencia('Titulo_Proyecto_1', setTituloProyecto1);
+        obtenerTextoPorReferencia('Titulo_Proyecto_2', setTituloProyecto2);
+        obtenerTextoPorReferencia('Titulo_Proyecto_3', setTituloProyecto3);
+
+        obtenerTextoPorReferencia('Texto_Descripcion_Proyecto_1', settextoDescripcionProyecto1);
+        obtenerTextoPorReferencia('Texto_Descripcion_Proyecto_2', settextoDescripcionProyecto2);
+        obtenerTextoPorReferencia('Texto_Descripcion_Proyecto_3', settextoDescripcionProyecto3);
 
         // Obtener texto e imagen por referencia para cada directivo
-        obtenerImagenPorReferencia('proyectoImagen1', settextoDescripcionProyecto1, setproyectoImages1);
-        obtenerImagenPorReferencia('proyectoImagen2', settextoDescripcionProyecto2, setproyectoImages2);
-        obtenerImagenPorReferencia('proyectoImagen3', settextoDescripcionProyecto3, setproyectoImages3);
+        obtenerImagenPorReferencia('proyectoImagen1', setproyectoImages1);
+        obtenerImagenPorReferencia('proyectoImagen2', setproyectoImages2);
+        obtenerImagenPorReferencia('proyectoImagen3', setproyectoImages3);
     }, []);
 
     return (
-        <div class="container">
-            <div class="row">
-                <div class="col-md-9">
+
+           
+                <div className="row mt-5">
+                    <div className="col-md-3">
                     <h1>{textoProyecto}</h1>
-                    <p>{textoProyecto2}</p>
-                </div>
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div className="cuadro-imagen">
-                                {proyectoImages1 && <img src={proyectoImages1} alt="foto del proyecto 1" />}
+                        <p>{descripcionProyecto}</p>
+                    </div>
+                    <div className="col-md-9">
+                        <div className="row">
+                            <div class="col-md-12">
+                                <div className="cuadro-imagen-proyecto">
+                                    {proyectoImages1 && <img src={proyectoImages1} alt="foto del proyecto 1" />}
+                                </div>
+                                <h3>{tituloProyecto1}</h3>
+                                <p>{textoDescripcionProyecto1} </p>
                             </div>
-                            <h3>{textoDescripcionProyecto1}</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div className="cuadro-imagen-proyecto">
+                                    {proyectoImages2 && <img src={proyectoImages2} alt="foto del proyecto 2" />}
+                                </div>
+                                <h3>{tituloProyecto2}</h3>
+                                <p> {textoDescripcionProyecto2}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div className="cuadro-imagen-proyecto">
+                                    {proyectoImages3 && <img src={proyectoImages3} alt="foto del proyecto 3" />}
+                                </div>
+                                <h3>{tituloProyecto3}</h3>
+                                <p> {textoDescripcionProyecto3}</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div className="cuadro-imagen">
-                                {proyectoImages2 && <img src={proyectoImages2} alt="foto del proyecto 1" />}
-                            </div>
-                            <h3>{textoDescripcionProyecto2}</h3>
-                        </div>
-                        <div class="col-md-6">
-                            <div className="cuadro-imagen">
-                                {proyectoIMages3 && <img src={proyectoIMages3} alt="foto del proyecto 1" />}
-                            </div>
-                            <h3>{textoDescripcionProyecto3}</h3>
-                        </div>
-                    </div>
                 </div>
-            </div>
-        </div>
+   
+
     );
 };
 

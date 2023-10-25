@@ -37,9 +37,23 @@ const BloqueDeCarga = () => {
     Contacto_General: 'Contacto_General',
     Facebook: 'Facebook',
     Instagram: 'Instagram',
-    textoProyecto: 'Nombre del proyecto 1',
-    reglamento1: 'Titulo reglamento',
-    // Agrega más nombres de referencia según tus necesidades
+    Dirrecion_map: 'Dirrecion de google map',
+    Texto_Proyecto: 'Titulo General de los Proyectos',
+    Descripcion_Proyecto: 'Parrafo Proyecto',
+    Titulo_Proyecto_1: 'Titulo del primer proyecto',
+    Texto_Descripcion_Proyecto_1: 'Descripcion del Proyecto 1',
+    Titulo_Proyecto_2: 'Titulo del segundo proyecto',
+    Texto_Descripcion_Proyecto_2: 'Descripcion del Proyecto 2',
+    Titulo_Proyecto_3: 'Titulo del tercer proyecto',
+    Texto_Descripcion_Proyecto_3: 'Descripcion del Proyecto 3',
+    Texto_Historial: 'Texto de la Historia de la Escuela',
+    Reglamento_1: 'Titulo reglamento',
+    Titulo_Reglamento_1: 'Titulo del Reglamento 1',
+    Titulo_Reglamento_2: 'Titulo del Reglamento 2',
+    Titulo_Reglamento_3: 'Titulo del Reglamento 3',
+    URL_1: 'URL del Reglamento 1',
+    URL_2: 'URL del Reglamento 2',
+    URL_3: 'URL del Reglamento 3',
   };
 
 

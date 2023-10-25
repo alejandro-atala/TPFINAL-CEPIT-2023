@@ -25,8 +25,9 @@ import { AlumnoAvisoModule } from './alumno-aviso/alumno-aviso.module';
     host: "localhost",
     port: 3306,
     username: "root",
-    password: "root",
+    password: "Vicky.63-router",
     database: "escuela",
+    
     entities: [
       "dist/**/**.entity{.ts,.js}", "node_modules/@nestjs/jwt"
     ],

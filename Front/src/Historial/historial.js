@@ -14,18 +14,16 @@ const Historial = () => {
         console.error(`Error al obtener datos de ${referencia}:`, error);
       }
     };
-    obtenerTextoPorReferencia(textoHistorial, setTextoHistorial);
+    obtenerTextoPorReferencia('Texto_Historial', setTextoHistorial);
   }, []);
     
     return (
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
+        <div class="container mt-5">
+                <div class="col-md-12">
                     <h1>SOBRE NUESTRA INSTITUCIÓN</h1>
                     <p>{textoHistorial}</p>
                 </div>
             </div>
-        </div>
     );
 };   
 
