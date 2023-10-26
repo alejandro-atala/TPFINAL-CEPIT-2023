@@ -43,9 +43,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center min-vh-100">
+    <div className="d-flex flex-column  align-items-center mt-5">
       <h1>{textoId1}</h1>
-      <div className="container plan-de-estudios mt-5">
+     
         <div className="row">
           <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
             <div className="carousel-inner">
@@ -67,9 +67,9 @@ const HomePage = () => {
             </button>
           </div>
           <h2>Estudia en nuestro Instituto</h2>
-          <p>{textoId2}</p>
+          <p className="d-flex flex-column  align-items-center">{textoId2}</p>
         </div>
-      </div>
+    
     </div>
   );
 };

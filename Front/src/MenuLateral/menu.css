@@ -3,6 +3,8 @@
   justify-content: center;
   align-items: center;
   background-size: cover;
+  margin-left: 50px;
+  border-radius: 10%;
 }
 
 .side-menu {
@@ -13,6 +15,7 @@
   border-radius: 10px;
   margin-top: 30px;
 }
+
 
 .menu-item {
   padding: 15px;
@@ -25,22 +28,28 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative; /* Agregar esta línea */
+  position: relative;
   border-bottom: 3px solid rgb(76, 129, 244); 
   margin-top: 15px;
 }
 
+.menu-container {
+  display: flex;
+  flex-direction: column; 
+}
+
+.hidden {
+  display: none;
+}
 
 
-
-
-.side-menu a { /* Cambiar a apuntar a los enlaces dentro de .side-menu */
+.side-menu a { 
   text-decoration: none;
-  color: inherit; /* Heredar el color de texto */
+  color: inherit; 
 }
 
 .menu-item:hover {
-  background-color: #859598;
+  background-color:rgb(76, 129, 244);
   color: rgb(255, 255, 255);
 }
 
@@ -48,3 +57,10 @@
   display: none;
 
 }
+
+
+
+
+
+
+ 

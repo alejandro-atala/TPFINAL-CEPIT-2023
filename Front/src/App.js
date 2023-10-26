@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes ,useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navbar from './BarraPrincipal/navbar';
@@ -35,7 +35,10 @@ import NotasExamen from './PaginaProfe/NotasExamen/notasExamen';
 import { NotificacionesProvider } from './Alumno/NotificacionesContext';
 import ResetPass from './ResetPass/resetpass';
 import Venta from './Venta/venta';
-
+import Logo from './Venta/logo';
+import Proyectos from './Proyectos/proyectos';
+import Historial from './Historial/historial';
+import Reglamento from './Reglamento/reglamento';
 
 const App = () => {
 
@@ -43,6 +46,8 @@ const App = () => {
   const [loggedInUser, setLoggedInUser] = useState('');
   const [currentComponent, setCurrentComponent] = useState(null);
   const unreadAvisosCount = 0;
+  const [sidebarVisible, setSidebarVisible] = useState(true);
+
   const marcarAvisosComoLeidos = async () => { };
 
   // Función para actualizar el nombre del usuario cuando inicie sesión
@@ -69,6 +74,13 @@ const App = () => {
     }
   }, []);
 
+  useEffect(() => {
+  
+    // Detectar la ruta actual y ocultar el Sidebar si es /alumno o /profesor
+    const path = window.location.pathname;
+    setSidebarVisible(!(path === '/alumno' || path === '/profesor'));
+  }, [window.location.pathname]);
+
   return (
     <BrowserRouter>
       <UsuarioProvider>
@@ -87,15 +99,16 @@ const App = () => {
                   <div className="flex-grow-1">
                     <div className="container-fluid">
                       <div className="row">
-                        {loggedInUser === "Admin" ? null : (
-                          <div className="col-md-3">
-                            <Sidebar />
-                          </div>
-                        )}
-                        <div className="col-md-9">
+                      {loggedInUser !== 'Admin' && (
+                <div className={`col-md-${sidebarVisible ? 3 : 0} `}>
+                  {sidebarVisible && <Sidebar />}
+                </div>
+              )}
+              <div className={`col-md-${sidebarVisible ? 9 : 12} mx-auto`}>
                        
                             <Routes>
                               <Route path="/venta" element={<Venta />} />
+                              <Route path="/logo" element={<Logo />} />
                               <Route path="/iniciarSesion/*" element={<InicioSesion onLogin={handleLogin} />} />
                               <Route path="/" element={<Home />} />
                             {/* pagina alumno */}
@@ -108,6 +121,11 @@ const App = () => {
 
                             {/* pagina Home */}
                             <Route path="/contacto" element={<Contacto />} />
+                            <Route path="/proyectos" element={<Proyectos />} />
+                              <Route path="/historial" element={<Historial />} />
+                              <Route path="/reglamento" element={<Reglamento />} />
+
+
                             <Route path="/plan-de-estudio" element={<PlanDeEstudios />} />
                             <Route path="/beneficios" element={<Beneficios />} />
                             <Route path="/inscripcion-online" element={<Inscripcion />} />
