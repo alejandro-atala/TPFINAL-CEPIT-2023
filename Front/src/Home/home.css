@@ -1,10 +1,9 @@
-.container.principal {
-  background-color: rgb(178, 231, 237);
-  max-width: 800px; 
+.home {
   margin: 0 auto; /* Centra horizontalmente */
   padding: 20px; /* Agrega un espacio alrededor */
   text-align: center;
   border-radius: 10px;
+  margin-left: 200px;
 }
 
 .tituloPrincipal {

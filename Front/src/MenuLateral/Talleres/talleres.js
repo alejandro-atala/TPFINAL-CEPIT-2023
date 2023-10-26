@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './talleres.css';
 import axios from 'axios';
+import SideMenu from '../sideMenu';
 
 const Talleres = () => {
   const [textoTaller1, setTextoTaller1] = useState('');
@@ -48,7 +49,9 @@ const Talleres = () => {
   const titulo = 'Talleres disponibles en nuestras instalaciones';
 
   return (
-    <div>
+    <div className="container">
+        <SideMenu />
+        <div>
       <h1 className="text-center mt-5 titulo ">{titulo}</h1>
       <div className="container mt-4 p-5 talleres">
         <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -106,6 +109,8 @@ const Talleres = () => {
         <p className="llamado-titulo text-center">Inscríbete llamando al: {textoTelefono}</p>
       </div>
     </div>
+    </div>
+
   );
 };
 

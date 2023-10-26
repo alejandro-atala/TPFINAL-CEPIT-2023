@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './planDeEstudios.css';
 import axios from 'axios';
+import SideMenu from '../sideMenu';
 
 const PlanDeEstudios = () => {
   const [materiasPorCurso, setMateriasPorCurso] = useState({});
@@ -36,25 +37,28 @@ const PlanDeEstudios = () => {
   }, []);
 
   return (
-    <div className="container plan-de-estudios mt-5">
-      <h1>Plan de Estudio Por Año</h1>
-      <div className="row">
-        {Object.keys(materiasPorCurso).map((curso) => (
-          <div key={curso} className="col-md-6 col-lg-4 mb-4">
-            <div className="card shadow">
-              <div className="card-body">
-                <h2 className="card-title">{` ${curso}`}</h2>
-                <div className="materias">
-                  {materiasPorCurso[curso].map((materia, index) => (
-                    <div key={index} className="card-text">
-                      {materia}
-                    </div>
-                  ))}
+    <div className='container'>
+      <SideMenu />
+      <div className="container plan-de-estudios mt-5">
+        <h1>Plan de Estudio Por Año</h1>
+        <div className="row">
+          {Object.keys(materiasPorCurso).map((curso) => (
+            <div key={curso} className="col-md-6 col-lg-4 mb-4">
+              <div className="card shadow">
+                <div className="card-body">
+                  <h2 className="card-title">{` ${curso}`}</h2>
+                  <div className="materias">
+                    {materiasPorCurso[curso].map((materia, index) => (
+                      <div key={index} className="card-text">
+                        {materia}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

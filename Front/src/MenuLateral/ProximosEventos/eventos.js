@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './eventos.css';
 import axios from 'axios';
+import SideMenu from '../sideMenu';
 
 const ProximosEventos = () => {
   const [textoActos, setTextoActos] = useState('');
@@ -31,6 +32,8 @@ const ProximosEventos = () => {
   const htmlProcesadoEventos = { __html: textoEventos };
 
   return (
+   <div className='container'>
+    <SideMenu/>
     <div className="container proximos-eventos mt-5">
       <div className="row justify-content-center">
         <div className="col-md-8 text-center">
@@ -56,6 +59,7 @@ const ProximosEventos = () => {
         </div>
       </div>
     </div>
+    </div> 
   );
 };
 

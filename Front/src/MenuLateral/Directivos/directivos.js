@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './directivos.css';
 import axios from 'axios';
+import SideMenu from '../sideMenu';
 
 const Directivos = () => {
   const [textoDirectora, setTextoDirectora] = useState('');
@@ -35,6 +36,8 @@ const Directivos = () => {
   }, []);
 
   return (
+    <div className='container'>
+      <SideMenu/>
     <div className="container component-directivos mt-4">
       <h1>Nuestro equipo de trabajo</h1>
       <div className="row">
@@ -58,6 +61,7 @@ const Directivos = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

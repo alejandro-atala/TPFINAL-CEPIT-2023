@@ -10,9 +10,9 @@ const SideMenu = () => {
   ['/', '/plan-de-estudio', '/beneficios', '/inscripcion-online', 
   '/directivos', '/proximos-eventos', '/talleres'].includes(location.pathname);
 
-  const isHomePage = location.pathname === '/';
+  // const isHomePage = location.pathname === '/';
 
-  if (isHomePage || isMenuOption) {
+  if (isMenuOption) {
   return (
     <div className="side-menu">
       <Link to="/plan-de-estudio">

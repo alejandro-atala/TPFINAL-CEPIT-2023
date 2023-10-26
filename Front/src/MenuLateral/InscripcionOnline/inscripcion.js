@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './inscripcion.css';
 import axios from 'axios'; // Importa la librería Axios
 import { useNavigate } from 'react-router-dom';
+import SideMenu from '../sideMenu';
 
 const Inscripcion = () => {
   const navigate = useNavigate();
@@ -80,8 +81,9 @@ const Inscripcion = () => {
   };
 
   return (
-    <div>
-      <div className="container rounded mt-4 text-center col-md-4 col-xs-12 col-sm-3 p-5 bg-registro">
+    <div className='container'>
+      <SideMenu/>
+      <div className="container rounded mt-5 text-center col-md-4 col-xs-12 col-sm-3 p-5 bg-registro">
         <div className="row align-items-center">
           <div className="col">
             <h2 className="text-center">Registro de usuario</h2>

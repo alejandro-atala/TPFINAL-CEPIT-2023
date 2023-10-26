@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes ,useLocation } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Navbar from './BarraPrincipal/navbar';
@@ -11,7 +11,7 @@ import Materias from './Materias/materias';
 import Avisos from './Avisos/avisos';
 import Mensaje from './Mensaje/mensaje';
 import InicioSesion from './InicioSesion/inicioSesion';
-import Sidebar from './MenuLateral/sideMenu';
+// import Sidebar from './MenuLateral/sideMenu';
 import Home from './Home/home';
 import PlanDeEstudios from './MenuLateral/PlanDeEstudio/planDeEstudio';
 import Beneficios from './MenuLateral/Beneficios/beneficios';
@@ -75,7 +75,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-  
+
     // Detectar la ruta actual y ocultar el Sidebar si es /alumno o /profesor
     const path = window.location.pathname;
     setSidebarVisible(!(path === '/alumno' || path === '/profesor'));
@@ -88,89 +88,86 @@ const App = () => {
           <ProfesorProvider>
             <AlumnoProvider>
               <AuthProvider>
-              {currentComponent || (
-                <div className="d-flex flex-column min-vh-100">
-                  <Navbar
-                    loggedInUser={loggedInUser}
-                    onLogout={logout}
-                    unreadAvisosCount={unreadAvisosCount}
-                    marcarAvisosComoLeidos={marcarAvisosComoLeidos}
-                  />
-                  <div className="flex-grow-1">
-                    <div className="container-fluid">
-                      <div className="row">
-                      {loggedInUser !== 'Admin' && (
-                <div className={`col-md-${sidebarVisible ? 3 : 0} `}>
-                  {sidebarVisible && <Sidebar />}
-                </div>
-              )}
-              <div className={`col-md-${sidebarVisible ? 9 : 12} mx-auto`}>
-                       
+                {currentComponent || (
+                  <div className="d-flex flex-column min-vh-100">
+                    <Navbar
+                      loggedInUser={loggedInUser}
+                      onLogout={logout}
+                      unreadAvisosCount={unreadAvisosCount}
+                      marcarAvisosComoLeidos={marcarAvisosComoLeidos}
+                    />
+                    <div className="flex-grow-1">
+                      <div className="container-fluid">
+                        <div className="row">
+
+                          <div className={`col-md mx-auto`}>
+
                             <Routes>
                               <Route path="/venta" element={<Venta />} />
                               <Route path="/logo" element={<Logo />} />
                               <Route path="/iniciarSesion/*" element={<InicioSesion onLogin={handleLogin} />} />
                               <Route path="/" element={<Home />} />
-                            {/* pagina alumno */}
-                            <Route path="/notas" element={<Notas />} />
-                            <Route path="/boletin" element={<Boletin loggedInUser={loggedInUser} />} />
-                            <Route path="/materias" element={<Materias />} />
-                            <Route path="/Asistencia" element={<Asistencia />} />
-                            <Route path="/avisos" element={<Avisos />} />
-                            <Route path="/mensaje" element={<Mensaje />} />
+                              {/* pagina alumno */}
+                              <Route path="/notas" element={<Notas />} />
+                              <Route path="/boletin" element={<Boletin loggedInUser={loggedInUser} />} />
+                              <Route path="/materias" element={<Materias />} />
+                              <Route path="/Asistencia" element={<Asistencia />} />
+                              <Route path="/avisos" element={<Avisos />} />
+                              <Route path="/mensaje" element={<Mensaje />} />
 
-                            {/* pagina Home */}
-                            <Route path="/contacto" element={<Contacto />} />
-                            <Route path="/proyectos" element={<Proyectos />} />
+                              {/* pagina Home */}
+                              <Route path="/contacto" element={<Contacto />} />
+                              <Route path="/proyectos" element={<Proyectos />} />
                               <Route path="/historial" element={<Historial />} />
                               <Route path="/reglamento" element={<Reglamento />} />
 
 
-                            <Route path="/plan-de-estudio" element={<PlanDeEstudios />} />
-                            <Route path="/beneficios" element={<Beneficios />} />
-                            <Route path="/inscripcion-online" element={<Inscripcion />} />
-                            <Route path="/directivos" element={<Directivos />} />
-                            <Route path="/talleres" element={<Talleres />} />
-                            <Route path="/proximos-eventos" element={<ProximosEventos />} />
-                            <Route path="/alumno" element={<Alumno />} />
+                              <Route path="/plan-de-estudio" element={<PlanDeEstudios />} />
+                              <Route path="/beneficios" element={<Beneficios />} />
+                              <Route path="/inscripcion-online" element={<Inscripcion />} />
+                              <Route path="/directivos" element={<Directivos />} />
+                              <Route path="/talleres" element={<Talleres />} />
+                              <Route path="/proximos-eventos" element={<ProximosEventos />} />
+                              <Route path="/alumno" element={<Alumno />} />
 
 
-                            {/* pagina profesor */}
-                            <Route path="/profesor" element={<Profesor />} />
-                            <Route path="/Profmaterias" element={<MateriasProf />} />
-                            <Route path="/ProfAsistencia" element={<AsistenciaList />} />
-                            <Route path="/Profnotas" element={<NotasExamen />} />
-                            <Route path="/ProfTrimestre" element={<NotasExamenesList />} />
-                            <Route path="/ProfAvisos" element={<ProfeAvisos />} />
-                            <Route path="/Profesor" element={<ProfesorProvider />} />
+                              {/* pagina profesor */}
+                              <Route path="/profesor" element={<Profesor />} />
+                              <Route path="/Profmaterias" element={<MateriasProf />} />
+                              <Route path="/ProfAsistencia" element={<AsistenciaList />} />
+                              <Route path="/Profnotas" element={<NotasExamen />} />
+                              <Route path="/ProfTrimestre" element={<NotasExamenesList />} />
+                              <Route path="/ProfAvisos" element={<ProfeAvisos />} />
+                              <Route path="/Profesor" element={<ProfesorProvider />} />
 
-                            <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
+                              <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
 
-                            <Route path="/resetpass" element={<ResetPass />} />
+                              <Route path="/resetpass" element={<ResetPass />} />
 
 
 
 
 
                             </Routes>
-                       
+
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                {loggedInUser !== "Admin" && (
-                  <div className="footer">
-                    <Footer />
-                  </div>
-                )}
-                
-              </div> )}
-            </AuthProvider>
-          </AlumnoProvider>
-        </ProfesorProvider>
-      </NotificacionesProvider>
-    </UsuarioProvider>
-  </BrowserRouter>
-)};
+                    {loggedInUser !== "Admin" && (
+                      <div className="footer">
+                        <Footer />
+                      </div>
+                    )}
+
+                  </div>)}
+              </AuthProvider>
+            </AlumnoProvider>
+          </ProfesorProvider>
+        </NotificacionesProvider>
+      </UsuarioProvider>
+    </BrowserRouter>
+  )
+};
 
 export default App;

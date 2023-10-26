@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './beneficios.css';
 import axios from 'axios';
+import SideMenu from '../sideMenu';
 
 const Beneficios = () => {
   const [textoBeneficios, setTextoBeneficios] = useState('');
@@ -26,6 +27,8 @@ const Beneficios = () => {
   const htmlProcesado = { __html: textoBeneficios };
 
   return (
+    <div className='container'>
+      <SideMenu/>
     <div className="container componente-beneficios mt-5 contenido">
       <div className="row">
         <div className="">
@@ -35,6 +38,7 @@ const Beneficios = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

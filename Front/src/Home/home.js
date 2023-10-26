@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './home.css';
 import axios from "axios";
+import SideMenu from "../MenuLateral/sideMenu";
 
 const HomePage = () => {
   const [textoId1, setTextoId1] = useState('');
@@ -24,15 +25,15 @@ const HomePage = () => {
           console.log(response.data.url); // Esto debería funcionar ahora
           return response.data.url;
         });
-    
+
         const images = await Promise.all(imagePromises);
         setHomeImages(images.filter((image) => image !== null));
       } catch (error) {
         console.error(`Error al obtener las imágenes:`, error);
       }
     };
-    
-    
+
+
 
     // Obtener textos para ID 1 y ID 2
     obtenerTextoPorId(1, setTextoId1);
@@ -43,35 +44,41 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="d-flex flex-column  align-items-center mt-5">
-      <h1>{textoId1}</h1>
-     
-        <div className="row">
-          <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
-            <div className="carousel-inner">
-              {homeImages.map((image, index) => (
-                <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
-                  <img src={image} className="img-fluid d-block w-100" alt={`foto ${index + 1}`} />
-                  <div className="carousel-caption d-none d-md-block text-black">
+    <div className="container">
+          <SideMenu />
+          <div>
+            <div className="home d-flex flex-column  align-items-center mt-5">
+              <h1>{textoId1}</h1>
+              <div className="row">
+                <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
+                  <div className="carousel-inner">
+                    {homeImages.map((image, index) => (
+                      <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+                        <img src={image} className="img-fluid d-block w-100" alt={`foto ${index + 1}`} />
+                        <div className="carousel-caption d-none d-md-block text-black">
+                        </div>
+                      </div>
+                    ))}
                   </div>
+                  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                  </button>
+                  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                  </button>
                 </div>
-              ))}
+                <h2>Estudia en nuestro Instituto</h2>
+                <p className="d-flex flex-column  align-items-center">{textoId2}</p>
+              </div>
             </div>
-            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Next</span>
-            </button>
           </div>
-          <h2>Estudia en nuestro Instituto</h2>
-          <p className="d-flex flex-column  align-items-center">{textoId2}</p>
         </div>
-    
-    </div>
+
   );
 };
 
 export default HomePage;
+
+
