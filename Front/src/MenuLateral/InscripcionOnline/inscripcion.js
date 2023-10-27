@@ -81,12 +81,12 @@ const Inscripcion = () => {
   };
 
   return (
-    <div className="container">
+    <div className="side">
     <div className="row ">
       <div className="col-md-3">
           <SideMenu />
         </div>
-        <div className="col-md-9 mt-5 d-flex flex-column align-items-center">
+        <div className="col-md-9 mt-5 d-flex  align-items-center">
         
           <div className="row container rounded text-center p-5 bg-registro">
             <h2 className="text-center">Registro de usuario</h2>

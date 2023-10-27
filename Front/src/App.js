@@ -89,18 +89,16 @@ const App = () => {
             <AlumnoProvider>
               <AuthProvider>
                 {currentComponent || (
-                  <div className="d-flex flex-column min-vh-100">
+                  <div className="">
                     <Navbar
                       loggedInUser={loggedInUser}
                       onLogout={logout}
                       unreadAvisosCount={unreadAvisosCount}
                       marcarAvisosComoLeidos={marcarAvisosComoLeidos}
                     />
-                    <div className="flex-grow-1">
-                      <div className="container-fluid">
-                        <div className="row">
+                  
 
-                          <div className={`col-md mx-auto`}>
+                          <div className="col-md mx-auto">
 
                             <Routes>
                               <Route path="/venta" element={<Venta />} />
@@ -151,9 +149,7 @@ const App = () => {
                             </Routes>
 
                           </div>
-                        </div>
-                      </div>
-                    </div>
+                      
                     {loggedInUser !== "Admin" && (
                       <div className="footer">
                         <Footer />
