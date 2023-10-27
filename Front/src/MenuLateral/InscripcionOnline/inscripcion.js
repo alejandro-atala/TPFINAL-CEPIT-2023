@@ -81,11 +81,14 @@ const Inscripcion = () => {
   };
 
   return (
-    <div className='container'>
-      <SideMenu/>
-      <div className="container rounded mt-5 text-center col-md-4 col-xs-12 col-sm-3 p-5 bg-registro">
-        <div className="row align-items-center">
-          <div className="col">
+    <div className="container">
+    <div className="row ">
+      <div className="col-md-3">
+          <SideMenu />
+        </div>
+        <div className="col-md-9 mt-5 d-flex flex-column align-items-center">
+        
+          <div className="row container rounded text-center p-5 bg-registro">
             <h2 className="text-center">Registro de usuario</h2>
 
             <form>
@@ -190,6 +193,7 @@ const Inscripcion = () => {
         </div>
       </div>
     </div>
+   
   );
 };
 

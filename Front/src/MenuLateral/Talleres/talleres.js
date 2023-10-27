@@ -50,8 +50,12 @@ const Talleres = () => {
 
   return (
     <div className="container">
+    <div className="row">
+      <div className="col-md-3 ">
         <SideMenu />
-        <div>
+        </div>
+        
+        <div className="col-md-9 mt-5 d-flex flex-column align-items-center justify-content-center">   
       <h1 className="text-center mt-5 titulo ">{titulo}</h1>
       <div className="container mt-4 p-5 talleres">
         <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -110,7 +114,7 @@ const Talleres = () => {
       </div>
     </div>
     </div>
-
+    </div>
   );
 };
 

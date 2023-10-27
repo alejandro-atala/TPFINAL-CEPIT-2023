@@ -36,32 +36,39 @@ const PlanDeEstudios = () => {
     obtenerMateriasDeIds();
   }, []);
 
-  return (
-    <div className='container'>
-      <SideMenu />
-      <div className="container plan-de-estudios mt-5">
-        <h1>Plan de Estudio Por Año</h1>
+
+  
+    return (
+      <div className="container">
         <div className="row">
-          {Object.keys(materiasPorCurso).map((curso) => (
-            <div key={curso} className="col-md-6 col-lg-4 mb-4">
-              <div className="card shadow">
-                <div className="card-body">
-                  <h2 className="card-title">{` ${curso}`}</h2>
-                  <div className="materias">
-                    {materiasPorCurso[curso].map((materia, index) => (
-                      <div key={index} className="card-text">
-                        {materia}
+          <div className="col-md-3">
+            <SideMenu />
+          </div>
+          <div className="col-md-9 mt-5">
+            <div className="d-flex flex-column align-items-center justify-content-center">
+              <h1>Plan de Estudio Por Año</h1>
+              <div className="row">
+                {Object.keys(materiasPorCurso).map((curso) => (
+                  <div key={curso} className="col-md-6 col-lg-4 mb-4">
+                    <div className="card shadow">
+                      <div className="card-body">
+                        <h2 className="card-title">{` ${curso}`}</h2>
+                        <div className="materias">
+                          {materiasPorCurso[curso].map((materia, index) => (
+                            <div key={index} className="card-text">
+                              {materia}
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    ))}
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
-
+    );
+  };
 export default PlanDeEstudios;

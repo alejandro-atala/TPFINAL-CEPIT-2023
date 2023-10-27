@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './beneficios.css';
+//import './beneficios.css';
 import axios from 'axios';
 import SideMenu from '../sideMenu';
 
@@ -27,20 +27,25 @@ const Beneficios = () => {
   const htmlProcesado = { __html: textoBeneficios };
 
   return (
-    <div className='container'>
-      <SideMenu/>
-    <div className="container componente-beneficios mt-5 contenido">
-      <div className="row">
-        <div className="">
-          <div className="col align-self-center cuadro-beneficios">
-            <h2 className="titulo">Beneficios</h2>
-            <div dangerouslySetInnerHTML={htmlProcesado}></div>
+    <div className="container">
+    <div className="row">
+      <div className="col-md-3 "> {/* Use align-self-start to align at the top */}
+        <SideMenu />
+      </div>
+      <div className="col-md-9 mt-5 d-flex flex-column align-items-center justify-content-center">   
+        <div className="container componente-beneficios mt-5 contenido">
+          <div className="row">
+            <div className="col align-self-center cuadro-beneficios">
+              <h2 className="titulo">Beneficios</h2>
+              <div dangerouslySetInnerHTML={htmlProcesado}></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
-  );
+  </div>
+);
 };
+
 
 export default Beneficios;

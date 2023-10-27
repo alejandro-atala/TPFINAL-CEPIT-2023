@@ -36,9 +36,12 @@ const Directivos = () => {
   }, []);
 
   return (
-    <div className='container'>
+    <div className="container">
+    <div className="row">
+      <div className="col-md-3 ">
       <SideMenu/>
-    <div className="container component-directivos mt-4">
+      </div>
+      <div className="col-md-9 mt-5 d-flex flex-column align-items-center justify-content-center">   
       <h1>Nuestro equipo de trabajo</h1>
       <div className="row">
         <div className="col-md-8">
@@ -61,6 +64,7 @@ const Directivos = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
     </div>
   );
