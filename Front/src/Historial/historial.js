@@ -17,14 +17,14 @@ const Historial = () => {
     obtenerTextoPorReferencia('Texto_Historial', setTextoHistorial);
   }, []);
     
-    return (
-        <div class="container mt-5">
-                <div class="col-md-12">
-                    <h1>SOBRE NUESTRA INSTITUCIÓN</h1>
-                    <p>{textoHistorial}</p>
-                </div>
-            </div>
-    );
-};   
-
+  return (
+    <div className="container mt-5 d-flex justify-content-center align-items-center">
+      <div className="col-md-12 text-center">
+        <h1>SOBRE NUESTRA INSTITUCIÓN</h1>
+        <p>{textoHistorial}</p>
+      </div>
+    </div>
+  );
+    
+  }
 export default Historial;

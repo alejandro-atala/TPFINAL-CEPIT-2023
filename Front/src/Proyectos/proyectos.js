@@ -61,12 +61,12 @@ const Proyectos = () => {
     return (
 
            
-                <div className="row mt-5">
+                <div className="container mt-5 d-flex flex-column justify-content-center align-items-center">
                     <div className="col-md-3">
                     <h1>{textoProyecto}</h1>
                         <p>{descripcionProyecto}</p>
                     </div>
-                    <div className="col-md-9">
+                    
                         <div className="row">
                             <div class="col-md-12">
                                 <div className="cuadro-imagen-proyecto">
@@ -92,7 +92,7 @@ const Proyectos = () => {
                                 <p> {textoDescripcionProyecto3}</p>
                             </div>
                         </div>
-                    </div>
+                 
                 </div>
    
 
