@@ -98,7 +98,7 @@ const App = () => {
                     />
                   
 
-                          <div className="col-md mx-auto">
+                          <div className="   ">
 
                             <Routes>
                               <Route path="/venta" element={<Venta />} />
@@ -151,7 +151,7 @@ const App = () => {
                           </div>
                       
                     {loggedInUser !== "Admin" && (
-                      <div className="footer">
+                      <div className="footer ">
                         <Footer />
                       </div>
                     )}

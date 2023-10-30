@@ -28,27 +28,31 @@ const Contacto = () => {
         window.open(url, '_blank');
     };
 
-    return (
-<div className="container mt-4 d-flex flex-column justify-content-center align-items-center" style={{ height: '50vh' }}>
-  <div className="card">
-    <div className="card-body">
-      <h1 className="card-title">¡Contáctanos!</h1>
-      <p className="card-text">
-        Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
-      </p>
-      <p className="card-text">Teléfono: {telefono} </p>
 
-      <div className="redes-sociales">
-        <button className="btn btn-primary mx-2" onClick={() => abrirURL(facebookURL)}>
-          Facebook
-        </button>
-
-        <button className="btn btn-primary mx-2" onClick={() => abrirURL(instagramURL)}>
-          Instagram
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-    )}
+      return (
+        <div className="d-flex align-items-center justify-content-center" >
+          <div className="mt-5 flex-column text-center" style={{ maxWidth: '500px' }}>
+            <div className="card">
+              <div className="card-body">
+                <h1 className="card-title">¡Contáctanos!</h1>
+                <p className="card-text">
+                  Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.
+                </p>
+                <p className="card-text">Teléfono: {telefono}</p>
+      
+                <div className="redes-sociales">
+                  <button className="btn btn-primary mx-2" onClick={() => abrirURL(facebookURL)}>
+                    Facebook
+                  </button>
+      
+                  <button className="btn btn-primary mx-2" onClick={() => abrirURL(instagramURL)}>
+                    Instagram
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+}
 export default Contacto;

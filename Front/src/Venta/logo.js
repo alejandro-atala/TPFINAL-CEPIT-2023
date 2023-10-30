@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Logo = () => {
 
     return (
-        <div className="container text-center venta mt-5 contenido-venta">
+        <div className="container text-center venta mt-5 contenido-venta ">
             <div className="row">
                 <div className="col align-self-center venta">
                     <h2 >

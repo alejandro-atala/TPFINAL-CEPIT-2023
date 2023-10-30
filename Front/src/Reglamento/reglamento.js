@@ -132,10 +132,19 @@ const Reglamento = () => {
       }
     };
 
-    const obtenerImagenPorReferencia = async (referencia, setTituloReglamento, setImagenReglamento) => {
+    const  obtenerTituloPorReferencia = async (referencia, setTituloReglamento) => {
       try {
         const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
-        setTituloReglamento(responseTexto.data.titulo);
+        setTituloReglamento(responseTexto.data.texto);
+   
+      } catch (error) {
+        console.error(`Error al obtener datos de ${referencia}:`, error);
+      }
+    };
+   
+    const obtenerImagenPorReferencia = async (referencia, setTituloReglamento, setImagenReglamento) => {
+      try {
+
 
         const responseImagen = await axios.get(`http://localhost:3000/imagenes/nombre/${referencia}`);
 
@@ -161,10 +170,10 @@ const Reglamento = () => {
       cargarDatosPorReferencia('URL_3', setUrl3);
   
   
-    obtenerTextoPorReferencia('Reglamento1', setTextoReglamento);
-    obtenerTextoPorReferencia('Titulo_Reglamento_1', setTituloReglamento1);
-    obtenerTextoPorReferencia('Titulo_Reglamento_2', setTituloReglamento2);
-    obtenerTextoPorReferencia('Titulo_Reglamento_3', setTituloReglamento3);
+    obtenerTextoPorReferencia('Reglamento_1', setTextoReglamento);
+    obtenerTituloPorReferencia('Titulo_Reglamento_1', setTituloReglamento1);
+    obtenerTituloPorReferencia('Titulo_Reglamento_2', setTituloReglamento2);
+    obtenerTituloPorReferencia('Titulo_Reglamento_3', setTituloReglamento3);
 
     obtenerImagenPorReferencia('imagenReglamento1', setTituloReglamento1, setImagenReglamento1);
     obtenerImagenPorReferencia('imagenReglamento2', setTituloReglamento2, setImagenReglamento2);
@@ -177,7 +186,7 @@ const Reglamento = () => {
 
 
   return (
-    <div className="container mt-5 d-flex flex-column justify-content-center align-items-center" style={{ height: '50vh' }}>
+    <div className="mt-5  flex-column text-center my-auto">
       <div className="card-body">
         <h1 className="card-title">{reglamento1}</h1>
         <div className="row">

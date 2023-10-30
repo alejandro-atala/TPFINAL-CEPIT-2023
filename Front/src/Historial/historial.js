@@ -18,7 +18,7 @@ const Historial = () => {
   }, []);
     
   return (
-    <div className="container mt-5 d-flex justify-content-center align-items-center">
+    <div className="mt-5  flex-column text-center my-auto">
       <div className="col-md-12 text-center">
         <h1>SOBRE NUESTRA INSTITUCIÓN</h1>
         <p>{textoHistorial}</p>

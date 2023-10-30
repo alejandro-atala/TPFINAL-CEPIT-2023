@@ -40,11 +40,11 @@ const PlanDeEstudios = () => {
   
     return (
       <div className="container">
-        <div className="row">
+        <div className="row ">
           <div className="col-md-3">
             <SideMenu />
           </div>
-          <div className="col-md-9 mt-5">
+          <div className="col-md-9 mt-5  flex-column text-center my-auto">
             <div className="d-flex flex-column align-items-center justify-content-center">
               <h1>Plan de Estudio Por Año</h1>
               <div className="row">

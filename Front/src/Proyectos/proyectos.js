@@ -61,7 +61,7 @@ const Proyectos = () => {
     return (
 
            
-                <div className="container mt-5 d-flex flex-column justify-content-center align-items-center">
+                <div className=" mt-5  flex-column text-center my-auto  ">
                     <div className="col-md-3">
                     <h1>{textoProyecto}</h1>
                         <p>{descripcionProyecto}</p>

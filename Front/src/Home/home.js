@@ -50,7 +50,7 @@ const HomePage = () => {
           <SideMenu />
         </div>
       
-        <div className="col-md-9 mt-5 d-flex flex-column align-items-center justify-content-center">   
+        <div className="col-md-9 mt-5 d-flex flex-column align-items-center justify-content-center ">   
                  <h1 className="=text">{textoId1}</h1>
             <div className="row">
               <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
