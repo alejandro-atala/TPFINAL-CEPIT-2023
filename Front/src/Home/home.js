@@ -46,41 +46,39 @@ const HomePage = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-3 ">
+        <div className="col-md-3">
           <SideMenu />
         </div>
-      
-        <div className="col-md-9 mt-5 d-flex flex-column align-items-center justify-content-center ">   
-                 <h1 className="=text">{textoId1}</h1>
-            <div className="row">
-              <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner">
-                  {homeImages.map((image, index) => (
-                    <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
-                      <img src={image} className="img-fluid d-block w-100" alt={`foto ${index + 1}`} />
-                      <div className="carousel-caption d-none d-md-block text-black">
-                      </div>
+        <div className="col-md-9 mt-5 d-flex flex-column home ">
+          <h1 className="text-center">{textoId1}</h1>
+          <div className="row ">
+            <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
+              <div className="carousel-inner">
+                {homeImages.map((image, index) => (
+                  <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+                    <img src={image} className="img-fluid d-block w-100" alt={`foto ${index + 1}`} />
+                    <div className="carousel-caption d-none d-md-block text-black">
                     </div>
-                  ))}
-                </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span className="visually-hidden">Next</span>
-                </button>
+                  </div>
+                ))}
               </div>
-              <h2>Estudia en nuestro Instituto</h2>
-              <p className="d-flex flex-column  align-items-center">{textoId2}</p>
+              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span className="carousel-control-next-icon" ariahidden="true"></span>
+                <span className="visually-hidden">Next</span>
+              </button>
             </div>
+            <h2>Estudia en nuestro Instituto</h2>
+            <p className="d-flex flex-column align-items-center">{textoId2}</p>
           </div>
-       
+        </div>
       </div>
     </div>
-
   );
+  
 };
 
 export default HomePage;

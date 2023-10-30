@@ -1,9 +1,9 @@
 .home {
-  margin: 0 auto; /* Centra horizontalmente */
+  margin: 0 auto; 
   padding: 20px; /* Agrega un espacio alrededor */
   text-align: center;
   border-radius: 10px;
-  margin-left: 200px;
+
 }
 
 .tituloPrincipal {
