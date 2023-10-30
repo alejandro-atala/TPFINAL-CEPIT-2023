@@ -1,0 +1,150 @@
+
+  
+  
+  .Chat {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  
+  .InputContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .TextInput {
+    flex: 1;
+    padding: 4px;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    color: #333;
+  }
+  
+  .SendButton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  
+  .CerrarButton {
+    background-color: #007bff;
+    color: #fff;
+    text-align: left;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 10px;
+    
+  }
+  
+  @keyframes titilar {
+    0%, 100% {
+      opacity: 1;
+      color: white;
+    }
+    50% {
+      opacity: 0;
+      color: red;
+    }
+  }
+  
+  .MensajesSinLeer {
+    margin-left: 8px;
+    animation: titilar 1s infinite;
+  }
+  
+  .BorrarMensajeIcon {
+    cursor: pointer;
+    color: #553636; /* Cambia el color a rojo u otro de tu elección */
+    font-size: 18px; /* Ajusta el tamaño según tus preferencias */
+    margin-left: 5px; /* Agrega un espacio a la izquierda del ícono si es necesario */
+  }
+  
+  .NombreRemitente {
+    font-size: 12px; /* Alinea el texto a la derecha */
+  }
+  
+  .HoraMensajeRecibido {
+    font-size: 12px; 
+    text-align: right; /* Alinea el texto a la derecha */
+  }
+  
+  .HoraMensajeEnviado {
+    font-size: 12px;
+    text-align: right; /* Alinea el texto a la derecha */
+  }
+  
+  
+ 
+  
+  .CenteredTitle {
+    background-color: transparent; /* Establece un fondo no transparente (en este caso, blanco sólido) */
+    color: #212052; /* Establece un color de texto (en este caso, negro) */
+    text-align: center; 
+  }
+
+  .TituloChat {
+    text-align: center; /* Centra el texto solo cuando el chat está abierto */
+    opacity: 1; /* Hace que el texto no sea transparente cuando el chat está abierto */
+    display: none; /* Oculta la palabra "Usuario" */
+   
+  }
+  
+  .TituloUsuarios {
+    text-align: center; /* Alinea el texto a la izquierda cuando el chat está cerrado */
+    opacity: 1; /* Hace que el texto no sea transparente cuando el chat está cerrado */
+    color: #212052;
+  }
+
+  /* Agrega el estilo para el cursor */
+.Mensaje {
+  cursor: pointer;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f8faf6;
+  padding: 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Establece un estilo para los mensajes seleccionados */
+.MensajeSeleccionado {
+  background-color: #cce6ff; /* Cambia el color de fondo de los mensajes seleccionados */
+}
+
+/* Agrega un estilo para el botón de eliminar seleccionados */
+.EliminarButton {
+  background-color: #007bff; /* Cambia el color del botón de eliminar seleccionados */
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.EliminarButton:hover {
+  background-color: #ff0000;
+}
+
+.SelectionWarning {
+  background-color: #ff6b6b; /* Color de fondo rojo */
+  color: #fff; /* Texto blanco */
+  padding: 10px; /* Espacio alrededor del texto */
+  text-align: center; /* Centra el texto */
+  border-radius: 5px; /* Bordes redondeados */
+  margin: 10px 0; /* Margen superior e inferior */
+}

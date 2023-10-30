@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 import { Alumno } from 'src/alumno/entities/alumno.entity';
 import { Profesor } from 'src/profesor/entities/profesor.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { Aviso } from 'src/avisos/entities/aviso.entity';
 import { AlumnoAviso } from 'src/alumno-aviso/entities/alumno-aviso.entity';
+import { Message } from 'src/message/entities/message.entity';
 
 
 @Entity()
@@ -94,4 +95,9 @@ export class Usuario {
   @OneToOne(() => Profesor, profesor => profesor.idProfesor) // Define the relationship
   profesor: Profesor; 
 
+  @OneToMany(type => Message, message => message.sender)
+  sentMessages: Message[];
+  
+  @OneToMany(type => Message, message => message.receiver)
+  receivedMessages: Message[];
 } 
