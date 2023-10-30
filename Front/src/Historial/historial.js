@@ -18,13 +18,12 @@ const Historial = () => {
   }, []);
     
   return (
-    <div className="mt-5  flex-column text-center my-auto">
-      <div className="col-md-12 text-center">
+    <div className="mt-5 d-flex justify-content-center align-items-center ">
+      <div className="col-md-6 text-center">
         <h1>SOBRE NUESTRA INSTITUCIÓN</h1>
-        <p>{textoHistorial}</p>
+        <p className=" text-center">{textoHistorial}</p>
       </div>
     </div>
   );
-    
-  }
+  }  
 export default Historial;

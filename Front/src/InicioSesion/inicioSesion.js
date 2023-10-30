@@ -179,11 +179,9 @@ const InicioSesion = ({ onLogin }) => {
               />
             </div>
             <div className="checkbox">
-              <label>
-                <input type="checkbox" /> Recordarme
-              </label>
+              
             </div>
-            <button type="submit" id="btn-iniciar" className="btn btn-primary btn-block">
+            <button type="submit" id="btn-iniciar" className="btn btn-primary btn-block mt-5">
               Iniciar sesión
             </button>
             <button

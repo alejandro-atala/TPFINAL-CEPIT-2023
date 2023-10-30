@@ -187,12 +187,12 @@ const Reglamento = () => {
 
   return (
     <div className="mt-5  flex-column text-center my-auto">
-      <div className="card-body">
+      <div className="card-body m-5">
         <h1 className="card-title">{reglamento1}</h1>
         <div className="row">
           <div className="col-md-4">
             <div className="card">
-              {imagenReglamento1 && <img className="card-img-top" src={imagenReglamento1} alt="foto del reglamento 1" />}
+              {imagenReglamento1 && <img className="card-img-top mx-auto"  style={{ maxWidth: '300px' }} src={imagenReglamento1} alt="foto del reglamento 1" />}
               <div className="card-body">
                 <h3 className="card-title">{tituloRegalmento1}</h3>
                 <button className="btn btn-primary mx-2" onClick={() => abrirURL(url1)}>
@@ -203,7 +203,7 @@ const Reglamento = () => {
           </div>
           <div className="col-md-4">
             <div className="card">
-              {imagenReglamento2 && <img className="card-img-top" src={imagenReglamento2} alt="foto del reglamento 2" />}
+              {imagenReglamento2 && <img className="card-img-top mx-auto"  style={{ maxWidth: '300px' }} src={imagenReglamento2} alt="foto del reglamento 2" />}
               <div className="card-body">
                 <h3 className="card-title">{tituloRegalmento2}</h3>
                 <button className="btn btn-primary mx-2" onClick={() => abrirURL(url2)}>
@@ -214,7 +214,7 @@ const Reglamento = () => {
           </div>
           <div className="col-md-4">
             <div className="card">
-              {imagenReglamento3 && <img className="card-img-top" src={imagenReglamento3} alt="foto del reglamento 3" />}
+              {imagenReglamento3 && <img className="card-img-top mx-auto" style={{ maxWidth: '300px' }}  src={imagenReglamento3} alt="foto del reglamento 3" />}
               <div className="card-body">
                 <h3 className="card-title">{tituloRegalmento3}</h3>
                 <button className="btn btn-primary mx-2" onClick={() => abrirURL(url3)}>
