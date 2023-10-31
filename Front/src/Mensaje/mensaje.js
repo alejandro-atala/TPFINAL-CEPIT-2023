@@ -268,7 +268,7 @@ function Mensaje() {
       {chatAbierto ? (
         <div className="ChatContent">
           <h5 className="CenteredTitle">Estoy chateando con {chatDestino}</h5>
-          <button onClick={cerrarChat} className="CerrarButton">
+          <button onClick={cerrarChat} className="CerrarButton m-2">
             Cerrar Chat
           </button>
           <button onClick={deleteSelectedMessages} className="EliminarButton">
@@ -293,7 +293,7 @@ function Mensaje() {
                     >
                       {esMensajeEnviado ? (
                         <LiMensajeEnviado onClick={() => toggleMessageSelection(mensaje.id)}>
-                          <div className="MensajeContenido">{contenido}</div>
+                          <div className="MensajeContenido ">{contenido}</div>
                           <div className="HoraMensajeEnviado">{horaMinutos}</div>
                         </LiMensajeEnviado>
                       ) : (
@@ -309,7 +309,7 @@ function Mensaje() {
               </ListaMensajes>
             </UlMensajes>
           </ChatPrivado>
-          <div className="InputContainer">
+          <div className="InputContainer ">
             <input
               type="text"
               value={nuevoMensaje}
@@ -317,7 +317,7 @@ function Mensaje() {
               className="TextInput"
               placeholder="Escribe un mensaje"
             />
-            <button onClick={enviarMensaje} className="SendButton">
+            <button onClick={enviarMensaje} className="SendButton m-2">
               Enviar
             </button>
           </div>
@@ -326,10 +326,10 @@ function Mensaje() {
 )}
         </div>
       ) : (
-        <div className="UsuariosConectados">
-          <ul className="UsuariosList">
+        <div className="UsuariosConectados ">
+          <ul className="UsuariosList ">
             {usuariosTotales.map((usuario) => (
-              <li key={usuario.idUsuario}>
+              <li key={usuario.idUsuario} className="mb-1">
                 <button onClick={() => iniciarChatConUsuario(usuario.nombre)} className="SendButton">
                   {usuario.nombre}
                 </button>
