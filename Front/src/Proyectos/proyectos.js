@@ -60,41 +60,42 @@ const Proyectos = () => {
 
     return (
 
-           
-                <div className=" mt-5  flex-column text-center my-auto  ">
-                    <div className="col-md-12">
-                    <h1>{textoProyecto}</h1>
-                        <p>{descripcionProyecto}</p>
-                    </div>
-                    
-                        <div className="row">
-                            <div class="">
-                                <div className="cuadro-imagen-proyecto">
-                                    {proyectoImages1 && <img src={proyectoImages1} style={{ maxWidth: '300px' }} alt="foto del proyecto 1" />}
-                                </div>
-                                <h3>{tituloProyecto1}</h3>
-                                <p>{textoDescripcionProyecto1} </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div className="cuadro-imagen-proyecto">
-                                    {proyectoImages2 && <img src={proyectoImages2} style={{ maxWidth: '300px' }} alt="foto del proyecto 2" />}
-                                </div>
-                                <h3>{tituloProyecto2}</h3>
-                                <p> {textoDescripcionProyecto2}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <div className="cuadro-imagen-proyecto">
-                                    {proyectoImages3 && <img src={proyectoImages3} style={{ maxWidth: '300px' }} alt="foto del proyecto 3" />}
-                                </div>
-                                <h3>{tituloProyecto3}</h3>
-                                <p> {textoDescripcionProyecto3}</p>
-                            </div>
-                        </div>
-                 
+
+        <div className=" mt-5  flex-column text-center my-auto  ">
+            <div className="col-md-12">
+                <h1>{textoProyecto}</h1>
+                <div className="centrado">
+                    <p className="text-center">{descripcionProyecto}</p>
                 </div>
-   
+            </div>
+            <div className="row">
+                <div class="">
+                    <div className="cuadro-imagen-proyecto">
+                        {proyectoImages1 && <img src={proyectoImages1} style={{ maxWidth: '300px' }} alt="foto del proyecto 1" />}
+                    </div>
+                    <h3>{tituloProyecto1}</h3>
+                    <p>{textoDescripcionProyecto1} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div className="cuadro-imagen-proyecto">
+                        {proyectoImages2 && <img src={proyectoImages2} style={{ maxWidth: '300px' }} alt="foto del proyecto 2" />}
+                    </div>
+                    <h3>{tituloProyecto2}</h3>
+                    <p> {textoDescripcionProyecto2}</p>
+                </div>
+                <div class="col-md-6">
+                    <div className="cuadro-imagen-proyecto">
+                        {proyectoImages3 && <img src={proyectoImages3} style={{ maxWidth: '300px' }} alt="foto del proyecto 3" />}
+                    </div>
+                    <h3>{tituloProyecto3}</h3>
+                    <p> {textoDescripcionProyecto3}</p>
+                </div>
+            </div>
+
+        </div>
+
 
     );
 };

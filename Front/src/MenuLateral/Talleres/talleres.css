@@ -1,25 +1,36 @@
+.container-taller{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  margin-left: 100px;
+  border-radius: 10%;
+  width: auto;
+  
+}
+
 .tituloTalleres {
   margin-top: 20px; 
   color: black; 
 
 }
 
-.talleres {
-  background-color: #45ceba;
-  /* margin-left:220px; */
-}
+
 
 
 .image-container {
   max-width: 100%;
   height: auto; 
+  display: block;
 }
 
 
-.card {
+.card-imagen {
   background-color: #f0f0f0; 
   border-radius: 10%;
   border: none;
+  overflow: hidden;
+  width: 100%;
 }
 
 .llamado-titulo {
@@ -28,7 +39,7 @@
   font-size: 30px;
 }
 
-.rectangulo-llamado {
+/* .rectangulo-llamado {
   background-color: #45ceba;;
   padding: 10px;
   border-radius: 10px;
@@ -37,4 +48,4 @@
   margin-left: 360px;
   border-radius: 10%;
   
-}
+} */

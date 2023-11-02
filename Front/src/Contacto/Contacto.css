@@ -1,0 +1,25 @@
+.card-custom {
+    border-radius: 25px;
+    border: 2px solid #2610e7;
+    padding: 20px;
+    background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
+}
+
+.btn-custom {
+    background-color: #0d0e0d; /* Color de fondo personalizado */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+/* Estilo al pasar el mouse sobre el botón */
+.btn-custom:hover {
+    background-color: #0b0c0b; /* Cambiar el color de fondo al pasar el mouse */
+}

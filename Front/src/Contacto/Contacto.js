@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import './Contacto.css';
 
 const Contacto = () => {
     const [telefono, setTelefono] = useState('');
@@ -32,7 +33,7 @@ const Contacto = () => {
       return (
         <div className="d-flex align-items-center justify-content-center" >
           <div className="mt-5 flex-column text-center" style={{ maxWidth: '500px' }}>
-            <div className="card">
+            <div className="card card-custom">
               <div className="card-body">
                 <h1 className="card-title">¡Contáctanos!</h1>
                 <p className="card-text">
@@ -41,11 +42,11 @@ const Contacto = () => {
                 <p className="card-text">Teléfono: {telefono}</p>
       
                 <div className="redes-sociales">
-                  <button className="btn btn-primary mx-2" onClick={() => abrirURL(facebookURL)}>
+                  <button className="btn btn-custom mx-2" onClick={() => abrirURL(facebookURL)}>
                     Facebook
                   </button>
       
-                  <button className="btn btn-primary mx-2" onClick={() => abrirURL(instagramURL)}>
+                  <button className="btn btn-custom mx-2" onClick={() => abrirURL(instagramURL)}>
                     Instagram
                   </button>
                 </div>

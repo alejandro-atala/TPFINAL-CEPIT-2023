@@ -1,9 +1,12 @@
 .home {
-  margin: 0 auto; 
-  padding: 20px; /* Agrega un espacio alrededor */
+  margin: 0 auto;
+  padding: 20px;
   text-align: center;
   border-radius: 10px;
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .tituloPrincipal {
@@ -12,13 +15,14 @@
 
 .carousel-item img {
   display: block;
-  margin: 0 auto; /* Centra horizontalmente */
+  margin: 0 auto;
+  /* Centra horizontalmente */
   max-width: 800px;
   height: auto;
   border-radius: 10%;
 }
 
-.carousel-control-prev, 
+.carousel-control-prev,
 .carousel-control-next {
   width: auto;
   padding: 0 15px;
@@ -28,9 +32,6 @@
 .container.principal h2,
 .container.principal p {
   text-align: center;
-  margin-bottom: 20px; 
-  
+  margin-bottom: 20px;
+
 }
-
-
-

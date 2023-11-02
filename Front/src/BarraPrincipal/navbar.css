@@ -1,29 +1,29 @@
 .bg-pink {
-  background-color: rgb(58, 244, 154);
+  background-color: rgba(232, 225, 190, 0.928);
   font-size: 20px;
 }
 
 .navbar-logo {
-  width: 100px;
+  width: 120px;
   height: auto;
   margin-right: 200px;
-  margin-left: 100px;
+  /* margin-left: 50px; */
 }
 
 .sesion {
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
-.iniciar{
+/* .iniciar{
   margin-right: 100px;
   margin-left: 300px;
-}
+} */
 
 .nav-item {
-  margin-top: 10px;
-  margin-right: 10px; 
-  margin-left: 10px;
-  letter-spacing: 1.2px;
+  /* margin-top: 10px; */
+  margin-right: 60px; 
+  margin-left: 60px;
+  letter-spacing: 1.5px;
 }
 
 
@@ -34,9 +34,18 @@
 }
 
 .nav-link:hover {
-  color: #fff;
-  background-color: rgb(76, 129, 244);
+  color: white;
+  background-color: rgb(158, 170, 196);
 
+}
+.container-navbar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  margin-left: 100px;
+  border-radius: 10%;
+  width: auto;
 }
 
 .hola-usuario{

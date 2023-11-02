@@ -1,8 +1,11 @@
 
 .container-footer {
-  background-color: rgb(58, 244, 154);
+  background-color: rgba(187, 179, 150, 0.928);
+  padding: 20px 0;
+    /* position: fixed; */
+    bottom: 0;
+    width: 100%;
 
-  padding: 20px 0; 
 }
 
 .social-icons {

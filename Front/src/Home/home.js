@@ -44,12 +44,13 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container-home">
       <div className="row">
         <div className="col-md-3">
           <SideMenu />
         </div>
-        <div className="col-md-9 mt-5 d-flex flex-column home ">
+        <div className="col-md-9 mt-5 d-flex flex-column ">
+         <div className="home">
           <h1 className="text-center">{textoId1}</h1>
           <div className="row ">
             <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
@@ -73,6 +74,7 @@ const HomePage = () => {
             </div>
             <h2>Estudia en nuestro Instituto</h2>
             <p className="d-flex flex-column align-items-center">{textoId2}</p>
+          </div>
           </div>
         </div>
       </div>

@@ -27,7 +27,7 @@ const Beneficios = () => {
   const htmlProcesado = { __html: textoBeneficios };
 
   return (
-    <div className="container">
+    <div className="container-beneficios">
     <div className="row">
       <div className="col-md-3 "> {/* Use align-self-start to align at the top */}
         <SideMenu />

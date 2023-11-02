@@ -39,7 +39,7 @@ const PlanDeEstudios = () => {
 
   
     return (
-      <div className="container">
+      <div className="container-plan">
         <div className="row ">
           <div className="col-md-3">
             <SideMenu />

@@ -3,7 +3,18 @@
     background-color: #45ceba;
     /* margin-left:220px; */
 }
-
+/* 
 .side{
   margin-left: 62px;
+} */
+
+.container-inscripcion{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  margin-left: 100px;
+  border-radius: 10%;
+  width: auto;
+  
 }
