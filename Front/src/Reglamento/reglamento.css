@@ -1,0 +1,48 @@
+.card{
+    width: 100%;
+    border-radius: 25px;
+    padding: 3%;
+    background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
+    box-shadow: 40px 20px 40px rgb(111, 108, 108);
+}
+
+.btn-reglamento{
+    background-color: #0d0e0d;
+    border: none; 
+    border-radius: 10%;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.btn-reglamento:hover {
+    background-color: #4f5052;
+    color: white;
+}
+
+.card-title-reglamento{
+    width: auto;
+    font-size: 100%;
+}
+
+.card-reglamento {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card img.img-reglamento {
+    width: 100%;
+    height: 200px; /* Ajusta la altura según tus preferencias */
+    object-fit: cover; /* Ajusta el ajuste del objeto de la imagen */
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px ;
+    border-bottom-right-radius: 25px;
+}

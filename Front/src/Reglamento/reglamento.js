@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './reglamento.css';
 
 const Reglamento = () => {
   const [reglamento1, setTextoReglamento] = useState('');
@@ -81,34 +82,34 @@ const Reglamento = () => {
       <div className="card-body m-5">
         <h1 className="card-title">{reglamento1}</h1>
         <div className="row">
-          <div className="col-md-4">
+          <div className="col-md-4 card-reglamento">
             <div className="card">
-              {imagenReglamento1 && <img className="card-img-top mx-auto"  style={{ maxWidth: '300px' }} src={imagenReglamento1} alt="foto del reglamento 1" />}
+              {imagenReglamento1 && <img className="img-reglamento mx-auto"  style={{ maxWidth: '300px' }} src={imagenReglamento1} alt="foto del reglamento 1" />}
               <div className="card-body">
-                <h3 className="card-title">{tituloRegalmento1}</h3>
-                <button className="btn btn-primary mx-2" onClick={() => abrirURL(url1)}>
+                <h3 className="card-title-reglamento">{tituloRegalmento1}</h3>
+                <button className="btn-reglamento btn mt-5 mx-2" onClick={() => abrirURL(url1)}>
                             Ver Documento
                         </button>
               </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 card-reglamento">
             <div className="card">
-              {imagenReglamento2 && <img className="card-img-top mx-auto"  style={{ maxWidth: '300px' }} src={imagenReglamento2} alt="foto del reglamento 2" />}
+              {imagenReglamento2 && <img className="img-reglamento mx-auto"  style={{ maxWidth: '300px' }} src={imagenReglamento2} alt="foto del reglamento 2" />}
               <div className="card-body">
-                <h3 className="card-title">{tituloRegalmento2}</h3>
-                <button className="btn btn-primary mx-2" onClick={() => abrirURL(url2)}>
+                <h3 className="card-title-reglamento">{tituloRegalmento2}</h3>
+                <button className="btn-reglamento btn mt-5 mx-2" onClick={() => abrirURL(url2)}>
                             Ver Documento
                         </button>
               </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 card-reglamento">
             <div className="card">
-              {imagenReglamento3 && <img className="card-img-top mx-auto" style={{ maxWidth: '300px' }}  src={imagenReglamento3} alt="foto del reglamento 3" />}
+              {imagenReglamento3 && <img className="img-reglamento mx-auto" style={{ maxWidth: '300px' }}  src={imagenReglamento3} alt="foto del reglamento 3" />}
               <div className="card-body">
-                <h3 className="card-title">{tituloRegalmento3}</h3>
-                <button className="btn btn-primary mx-2" onClick={() => abrirURL(url3)}>
+                <h3 className="card-title-reglamento">{tituloRegalmento3}</h3>
+                <button className=" btn btn-reglamento mt-5 mx-2" onClick={() => abrirURL(url3)}>
                             Ver Documento
                         </button>
               </div>

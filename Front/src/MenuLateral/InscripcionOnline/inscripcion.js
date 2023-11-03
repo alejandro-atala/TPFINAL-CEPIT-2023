@@ -80,17 +80,16 @@ const Inscripcion = () => {
     }
   };
 
+
   return (
     <div className="side">
     <div className="row ">
       <div className="col-md-3">
           <SideMenu />
         </div>
-        <div className="col-md-9 mt-5 d-flex  align-items-center">
-        
-          <div className="row container-inscripcion rounded text-center p-5 bg-registro">
+        <div className="col-md-9 mt-5 d-flex justify-content-center align-items-center">
+          <div className="container-inscripcion rounded text-center p-5 bg-registro">
             <h2 className="text-center">Registro de usuario</h2>
-
             <form>
               <div className="form-group">
                 <label htmlFor="nombre">Nombre completo:</label>
@@ -179,7 +178,7 @@ const Inscripcion = () => {
                 </div>
               )}
 
-              <button type="submit" className="btn btn-primary m-4" id="registrarse" onClick={handleSubmit}>
+              <button type="submit" className="btn-registro mt-5 m-4" id="registrarse" onClick={handleSubmit}>
                 Registrarse
               </button>
               {successMessage && <div className="alert alert-success">{successMessage}</div>}

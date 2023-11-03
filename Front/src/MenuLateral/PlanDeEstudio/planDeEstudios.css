@@ -1,16 +1,6 @@
-.plan-de-estudios {
-  display: flex;
-  flex-direction: column;
-  max-width: 1200px;
-  padding: 20px;
-  position: relative;
-  background-color: #45ceba;
-  border-radius: 10%;
-  margin-left: 200px;
-}
 
-h1 {
-  margin-bottom: 20px; 
+.titulo-plan{
+  margin-bottom: 5%; 
 }
 
 .materias {
@@ -18,6 +8,13 @@ h1 {
   padding-top: 10px;
   border-top: 1px solid #578ee5;
 }
+
+.plan{
+  width: auto;
+  margin-right: 5%;
+  margin-left: 3%;
+}
+
 
 
 

@@ -50,39 +50,41 @@ const HomePage = () => {
           <SideMenu />
         </div>
         <div className="col-md-9 mt-5 d-flex flex-column ">
-         <div className="home">
-          <h1 className="text-center">{textoId1}</h1>
-          <div className="row ">
-            <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
-              <div className="carousel-inner">
-                {homeImages.map((image, index) => (
-                  <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
-                    <img src={image} className="img-fluid d-block w-100" alt={`foto ${index + 1}`} />
-                    <div className="carousel-caption d-none d-md-block text-black">
-                    </div>
-                  </div>
-                ))}
+          <div className="home">
+            <h1 className="text-left">{textoId1}</h1>
+            <div className="row align-items-center">
+              <div className="col-md-6">
+                <h2>Estudia en nuestro Instituto</h2>
+                <p>{textoId2}</p>
               </div>
-              <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span className="visually-hidden">Previous</span>
-              </button>
-              <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                <span className="carousel-control-next-icon" ariahidden="true"></span>
-                <span className="visually-hidden">Next</span>
-              </button>
+            <div className="row carousel col-md-6">
+              <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
+                <div className="carousel-inner">
+                  {homeImages.map((image, index) => (
+                    <div key={index} className={`carousel-item ${index === 0 ? 'active' : ''}`}>
+                      <img src={image} className="img-fluid d-block w-100" alt={`foto ${index + 1}`} />
+                      <div className="carousel-caption d-none d-md-block text-black">
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span className="visually-hidden">Previous</span>
+                </button>
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                  <span className="carousel-control-next-icon" ariahidden="true"></span>
+                  <span className="visually-hidden">Next</span>
+                </button>
+              </div>
             </div>
-            <h2>Estudia en nuestro Instituto</h2>
-            <p className="d-flex flex-column align-items-center">{textoId2}</p>
-          </div>
           </div>
         </div>
       </div>
+      </div>
     </div>
   );
-  
+
 };
 
 export default HomePage;
-
-

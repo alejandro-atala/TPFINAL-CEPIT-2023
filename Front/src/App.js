@@ -96,9 +96,7 @@ const App = () => {
                       unreadAvisosCount={unreadAvisosCount}
                       marcarAvisosComoLeidos={marcarAvisosComoLeidos}
                     />
-                  
-
-                          <div className="   ">
+                          <div className=" colu  ">
 
                             <Routes>
                               <Route path="/venta" element={<Venta />} />
@@ -141,10 +139,6 @@ const App = () => {
                               <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
 
                               <Route path="/resetpass" element={<ResetPass />} />
-
-
-
-
 
                             </Routes>
 

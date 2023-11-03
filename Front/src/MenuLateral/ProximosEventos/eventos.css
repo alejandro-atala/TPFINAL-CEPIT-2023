@@ -1,27 +1,19 @@
 .proximos-eventos {
-  display: flex;
-  flex-direction: column;
-  max-width: 1200px;
-  padding: 20px;
-  position: relative;
-  background-color: #45ceba;
-  border-radius: 10%;
-  margin-left:220px;
+  width: 50%;
+  border-radius: 25px;
+  padding: 5%;
+  background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
+  box-shadow: 40px 20px 40px rgb(111, 108, 108);
+  margin-bottom: 10%;
 }
 
 
-h1 {
-  margin-bottom: 20px; 
+.titulo-evento{
+  margin-bottom: 10%; 
 }
+
 
 h2{
   text-align: center;
 }
 
-.evento {
-  text-align: center;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 2px solid #439cea;
-  font-size: 20px;;
-}

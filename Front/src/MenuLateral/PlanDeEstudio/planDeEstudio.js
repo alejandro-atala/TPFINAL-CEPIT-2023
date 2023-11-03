@@ -44,10 +44,10 @@ const PlanDeEstudios = () => {
           <div className="col-md-3">
             <SideMenu />
           </div>
-          <div className="col-md-9 mt-5  flex-column text-center my-auto">
-            <div className="d-flex flex-column align-items-center justify-content-center">
-              <h1>Plan de Estudio Por Año</h1>
-              <div className="row">
+          <div className="col-md-9 mt-5  flex-column">
+            <div className="d-flex flex-column align-items-left">
+              <h1 className='titulo-plan'>Plan de Estudio Por Año</h1>
+              <div className="row plan">
                 {Object.keys(materiasPorCurso).map((curso) => (
                   <div key={curso} className="col-md-6 col-lg-4 mb-4">
                     <div className="card shadow">

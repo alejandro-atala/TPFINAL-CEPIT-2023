@@ -1,28 +1,9 @@
-.contenido {
-  padding: 20px;
-  background-color: #45ceba;
-  width: auto;
-  border-radius: 10%;
-  margin-bottom: 60px;
-}
 
-.container-beneficios{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  margin-left: 100px;
-  border-radius: 10%;
-  width: auto;
-  
-}
-
-.tituloBeneficios {
+.titulo-beneficios {
   font-size: xx-large;
   font-family: 'Times New Roman', Times, serif;
   color: black;
   text-transform: uppercase;
-  margin-bottom: 10px;
 }
 
 .lista-beneficios {
@@ -34,3 +15,14 @@
   padding-top: 3;
   padding-bottom: 3;
 }
+
+.cuadro-beneficios{
+  width: 40%;
+  border-radius: 25px;
+  padding: 5%;
+  background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
+  box-shadow: 40px 20px 40px rgb(111, 108, 108);
+  margin-bottom: 10%;
+  margin-right: 5%;
+}
+

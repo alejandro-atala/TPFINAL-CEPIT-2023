@@ -1,7 +1,27 @@
-.bg-sesion{
-    /* margin-left:220px; */
-    background-color:  #45ceba;
-max-width: 400px;
-
+.bg-sesion {
+    width: 30%;
+    box-shadow: 40px 20px 40px rgb(111, 108, 108);
+    background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
+    border-radius: 20%;
+    padding: 10%;
 }
 
+.btn-sesion:hover {
+    background-color: #4f5052;
+    color: white;
+}
+
+.btn-sesion{
+    background-color: #0d0e0d; /* Color de fondo personalizado */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    font-size: 100%;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}

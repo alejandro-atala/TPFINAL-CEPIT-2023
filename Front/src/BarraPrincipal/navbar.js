@@ -41,23 +41,25 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
             <li className="nav-item">
               <Link to="/contacto" className="nav-link">Contacto</Link>
             </li>
-            {loggedInUser ? (
-              <li className="nav-item">
-                <span className="nav-link hola-usuario">Hola {loggedInUser}</span>
-              </li>
-            ) : null}
           </ul>
-        </div>
-          <div className="navbar-nav">
-            <li className="nav-item sesion">
+          <div className="d-flex align-items-center">
+            <div className="navbar-nav mr-auto">
               {loggedInUser ? (
-                <button className="nav-link sesion" onClick={onLogout}>Cerrar Sesión</button>
-              ) : (
-                <Link to="/iniciarSesion" className="nav-link sesion">Iniciar Sesión</Link>
-              )}
-            </li>
+                <span className="nav-link hola-usuario">Hola {loggedInUser}</span>
+              ) : null}
+            </div>
+            <div className="navbar-nav">
+              <li className="nav-item sesion">
+                {loggedInUser ? (
+                  <button className="nav-link sesion" onClick={onLogout}>Cerrar Sesión</button>
+                ) : (
+                  <Link to="/iniciarSesion" className="nav-link sesion">Iniciar Sesión</Link>
+                )}
+              </li>
+            </div>
           </div>
-      </div>
+        </div>
+        </div>
     </nav>
   );
 }

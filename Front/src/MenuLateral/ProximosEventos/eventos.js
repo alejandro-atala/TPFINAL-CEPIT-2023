@@ -32,12 +32,15 @@ const ProximosEventos = () => {
   const htmlProcesadoEventos = { __html: textoEventos };
 
   return (
-   <div className='container'>
+   <div>
+     <div className="row">
+      <div className="col-md-3 ">
     <SideMenu/>
-    <div className="container proximos-eventos mt-5">
-      <div className="row justify-content-center">
+    </div>
+    <div className="col-md-9 proximos-eventos mt-5 align-items-center justify-content-center">
+      <div className="row justify-content-center w-100">
         <div className="col-md-8 text-center">
-          <h1>{titulo}</h1>
+          <h1 className='titulo-evento'>{titulo}</h1>
         </div>
       </div>
       <div className="row justify-content-center w-100">
@@ -58,6 +61,7 @@ const ProximosEventos = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
     </div> 
   );

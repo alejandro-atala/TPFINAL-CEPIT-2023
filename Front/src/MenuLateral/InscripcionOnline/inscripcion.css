@@ -1,20 +1,32 @@
 
-  .bg-registro{
-    background-color: #45ceba;
-    /* margin-left:220px; */
-}
-/* 
-.side{
-  margin-left: 62px;
-} */
-
 .container-inscripcion{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  margin-left: 100px;
-  border-radius: 10%;
-  width: auto;
+  width: 50%;
+  border-radius: 25px;
+  padding: 10%;
+  background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
+  box-shadow: 40px 20px 40px rgb(111, 108, 108);
+  margin-bottom: 10%;
   
+}
+
+.btn-registro{
+  background-color: #0d0e0d; 
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  width: 80%;
+  margin-bottom: 20%;
+  border-radius: 4%;
+}
+
+.btn-registro:hover{
+  background-color: #4f5052;
+  color: white;
 }
