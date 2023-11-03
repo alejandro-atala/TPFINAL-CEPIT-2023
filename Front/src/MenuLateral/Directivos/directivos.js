@@ -43,19 +43,19 @@ const Directivos = () => {
       </div>
       <div className="col-md-9 mt-5 flex-column align-items-center justify-content-center">   
       <h1 className='titulo-directivos text-top align-items-left'>Nuestro Equipo de Trabajo</h1>
-      <div className="row">
-        <div className="col-md-8">
-          <div className="directivos">
+      <div className="row align-items-center justify-content-center">
+        <div className="col-md-8 ">
+          <div className="directivos ">
             <div className="cuadro-imagen">
               {imagenDirectora && <img src={imagenDirectora} alt="foto de la directora" />}
             </div>
             <h3>{textoDirectora}</h3>
-            <h5 className='nombre-directivos'>Directora de La Institución</h5>
+            <h5 className='nombre-directivos'>Director de La Institución</h5>
             <div className="cuadro-imagen">
               {imagenSecretaria && <img src={imagenSecretaria} alt="foto de la secretaria" />}
             </div>
             <h3>{textoSecretaria}</h3>
-            <h5 className='nombre-directivos'>Secretaria de La Institución</h5>
+            <h5 className='nombre-directivos'>Secretario de La Institución</h5>
             <div className="cuadro-imagen">
               {imagenRepresentante && <img src={imagenRepresentante} alt="foto del representante" />}
             </div>

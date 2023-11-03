@@ -9,8 +9,7 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-pink">
-      <div className="container-navbar">
-        <Link to="/logo" className="navbar-brand">
+        <Link to="/logo" className='col-md-3 logo' >
           <img src="https://images4.imagebam.com/9c/af/6d/MENQMV5_o.png" alt="Logo" className="navbar-logo" />
         </Link>
         <button
@@ -24,7 +23,7 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse justify-content-center">
+        <div className="collapse navbar-collapse justify-content-center col-md-9">
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link to="/" className="nav-link">Home</Link>
@@ -59,7 +58,7 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
             </div>
           </div>
         </div>
-        </div>
+        
     </nav>
   );
 }

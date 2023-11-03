@@ -12,7 +12,10 @@ const HomePage = () => {
     const obtenerTextoPorId = async (id, setTexto) => {
       try {
         const response = await axios.get(`http://localhost:3000/carga/id/${id}`);
-        setTexto(response.data.texto);
+        var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
+
+        setTexto(textoConSaltosDeLinea);
+       
       } catch (error) {
         console.error(`Error al obtener el texto con ID ${id}:`, error);
       }
@@ -22,12 +25,13 @@ const HomePage = () => {
       try {
         const imagePromises = nombres.map(async (nombre) => {
           const response = await axios.get(`http://localhost:3000/imagenes/nombre/${nombre}`);
-          console.log(response.data.url); // Esto debería funcionar ahora
+  
           return response.data.url;
         });
 
         const images = await Promise.all(imagePromises);
         setHomeImages(images.filter((image) => image !== null));
+
       } catch (error) {
         console.error(`Error al obtener las imágenes:`, error);
       }
@@ -43,21 +47,18 @@ const HomePage = () => {
     obtenerImagenesPorNombres(['home1', 'home2', 'home3']);
   }, []);
 
+  const htmlProcesado = { __html: textoId2 };
+
   return (
     <div className="container-home">
       <div className="row">
         <div className="col-md-3">
           <SideMenu />
         </div>
-        <div className="col-md-9 mt-5 d-flex flex-column ">
-          <div className="home">
-            <h1 className="text-left">{textoId1}</h1>
-            <div className="row align-items-center">
-              <div className="col-md-6">
-                <h2>Estudia en nuestro Instituto</h2>
-                <p>{textoId2}</p>
-              </div>
-            <div className="row carousel col-md-6">
+        <div className="col-md-9 mt-5 flex-column">
+          <h1 className="text-left d-flex flex-column align-items-left titulo-home">{textoId1}</h1>
+          <div className="row align-items-start">
+            <div className="col-md-6 carousel">
               <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
                   {homeImages.map((image, index) => (
@@ -78,9 +79,12 @@ const HomePage = () => {
                 </button>
               </div>
             </div>
+            <div className="col-md-6 text-right">
+              <h2 className="texto-titulo-home">Estudia en Nuestro Instituto</h2>
+              <p className="texto-home text-center" dangerouslySetInnerHTML={htmlProcesado}></p>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   );

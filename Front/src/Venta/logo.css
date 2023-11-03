@@ -1,5 +1,17 @@
-.texto-venta{
-    font-size: 30px;
-    font-style: oblique;
-}
 
+.texto-venta {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 120%;
+    list-style: none;
+    padding-top: 3;
+    padding-bottom: 3;
+    margin-top: 5%;
+    margin-left: 2%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+  }
+
+  .p-logo {
+    margin-bottom: 2%;
+    margin-top: 2%;
+  }

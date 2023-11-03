@@ -46,7 +46,7 @@ const Talleres = () => {
     obtenerTextoEImagenPorReferencia('Contacto_Talleres', setTextoTelefono);
   }, []);
 
-  const titulo = 'Talleres disponibles en nuestras instalaciones';
+  const titulo = 'Talleres Disponibles en Nuestras Instalaciones';
 
   return (
     <div>

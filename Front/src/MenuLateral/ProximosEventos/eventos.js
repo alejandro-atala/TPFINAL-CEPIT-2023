@@ -37,25 +37,25 @@ const ProximosEventos = () => {
       <div className="col-md-3 ">
     <SideMenu/>
     </div>
-    <div className="col-md-9 proximos-eventos mt-5 align-items-center justify-content-center">
+    <div className="col-md-9 proximos-eventos mt-5 text-center">
       <div className="row justify-content-center w-100">
-        <div className="col-md-8 text-center">
+        <div className="text-center">
           <h1 className='titulo-evento'>{titulo}</h1>
         </div>
       </div>
       <div className="row justify-content-center w-100">
-        <div className="col-md-6 col-lg-4 mb-4">
+        <div className="col-md-9 col-lg-4 mb-4 eventos">
           <div className="card shadow">
-            <div className="card-body">
-              <h2 className="card-title">Actos</h2>
+            <div className="card-body-eventos">
+              <h2 className="card-title-eventos">ACTOS</h2>
               <div className="evento" dangerouslySetInnerHTML={htmlProcesadoActos}></div>
             </div>
           </div>
         </div>
-        <div className="col-md-6 col-lg-4 mb-4">
+        <div className="col-md-9 col-lg-4 mb-4 eventos">
           <div className="card shadow">
-            <div className="card-body">
-              <h2 className="card-title">Eventos</h2>
+            <div className="card-body-eventos">
+              <h2 className="card-title-eventos">EVENTOS</h2>
               <div className="evento" dangerouslySetInnerHTML={htmlProcesadoEventos}></div>
             </div>
           </div>

@@ -1,20 +1,14 @@
 
 .bg-pink {
   background-color: rgba(232, 225, 190, 0.928);
-  font-size: 100%;
+  font-size: 95%;
   width: auto;
 }
 
 .navbar-logo {
-  width: 15%;
+  width: 30%;
   height: auto;
-  margin-right: 10%;
-  margin-left: 10%; 
-}
-
-.sesion {
-  transition: color 0.3s ease, background-color 0.3s ease;
-  margin-left: auto;
+  margin-left: 15%; 
 }
 
 .nav-item {
@@ -32,21 +26,17 @@
 .nav-link:hover {
   color: white;
   background-color: rgb(15, 15, 15);
-
 }
+
 .container-navbar{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  border-radius: 10%;
-  width: auto;
 }
 
 .hola-usuario{
   font-family:'Times New Roman', Times, serif;
   font-size: 20px;
-  background-color:rgb(124, 153, 214);
+  background-color:rgb(31, 32, 35);
+  color: white;
   text-decoration: underline;
-  width: 20%;
+  width: auto;
 }
