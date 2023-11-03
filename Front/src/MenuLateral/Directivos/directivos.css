@@ -1,8 +1,12 @@
-.component-directivos {
 
-  padding: 100px;
-
+.titulo-directivos{
+  font-size: xx-large;
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+  text-transform: uppercase;
+  margin-bottom: 5%;
 }
+
 
 .directivos {
   display: grid;
@@ -10,12 +14,15 @@
   grid-gap: 20px;
 }
 
-/* .directivo {
-  background-color: #f0f0f0;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-} */
+
+.nombre-directivos{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 120%;
+  list-style: none;
+  padding-left: 0;
+  padding-top: 3;
+  padding-bottom: 3;
+}
 
 .cuadro-imagen {
   width: 100px;
@@ -31,7 +38,3 @@
   object-fit: cover;
   object-position: center;
 }
-
-/* .descripcion {
-  font-size: 14px;
-} */

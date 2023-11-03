@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import './beneficios.css';
+import './beneficios.css';
 import axios from 'axios';
 import SideMenu from '../sideMenu';
 
@@ -23,21 +23,22 @@ const Beneficios = () => {
     obtenerTextoPorReferencia('Beneficios', setTextoBeneficios);
   }, []);
 
-  // Crear un objeto con el HTML procesado
+
+
   const htmlProcesado = { __html: textoBeneficios };
 
   return (
-    <div className="container">
+    <div className="container-beneficios">
     <div className="row">
-      <div className="col-md-3 "> {/* Use align-self-start to align at the top */}
+      <div className="col-md-3 ">
         <SideMenu />
       </div>
-      <div className="col-md-9 mt-5 d-flex flex-column align-items-center justify-content-center">   
-        <div className="container componente-beneficios mt-5 contenido">
+      <div className="col-md-9 mt-5 d-flex flex-column">   
+        <div className="mt-5">
           <div className="row">
             <div className="col align-self-center cuadro-beneficios">
-              <h2 className="titulo">Beneficios</h2>
-              <div dangerouslySetInnerHTML={htmlProcesado}></div>
+              <h2 className="titulo-beneficios">Beneficios</h2>
+              <div className='text-center' dangerouslySetInnerHTML={htmlProcesado}></div>
             </div>
           </div>
         </div>

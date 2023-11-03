@@ -1,29 +1,19 @@
+
 .bg-pink {
-  background-color: rgb(58, 244, 154);
-  font-size: 20px;
+  background-color: rgba(232, 225, 190, 0.928);
+  font-size: 95%;
+  width: auto;
 }
 
 .navbar-logo {
-  width: 100px;
+  width: 30%;
   height: auto;
-  margin-right: 200px;
-  margin-left: 100px;
-}
-
-.sesion {
-  transition: color 0.3s ease, background-color 0.3s ease;
-}
-
-.iniciar{
-  margin-right: 100px;
-  margin-left: 300px;
+  margin-left: 15%; 
 }
 
 .nav-item {
-  margin-top: 10px;
-  margin-right: 10px; 
-  margin-left: 10px;
-  letter-spacing: 1.2px;
+  margin-left: 20px; 
+  letter-spacing: 1.5px;
 }
 
 
@@ -34,17 +24,19 @@
 }
 
 .nav-link:hover {
-  color: #fff;
-  background-color: rgb(76, 129, 244);
+  color: white;
+  background-color: rgb(15, 15, 15);
+}
 
+.container-navbar{
+  display: flex;
 }
 
 .hola-usuario{
-  margin-left:50px;
-  margin-top: -5px;
   font-family:'Times New Roman', Times, serif;
   font-size: 20px;
-  background-color:rgb(76, 129, 244);
+  background-color:rgb(31, 32, 35);
+  color: white;
   text-decoration: underline;
-  width: 150px;
+  width: auto;
 }

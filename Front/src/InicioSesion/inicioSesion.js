@@ -152,7 +152,7 @@ const InicioSesion = ({ onLogin }) => {
 
   return (
     
-    <div className="">
+    <div className=" rounded mt-3">
     <div className="d-flex justify-content-center align-items-center ">
       <div className="rounded text-center col-xs-12 col-md-4 col-sm-3 p-5 mt-4 bg-sesion">
         <h2 className="text-center">Iniciar sesión</h2>
@@ -182,13 +182,13 @@ const InicioSesion = ({ onLogin }) => {
             <div className="checkbox">
               
             </div>
-            <button type="submit" id="btn-iniciar" className="btn btn-primary btn-block mt-5">
+            <button type="submit" id="btn-iniciar" className="btn btn-sesion mt-5">
               Iniciar sesión
             </button>
             <button
               type="button"
               id="btn-pass"
-              className="btn btn-secondary btn-block m-2"
+              className="btn btn-sesion mt-2"
               onClick={() => {
                 handlePasswordReset();
 

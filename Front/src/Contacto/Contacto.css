@@ -1,0 +1,73 @@
+.card-custom {
+    width: 80%;
+    border-radius: 25px;
+    padding: 10%;
+    background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
+    box-shadow: 40px 20px 40px rgb(111, 108, 108);
+    margin-bottom: 10%;
+}
+
+.btn-enviar{
+    background-color: #0d0e0d; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 80%;
+    margin-bottom: 20%;
+    border-radius: 4%;
+}
+
+.btn-enviar:hover{
+    background-color: #4f5052;
+    color: white;
+}
+
+.cel{
+    background-color: #c4cbc4;
+    text-align: center;
+    padding: 2%;
+}
+
+.btn-custom {
+    background-color: #0d0e0d; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+
+.btn-custom:hover {
+    background-color: #4f5052;
+    color: white;
+}
+
+
+.contacto-input{
+    padding: 1.3%;
+    margin-bottom: 5%;
+    width: 100%;
+    border: none; 
+}
+
+
+.contacto-input-consulta{
+    padding: 10%;
+    margin-bottom: 5%;
+    width: 100%;
+    border: none;
+  
+}

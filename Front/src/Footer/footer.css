@@ -1,8 +1,10 @@
 
 .container-footer {
-  background-color: rgb(58, 244, 154);
-
-  padding: 20px 0; 
+  background-color: rgba(187, 179, 150, 0.928);
+  padding: 0.2%;
+    bottom: 0;
+    width: 100%;
+    
 }
 
 .social-icons {
@@ -11,7 +13,7 @@
 }
 
 .social-icons a {
-  font-size: 24px;
+  font-size: 100%;
   margin: 0 10px;
   color: #333; 
   transition: color 0.3s; 

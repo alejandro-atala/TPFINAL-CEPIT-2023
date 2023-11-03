@@ -5,7 +5,7 @@ import './footer.css'; // Importa tu archivo CSS personalizado
 
 const Footer = () => {
   return (
-    <footer className="py-4 bg ">
+    <footer className=" bg ">
       <div className="container-footer ">
         <div className="social-icons-container ">
           <div className="social-icons text-center ">

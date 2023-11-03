@@ -46,71 +46,70 @@ const Talleres = () => {
     obtenerTextoEImagenPorReferencia('Contacto_Talleres', setTextoTelefono);
   }, []);
 
-  const titulo = 'Talleres disponibles en nuestras instalaciones';
+  const titulo = 'Talleres Disponibles en Nuestras Instalaciones';
 
   return (
-    <div className="container">
+    <div>
     <div className="row">
       <div className="col-md-3 ">
         <SideMenu />
         </div>
-        
         <div className="col-md-9 mt-5 d-flex flex-column align-items-center justify-content-center">   
-      <h1 className="text-center mt-5 titulo ">{titulo}</h1>
-      <div className="container mt-4 p-5 talleres">
+      <h1 className="titulo-taller  ">{titulo}</h1>
+      <div className="mt-4 p-5">
         <div className="row row-cols-1 row-cols-md-3 g-4">
-          <div className="col">
-            <div className="card h-100">
-              {imagenTaller1 && <img src={imagenTaller1} className="card-img-top" alt="..." />}
+          <div className="col taller">
+            <div className="img-taller h-100">
+              {imagenTaller1 && <img src={imagenTaller1} className="img-taller" alt="..." />}
               <div className="card-body">
                 <h5 className="card-title text-center">{textoTaller1}</h5>
               </div>
             </div>
           </div>
-          <div className="col ">
-            <div className="card h-100">
-              {imagenTaller2 && <img src={imagenTaller2} className="card-img-top" alt="..." />}
+          <div className="col taller ">
+            <div className="img-taller h-100">
+              {imagenTaller2 && <img src={imagenTaller2} className="img-taller" alt="..." />}
               <div className="card-body">
                 <h5 className="card-title text-center">{textoTaller2}</h5>
               </div>
             </div>
           </div>
-          <div className="col ">
-            <div className="card h-100">
-              {imagenTaller3 && <img src={imagenTaller3} className="card-img-top" alt="..." />}
-              <div className="card-body">
-                <h5 className="card-title text-center">{textoTaller3}</h5>
+          <div className="col taller">
+            <div className="img-cont-taller h-100">
+              {imagenTaller3 && <img src={imagenTaller3} className="img-taller" alt="..." />}
+              <div className="card-body-taller">
+                <h5 className="card-title-taller text-center">{textoTaller3}</h5>
               </div>
             </div>
           </div>
-          <div className="col ">
-            <div className="card h-100">
-              {imagenTaller4 && <img src={imagenTaller4} className="card-img-top" alt="..." />}
-              <div className="card-body">
+          <div className="col taller">
+            <div className="img-cont-taller h-100">
+              {imagenTaller4 && <img src={imagenTaller4} className="img-taller" alt="..." />}
+              <div className="card-body-taller">
                 <h5 className="card-title text-center">{textoTaller4}</h5>
               </div>
             </div>
           </div>
-          <div className="col ">
-            <div className="card h-100">
-              {imagenTaller5 && <img src={imagenTaller5} className="card-img-top" alt="..." />}
-              <div className="card-body">
+          <div className="col taller">
+            <div className="img-cont-taller h-100">
+              {imagenTaller5 && <img src={imagenTaller5} className="img-taller" alt="..." />}
+              <div className="card-body-taller">
                 <h5 className="card-title text-center">{textoTaller5}</h5>
               </div>
             </div>
           </div>
-          <div className="col ">
-            <div className="card h-100">
-              {imagenTaller6 && <img src={imagenTaller6} className="card-img-top" alt="..." />}
-              <div className="card-body">
+          <div className="col taller">
+            <div className="img-cont-taller h-100">
+              {imagenTaller6 && <img src={imagenTaller6} className="img-taller" alt="..." />}
+              <div className="card-body-taller">
                 <h5 className="card-title text-center">{textoTaller6}</h5>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="container col-end rectangulo-llamado rounded">
-        <p className="llamado-titulo text-center">Inscríbete llamando al: {textoTelefono}</p>
+      <div className="col-end rectangulo-llamado rounded">
+        <p className="llamado-titulo text-center">Inscribirse llamando al: {textoTelefono}</p>
       </div>
     </div>
     </div>
