@@ -20,6 +20,12 @@ const BloqueDeCarga = () => {
 
   const nombresDeReferencia = {
     Titulo_instituto: 'Nombre Instituto',
+    Titulo_home: 'Subtitulo home',
+    Texto_home: 'Texto en home',
+    Item_home1: 'Item extras datos 1',
+    Item_home2: 'Item extras datos 2',
+    Item_home3: 'Item extras datos 3',
+    Item_home4: 'Item extras datos 4',
     Descripcion: 'Descripcion',
     Beneficios: 'Beneficios',
     Directora: 'Directora',
