@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Contacto.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Contacto = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +15,7 @@ const Contacto = () => {
   const [email, setEmail] = useState('');
   const [consulta, setConsulta] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+
 
   useEffect(() => {
     const cargarDatosPorReferencia = async (referencia, setDato) => {
@@ -47,7 +48,7 @@ const Contacto = () => {
         consulta: consulta,
         email: email,
       };
-console.log(formData);
+      console.log(formData);
       const response = await axios.post(`http://localhost:3000/email/contacto`, formData);
       console.log('Solicitud POST exitosa', response.data);
 
@@ -56,6 +57,10 @@ console.log(formData);
         autoClose: 3000, // La notificación se cierra automáticamente después de 3 segundos
       });
 
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setConsulta('');
 
     } catch (error) {
       console.error('Error al enviar la solicitud POST', error);
@@ -139,6 +144,14 @@ console.log(formData);
                   </p>
                 </div>
                 <button type="submit" className="btn-enviar">Enviar</button>
+
+                <div type="submit" className="" disabled={isLoading}>
+                  {isLoading ? (
+                    <div className="loader"></div> 
+                  ) : (
+                    ''
+                  )}
+                </div>
               </form>
             )}
 
@@ -158,6 +171,9 @@ console.log(formData);
           </div>
         </div>
       </div>
+
+
+      <ToastContainer />
     </div>
   );
 }

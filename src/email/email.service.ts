@@ -75,8 +75,8 @@ export class EmailService {
   <div style="background-color:rgba(78, 202, 155, 0.618); padding: 20px;">
     <div style="background-color: white; border-radius: 10px; padding: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
       <h2 style="color: #333;">Contacto</h2>
-      <p>El usuario ${para} quiere contacterse por asesoramiento</p>
-      <p>Su consulta es : ${consulta}</p>
+      <p>El usuario ${para} tiene la siguiente consulta:</p>
+      <p> ${consulta}</p>
      
     </div>
   </div>
