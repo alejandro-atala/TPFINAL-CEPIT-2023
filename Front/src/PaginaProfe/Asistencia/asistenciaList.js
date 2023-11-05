@@ -57,7 +57,7 @@ const AsistenciaList = () => {
       const updatedData = prevData.filter((item) => item.id !== alumnoId);
 
       const alumno = alumnos.find((alumno) => alumno.idAlumno === alumnoId);
-
+      console.log(alumno)
       if (asistenciaType) {
         return [
           ...updatedData,
@@ -65,7 +65,7 @@ const AsistenciaList = () => {
             id: alumnoId,
             idAlumno: alumno.idAlumno,
             nombre: alumno.nombre,
-            anio: alumno.curso.anio,
+            anio: alumno.cursoIdCurso.anio,
             fecha,
             asistencia: asistenciaType,
           },
@@ -88,6 +88,7 @@ const AsistenciaList = () => {
     }
 
     try {
+      console.log(attendanceData)
       await axios.post('http://localhost:3000/asistencia', attendanceData, {
         headers: {
           'Authorization': `${token}`,
