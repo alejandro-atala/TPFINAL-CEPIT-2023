@@ -162,8 +162,9 @@ const MateriasList = () => {
   };
 
   return (
-    <div className="container d-flex flex-column justify-content-center ">
-      <h4 className="mb-4">Aquí podrás editar las materias según los días y horarios</h4>
+    <div className=" col-12 mt-5 ">
+       <div className="row">
+      <h4 className="mb-4">Aquí podrás editar las materias según los días y horarioss</h4>
       <div className="mb-3">
         <label>Seleccione un curso:</label>
         <select className="form-select" onChange={handleCursoChange} value={selectedCurso}>
@@ -231,7 +232,7 @@ const MateriasList = () => {
           </tbody>
         </table>
       </div>
-      <button className="btn btn-success" onClick={handleSaveClick}>
+      <button className="btn btn-success " onClick={handleSaveClick}>
         Guardar Materias
       </button>
 
@@ -246,6 +247,7 @@ const MateriasList = () => {
           Error al guardar las materias. Por favor, inténtalo nuevamente.
         </Alert>
       )}
+    </div>
     </div>
   );
 };

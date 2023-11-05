@@ -119,7 +119,7 @@ const AsistenciaList = () => {
   };
 
   return (
-    <div className="col-9 mt-5">
+    <div className="col-9 mx-auto mt-5">
       {sessionExpired ? (
         <Alert className="alert alert-danger">
           Tu sesión ha expirado. Por favor, inicia sesión nuevamente.

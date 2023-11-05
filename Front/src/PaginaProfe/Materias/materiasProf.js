@@ -74,7 +74,7 @@ const MateriasProf = () => {
   };
 
   return (
-    <div className="container d-flex flex-column justify-content-center">
+    <div className="col-9 mx-auto mt-5">
       <h4 className="mb-4">Aquí podrás ver las materias según los días y horarios</h4>
       <div className="mb-3">
         <label>Seleccione un curso:</label>

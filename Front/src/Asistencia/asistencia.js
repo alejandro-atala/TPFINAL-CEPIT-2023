@@ -48,7 +48,7 @@ const Asistencia = () => {
   };
 
   return (
-    <div className='col-9'>
+    <div className='col-9 mx-auto'>
       <h4>Registro de asistencias e inasistencias</h4>
       <table className="custom-table">
 
