@@ -38,37 +38,37 @@ const PlanDeEstudios = () => {
 
 
   
-    return (
-      <div className="container-plan">
-        <div className="row ">
-          <div className="col-md-3">
-            <SideMenu />
-          </div>
-          <div className="col-md-9 mt-5  flex-column">
-            <div className="d-flex flex-column align-items-left">
-              <h1 className='titulo-plan'>Plan de Estudio Por Año</h1>
-              <div className="row plan">
-                {Object.keys(materiasPorCurso).map((curso) => (
-                  <div key={curso} className="col-md-6 col-lg-4 mb-4">
-                    <div className="card shadow">
-                      <div className="card-body">
-                        <h2 className="card-title">{` ${curso}`}</h2>
-                        <div className="materias">
-                          {materiasPorCurso[curso].map((materia, index) => (
-                            <div key={index} className="card-text">
-                              {materia}
-                            </div>
-                          ))}
-                        </div>
+  return (
+    <div className="container-plan">
+      <div className="row">
+        <div className="col-md-3">
+          <SideMenu />
+        </div>
+        <div className="col-md-9 mt-5">
+          <div className="d-flex flex-column align-items-center">
+            <h1 className='titulo-plan'>Plan de Estudio Por Año</h1>
+            <div className="row plan">
+              {Object.keys(materiasPorCurso).map((curso) => (
+                <div key={curso} className="col-md-6 col-lg-4 mb-4">
+                  <div className="card shadow">
+                    <div className="card-body text-center"> {/* Utilizamos la clase text-center para centrar el contenido */}
+                      <h2 className="card-title">{` ${curso}`}</h2>
+                      <div className="materias">
+                        {materiasPorCurso[curso].map((materia, index) => (
+                          <div key={index} className="card-text">
+                            {materia}
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
-    );
-  };
+    </div>
+  );}
+  
 export default PlanDeEstudios;
