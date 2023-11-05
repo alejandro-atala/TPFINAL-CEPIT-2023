@@ -64,7 +64,7 @@ const Proyectos = () => {
     const htmlProcesado1 = { __html: textoDescripcionProyecto1 };
     const htmlProcesado2 = { __html: textoDescripcionProyecto2 };
     const htmlProcesado3 = { __html: textoDescripcionProyecto3 };
-    
+
 
     return (
 
@@ -73,16 +73,17 @@ const Proyectos = () => {
             <div className="col-md-12">
                 <h1 className="titulo-proyectos">{textoProyecto}</h1>
                 <div className="texto-proyectos">
-                    <p className="text-center"  dangerouslySetInnerHTML={htmlProcesado}></p>
+                    <p className="text-center" dangerouslySetInnerHTML={htmlProcesado}></p>
                 </div>
             </div>
             <div className="row">
                 <div class="">
+
+                    <h3 className="titulo-proyecto">{tituloProyecto1}</h3>
+                    <p className="texto-proyectos" dangerouslySetInnerHTML={htmlProcesado1}></p>
                     <div className="cuadro-imagen-proyecto">
                         {proyectoImages1 && <img src={proyectoImages1} className="imagen-proyecto" style={{ maxWidth: '300px' }} alt="foto del proyecto 1" />}
                     </div>
-                    <h3 className="titulo-proyecto">{tituloProyecto1}</h3>
-                    <p className="texto-proyectos" dangerouslySetInnerHTML={htmlProcesado1}></p>
                 </div>
             </div>
             <div class="row">
@@ -90,14 +91,14 @@ const Proyectos = () => {
                     <div className="cuadro-imagen-proyecto">
                         {proyectoImages2 && <img src={proyectoImages2} className="imagen-proyecto" style={{ maxWidth: '300px' }} alt="foto del proyecto 2" />}
                     </div>
-                    <h3  className="titulo-proyecto">{tituloProyecto2}</h3>
+                    <h3 className="titulo-proyecto">{tituloProyecto2}</h3>
                     <p className="texto-proyectos" dangerouslySetInnerHTML={htmlProcesado2}></p>
                 </div>
                 <div class="col-md-6">
                     <div className="cuadro-imagen-proyecto">
                         {proyectoImages3 && <img src={proyectoImages3} className="imagen-proyecto" style={{ maxWidth: '300px' }} alt="foto del proyecto 3" />}
                     </div>
-                    <h3  className="titulo-proyecto">{tituloProyecto3}</h3>
+                    <h3 className="titulo-proyecto">{tituloProyecto3}</h3>
                     <p className="texto-proyectos" dangerouslySetInnerHTML={htmlProcesado3}></p>
                 </div>
             </div>

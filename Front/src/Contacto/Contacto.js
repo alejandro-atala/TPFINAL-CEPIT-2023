@@ -33,9 +33,23 @@ const Contacto = () => {
   }, []);
 
   const abrirURL = (url) => {
-    console.log(url);
-    window.open(url, '_blank');
+    // Comprobar si la URL no está vacía
+    if (url) {
+      // Agregar el protocolo "https://" si no está presente en la URL
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = "https://" + url;
+      }
+      // Abrir la URL en una nueva ventana o pestaña
+      window.open(url, '_blank');
+    } else {
+      // Mostrar un mensaje de error si la URL está vacía
+      toast.error('URL no válida', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+    }
   };
+  
 
 
   const handleSubmit = async (e) => {
