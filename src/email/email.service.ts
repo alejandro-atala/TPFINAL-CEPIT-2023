@@ -16,6 +16,9 @@ const transporter = nodemailer.createTransport({
 
 
 export class EmailService {
+
+
+  
   async sendEmail(para: string, subject: string): Promise<void> {
 
 

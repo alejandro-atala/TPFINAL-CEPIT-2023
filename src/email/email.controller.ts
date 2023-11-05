@@ -19,6 +19,7 @@ export class EmailController{
   }
 
 
+
   @Post('suscripcion')
   async sendEmailSuscripcion(@Body('email')  email: string): Promise<string> {
     console.log("suscri")
