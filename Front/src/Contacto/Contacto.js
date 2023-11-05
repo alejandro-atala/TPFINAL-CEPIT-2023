@@ -47,8 +47,8 @@ const Contacto = () => {
         consulta: consulta,
         email: email,
       };
-
-      const response = await axios.post(`http://localhost:3000/email/suscripcion`, formData);
+console.log(formData);
+      const response = await axios.post(`http://localhost:3000/email/contacto`, formData);
       console.log('Solicitud POST exitosa', response.data);
 
       toast.success('Correo enviado con éxito', {
