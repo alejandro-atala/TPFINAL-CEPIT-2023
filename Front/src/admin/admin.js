@@ -206,12 +206,13 @@ const AdminPage = () => {
   const isTableEmpty = tableData.length === 0;
 
   return (
-    <div className="admin-page d-flex flex-column ">
+    <div className="admin-page d-flex flex-column  ">
 
-      <div>
+<div className="mx-auto mt-5">
+        <h4 className=''>Editar contenido de tablas</h4>
         <div className="d-flex justify-content-between align-items-center ">
           <select
-            className="form-select m-3"
+            className="form-select m-3 mx-auto"
             style={{ maxWidth: '200px' }}
             onChange={handleTableChange}
             value={selectedTable}

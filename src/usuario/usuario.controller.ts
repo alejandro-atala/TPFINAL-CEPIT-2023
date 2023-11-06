@@ -71,7 +71,7 @@ export class UsuarioController {
     @Body('email') email: string,
     @Body() newPasswordData: { newPassword: string }
   ) {
-   
+   console.log("reset password")
     try {
       // Llama a la función que maneja el restablecimiento de contraseña en el servicio
       await this.usuarioService.resetPassword(email, newPasswordData.newPassword);

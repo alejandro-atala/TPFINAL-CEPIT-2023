@@ -48,7 +48,7 @@ const InicioSesion = ({ onLogin }) => {
 
      setShowSuccessAlert({ message: 'Enviando email......' });
 
-      const sendEmailResponse = await axios.post('http://localhost:3000/email', {
+      const sendEmailResponse = await axios.post('http://localhost:3000/email/reset', {
         email: formData.email,
       });
 

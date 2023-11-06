@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Contacto.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Contacto = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +15,7 @@ const Contacto = () => {
   const [email, setEmail] = useState('');
   const [consulta, setConsulta] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+
 
   useEffect(() => {
     const cargarDatosPorReferencia = async (referencia, setDato) => {
@@ -32,9 +33,23 @@ const Contacto = () => {
   }, []);
 
   const abrirURL = (url) => {
-    console.log(url);
-    window.open(url, '_blank');
+    // Comprobar si la URL no está vacía
+    if (url) {
+      // Agregar el protocolo "https://" si no está presente en la URL
+      if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = "https://" + url;
+      }
+      // Abrir la URL en una nueva ventana o pestaña
+      window.open(url, '_blank');
+    } else {
+      // Mostrar un mensaje de error si la URL está vacía
+      toast.error('URL no válida', {
+        position: 'bottom-right',
+        autoClose: 3000,
+      });
+    }
   };
+  
 
 
   const handleSubmit = async (e) => {
@@ -47,8 +62,8 @@ const Contacto = () => {
         consulta: consulta,
         email: email,
       };
-
-      const response = await axios.post(`http://localhost:3000/email/suscripcion`, formData);
+      console.log(formData);
+      const response = await axios.post(`http://localhost:3000/email/contacto`, formData);
       console.log('Solicitud POST exitosa', response.data);
 
       toast.success('Correo enviado con éxito', {
@@ -56,6 +71,10 @@ const Contacto = () => {
         autoClose: 3000, // La notificación se cierra automáticamente después de 3 segundos
       });
 
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setConsulta('');
 
     } catch (error) {
       console.error('Error al enviar la solicitud POST', error);
@@ -139,6 +158,14 @@ const Contacto = () => {
                   </p>
                 </div>
                 <button type="submit" className="btn-enviar">Enviar</button>
+
+                <div type="submit" className="" disabled={isLoading}>
+                  {isLoading ? (
+                    <div className="loader"></div> 
+                  ) : (
+                    ''
+                  )}
+                </div>
               </form>
             )}
 
@@ -158,6 +185,9 @@ const Contacto = () => {
           </div>
         </div>
       </div>
+
+
+      <ToastContainer />
     </div>
   );
 }

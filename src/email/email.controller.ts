@@ -19,12 +19,25 @@ export class EmailController{
   }
 
 
+
   @Post('suscripcion')
-  async sendEmailSuscripcion(@Body('email') email: string, subject: string): Promise<string> {
+  async sendEmailSuscripcion(@Body('email')  email: string): Promise<string> {
     console.log("suscri")
-    console.log(email, subject);
+    console.log(email);
     try {
       await this.emailService.sendEmailSuscripcion(email);
+      return 'Correo electrónico enviado correctamente!';
+    } catch (error) {
+      throw new InternalServerErrorException('Error al enviar el correo electrónico.');
+    }
+  }
+
+  @Post('contacto')
+  async sendEmailContacto(@Body('consulta') consulta: string, @Body('email') email: string, subject: string): Promise<string> {
+    console.log("suscri")
+    console.log(consulta);
+    try {
+      await this.emailService.sendEmailContacto(email,consulta);
       return 'Correo electrónico enviado correctamente!';
     } catch (error) {
       throw new InternalServerErrorException('Error al enviar el correo electrónico.');

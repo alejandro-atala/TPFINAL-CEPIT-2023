@@ -119,7 +119,7 @@ const AvisosProfe = () => {
   };
 
   return (
-    <div>
+    <div className='col-6 mx-auto'>
       <div className="row">
         <h4 className="card-title">Enviar avisos al curso</h4>
         <form onSubmit={handleSubmit}>

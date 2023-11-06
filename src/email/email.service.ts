@@ -6,8 +6,8 @@ import * as nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'aledorrego89@gmail.com',
-    pass: 'szoq utxp stcm mvkb'
+    user: 'vsadesarrollos@gmail.com',
+    pass: 'mjeo axrr epoe wcwq'
   }
 });
 
@@ -16,6 +16,9 @@ const transporter = nodemailer.createTransport({
 
 
 export class EmailService {
+
+
+  
   async sendEmail(para: string, subject: string): Promise<void> {
 
 
@@ -51,18 +54,48 @@ export class EmailService {
   `;
 
 
-    console.log('enviando mail...',emailContent)
+    console.log('enviando mail...', emailContent)
     let mailOptions = {
-      from: 'aledorrego89@gmail.com',
-      to: para, 
+      from: 'vsadesarrollos@gmail.com',
+      to: para,
       subject: 'Restablecer contraseña',
       html: emailContent
     };
-console.log(mailOptions);
+
     await transporter.sendMail(mailOptions);
 
 
   }
+
+
+
+
+
+  async sendEmailContacto(para: string, consulta: string): Promise<void> {
+
+
+    const emailContent2 = `
+  <div style="background-color:rgba(78, 202, 155, 0.618); padding: 20px;">
+    <div style="background-color: white; border-radius: 10px; padding: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+      <h2 style="color: #333;">Contacto</h2>
+      <p>El usuario ${para} tiene la siguiente consulta:</p>
+      <p> ${consulta}</p>
+     
+    </div>
+  </div>
+`;
+
+    let mailOptions2 = {
+      from: 'vsadesarrollos@gmail.com',
+      to: 'vsadesarrollos@gmail.com',
+      subject: 'Nueva solicitud de contacto',
+      html: emailContent2
+    };
+    await transporter.sendMail(mailOptions2);
+  }
+
+
+
 
 
 
@@ -73,7 +106,7 @@ console.log(mailOptions);
     <div style="background-color:rgba(78, 202, 155, 0.618); padding: 20px;">
       <div style="background-color: white; border-radius: 10px; padding: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
         <h2 style="color: #333;">Gracias por contactarse</h2>
-        <p>A la brevedad un representante se contactara para brindarle mas informacion sobre el sistema de gestion de escuelas, brindandole 
+        <p>A la brevedad un representante se contactara para brindarle mas informacion sobre el sistema de gestion de escuelas,  
         detalles de costos y funcionamiento</p>
        
       </div>
@@ -81,15 +114,24 @@ console.log(mailOptions);
   `;
 
 
-    console.log('enviando mail...',emailContent)
+
     let mailOptions = {
-      from: 'aledorrego89@gmail.com',
-      to: para, 
+      from: 'vsadesarrollos@gmail.com',
+      to: para,
       subject: 'Suscripcion exitosa',
       html: emailContent
     };
-console.log(mailOptions);
     await transporter.sendMail(mailOptions);
+
+
+    let mailOptions2 = {
+      from: 'vsadesarrollos@gmail.com',
+      to: 'vsadesarrollos@gmail.com',
+      subject: 'Nueva suscripcion',
+      html: `El usuario ${para} desea asesoramiento del sistema de gestion`
+    };
+
+    await transporter.sendMail(mailOptions2);
 
 
   }

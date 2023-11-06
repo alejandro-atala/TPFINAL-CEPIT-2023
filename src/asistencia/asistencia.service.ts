@@ -13,6 +13,7 @@ export class AsistenciaService {
   ) {}
 
   async create(createAsistenciaDto: CreateAsistenciaDto[]): Promise<void> {
+    console.log(createAsistenciaDto)
     const asistenciaEntities: Asistencia[] = createAsistenciaDto.map(dto => {
       const asistencia = new Asistencia();
       asistencia.idAlumno = dto.idAlumno;

@@ -53,7 +53,7 @@ const ResetPass = () => {
 
                 // Envia la solicitud para restablecer la contraseña
                 const response = await axios.post(
-                    `http://localhost:3000/usuario/resetpassword/email/reset`,
+                    `http://localhost:3000/usuario/resetpassword/email/`,
                     requestData
                 );
 
