@@ -59,16 +59,16 @@ function Venta() {
               <p>VSA Desarrollos</p>
             </div>
         
-            <div className="col-md-6 carousel mx-auto">
-  <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
-    <div className="carousel-inner">
-      <div className="carousel-item active">
+            <div className="col-md-6  mx-auto">
+  <div id="carouselExampleAutoplaying" className="carousel-item-venta slide " data-bs-ride="carousel">
+    <div className="carousel-inner carousel-item-venta">
+      <div className="carousel-item active ">
         <img src='https://res.cloudinary.com/difggjfxn/image/upload/v1699192751/imagenes/5ebdc2f576807f9cab3d9c45d6ff59cd.png' className="img-fluid d-block w-100" alt="Slide 1" />
         <div className="carousel-caption d-none d-md-block text-black">
         </div>
       </div>
 
-      <div className="carousel-item">
+      <div className="carousel-item ">
         <img src='https://res.cloudinary.com/difggjfxn/image/upload/v1699192935/imagenes/d11cfadfeffd62a3c74549cabd352b0f.png' className="img-fluid d-block w-100" alt="Slide 2" />
         <div className="carousel-caption d-none d-md-block text-black">
         </div>
