@@ -51,9 +51,9 @@ const Talleres = () => {
   return (
     <div>
     <div className="row">
-      <div className="col-md-3 ">
-        <SideMenu />
-        </div>
+    <div className="col-md-3 col-sm-6 col-xs-12">
+    <SideMenu />
+</div>
         <div className="col-md-9 mt-5 d-flex flex-column align-items-center justify-content-center">   
       <h1 className="titulo-taller  ">{titulo}</h1>
       <div className="mt-4 p-5">

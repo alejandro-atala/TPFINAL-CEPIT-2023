@@ -95,9 +95,10 @@ const HomePage = () => {
   return (
     <div className="container-home">
       <div className="row">
-        <div className="col-md-3">
-          <SideMenu />
-        </div>
+  <div className="col-md-3 col-sm-6 col-xs-12">
+    <SideMenu />
+</div>
+
         <div className="col-md-9 mt-5 flex-column">
           <h1 className="text-left d-flex flex-column align-items-center titulo-home">{textoId1}</h1>
           <div className="row align-items-start">

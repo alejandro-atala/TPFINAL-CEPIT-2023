@@ -38,9 +38,9 @@ const Directivos = () => {
   return (
     <div>
     <div className="row">
-      <div className="col-md-3 ">
-      <SideMenu/>
-      </div>
+    <div className="col-md-3 col-sm-6 col-xs-12">
+    <SideMenu />
+</div>
       <div className="col-md-9 mt-5 flex-column align-items-center justify-content-center">   
       <h1 className='titulo-directivos text-top align-items-left'>Nuestro Equipo de Trabajo</h1>
       <div className="row align-items-center justify-content-center">
