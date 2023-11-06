@@ -18,6 +18,7 @@ const Profesor = () => {
             <div className="card-body">
               <h5 className="card-title-profe">Notas de examenes</h5>
               <p className="card-text-profe">Aqui podras cargar las notas de los examenes realizados</p>
+             
               <Link to="/Profnotas" className="btn btn-profe" id="myButton">Cargar Notas</Link>
             </div>
             <div className="card-footer">
@@ -30,7 +31,8 @@ const Profesor = () => {
           <img src="https://images4.imagebam.com/75/42/5c/MENRF62_o.jpg" className="img-profe" alt="..." />
             <div className="card-body">
               <h5 className="card-title-profe">Trimestre</h5>
-              <p className="card-text-profe">Aqui podrás cargar las notas trimestrales </p>
+              <p className="card-text-profe">Aqui podrás cargar las notas trimestrales de tus alumnos</p>
+            
               <Link to="/ProfTrimestre" className="btn btn-profe" id="myButton">Cargar Notas Trimestre</Link>
             </div>
             <div className="card-footer">
@@ -69,7 +71,7 @@ const Profesor = () => {
             <img src="https://images4.imagebam.com/96/d2/c0/MENRF61_o.jpg" className="img-profe" alt="..." />
               <div className="card-body">
                 <h5 className="card-title-profe">Avisos de los Profes</h5>
-                <p className="card-text-profe">Aqui podrás cargar avisos a tus Cursos</p>
+                <p className="card-text-profe">Aqui podrás cargar los avisos  deseados a tus Cursos </p>
                 <Link to="/Profavisos" className="btn btn-profe" id="myButton">Cargar Aviso</Link>
               </div>
               <div className="card-footer">
