@@ -181,6 +181,8 @@ const CargaImagenes = () => {
         <option value="Home1">Home 1</option>
         <option value="Home2">Home 2</option>
         <option value="Home3">Home 3</option>
+        <option value="Imagen_home">Home extra</option>
+        <option value="Imagen_Home2">Home extra2</option>
         <option value="directora">Directora</option>
         <option value="secretaria">Secretaria</option>
         <option value="representante">Representante</option>

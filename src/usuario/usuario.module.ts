@@ -14,7 +14,7 @@ import { JwtModule } from '@nestjs/jwt';
     TypeOrmModule.forFeature([Usuario, Profesor, Alumno]),
     JwtModule.register({
       secret: 'ProgramadorFullStack2023', // Tu clave secreta aquí
-      signOptions: { expiresIn: '500s' },
+      signOptions: { expiresIn: '1h' },
     }),
   ],
   controllers: [UsuarioController],

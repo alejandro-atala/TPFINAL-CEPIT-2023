@@ -6,7 +6,15 @@ import SideMenu from "../MenuLateral/sideMenu";
 const HomePage = () => {
   const [textoId1, setTextoId1] = useState('');
   const [textoId2, setTextoId2] = useState('');
-  const [homeImages, setHomeImages] = useState([]); // Almacenar todas las imágenes
+  const [homeImages, setHomeImages] = useState([]);
+  const [textohome, setTextoHome] = useState('');
+  const [titulohome1, setTituloHome] = useState('');
+  const [homeImage1, setHomeImagen1] = useState('');
+  const [homeImage2, setHomeImagen2] = useState('');
+  const [itemHome1, setItemHome1] = useState('');
+  const [itemHome2, setItemHome2] = useState('');
+  const [itemHome3, setItemHome3] = useState('');
+  const [itemHome4, setItemHome4] = useState('');
 
   useEffect(() => {
     const obtenerTextoPorId = async (id, setTexto) => {
@@ -15,17 +23,36 @@ const HomePage = () => {
         var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
 
         setTexto(textoConSaltosDeLinea);
-       
+
       } catch (error) {
         console.error(`Error al obtener el texto con ID ${id}:`, error);
       }
     };
 
+    const obtenerTextoPorReferencia = async (referencia, setTextoHistorial) => {
+      try {
+        const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
+        var textoConSaltosDeLinea = responseTexto.data.texto.replace(/\n/g, "<br>");
+
+        setTextoHistorial(textoConSaltosDeLinea);
+      } catch (error) {
+        console.error(`Error al obtener datos de ${referencia}:`, error);
+      }
+    };
+
+    obtenerTextoPorReferencia('Texto_Home', setTextoHome);
+    obtenerTextoPorReferencia('Titulo_home', setTituloHome);
+    obtenerTextoPorReferencia('Item_home1', setItemHome1);
+    obtenerTextoPorReferencia('Item_home2', setItemHome2);
+    obtenerTextoPorReferencia('Item_home3', setItemHome3);
+    obtenerTextoPorReferencia('Item_home4', setItemHome4);
+
+
     const obtenerImagenesPorNombres = async (nombres) => {
       try {
         const imagePromises = nombres.map(async (nombre) => {
           const response = await axios.get(`http://localhost:3000/imagenes/nombre/${nombre}`);
-  
+
           return response.data.url;
         });
 
@@ -37,6 +64,19 @@ const HomePage = () => {
       }
     };
 
+    const obtenerImagenPorReferencia = async (referencia, setImagen) => {
+      try {
+        const responseImagen = await axios.get(`http://localhost:3000/imagenes/nombre/${referencia}`);
+
+        if (responseImagen.data) {
+
+          setImagen(responseImagen.data.url);
+        }
+      } catch (error) {
+        console.error(`Error al obtener datos de ${referencia}:`, error);
+      }
+    };
+
 
 
     // Obtener textos para ID 1 y ID 2
@@ -45,9 +85,12 @@ const HomePage = () => {
 
     // Obtener imágenes por nombre
     obtenerImagenesPorNombres(['home1', 'home2', 'home3']);
+    obtenerImagenPorReferencia('Imagen_home', setHomeImagen1);
+    obtenerImagenPorReferencia('Imagen_Home2', setHomeImagen2);
   }, []);
 
   const htmlProcesado = { __html: textoId2 };
+  const htmlProcesado1 = { __html: textohome };
 
   return (
     <div className="container-home">
@@ -77,6 +120,22 @@ const HomePage = () => {
                   <span className="carousel-control-next-icon" ariahidden="true"></span>
                   <span className="visually-hidden">Next</span>
                 </button>
+              </div>
+              <div>
+                <div class="col-md-3 extra-home">
+                  <div className="cuadro-imagen-home">
+                    <h3 className="titulo-home2">{titulohome1}</h3>
+                    {homeImage1 && <img src={homeImage2} className="imagen-home" style={{ maxWidth: '300px' }} alt="foto home 2" />}
+                    {homeImage1 && <img src={homeImage1} className="imagen-home" style={{ maxWidth: '300px' }} alt="foto home 1" />}
+                    <p className="texto-home-extra" dangerouslySetInnerHTML={htmlProcesado1}></p>
+                    <ul class="list-group">
+                      <li class="item-home">{itemHome1}</li>
+                      <li class="item-home">{itemHome2}</li>
+                      <li class="item-home">{itemHome3}</li>
+                      <li class="item-home">{itemHome4}</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="col-md-6 text-right">
