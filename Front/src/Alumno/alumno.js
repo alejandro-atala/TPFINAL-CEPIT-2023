@@ -4,7 +4,7 @@ import { useAlumno } from './AlumnoContext';
 import { useNotificaciones } from './NotificacionesContext';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import './alumno.css' ;
 
 
 const Alumno = () => {
@@ -134,11 +134,11 @@ const Alumno = () => {
       <div className="row row-cols-1 row-cols-md-3 g-4 ">
         <div className="col">
           <div className="card h-100 ">
-            <img src="https://images4.imagebam.com/ef/e7/3b/MENRF6F_o.jpg" className="card-img-top" alt="..." />
+            <img src="https://images4.imagebam.com/ef/e7/3b/MENRF6F_o.jpg" className="img-profe" alt="..." />
             <div className="card-body">
-              <h5 className="card-title">Notas de exámenes</h5>
-              <p className="card-text">Aquí podrás ver las notas de los exámenes realizados.</p>
-              <Link to="/notas" className="btn btn-primary" id="myButton">Ver notas</Link>
+              <h5 className="card-title-profe">Notas de exámenes</h5>
+              <p className="card-text-profe">Aquí podrás ver las notas de los exámenes realizados.</p>
+              <Link to="/notas" className="btn btn-profe" id="myButton">Ver notas</Link>
             </div>
             <div className="card-footer">
               <small className="text-body-secondary">Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -147,11 +147,11 @@ const Alumno = () => {
         </div>
         <div className="col">
           <div className="card h-100">
-            <img src="https://images4.imagebam.com/75/42/5c/MENRF62_o.jpg" className="card-img-top" alt="..." />
+            <img src="https://images4.imagebam.com/75/42/5c/MENRF62_o.jpg" className="img-profe" alt="..." />
             <div className="card-body">
-              <h5 className="card-title">Boletín</h5>
-              <p className="card-text">Aquí podrás ver el boletín.</p>
-              <Link to="/boletin" className="btn btn-primary" id="myButton">Ver Boletín</Link>
+              <h5 className="card-title-profe">Boletín</h5>
+              <p className="card-text-profe">Aquí podrás ver todas las notas del boletín.</p>
+              <Link to="/boletin" className="btn btn-profe" id="myButton">Ver Boletín</Link>
             </div>
             <div className="card-footer">
               <small className="text-body-secondary">Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -160,11 +160,11 @@ const Alumno = () => {
         </div>
         <div className="col">
           <div className="card h-100">
-            <img src="https://images4.imagebam.com/08/79/bf/MENRF6G_o.jpg" className="card-img-top" alt="..." />
+            <img src="https://images4.imagebam.com/08/79/bf/MENRF6G_o.jpg" className="img-profe" alt="..." />
             <div className="card-body">
-              <h5 className="card-title">Materias del año en curso</h5>
-              <p className="card-text">Aquí verás las materias con sus días y horarios.</p>
-              <Link to="/materias" className="btn btn-primary" id="myButton">Ver Materias</Link>
+              <h5 className="card-title-profe">Materias del año en curso</h5>
+              <p className="card-text-profe">Aquí verás las materias con sus días y horarios.</p>
+              <Link to="/materias" className="btn btn-profe" id="myButton">Ver Materias</Link>
             </div>
             <div className="card-footer">
               <small className="text-body-secondary">Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -173,11 +173,11 @@ const Alumno = () => {
         </div>
         <div className="col">
           <div className="card h-100">
-            <img src="https://images4.imagebam.com/3e/e8/24/MENRF5Z_o.jpg" className="card-img-top" alt="..." />
+            <img src="https://images4.imagebam.com/3e/e8/24/MENRF5Z_o.jpg" className="img-profe" alt="..." />
             <div className="card-body">
-              <h5 className="card-title">Asistencias</h5>
-              <p className="card-text">Aquí verás las asistencias.</p>
-              <Link to="/Asistencia" className="btn btn-primary" id="myButton">Asistencias</Link>
+              <h5 className="card-title-profe">Asistencias</h5>
+              <p className="card-text-profe">Aquí verás las asistencias.</p>
+              <Link to="/Asistencia" className="btn btn-profe" id="myButton">Asistencias</Link>
             </div>
             <div className="card-footer">
               <small className="text-body-secondary">Last updated <span id="elapsedTime"></span> mins ago</small>
@@ -186,9 +186,9 @@ const Alumno = () => {
         </div>
         <div className="col">
   <div className="card h-100">
-    <img src="https://images4.imagebam.com/96/d2/c0/MENRF61_o.jpg" className="card-img-top" alt="..." />
+    <img src="https://images4.imagebam.com/96/d2/c0/MENRF61_o.jpg" className="img-profe" alt="..." />
     <div className="card-body">
-      <h5 className="card-title">
+      <h5 className="card-title-profe">
         Avisos de los profesores
         <span className={`notification-badge ${unreadAvisosCount > 0 ? 'show' : 'hide'}`}>🔔</span>
       </h5>
@@ -196,7 +196,7 @@ const Alumno = () => {
       
       <Link
         to="/avisos"
-        className="btn btn-primary"
+        className="btn btn-profe"
         onClick={() => {
           marcarAvisosVistos();
           guardarAvisosLeidos(avisosSinLeer, alumnoLogueado.idAlumno);
@@ -213,11 +213,11 @@ const Alumno = () => {
 
 <div className={`col ${isCardDisabled ? 'disabled-card' : ''}`}>
   <div className="card h-100">
-    <img src="https://images4.imagebam.com/d5/79/59/MENRF6I_o.jpg" className="card-img-top" alt="..." />
+    <img src="https://images4.imagebam.com/d5/79/59/MENRF6I_o.jpg" className="img-profe" alt="..." />
     <div className="card-body">
-      <h5 className="card-title">Enviar mensaje</h5>
-      <p className="card-text">Aquí podrás enviar un mensaje directamente al profesor.</p>
-      <Link to="/mensaje" className="btn btn-primary" id="myButton" disabled>
+      <h5 className="card-title-profe">Enviar mensaje</h5>
+      <p className="card-text-profe">Aquí podrás enviar un mensaje directamente al profesor.</p>
+      <Link to="/mensaje" className="btn btn-profe" id="myButton" disabled>
         Enviar Mensaje
       </Link>
     </div>
