@@ -77,8 +77,8 @@ console.log(mailOptions);
   
 
   return (
-    <div>
-      <h1>Solicitudes de nuevos usuarios</h1>
+    <div className='container text-center'>
+      <h1 className='text-align-center mt-3'>Solicitudes de nuevos usuarios</h1>
       <table className="table">
         <thead>
           <tr>
