@@ -18,6 +18,8 @@ import { AvisosModule } from './avisos/aviso.module';
 import { AlumnoAvisoModule } from './alumno-aviso/alumno-aviso.module';
 import { EmailModule } from './email/email.module';
 import { SolicitudesModule } from './solicitudes/solicitudes.module';
+import { messageModule } from './message/message.module';
+import { ChatGateway } from './chat-gateway';
 
 
 @Module({
@@ -49,9 +51,10 @@ import { SolicitudesModule } from './solicitudes/solicitudes.module';
     AvisosModule,
     AlumnoAvisoModule,
     EmailModule,
-    SolicitudesModule],
+    SolicitudesModule,
+    messageModule],
 
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ChatGateway],
 })
 export class AppModule { }
