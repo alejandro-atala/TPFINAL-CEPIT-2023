@@ -18,5 +18,10 @@ export class SolicitudesController {
     return this.solicitudesService.findAll();
   }
 
+  @Delete(':id')
+  delete(@Param('id') id: number) {
+    return this.solicitudesService.delete(id);
+  }
 
+  
 }

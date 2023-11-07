@@ -68,12 +68,12 @@ const Inscripcion = () => {
       console.log(formData)
       const response = await axios.post('http://localhost:3000/solicitudes', formData);
       console.log('Registro exitoso:', response.data);
-      setSuccessMessage('Registro exitoso. ¡Bienvenido!');
+      setSuccessMessage('Procesando su solicitud. Recibira un email a la brevedad.');
       setErrorMessage([]);
 
       setTimeout(() => {
         navigate('/iniciarSesion');
-      }, 3000);
+      }, 5000);
     } catch (error) {
       console.error('Error en el registro:', error);
       setErrorMessage(['Error en el registro. Inténtelo nuevamente.']);
@@ -182,7 +182,7 @@ const Inscripcion = () => {
               <button type="submit" className="btn-registro mt-5 m-4" id="registrarse" onClick={handleSubmit}>
                 Registrarse
               </button>
-              {successMessage && <div className="alert alert-success">{successMessage}</div>}
+              {successMessage && <div className="alert alert-warning">{successMessage}</div>}
               {errorMessage.map((message, index) => (
                 <div key={index} className="alert alert-danger">
                   {message}

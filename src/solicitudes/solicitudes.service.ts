@@ -1,5 +1,5 @@
 // solicitudes.service.ts (Update your service)
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Solicitude } from './entities/solicitude.entity';
@@ -31,6 +31,17 @@ export class SolicitudesService {
     return this.solicitudesRepository.find();
   }
 
+
+  async delete(id: number) {
+
+    const userToDelete = await this.solicitudesRepository.findOne({where: {idUsuario: id}});
+
+    if (!userToDelete) {
+      throw new NotFoundException(`User with ID ${id} not found`);
+    }
+
+    await this.solicitudesRepository.remove(userToDelete);
+  }
 
 }
 
