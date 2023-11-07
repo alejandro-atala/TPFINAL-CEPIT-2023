@@ -24,20 +24,19 @@ const Solicitudes = () => {
 
   const acceptUser = async (user) => {
     try {
-      // Send a request to accept the user and save their data in the Usuarios table.
       const response = await axios.post('http://localhost:3000/usuario', user);
  
       console.log('User accepted and added to Usuarios table', response.data);
 
-      // After successfully accepting the user, filter out the accepted user and update the state.
+     
       setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.idUsuario));
       await axios.delete(`http://localhost:3000/solicitudes/${user.idUsuario}`);
       fetchUsers();
 
       console.log("mailOptions");
       const mailOptions = {
-        email: user.email, // Remitente (debe coincidir con el correo configurado en el transporte)
-        estado: 'Aprobada', // Reemplaza con la dirección de correo del destinatario
+        email: user.email, 
+        estado: 'Aprobada', 
  
       };
 
@@ -52,17 +51,15 @@ console.log(mailOptions);
   };
 
   const rejectUser = async (user) => {
-    // Send a request to reject the user to your backend.
     axios.delete(`http://localhost:3000/solicitudes/${user.idUsuario}`)
       .then(async () => {
-        // After successfully rejecting the user, update the local state to remove the rejected user.
         setUsers((prevUsers) => prevUsers.filter((user) => user.id !== user.idUsuario));
   fetchUsers();
 
 
   const mailOptions = {
-    email: user.email, // Remitente (debe coincidir con el correo configurado en el transporte)
-    estado: 'Rechazada', // Reemplaza con la dirección de correo del destinatario
+    email: user.email, 
+    estado: 'Rechazada',
 
   };
 
@@ -85,7 +82,7 @@ console.log(mailOptions);
             <th>Nombre</th>
             <th>DNI</th>
             <th>Tipo</th>
-            <th>Actions</th>
+            <th>Accion</th>
           </tr>
         </thead>
         <tbody>

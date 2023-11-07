@@ -207,11 +207,11 @@ const AdminPage = () => {
   const isTableEmpty = tableData.length === 0;
 
   return (
-    <div className="admin-page d-flex flex-column  ">
-<Solicitudes />
-      <div className="mx-auto mt-5">
-        <h4 className=''>Editar contenido de tablas</h4>
-        <div className="d-flex justify-content-between align-items-center ">
+<div className="admin-page d-flex flex-column">
+  <Solicitudes />
+  <div className="mx-auto mt-5 text-center">
+    <h4>Editar contenido de tablas</h4>
+    <div className="d-flex justify-content-between align-items-center">
           <select
             className="form-select m-3 mx-auto"
             style={{ maxWidth: '200px' }}
