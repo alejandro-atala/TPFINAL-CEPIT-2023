@@ -17,6 +17,7 @@ import { ImagenesModule } from './imagenes/imagenes.module';
 import { AvisosModule } from './avisos/aviso.module';
 import { AlumnoAvisoModule } from './alumno-aviso/alumno-aviso.module';
 import { EmailModule } from './email/email.module';
+import { SolicitudesModule } from './solicitudes/solicitudes.module';
 
 
 @Module({
@@ -47,7 +48,8 @@ import { EmailModule } from './email/email.module';
     ImagenesModule,
     AvisosModule,
     AlumnoAvisoModule,
-    EmailModule],
+    EmailModule,
+    SolicitudesModule],
 
   controllers: [AppController],
   providers: [AppService],

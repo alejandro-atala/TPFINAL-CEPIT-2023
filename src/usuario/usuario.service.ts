@@ -187,7 +187,7 @@ export class UsuarioService {
 
 
   async createUsuario(createUsuarioDto: CreateUsuarioDto): Promise<Usuario> {
-
+    
     // Verifica si createUsuarioDto.curso es un array antes de usar join()
     const cursoArray = Array.isArray(createUsuarioDto.curso) ? createUsuarioDto.curso : [createUsuarioDto.curso];
 
@@ -199,7 +199,7 @@ export class UsuarioService {
       ...createUsuarioDto,
       curso: cursoString,
     };
-
+    console.log("pass",nuevoUsuario.password)
     // Hash de la contraseña y guarda el usuario
     nuevoUsuario.password = await bcrypt.hash(
       nuevoUsuario.password,

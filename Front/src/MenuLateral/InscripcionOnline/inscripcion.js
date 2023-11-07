@@ -37,19 +37,20 @@ const Inscripcion = () => {
   const handleCourseChange = (course) => {
     const updatedCourses = [...selectedCourses];
     if (updatedCourses.includes(course)) {
-      // Si el curso ya está seleccionado, lo eliminamos
+      // If the course is already selected, remove it
       updatedCourses.splice(updatedCourses.indexOf(course), 1);
     } else {
-      // Si el curso no está seleccionado, lo agregamos
+      // If the course is not selected, add it
       updatedCourses.push(course);
     }
     setSelectedCourses(updatedCourses);
-    // Actualiza formData.curso con los cursos seleccionados separados por comas
+    // Update formData.curso with the selected courses separated by commas
     setFormData((prevData) => ({
       ...prevData,
       curso: updatedCourses.join(','),
     }));
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,7 +66,7 @@ const Inscripcion = () => {
 
     try {
       console.log(formData)
-      const response = await axios.post('http://localhost:3000/usuario', formData);
+      const response = await axios.post('http://localhost:3000/solicitudes', formData);
       console.log('Registro exitoso:', response.data);
       setSuccessMessage('Registro exitoso. ¡Bienvenido!');
       setErrorMessage([]);
