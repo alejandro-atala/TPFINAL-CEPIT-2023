@@ -82,6 +82,7 @@ console.log(mailOptions);
             <th>Nombre</th>
             <th>DNI</th>
             <th>Tipo</th>
+            <th>Curso</th>
             <th>Accion</th>
           </tr>
         </thead>
@@ -92,6 +93,7 @@ console.log(mailOptions);
               <td>{user.nombre}</td>
               <td>{user.dni}</td>
               <td>{user.tipo}</td>
+              <td>{user.curso}</td>
               <td>
                 <button
                   className="btn btn-success m-2"
