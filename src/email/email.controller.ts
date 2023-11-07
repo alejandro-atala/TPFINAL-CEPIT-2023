@@ -43,4 +43,16 @@ export class EmailController{
       throw new InternalServerErrorException('Error al enviar el correo electrónico.');
     }
   }
+
+  @Post('solicitud')
+  async sendEmailSolicitud( @Body('email') email: string,  @Body('estado') estado: string): Promise<string> {
+    console.log("solicitud",email,estado)
+  
+    try {
+      await this.emailService.sendEmailSolicitud(email,estado);
+      return 'Correo electrónico enviado correctamente!';
+    } catch (error) {
+      throw new InternalServerErrorException('Error al enviar el correo electrónico.');
+    }
+  }
 }

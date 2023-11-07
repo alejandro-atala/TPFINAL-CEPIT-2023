@@ -3,6 +3,7 @@ import axios from 'axios';
 import './admin.css';
 import BloqueDeCarga from './dataCarga';
 import SessionExpiration from '../SesionExpired';
+import Solicitudes from './Solicitudes/solicitudes';
 
 const AdminPage = () => {
   const [selectedTable, setSelectedTable] = useState('');
@@ -92,12 +93,12 @@ const AdminPage = () => {
     try {
       let idFieldName = '';
       if (selectedTable === 'materias') {
-      idFieldName = 'idMateria';
-    } else if (selectedTable === 'usuario') {
-      idFieldName = 'idUsuario';
-    } else if (selectedTable === 'curso') {
-      idFieldName = 'idCurso';
-    }
+        idFieldName = 'idMateria';
+      } else if (selectedTable === 'usuario') {
+        idFieldName = 'idUsuario';
+      } else if (selectedTable === 'curso') {
+        idFieldName = 'idCurso';
+      }
       const id = editedData[rowIndex][idFieldName];
       const url = `http://localhost:3000/${selectedTable}/${id}`;
       await axios.delete(url);
@@ -112,19 +113,19 @@ const AdminPage = () => {
   const handleSaveChanges = async (rowIndex) => {
     try {
       const { isEditing, ...updatedRow } = editedData[rowIndex];
-      
+
       const idFieldName = requiredFields[selectedTable][0]; // El primer campo es el ID
       const id = updatedRow[idFieldName];
-  
+
       const isDataValid = requiredFields[selectedTable].every(
         (field) => updatedRow[field] !== undefined && updatedRow[field] !== ''
       );
-  
+
       if (!isDataValid) {
         console.error('Completa todos los campos requeridos.');
         return;
       }
-  
+
       // Crear un objeto con los campos a actualizar
       const fieldsToUpdate = {};
       for (const field in updatedRow) {
@@ -132,9 +133,9 @@ const AdminPage = () => {
           fieldsToUpdate[field] = updatedRow[field];
         }
       }
-  
+
       await axios.put(`http://localhost:3000/${selectedTable}/${id}`, fieldsToUpdate);
-  
+
       const updatedData = [...editedData];
       updatedData[rowIndex] = updatedRow;
       setEditedData(updatedData);
@@ -143,8 +144,8 @@ const AdminPage = () => {
     }
     cargarDatos();
   };
-  
-  
+
+
 
   const handleEditRow = (rowIndex) => {
     const updatedRow = { ...editedData[rowIndex], isEditing: true };
@@ -156,48 +157,48 @@ const AdminPage = () => {
 
   const handleAddRow = async () => {
     try {
-    let requiredFields = [];
-    if (selectedTable === 'materias') {
-      requiredFields = [ 'nombre'];
-    } else if (selectedTable === 'curso') {
-      requiredFields = [ 'anio'];
-    } else if (selectedTable === 'usuario') {
-      requiredFields = [
-        'nombre',
-        'dni',
-        'fechaNac',
-        'direccion',
-        'telefono',
-        'email',
-        'password',
-        'tipo',
-        'curso',
-      ];
+      let requiredFields = [];
+      if (selectedTable === 'materias') {
+        requiredFields = ['nombre'];
+      } else if (selectedTable === 'curso') {
+        requiredFields = ['anio'];
+      } else if (selectedTable === 'usuario') {
+        requiredFields = [
+          'nombre',
+          'dni',
+          'fechaNac',
+          'direccion',
+          'telefono',
+          'email',
+          'password',
+          'tipo',
+          'curso',
+        ];
+      }
+      const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
+
+      if (!isDataValid) {
+        console.error('Completa todos los campos requeridos.');
+        return;
+      }
+
+
+      // Envía la nueva fila al servidor para su creación
+      const response = await axios.post(`http://localhost:3000/${selectedTable}`, newRowData);
+      const addedRow = response.data;
+
+      // Agrega la fila completa al estado local
+      setEditedData([...editedData, addedRow]);
+      setNewRowData({}); // Restablece la nueva fila después de agregarla
+
+      // Después de agregar la fila, puedes recargar los datos nuevamente desde el servidor para asegurarte de que estén actualizados
+      cargarDatos(); // Llama a la función que carga los datos nuevamente
+    } catch (error) {
+      console.error('Error al agregar una nueva fila:', error);
     }
-    const isDataValid = requiredFields.every((field) => newRowData[field] !== undefined && newRowData[field] !== '');
-
-    if (!isDataValid) {
-      console.error('Completa todos los campos requeridos.');
-      return;
-    }
+  };
 
 
-    // Envía la nueva fila al servidor para su creación
-    const response = await axios.post(`http://localhost:3000/${selectedTable}`, newRowData);
-    const addedRow = response.data;
-
-    // Agrega la fila completa al estado local
-    setEditedData([...editedData, addedRow]);
-    setNewRowData({}); // Restablece la nueva fila después de agregarla
-
-    // Después de agregar la fila, puedes recargar los datos nuevamente desde el servidor para asegurarte de que estén actualizados
-    cargarDatos(); // Llama a la función que carga los datos nuevamente
-  } catch (error) {
-    console.error('Error al agregar una nueva fila:', error);
-  }
-};
-  
-  
 
   const handleNewRowInputChange = (e, columnName) => {
     setNewRowData({ ...newRowData, [columnName]: e.target.value });
@@ -207,8 +208,8 @@ const AdminPage = () => {
 
   return (
     <div className="admin-page d-flex flex-column  ">
-
-<div className="mx-auto mt-5">
+<Solicitudes />
+      <div className="mx-auto mt-5">
         <h4 className=''>Editar contenido de tablas</h4>
         <div className="d-flex justify-content-between align-items-center ">
           <select
@@ -300,7 +301,7 @@ const AdminPage = () => {
           </div>
         )}
       </div>
-
+      
       <BloqueDeCarga />
       <SessionExpiration />
     </div>

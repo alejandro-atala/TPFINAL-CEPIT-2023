@@ -136,4 +136,30 @@ export class EmailService {
 
   }
 
+
+
+
+  async sendEmailSolicitud(para: string, estado: string): Promise<void> {
+
+    console.log(para,estado);
+
+    const emailContent = `
+    <div style="background-color:rgba(78, 202, 155, 0.618); padding: 20px;">
+      <div style="background-color: white; border-radius: 10px; padding: 20px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="color: #333;">Estado de registro</h2>
+        <p>Sr usuario, le informamos que su solicitud de acceso fue ${estado}</p>
+       
+      </div>
+    </div>
+  `;
+
+    let mailOptions = {
+      from: 'vsadesarrollos@gmail.com',
+      to: para,
+      subject: 'Suscripcion exitosa',
+      html: emailContent
+    };
+    await transporter.sendMail(mailOptions);
+  }
+
 }
