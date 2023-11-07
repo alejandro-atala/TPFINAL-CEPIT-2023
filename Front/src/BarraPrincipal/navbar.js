@@ -9,59 +9,75 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-pink">
-        <Link to="/logo" className='col-md-3 logo' >
-          <img src="https://images4.imagebam.com/9c/af/6d/MENQMV5_o.png" alt="Logo" className="navbar-logo" />
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse justify-content-center col-md-9">
-          <ul className="navbar-nav">
+      <Link to="/logo" className="navbar-brand">
+        <img
+          src="https://images4.imagebam.com/9c/af/6d/MENQMV5_o.png"
+          alt="Logo"
+          className="navbar-logo"
+        />
+      </Link>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNav">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link to="/" className="nav-link">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/proyectos" className="nav-link">
+              Proyectos
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/historial" className="nav-link">
+              Historial
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/reglamento" className="nav-link">
+              Reglamentos
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/contacto" className="nav-link">
+              Contacto
+            </Link>
+          </li>
+        </ul>
+        {loggedInUser ? (
+          <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <Link to="/" className="nav-link">Home</Link>
+              <span className="nav-link hola-usuario">Hola {loggedInUser}</span>
             </li>
             <li className="nav-item">
-              <Link to="/proyectos" className="nav-link">Proyectos</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/historial" className="nav-link">Historial</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/reglamento" className="nav-link">Reglamentos</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/contacto" className="nav-link">Contacto</Link>
+              <button className="nav-link sesion" onClick={onLogout}>
+                Cerrar Sesión
+              </button>
             </li>
           </ul>
-          <div className="d-flex align-items-center">
-            <div className="navbar-nav mr-auto">
-              {loggedInUser ? (
-                <span className="nav-link hola-usuario">Hola {loggedInUser}</span>
-              ) : null}
-            </div>
-            <div className="navbar-nav">
-              <li className="nav-item sesion">
-                {loggedInUser ? (
-                  <button className="nav-link sesion" onClick={onLogout}>Cerrar Sesión</button>
-                ) : (
-                  <Link to="/iniciarSesion" className="nav-link sesion">Iniciar Sesión</Link>
-                )}
-              </li>
-            </div>
-          </div>
-        </div>
-        
+        ) : (
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to="/iniciarSesion" className="nav-link sesion">
+                Iniciar Sesión
+              </Link>
+            </li>
+          </ul>
+        )}
+      </div>
     </nav>
   );
-}
-
+};
 
 export default Navbar;
