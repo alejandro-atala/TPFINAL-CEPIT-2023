@@ -32,7 +32,7 @@ const Solicitudes = () => {
       // After successfully accepting the user, filter out the accepted user and update the state.
       setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.idUsuario));
       await axios.delete(`http://localhost:3000/solicitudes/${user.idUsuario}`);
-      //fetchUsers();
+      fetchUsers();
 
       console.log("mailOptions");
       const mailOptions = {
@@ -56,7 +56,7 @@ console.log(mailOptions);
     axios.delete(`http://localhost:3000/solicitudes/${user.idUsuario}`)
       .then(async () => {
         // After successfully rejecting the user, update the local state to remove the rejected user.
-        setUsers((prevUsers) => prevUsers.filter((user) => user.idUsuario !== user.idUsuario));
+        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== user.idUsuario));
   fetchUsers();
 
 
