@@ -72,7 +72,7 @@ const App = () => {
 
   const ProtectedRoute = ({ element }) => {
     const { token } = useAuth();
-
+console.log(token)
     if (token) {
       return element;
     } else {
