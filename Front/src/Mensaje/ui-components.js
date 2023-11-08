@@ -8,7 +8,7 @@ const UlMensajes = styled.ul`
   border-radius: 10px;
   color: #007bff;
     background-image: url('https://mcdn.wallpapersafari.com/medium/77/16/Nkc7Xe.jpg');
-        height: 400px;
+        min-height: 400px;
 `;
 
 const LiMensaje = styled.li`

@@ -75,15 +75,12 @@ const App = () => {
 
   const ProtectedRoute = ({ element }) => {
     const { token } = useAuth();
-    console.log("usuario:",loggedInUser)
+ 
     if (token && loggedInUser=='Admin') {
       return element;
     } else {
         setShowErrorAlert(true);
 
-      setTimeout(() => {
-        setShowErrorAlert(false);
-      }, 2000);
       return (
         <div className=''>
            {showErrorAlert && (

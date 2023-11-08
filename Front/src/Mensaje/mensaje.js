@@ -142,26 +142,46 @@ function Mensaje() {
     console.log('Usuarios conectados:', filteredUsers);
   };
 
+  // const iniciarChatConUsuario = (usuario) => {
+  //   console.log('Iniciar chat con usuario:', usuario);
+  //   if (usuario !== chatDestino) {
+
+  
+  //     // Limpiar la selección de mensajes al iniciar una conversación
+  //     setSelectedMessages(new Set());
+  //     setChatMensajes([]);
+  //     const mensajesActuales = chatMensajes.slice(); // Crea una copia de los mensajes actuales
+  //     setChatDestino(usuario);
+
+  //     const usuarioReceptor = usuariosTotales.find((u) => u.nombre === usuario);
+  //     console.log('Usuario receptor:', usuarioReceptor);
+  
+  //     setUsuarioReceptor(usuarioReceptor);
+  //     setChatMensajes(mensajesActuales);
+  //     setChatAbierto(true);
+  //   }
+  // };
+  
   const iniciarChatConUsuario = (usuario) => {
     console.log('Iniciar chat con usuario:', usuario);
     if (usuario !== chatDestino) {
-
-  
       // Limpiar la selección de mensajes al iniciar una conversación
       setSelectedMessages(new Set());
   
-      const mensajesActuales = chatMensajes.slice(); // Crea una copia de los mensajes actuales
-      setChatDestino(usuario);
-
+      // Limpiar los mensajes anteriores del chat anterior
+      setChatMensajes([]);
+      
       const usuarioReceptor = usuariosTotales.find((u) => u.nombre === usuario);
       console.log('Usuario receptor:', usuarioReceptor);
-  
+    
       setUsuarioReceptor(usuarioReceptor);
-      setChatMensajes(mensajesActuales);
-      setChatAbierto(true);
+      setChatDestino(usuario);
+     setChatAbierto(true);
+      setMensajesCargados(false); // Reiniciar el estado de mensajes cargados
     }
   };
   
+    
 
   const cerrarChat = () => {
     if (chatDestino) {
