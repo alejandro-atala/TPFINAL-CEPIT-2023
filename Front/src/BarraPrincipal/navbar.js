@@ -1,11 +1,24 @@
 import React from 'react';
 import './navbar.css';
-import AvisosNotificationBadge from '../Alumno/notificacion';
-import { useAlumno } from '../Alumno/AlumnoContext';
-import { Link } from 'react-router-dom';
+import { useUsuario } from '../usuarioContext';
+import { Link, useNavigate } from 'react-router-dom'; // Importa useHistory
 
 const Navbar = ({ loggedInUser, onLogout, userType }) => {
-  const { alumnoLogueado } = useAlumno();
+  const { usuarioLogueado } = useUsuario();
+  const navigate = useNavigate(); // Obtiene el objeto de historial
+
+
+
+
+  const handleHelloUserClick = () => {
+    if (usuarioLogueado.tipo === 'Alumno') {
+      // Si es un alumno, redirige a la página de alumno
+      navigate('/alumno');
+    } else if (usuarioLogueado.tipo === 'Profesor') {
+      // Si es un profesor, redirige a la página de profesor
+      navigate('/profesor');
+    }
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-pink">
@@ -58,7 +71,13 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
         {loggedInUser ? (
           <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-              <span className="nav-link hola-usuario">Hola {loggedInUser}</span>
+            <span
+            className="nav-link hola-usuario"
+            onClick={handleHelloUserClick} // Manejar clic en "Hola Usuario"
+            style={{ cursor: 'pointer' }} // Cambiar el cursor para indicar que es un enlace
+          >
+            Hola {loggedInUser}
+          </span>
             </li>
             <li className="nav-item">
               <button className="nav-link sesion" onClick={onLogout}>
