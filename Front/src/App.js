@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {  Alert } from 'react-bootstrap';
 import './App.css';
 import Navbar from './BarraPrincipal/navbar';
 import Footer from './Footer/footer';
@@ -49,6 +50,8 @@ const App = () => {
   const [currentComponent, setCurrentComponent] = useState(null);
   const unreadAvisosCount = 0;
   const [sidebarVisible, setSidebarVisible] = useState(true);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+
 
   const marcarAvisosComoLeidos = async () => { };
 
@@ -76,10 +79,18 @@ const App = () => {
     if (token && loggedInUser=='Admin') {
       return element;
     } else {
-    
+        setShowErrorAlert(true);
+
+      setTimeout(() => {
+        setShowErrorAlert(false);
+      }, 2000);
       return (
         <div className=''>
-          <h1>Debes iniciar sesión</h1>
+           {showErrorAlert && (
+            <Alert variant="danger" className="mt-3 text-center">
+              <b>Acceso denegado. Debe iniciar sesion con sus credenciales de administrador</b>
+            </Alert>
+          )}
     
         </div>
       );
