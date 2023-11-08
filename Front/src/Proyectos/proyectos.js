@@ -77,7 +77,7 @@ const Proyectos = () => {
                 </div>
             </div>
             <div className="row">
-                <div class="">
+                <div classname="">
                 <div className="cuadro-imagen-proyecto">
                         {proyectoImages1 && <img src={proyectoImages1} className="imagen-proyecto" style={{ maxWidth: '300px', height:'200px' }} alt="foto del proyecto 1" />}
                     </div>
@@ -86,15 +86,15 @@ const Proyectos = () => {
                     
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
+            <div classname="row">
+                <div classname="col-md-6">
                     <div className="cuadro-imagen-proyecto">
                         {proyectoImages2 && <img src={proyectoImages2} className="imagen-proyecto" style={{ maxWidth: '300px', height:'200px' }} alt="foto del proyecto 2" />}
                     </div>
                     <h3 className="titulo-proyecto">{tituloProyecto2}</h3>
                     <p className="texto-proyectos" dangerouslySetInnerHTML={htmlProcesado2}></p>
                 </div>
-                <div class="col-md-6">
+                <div classname="col-md-6">
                     <div className="cuadro-imagen-proyecto">
                         {proyectoImages3 && <img src={proyectoImages3} className="imagen-proyecto" style={{ maxWidth: '300px', height:'200px' }} alt="foto del proyecto 3" />}
                     </div>

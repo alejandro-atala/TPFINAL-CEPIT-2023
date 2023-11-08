@@ -123,17 +123,17 @@ const HomePage = () => {
                 </button>
               </div>
               <div>
-                <div class="col-md-3 extra-home">
+                <div classname="col-md-3 extra-home">
                   <div className="cuadro-imagen-home">
                     <h3 className="titulo-home2">{titulohome1}</h3>
                     {homeImage1 && <img src={homeImage2} className="imagen-home" style={{ maxWidth: '300px' }} alt="foto home 2" />}
                     {homeImage1 && <img src={homeImage1} className="imagen-home" style={{ maxWidth: '300px' }} alt="foto home 1" />}
                     <p className="texto-home-extra" dangerouslySetInnerHTML={htmlProcesado1}></p>
-                    <ul class="list-group">
-                      <li class="item-home">{itemHome1}</li>
-                      <li class="item-home">{itemHome2}</li>
-                      <li class="item-home">{itemHome3}</li>
-                      <li class="item-home">{itemHome4}</li>
+                    <ul classname="list-group">
+                      <li classname="item-home">{itemHome1}</li>
+                      <li classname="item-home">{itemHome2}</li>
+                      <li classname="item-home">{itemHome3}</li>
+                      <li classname="item-home">{itemHome4}</li>
                     </ul>
                   </div>
                 </div>

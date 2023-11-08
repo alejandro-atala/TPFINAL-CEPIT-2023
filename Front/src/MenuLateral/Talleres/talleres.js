@@ -78,7 +78,7 @@ const Talleres = () => {
             <div className="img-cont-taller h-100">
               {imagenTaller3 && <img src={imagenTaller3} className="img-taller" alt="..." />}
               <div className="card-body-taller">
-                <h5 className="card-title-taller text-center">{textoTaller3}</h5>
+                <h5 className="card-title text-center">{textoTaller3}</h5>
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@ const Talleres = () => {
             <div className="img-cont-taller h-100">
               {imagenTaller4 && <img src={imagenTaller4} className="img-taller" alt="..." />}
               <div className="card-body-taller">
-                <h5 className="card-title text-center">{textoTaller4}</h5>
+                <h4 className="card-title text-center">{textoTaller4}</h4>
               </div>
             </div>
           </div>
