@@ -72,8 +72,8 @@ const App = () => {
 
   const ProtectedRoute = ({ element }) => {
     const { token } = useAuth();
-console.log(token)
-    if (token) {
+    console.log("usuario:",loggedInUser)
+    if (token && loggedInUser=='Admin') {
       return element;
     } else {
     
