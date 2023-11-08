@@ -6,11 +6,13 @@
     border-radius: 10px;
     font-weight: bold;
     color: #007bff;
+
   }
   
   .InputContainer {
     display: flex;
     align-items: center;
+    
   }
   
   .TextInput {
@@ -22,20 +24,18 @@
   }
   
   .SendButton {
-    background-color:rgba(232, 225, 190, 0.928);
+    background-color:rgba(0, 0, 0, 0.928);
     border: none;
     padding: 4px 10px;
     border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
+  color: white;
   
-    &:hover {
-      background-color: #0056b3;
-    }
   }
   
   .CerrarButton {
-    background-color: rgba(232, 225, 190, 0.928);
+    background-color: rgba(0, 0, 0, 0.928);
     text-align: left;
     border: none;
     padding: 4px 10px;
@@ -104,7 +104,7 @@
     max-width: 400px;
     margin: 0 auto;
     background-color: #f8faf6;
-    padding: 20px;
+    /* padding: 20px; */
     border-radius: 10px;
     font-weight: bold;
     color: #007bff;
@@ -136,7 +136,7 @@
   }
   
   .eliminarSeleccionados {
-    background-color: rgba(232, 225, 190, 0.928);
+    background-color: rgba(0, 0, 0, 0.928);
     border: none;
     padding: 4px 10px;
     border-radius: 10px;

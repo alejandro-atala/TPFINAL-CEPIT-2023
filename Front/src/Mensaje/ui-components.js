@@ -7,6 +7,8 @@ const UlMensajes = styled.ul`
   padding: 20px;
   border-radius: 10px;
   color: #007bff;
+    background-image: url('https://mcdn.wallpapersafari.com/medium/77/16/Nkc7Xe.jpg');
+        height: 400px;
 `;
 
 const LiMensaje = styled.li`
@@ -20,7 +22,7 @@ const LiMensaje = styled.li`
 
 const LiMensajeEnviado = styled(LiMensaje)`
 background-color: rgba(0, 255, 0, 0.2); /* Fondo verde transparente para mensajes enviados */
-  text-align: left;
+  text-align: right;
 `;
 
 const LiMensajeRecibido = styled(LiMensaje)`
@@ -38,11 +40,13 @@ export {
 export const ChatPrivado = styled.div`
   max-height: 400px;
   overflow-y: auto;
+
 `;
 
 export const ListaMensajes = styled.ul`
   padding: 0;
   list-style: none;
+  
 `;
 
 export const Mensaje = styled.li`

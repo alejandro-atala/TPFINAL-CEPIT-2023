@@ -425,7 +425,7 @@ function Mensaje() {
   const chatPrivadoRef = useRef();
 
   return (
-    <div className="Chat">
+    <div className="Chat mt-5">
       <h5 className={chatAbierto ? 'ChatTitle' : 'UsuariosConectados'}>
         <span className={chatAbierto ? 'TituloChat' : 'TituloUsuarios'}>
           {isConnected ? 'Usuarios' : 'No hay usuarios conectados'}
@@ -434,12 +434,12 @@ function Mensaje() {
       {chatAbierto ? (
         <div className="ChatContent">
           <h5 className="CenteredTitle">Estoy chateando con {chatDestino}</h5>
-          <button onClick={cerrarChat} className="CerrarButton m-2">
+          <button onClick={cerrarChat} className="CerrarButton  btn btn-danger m-2">
             Cerrar Chat
           </button>
           <button
             onClick={() => openDeleteModal('deleteForMe')}
-            className="eliminarSeleccionados"
+            className="eliminarSeleccionados btn btn-secondary"
           >
             Eliminar Seleccionados
           </button>
@@ -525,7 +525,7 @@ function Mensaje() {
               className="TextInput"
               placeholder="Escribe un mensaje"
             />
-            <button onClick={enviarMensaje} className="SendButton m-2">
+            <button onClick={enviarMensaje} className="SendButton btn btn-success m-2">
               Enviar
             </button>
           </div>
@@ -542,7 +542,7 @@ function Mensaje() {
               <li key={usuario.idUsuario} className="mb-1">
                 <button
                   onClick={() => iniciarChatConUsuario(usuario.nombre)}
-                  className="SendButton"
+                  className="SendButton btn btn-secondary"
                 >
                   {usuario.nombre}
                 </button>
