@@ -44,7 +44,7 @@
 
 .texto-home-extra {
   font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 100%;
+  /* font-size: 100%; */
   list-style: none;
   padding-top: 3;
   padding-bottom: 3;
@@ -54,6 +54,7 @@
   list-style-type:circle;
   margin-left: 20%;
   margin-bottom: 5%;
+
 }
 
 .imagen-home {
