@@ -49,17 +49,17 @@ const Directivos = () => {
             <div className="cuadro-imagen">
               {imagenDirectora && <img src={imagenDirectora} alt="foto de la directora" />}
             </div>
-            <h3>{textoDirectora}</h3>
+            <h3 className='nombre-directivos'>{textoDirectora}</h3>
             <h5 className='nombre-directivos'>Director de La Institución</h5>
             <div className="cuadro-imagen">
               {imagenSecretaria && <img src={imagenSecretaria} alt="foto de la secretaria" />}
             </div>
-            <h3>{textoSecretaria}</h3>
+            <h3 className='nombre-directivos'>{textoSecretaria}</h3>
             <h5 className='nombre-directivos'>Secretario de La Institución</h5>
             <div className="cuadro-imagen">
               {imagenRepresentante && <img src={imagenRepresentante} alt="foto del representante" />}
             </div>
-            <h3>{textoRepresentante}</h3>
+            <h3 className='nombre-directivos'>{textoRepresentante}</h3>
             <h5 className='nombre-directivos'>Representante Legal de La Institución</h5>
           </div>
         </div>

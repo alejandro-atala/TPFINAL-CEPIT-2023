@@ -113,6 +113,7 @@
   /* Establece un estilo para los mensajes seleccionados */
   .MensajeSeleccionado {
     background-color: #cce6ff; /* Cambia el color de fondo de los mensajes seleccionados */
+
   }
   
   .message-received {
@@ -171,3 +172,6 @@
     transition: background-color 0.3s;
   }
   
+
+
+
