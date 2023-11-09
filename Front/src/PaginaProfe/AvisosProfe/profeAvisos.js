@@ -157,7 +157,7 @@ const AvisosProfe = () => {
   
 
   return (
-    <div>
+    <div className='col-6 mx-auto'>
       <div className="row">
         <h4 className="card-title">Enviar avisos al curso</h4>
         <form onSubmit={handleSubmit}>
@@ -186,14 +186,14 @@ const AvisosProfe = () => {
   ))}
 </select>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary mb-5">
             Cargar Aviso
           </button>
         </form>
       </div>
       <div>
       {avisos.map((aviso) => (
-  <div key={aviso.idAviso} className="card">
+  <div key={aviso.idAviso} className="card mb-4">
             <div className="card-body">
               <h5>Aviso dirigido al Curso:  <span className="numero-curso">{aviso.curso}</span></h5>
         {aviso.idAviso === avisoEditId ? (
