@@ -10,6 +10,7 @@ import { Profesor } from 'src/profesor/entities/profesor.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { Curso } from 'src/curso/entities/curso.entity';
+import { Message } from 'src/message/entities/message.entity';
 
 const saltRounds = 10; // Número de rondas de encriptación
 
@@ -22,6 +23,8 @@ export class UsuarioService {
     private profesorRepository: Repository<Profesor>,
     @InjectRepository(Alumno)
     private alumnoRepository: Repository<Alumno>,
+    @InjectRepository(Message)
+    private messageRepository: Repository<Message>,
     private readonly jwtService: JwtService
   ) { }
 
@@ -99,23 +102,29 @@ export class UsuarioService {
     // Elimina el alumno asociado si existe
     const alumno = await this.alumnoRepository.findOne({ where: { usuarioId: usuarioId } });
     if (alumno) {
-      await this.alumnoRepository.remove(alumno);
+        await this.alumnoRepository.remove(alumno);
     }
 
     // Elimina el profesor asociado si existe
     const profesor = await this.profesorRepository.findOne({ where: { usuarioId: usuarioId } });
     if (profesor) {
-      await this.profesorRepository.remove(profesor);
+        await this.profesorRepository.remove(profesor);
+    }
+
+    // Elimina el mensaje asociado si existe
+    const mensaje = await this.messageRepository.findOne({ where: { receiverId: usuarioId } });
+    if (mensaje) {
+        await this.messageRepository.remove(mensaje);
     }
 
     // Elimina el usuario principal
     const usuario = await this.usuarioRepository.findOne({ where: { idUsuario: usuarioId } });
     if (!usuario) {
-      throw new NotFoundException(`Usuario con ID ${usuarioId} no encontrado.`);
+        throw new NotFoundException(`Usuario con ID ${usuarioId} no encontrado.`);
     }
 
     await this.usuarioRepository.remove(usuario);
-  }
+}
 
 
 

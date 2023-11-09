@@ -205,6 +205,7 @@ function Mensaje() {
         senderId: usuarioLogueado.id,
         receiverId: usuarioReceptor.idUsuario,
         timestamp: new Date().getTime(),
+        usuarioId: usuarioLogueado.id,
       };
 
       try {
