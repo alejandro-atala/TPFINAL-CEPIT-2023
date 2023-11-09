@@ -71,9 +71,9 @@ const Materias = () => {
   return (
     <div className="container d-flex flex-column justify-content-center">
       <br></br>
-      <h4 className="mb-4">Aquí podrás ver las materias según los días y horarios</h4>
+      <h4 className="mb-4 titulo-materias">Aquí podrás ver las materias según los días y horarios</h4>
       <div className="table-responsive mb-4">
-      <table className="table table-bordered">
+      <table className="table-materias align-items-center table-bordered">
   <thead>
     <tr>
       <th className="column-header">Horario</th>

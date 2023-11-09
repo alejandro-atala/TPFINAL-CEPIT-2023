@@ -45,9 +45,9 @@ const calculateOneWeekAfter = (inputDate) => {
 
   return (
     <div>
-      <h4>Aquí podrás ver las notas de tus exámenes</h4>
+      <h4 className='titulo-notas'>Aquí podrás ver las notas de tus exámenes</h4>
 
-      <table>
+      <table className='tabla-notas'>
         <thead>
           <tr>
             <th>Fecha</th>

@@ -1,19 +1,18 @@
-.notas-container {
-    padding: 20px;
-  }
-  
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  th, td {
-    padding: 8px;
-    text-align: center;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
+.titulo-notas {
+  font-size: 200%;
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
+  text-align: center;
+  margin-bottom: 5%;
+  margin-top: 5%;
+}
+
+.tabla-notas {
+  width: 80%;
+  border-radius: 25px;
+  padding: 5%;
+  background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
+  box-shadow: 40px 20px 40px rgb(111, 108, 108);
+  margin-bottom: 5%;
+  margin-left: 10%;
+}

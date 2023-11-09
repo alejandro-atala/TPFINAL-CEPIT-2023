@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAlumno } from '../Alumno/AlumnoContext';
+import './asistencia.css';
 
 const formatDate = (dateString) => {
   const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -49,8 +50,8 @@ const Asistencia = () => {
 
   return (
     <div className='col-9 mx-auto'>
-      <h4>Registro de asistencias e inasistencias</h4>
-      <table className="custom-table">
+      <h4 className='titulo-asistencia'>Registro de asistencias e inasistencias</h4>
+      <table className="custom-table tabla-asistencia">
 
         <thead>
           <tr>
@@ -76,7 +77,7 @@ const Asistencia = () => {
         </tbody>
       </table>
       <br></br>
-      <div className="d-flex justify-content-between ">
+      <div className="d-flex justify-content-between tabla-asistencia-2">
         <p>Asistencias: <strong>{contadorAsistencias}</strong></p>
         <p>Inasistencias: <strong>{contadorInasistencias}</strong></p>
         <p>Medias Faltas:<strong> {contadorMediaFalta}</strong></p>

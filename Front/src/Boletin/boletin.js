@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Alert } from 'react-bootstrap';
 import { useAlumno } from '../Alumno/AlumnoContext';
+import './boletin.css';
 
 const Boletin = () => {
   const { alumnoLogueado } = useAlumno(); // Acceder a la información del usuario desde el contexto
@@ -79,20 +80,12 @@ const Boletin = () => {
     return promedioAnual.toFixed(2);
   };
   
-  
-  
-  
-  
-  
-  
-  
-
   return (
     <div className='mt-5'>
-      <h2>Boletín de Notas</h2>
-      <Table striped bordered hover>
+      <h2 className='titulo-boletin'>Boletín de Notas</h2>
+      <Table className='tabla-boletin'striped bordered hover>
         <thead>
-          <tr>
+          <tr className='boletin'>
             <th>Materia</th>
             {trimestres.map((trimestre) => (
               <th key={trimestre}>Trimestre {trimestre}</th>
@@ -119,7 +112,7 @@ const Boletin = () => {
         </tbody>
       </Table>
       <Alert variant="success" className="col-md-4 mx-auto mt-4">
-  <h4 className="text-center">Su nota final del año es: {calcularPromedioAnual()}</h4>
+  <h4 className="text-center cuadro-boletin">Su nota final del año es: {calcularPromedioAnual()}</h4>
 </Alert>
 
     </div>

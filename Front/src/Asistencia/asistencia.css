@@ -1,21 +1,30 @@
 
-.notas-container {
-  padding: 20px;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th, td {
-  padding: 8px;
+.titulo-asistencia {
+  font-size: 200%;
+  font-family: 'Times New Roman', Times, serif;
+  color: black;
   text-align: center;
-  border-bottom: 1px solid #ddd;
+  margin-bottom: 5%;
+  margin-top: 5%;
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+.tabla-asistencia {
+  width: 80%;
+  border-radius: 25px;
+  padding: 5%;
+  background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
+  box-shadow: 40px 20px 40px rgb(111, 108, 108);
+  margin-bottom: 5%;
+  margin-left: 10%;
 }
- 
 
+
+
+.tabla-asistencia-2 {
+  width: 100%;
+  border-radius: 25px;
+  padding: 3%;
+  background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
+  box-shadow: 40px 20px 40px rgb(111, 108, 108);
+  margin-bottom: 5%;
+}
