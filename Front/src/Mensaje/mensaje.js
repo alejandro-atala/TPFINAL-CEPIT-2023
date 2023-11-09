@@ -32,6 +32,7 @@ function Mensaje() {
     new Set(),
   );
   const messagesRef = useRef(null);
+  const inputRef = useRef(); 
 
   useEffect(() => {
     // Cargar la lista de usuarios al montar el componente
@@ -293,6 +294,9 @@ function Mensaje() {
         console.error('Error al realizar la solicitud POST', error);
       }
       setNuevoMensaje('');
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
       scrollToBottom();
     }
   };
@@ -359,7 +363,9 @@ const handleDelete = async (option) => {
                   // Eliminar el mensaje del estado local
                   setChatMensajes((mensajes) =>
                     mensajes.filter((mensaje) => mensaje.id !== messageId)
+                    
                   );
+                  scrollToBottom();
                 } else {
                   console.error(
                     'Error al marcar el mensaje como eliminado para ti en la base de datos',
@@ -557,6 +563,7 @@ const handleDelete = async (option) => {
             )}
             <div className="InputContainer">
               <input
+              ref={inputRef}
                 type="text"
                 value={nuevoMensaje}
                 onChange={(e) => setNuevoMensaje(e.target.value)}
