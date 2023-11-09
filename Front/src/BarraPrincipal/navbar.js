@@ -19,7 +19,7 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
       navigate('/profesor');
     }else if (usuarioLogueado.nombre === 'Admin') {
       // Si es un profesor, redirige a la página de profesor
-      navigate('/admin');
+    window.location.reload();
     }
   };
 

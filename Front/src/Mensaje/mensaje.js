@@ -548,17 +548,17 @@ function Mensaje() {
                 </p>
                 <button
                   onClick={() => handleDelete('deleteForMe')}
-                  className="eliminarParaMi"
+                  className="eliminarSeleccionados btn btn-secondary m-2"
                 >
                   Eliminar para mí
                 </button>
                 <button
                   onClick={() => handleDelete('deleteForAll')}
-                  className="eliminarParaTodos"
+                  className="eliminarSeleccionados btn btn-secondary m-2"
                 >
                   Eliminar para todos
                 </button>
-                <button onClick={closeDeleteModal} className="cancelar">
+                <button onClick={closeDeleteModal} className="eliminarSeleccionados btn btn-secondary m-2">
                   Cancelar
                 </button>
               </div>
