@@ -157,7 +157,7 @@ export class EmailService {
     let mailOptions = {
       from: 'vsadesarrollos@gmail.com',
       to: para,
-      subject: 'Suscripcion exitosa',
+      subject: 'Estado de inscripcion',
       html: emailContent
     };
     await transporter.sendMail(mailOptions);

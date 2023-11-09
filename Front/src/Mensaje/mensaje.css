@@ -1,18 +1,18 @@
 .Chat {
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 100%;
+
     background-color: transparent;
     padding: 20px;
     border-radius: 10px;
     font-weight: bold;
     color: #007bff;
-
+    min-height: 800px;
   }
   
   .InputContainer {
     display: flex;
     align-items: center;
-    
+
   }
   
   .TextInput {
@@ -101,7 +101,7 @@
   /* Agrega el estilo para el cursor */
   .Mensaje {
     cursor: pointer;
-    max-width: 400px;
+    max-width: 800px;
     margin: 0 auto;
     background-color: #f8faf6;
     /* padding: 20px; */

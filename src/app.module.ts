@@ -37,6 +37,8 @@ import { ChatGateway } from './chat-gateway';
     synchronize: true
   }),
 
+
+
     CursoModule,
     AlumnoModule,
     MateriaModule,
