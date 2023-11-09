@@ -37,6 +37,19 @@ import { ChatGateway } from './chat-gateway';
     synchronize: true
   }),
 
+  TypeOrmModule.forRoot({
+    type: "mysql",
+    host: "b0jgxvdovoqcsoqfrktr-mysql.services.clever-cloud.com",
+    port: 3306,
+    username: "uctmsriwkhnlgmrj",
+    password: "V8xGFk5CwjxazyBS2WpO",
+    database: "b0jgxvdovoqcsoqfrktr",
+    entities: [
+      "dist/**/**.entity{.ts,.js}", "node_modules/@nestjs/jwt"
+    ],
+    synchronize: true
+  }),
+
     CursoModule,
     AlumnoModule,
     MateriaModule,
