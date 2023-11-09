@@ -103,7 +103,7 @@ const AsistenciaList = () => {
       }, 2000); // 2000 milisegundos (2 segundos)
       setAttendanceData([]);
       setAlumnos([]);
-
+      setSelectedAnio('');
     } catch (error) {
 
       console.error('Error al guardar asistencias:', error);
