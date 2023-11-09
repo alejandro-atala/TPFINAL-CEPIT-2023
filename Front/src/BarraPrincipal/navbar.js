@@ -14,9 +14,12 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
     if (usuarioLogueado.tipo === 'Alumno') {
       // Si es un alumno, redirige a la página de alumno
       navigate('/alumno');
-    } else if (usuarioLogueado.tipo === 'Profesor') {
+    } else if (usuarioLogueado.tipo === 'Profesor' && usuarioLogueado.nombre !== 'Admin') {
       // Si es un profesor, redirige a la página de profesor
       navigate('/profesor');
+    }else if (usuarioLogueado.nombre === 'Admin') {
+      // Si es un profesor, redirige a la página de profesor
+      navigate('/admin');
     }
   };
 
