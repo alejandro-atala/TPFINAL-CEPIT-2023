@@ -323,18 +323,18 @@ function Mensaje() {
   
   
 
-  const handleDelete = async (option) => {
-    if (selectedMessages.size > 0) {
-      const selectedMessagesArray = Array.from(selectedMessages);
+ // Dentro de tu función handleDelete
+const handleDelete = async (option) => {
+  if (selectedMessages.size > 0) {
+    try {
+      await Promise.all(
+        Array.from(selectedMessages).map(async (messageId) => {
+          if (typeof messageId === 'number') {
+            const messageToDelete = chatMensajes.find(
+              (mensaje) => mensaje.id === messageId,
+            );
 
-      for (const messageId of selectedMessagesArray) {
-        if (typeof messageId === 'number') {
-          const messageToDelete = chatMensajes.find(
-            (mensaje) => mensaje.id === messageId,
-          );
-
-          if (messageToDelete) {
-            try {
+            if (messageToDelete) {
               if (option === 'deleteForMe') {
                 // Agrega el ID del mensaje a mensajesEliminadosParaMi
                 setMensajesEliminadosParaMi(
@@ -356,16 +356,10 @@ function Mensaje() {
                   console.log(
                     'Mensaje marcado como eliminado para ti con éxito en la base de datos',
                   );
-                  // Agregar el mensaje a la lista de mensajes eliminados para ti en el estado local
-                  setDeletedMessagesForMe(
-                    new Set([...deletedMessagesForMe, messageId]),
-                  );
-
                   // Eliminar el mensaje del estado local
-                  const updatedMessages = chatMensajes.filter(
-                    (mensaje) => mensaje.id !== messageId,
+                  setChatMensajes((mensajes) =>
+                    mensajes.filter((mensaje) => mensaje.id !== messageId)
                   );
-                  setChatMensajes(updatedMessages);
                 } else {
                   console.error(
                     'Error al marcar el mensaje como eliminado para ti en la base de datos',
@@ -391,10 +385,9 @@ function Mensaje() {
                     'Mensaje eliminado con éxito de la base de datos',
                   );
                   // Eliminar el mensaje del estado local
-                  const updatedMessages = chatMensajes.filter(
-                    (mensaje) => mensaje.id !== messageId,
+                  setChatMensajes((mensajes) =>
+                    mensajes.filter((mensaje) => mensaje.id !== messageId)
                   );
-                  setChatMensajes(updatedMessages);
                 } else {
                   console.error(
                     'Error al eliminar el mensaje de la base de datos',
@@ -402,29 +395,28 @@ function Mensaje() {
                   );
                 }
               }
-            } catch (error) {
-              console.error(
-                'Error al eliminar el mensaje en el servidor',
-                error,
-              );
             }
           }
-        }
-      }
-
-      // Limpia los mensajes seleccionados y oculta el modal
-      setSelectedMessages(new Set());
-      closeDeleteModal();
-    } else {
-      // No hay mensajes seleccionados, muestra la advertencia
-      setShowSelectionWarning(true);
-
-      // Luego, puedes ocultar la advertencia después de unos segundos si lo deseas
-      setTimeout(() => {
-        setShowSelectionWarning(false);
-      }, 3000);
+        })
+      );
+    } catch (error) {
+      console.error('Error al eliminar mensajes en paralelo', error);
     }
-  };
+
+    // Limpia los mensajes seleccionados y oculta el modal
+    setSelectedMessages(new Set());
+    closeDeleteModal();
+  } else {
+    // No hay mensajes seleccionados, muestra la advertencia
+    setShowSelectionWarning(true);
+
+    // Luego, puedes ocultar la advertencia después de unos segundos si lo deseas
+    setTimeout(() => {
+      setShowSelectionWarning(false);
+    }, 3000);
+  }
+};
+
 
   const formatTimestamp = (timestamp) => {
     if (!timestamp) {
