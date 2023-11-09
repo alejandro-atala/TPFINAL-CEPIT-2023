@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 const UlMensajes = styled.ul`
-  max-width: 400px;
+  max-width: 100%;
   margin: 0 auto;
-  background-color: #f8faf6;
+ 
   padding: 20px;
   border-radius: 10px;
   color: #007bff;
     background-image: url('https://mcdn.wallpapersafari.com/medium/77/16/Nkc7Xe.jpg');
-        min-height: 400px;
+        min-height: 700Px;
 `;
 
 const LiMensaje = styled.li`
@@ -38,7 +38,7 @@ export {
 };
 
 export const ChatPrivado = styled.div`
-  max-height: 400px;
+  max-height: 700px;
   overflow-y: auto;
 
 `;
