@@ -198,21 +198,22 @@ const AvisosProfe = () => {
               <h5>Aviso dirigido al Curso:  <span className="numero-curso">{aviso.curso}</span></h5>
         {aviso.idAviso === avisoEditId ? (
           <div>
-            <input
+            <textarea
+            className="contenido-aviso input-edit"
               type="text"
               value={avisoEditText}
               onChange={(e) => setAvisoEditText(e.target.value)}
             />
-            <button onClick={handleGuardarEdicion}>Guardar</button>
-            <button onClick={handleCancelarEdicion}>Cancelar</button>
+            <button className='btn btn-success m-1' onClick={handleGuardarEdicion}>Guardar</button>
+            <button className='btn btn-secondary m-1' onClick={handleCancelarEdicion}>Cancelar</button>
           </div>
         ) : (
           <div>
-            <p className="card-text">Contenido del Aviso: </p>
+         
             <h5 className="contenido-aviso">{aviso.contenido}</h5>
             <p className="card-text">Fecha: {new Date(aviso.fecha).toLocaleString()}</p>
-            <button onClick={() => handleEditarClick(aviso.idAviso, aviso.contenido)}>Editar</button>
-            <button onClick={() => handleEliminarClick(aviso.idAviso)}>Borrar</button>
+            <button className='btn btn-primary m-1' onClick={() => handleEditarClick(aviso.idAviso, aviso.contenido)}>Editar</button>
+            <button className='btn btn-danger m-1' onClick={() => handleEliminarClick(aviso.idAviso)}>Borrar</button>
           </div>
         )}
       </div>
