@@ -32,6 +32,12 @@ const Inscripcion = () => {
       ...prevData,
       [id]: value,
     }));
+console.log(id, value);
+    if (id === 'password' && value.length < 8) {
+      setErrorMessage(['La contraseña debe tener al menos 8 caracteres.']);
+    } else {
+      setErrorMessage([]);
+    }
   };
 
   const handleCourseChange = (course) => {
@@ -60,6 +66,21 @@ const Inscripcion = () => {
 
     if (!isFormValid) {
       setErrorMessage(['Por favor, complete todos los campos.']);
+      setSuccessMessage('');
+      return;
+    }
+
+    const selectedDate = new Date(formData.fechaNac);
+    const currentDate = new Date();
+  
+    if (selectedDate > currentDate) {
+      setErrorMessage(['La fecha de nacimiento no puede ser en el futuro.']);
+      setSuccessMessage('');
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      setErrorMessage(['La contraseña debe tener al menos 8 caracteres.']);
       setSuccessMessage('');
       return;
     }
