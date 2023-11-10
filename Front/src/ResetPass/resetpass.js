@@ -22,12 +22,12 @@ const ResetPass = () => {
         const token = queryParams.get('email');
         setEmail(token);
         console.log('Token de la URL:', token); // <-- Move this line inside the useEffect
-      }, []);
+    }, []);
 
 
 
 
-  
+
 
 
 
@@ -43,21 +43,20 @@ const ResetPass = () => {
 
     const handlePasswordResetSubmit = async (e) => {
         e.preventDefault();
-
-        // Verifica si las contraseñas coinciden
-        if (passwordsMatch) {
+    
+        if (passwordsMatch && passwordResetData.newPassword.length >= 8) {
             try {
                 const requestData = {
                     email,
                     newPassword: passwordResetData.newPassword,
                 };
-
+    
                 // Envia la solicitud para restablecer la contraseña
                 const response = await axios.post(
                     `http://localhost:3000/usuario/resetpassword/email/`,
                     requestData
                 );
-
+    
                 // Maneja la respuesta de la API, por ejemplo, mostrar un mensaje de éxito
                 console.log('Contraseña actualizada con éxito:', response.data);
                 setShowSuccessAlert(true);
@@ -65,7 +64,7 @@ const ResetPass = () => {
                     setShowSuccessAlert(null);
                     navigate('/iniciarSesion');
                 }, 2000); // 2000 milisegundos (2 segundos)
-
+    
             } catch (error) {
                 console.error('Error al restablecer la contraseña:', error.response.data);
                 setShowErrorAlert(true);
@@ -73,10 +72,20 @@ const ResetPass = () => {
                     setShowErrorAlert(null);
                 }, 2000); // 2000 milisegundos (2 segundos)
             }
-        } else {
-            alert('Las contraseñas no coinciden. Inténtalo de nuevo.');
+        } else if (!passwordsMatch) {
+            setShowErrorAlert("Las contraseñas no coinciden. Inténtalo de nuevo.");
+            setTimeout(() => {
+                setShowErrorAlert(null);
+            }, 4000);
+        } else if (passwordResetData.newPassword.length < 8) {
+            setShowErrorAlert("La nueva contraseña debe tener al menos 8 caracteres.");
+            setTimeout(() => {
+                setShowErrorAlert(null);
+            }, 4000);
         }
     };
+    
+    
 
 
     return (
@@ -102,17 +111,28 @@ const ResetPass = () => {
                         onChange={handlePasswordResetChange}
                     />
                 </div>
+
+
                 <button
                     type="submit"
                     className="btn btn-primary btn-block m-2"
-                    disabled={
-                        !passwordsMatch ||
-                        passwordResetData.newPassword.trim() === '' ||
-                        passwordResetData.confirmPassword.trim() === ''
-                    }
+                    onClick={handlePasswordResetSubmit}
                 >
                     Actualizar contraseña
                 </button>
+
+                <div>
+                    {showErrorAlert && (
+                        <Alert variant="danger" className="mt-3 text-center">
+                            {passwordsMatch
+                                ? "Token expirado"
+                                : "Las contraseñas no coinciden o la nueva contraseña tiene menos de 8 caracteres."
+                            }
+                        </Alert>
+                    )}
+                </div>
+
+
 
                 <div>
                     {showSuccessAlert && (
@@ -120,11 +140,11 @@ const ResetPass = () => {
                             Contraseña actualizada exitosamente.
                         </Alert>
                     )}
-                    {showErrorAlert && (
+                    {/* {showErrorAlert && (
                         <Alert variant="danger" className="mt-3 text-center">
                             Error al actualizar la contraseña. Token expirado
                         </Alert>
-                    )}
+                    )} */}
                 </div>
             </form>
         </div>
