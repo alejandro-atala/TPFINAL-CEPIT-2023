@@ -11,6 +11,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { Curso } from 'src/curso/entities/curso.entity';
 import { Message } from 'src/message/entities/message.entity';
+import { Aviso } from 'src/avisos/entities/aviso.entity';
 
 const saltRounds = 10; // Número de rondas de encriptación
 
@@ -25,6 +26,8 @@ export class UsuarioService {
     private alumnoRepository: Repository<Alumno>,
     @InjectRepository(Message)
     private messageRepository: Repository<Message>,
+    @InjectRepository(Aviso)
+    private  avisoRepository: Repository<Aviso>,
     private readonly jwtService: JwtService
   ) { }
 
@@ -116,6 +119,21 @@ export class UsuarioService {
     if (mensaje) {
         await this.messageRepository.remove(mensaje);
     }
+
+       // Encuentra todos los avisos asociados al profesor
+const avisos = await this.avisoRepository.find({ where: { profesorIdProfesor: usuarioId } });
+
+// Verifica si hay avisos para eliminar
+if (avisos && avisos.length > 0) {
+    // Itera sobre cada aviso y elimínalos
+    for (const aviso of avisos) {
+        console.log(aviso);
+        await this.avisoRepository.remove(aviso);
+    }
+} else {
+    console.log("No se encontraron avisos asociados al profesor.");
+}
+
 
     // Elimina el usuario principal
     const usuario = await this.usuarioRepository.findOne({ where: { idUsuario: usuarioId } });

@@ -10,16 +10,18 @@ import { AlumnoService } from 'src/alumno/alumno.service';
 import { JwtModule } from '@nestjs/jwt';
 import { Message } from 'src/message/entities/message.entity';
 import { MessageService } from 'src/message/message.service';
+import { Aviso } from 'src/avisos/entities/aviso.entity';
+import { AvisosService } from 'src/avisos/aviso.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Usuario, Profesor, Alumno, Message]),
+    TypeOrmModule.forFeature([Usuario, Profesor, Alumno, Message, Aviso]),
     JwtModule.register({
       secret: 'ProgramadorFullStack2023', // Tu clave secreta aquí
       signOptions: { expiresIn: '5m' },
     }),
   ],
   controllers: [UsuarioController],
-  providers: [UsuarioService, ProfesorService, AlumnoService, MessageService],
+  providers: [UsuarioService, ProfesorService, AlumnoService, MessageService, AvisosService],
 })
 export class UsuarioModule {}

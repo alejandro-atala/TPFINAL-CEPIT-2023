@@ -22,8 +22,11 @@ export class Aviso {
 
   @Column()
   nombreProfesor: string;
-  @ManyToOne(() => Profesor)
-  @JoinColumn({ name: 'profesorIdProfesor' })
-  profesor: Profesor;
+
+
+@ManyToOne(() => Profesor, { onDelete: 'CASCADE' })
+@JoinColumn({ name: 'profesorIdProfesor' })
+profesor: Profesor;
+
 
 }
