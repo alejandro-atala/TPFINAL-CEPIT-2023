@@ -1,6 +1,12 @@
 
 
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
 import * as nodemailer from 'nodemailer';
+import { Usuario } from 'src/usuario/entities/usuario.entity';
+import { Repository } from 'typeorm';
+
 
 
 const transporter = nodemailer.createTransport({
@@ -13,13 +19,35 @@ const transporter = nodemailer.createTransport({
 
 
 
-
-
+@Injectable()
 export class EmailService {
 
+  constructor(
+    private readonly jwtService: JwtService,
+  ) {}
+
+
+
+
+  async generateToken(user): Promise<string> {
+    try {
+      const payload = {
+        email: user,
+      };
+  
+      const token = await this.jwtService.signAsync(payload);
+      console.log(token);
+      return token;
+    } catch (error) {
+      console.error(error);
+      throw new HttpException('Error generando el token', HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+  
+  
+  async sendEmail(para: string): Promise<void> {
 
   
-  async sendEmail(para: string, subject: string): Promise<void> {
 
 
     const emailContent = `
@@ -29,7 +57,7 @@ export class EmailService {
         <p>Haga click en el siguiente enlace para cambiar su contraseña</p>
 
 
-        <a href="http://localhost:3001/resetpass?email=${para}" style="text-decoration: none;">
+        <a href="http://localhost:3001/resetpass?email=${await this.generateToken(para)}" style="text-decoration: none;">
 
      
 

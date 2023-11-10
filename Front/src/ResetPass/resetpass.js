@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const ResetPass = () => {
 
 
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState('');
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const navigate = useNavigate();
@@ -19,14 +19,15 @@ const ResetPass = () => {
     useEffect(() => {
         // Obtén el email de la URL
         const queryParams = new URLSearchParams(window.location.search);
-        const email = queryParams.get('email');
-        setEmail(email);
-        console.log('Email de la URL:', email);
+        const token = queryParams.get('email');
+        setEmail(token);
+        console.log('Token de la URL:', token); // <-- Move this line inside the useEffect
+      }, []);
 
 
 
 
-    }, []); // El array vacío asegura que este efecto se ejecute solo una vez al montar el componente
+  
 
 
 
@@ -121,7 +122,7 @@ const ResetPass = () => {
                     )}
                     {showErrorAlert && (
                         <Alert variant="danger" className="mt-3 text-center">
-                            Error al actualizar la contraseña
+                            Error al actualizar la contraseña. Token expirado
                         </Alert>
                     )}
                 </div>

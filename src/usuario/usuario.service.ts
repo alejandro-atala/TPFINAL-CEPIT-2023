@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
@@ -12,6 +12,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Curso } from 'src/curso/entities/curso.entity';
 import { Message } from 'src/message/entities/message.entity';
 import { Aviso } from 'src/avisos/entities/aviso.entity';
+import * as jwt from 'jsonwebtoken';
 
 const saltRounds = 10; // Número de rondas de encriptación
 
@@ -298,16 +299,25 @@ if (avisos && avisos.length > 0) {
     return this.profesorRepository.save(profesor);
   }
 
-  async resetPassword(email: string, newPassword: string): Promise<void> {
-    const usuario = await this.usuarioRepository.findOne({ where: { email } });
-  console.log(usuario);
-    if (!usuario) {
-      throw new Error('Usuario no encontrado');
+  async resetPassword(token: string, newPassword: string): Promise<void> {
+    try {
+      const decodedToken: any = jwt.verify(token, 'ProgramadorFullStack2023'); // Replace 'your-secret-key' with your actual secret key
+  
+      const email = decodedToken.email;
+  
+      const usuario = await this.usuarioRepository.findOne({ where: { email } });
+  
+      if (!usuario) {
+        throw new Error('Usuario no encontrado');
+      }
+  
+      usuario.password = await bcrypt.hash(newPassword, saltRounds);
+  
+      await this.usuarioRepository.save(usuario);
+    } catch (error) {
+      console.error('Error al restablecer la contraseña:', error);
+      throw new BadRequestException('No se pudo restablecer la contraseña.');
     }
-  
-    usuario.password = await bcrypt.hash(newPassword, saltRounds);
-  
-    await this.usuarioRepository.save(usuario);
   }
   
   

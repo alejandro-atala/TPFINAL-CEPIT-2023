@@ -8,10 +8,10 @@ export class EmailController{
   constructor(private readonly emailService: EmailService) {}
 
   @Post('reset')
-  async sendEmail(@Body('email') email: string, subject: string): Promise<string> {
-    console.log(email, subject);
+  async sendEmail(@Body('email') email: string): Promise<string> {
+    console.log(email);
     try {
-      await this.emailService.sendEmail(email, subject);
+      await this.emailService.sendEmail(email);
       return 'Correo electrónico enviado correctamente!';
     } catch (error) {
       throw new InternalServerErrorException('Error al enviar el correo electrónico.');

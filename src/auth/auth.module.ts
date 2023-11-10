@@ -6,7 +6,7 @@ import { AuthController } from './auth.controller';
 @Module({
   imports: [
     JwtModule.register({
-      secret: 'your-secret-key', // Replace with your secret key
+      secret: 'ProgramadorFullStack2023', // Replace with your secret key
       signOptions: { expiresIn: '1h' }, // Token expiration time
     }),
   ],
