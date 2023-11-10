@@ -25,7 +25,7 @@ const AvisosProfe = () => {
   useEffect(() => {
     fetchProfesorId();
     fetchCursosDelProfesor();
-  }, [usuarioLogueado]); // Ejecutar cuando el usuarioLogueado cambie
+  }, [usuarioLogueado, avisos]); // Ejecutar cuando el usuarioLogueado cambie
 
   const fetchProfesorId = async () => {
     try {
@@ -146,13 +146,14 @@ const AvisosProfe = () => {
   const handleEliminarClick = async (id) => {
     try {
       await axios.delete(`http://localhost:3000/avisos/${id}`);
-
-      const avisosActualizados = avisos.filter((aviso) => aviso.idAviso !== id);
-      setAvisos(avisosActualizados);
+  
+      // Use a callback function in setAvisos to ensure you are working with the latest state
+      setAvisos(prevAvisos => prevAvisos.filter((aviso) => aviso.idAviso !== id));
     } catch (error) {
       console.error('Error al eliminar el aviso:', error);
     }
   };
+  
 
   
 
@@ -192,7 +193,7 @@ const AvisosProfe = () => {
         </form>
       </div>
       <div>
-      {avisos.map((aviso) => (
+      {avisos.slice().reverse().map((aviso) => (
   <div key={aviso.idAviso} className="card mb-4">
             <div className="card-body">
               <h5>Aviso dirigido al Curso:  <span className="numero-curso">{aviso.curso}</span></h5>
