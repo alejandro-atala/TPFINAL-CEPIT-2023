@@ -54,10 +54,10 @@ const Talleres = () => {
     <div className="col-md-3 col-sm-6 col-xs-12">
     <SideMenu />
 </div>
-        <div className="col-md-9 mt-5 d-flex flex-column align-items-center justify-content-center">   
+        <div className="col-md-9 mt-5  flex-column  ">   
       <h1 className="titulo-taller  ">{titulo}</h1>
       <div className="mt-4 p-5">
-        <div className="row row-cols-1 row-cols-md-3 g-4">
+        <div className="row row-cols-1 row-cols-md-4 g-4">
           <div className="col taller">
             <div className="img-taller h-100">
               {imagenTaller1 && <img src={imagenTaller1} className="img-taller" alt="..." />}

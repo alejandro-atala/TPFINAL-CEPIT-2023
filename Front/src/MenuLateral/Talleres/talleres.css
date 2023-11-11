@@ -17,6 +17,7 @@
 }
 
 .card-body-taller{
+
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -124,7 +124,7 @@ const App = () => {
             <AlumnoProvider>
               <AuthProvider>
                 {currentComponent || (
-                  <div className="">
+                  <div >
                     <Navbar
                       loggedInUser={loggedInUser}
                       onLogout={logout}

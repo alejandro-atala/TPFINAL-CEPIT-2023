@@ -37,7 +37,7 @@ const ProximosEventos = () => {
      <div className="col-md-3 col-sm-6 col-xs-12">
     <SideMenu />
 </div>
-    <div className="col-md-9 proximos-eventos mt-5 text-center">
+    <div className="col-md-6 flex-column proximos-eventos mt-5 text-center">
       <div className="row justify-content-center w-100">
         <div className="text-center">
           <h1 className='titulo-evento'>{titulo}</h1>
