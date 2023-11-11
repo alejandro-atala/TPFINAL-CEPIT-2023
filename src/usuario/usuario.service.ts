@@ -1,4 +1,4 @@
-import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, ExecutionContext, HttpException, HttpStatus, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { Usuario } from './entities/usuario.entity';
@@ -322,6 +322,27 @@ if (avisos && avisos.length > 0) {
   
   
   
+  async validarToken(token: string): Promise<boolean> {
+    try {
+      console.log("ser", token);
+      // Decodificar el token para verificar la fecha de expiración
+      const decodedToken = this.jwtService.verify(token, { ignoreExpiration: false });
 
+      // Verificar la fecha de expiración
+      const expirationDate = new Date(decodedToken.exp * 1000); // La fecha de expiración en segundos
+      if (expirationDate <= new Date()) {
+        console.log('Token expirado');
+        return false;
+      }
+
+      // Otra lógica de autorización personalizada aquí...
+
+      return true; // Permitir la solicitud si todo está correcto
+    } catch (error) {
+      console.error('Error al validar el token:', error);
+      // Manejar errores de decodificación u otros errores
+      return false;
+    }
+  }
 
 }

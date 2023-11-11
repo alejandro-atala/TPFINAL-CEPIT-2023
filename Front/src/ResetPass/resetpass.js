@@ -21,12 +21,40 @@ const ResetPass = () => {
         const queryParams = new URLSearchParams(window.location.search);
         const token = queryParams.get('email');
         setEmail(token);
-        console.log('Token de la URL:', token); // <-- Move this line inside the useEffect
+    
+        validarToken(token);
     }, []);
 
+    const validarToken = async (token) => {
 
-
-
+        try {
+            // Realiza una solicitud al servidor para validar el token
+            const response = await axios.post('http://localhost:3000/usuario/resetpassword/token', { token });
+       
+           console.log("esperando...", response)
+         
+            // La respuesta del servidor indicará si el token es válido
+            if (!response.data.message ==='Token activo') {
+                console.log('El token no es válido');
+                setShowErrorAlert("Token expirado");
+                setTimeout(() => {
+                    setShowErrorAlert(null);
+                    // Puedes redirigir al usuario a otra página aquí si lo deseas
+                }, 4000);
+            }
+        } catch (error) {
+            console.error('Error al validar el token:', error);
+            setShowErrorAlert("Token expirado");
+            setTimeout(() => {
+                setShowErrorAlert(null);
+            }, 4000);
+        }
+    };
+    
+ 
+ 
+    
+      
 
 
 
@@ -67,7 +95,7 @@ const ResetPass = () => {
     
             } catch (error) {
                 console.error('Error al restablecer la contraseña:', error.response.data);
-                setShowErrorAlert(true);
+                setShowErrorAlert("Token expirado");
                 setTimeout(() => {
                     setShowErrorAlert(null);
                 }, 2000); // 2000 milisegundos (2 segundos)
@@ -124,10 +152,11 @@ const ResetPass = () => {
                 <div>
                     {showErrorAlert && (
                         <Alert variant="danger" className="mt-3 text-center">
-                            {passwordsMatch
-                                ? "Token expirado"
+                             {showErrorAlert}
+                            {/* {passwordsMatch
+                                ? "Las contraseñas no coinciden o la nueva contraseña tiene menos de 8 caracteres."
                                 : "Las contraseñas no coinciden o la nueva contraseña tiene menos de 8 caracteres."
-                            }
+                            } */}
                         </Alert>
                     )}
                 </div>

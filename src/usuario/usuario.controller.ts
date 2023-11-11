@@ -86,4 +86,22 @@ export class UsuarioController {
   
 
 
+  @Post('resetpassword/token')
+  async validarToken(@Body('token') token: string): Promise<{ message: string }> {
+    console.log("controller",token);
+    try {
+      // Llama a la función que maneja la validación del token en el servicio
+      const tokenValido = await this.usuarioService.validarToken(token);
+
+      if (tokenValido) {
+        return { message: 'Token activo.' };
+      } else {
+        throw new BadRequestException('Token expirado o no válido');
+      }
+    } catch (error) {
+      console.error('Error al validar el token:', error);
+      throw new BadRequestException('No se pudo verificar el token');
+    }
+  }
+
   }
