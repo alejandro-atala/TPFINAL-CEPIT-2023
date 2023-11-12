@@ -2,12 +2,12 @@
 .titulo-beneficios {
   font-size: xx-large;
   font-family: 'Times New Roman', Times, serif;
-  color: black;
+  color: var(--color-titulos);
   text-transform: uppercase;
 }
 
 .lista-beneficios {
-  border-top: 1px solid black;
+  border-top: 1px solid var(--color-bordes);
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 30px;
   list-style: none;
@@ -20,8 +20,8 @@
   width: 40%;
   border-radius: 25px;
   padding: 5%;
-  background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
-  box-shadow: 40px 20px 40px rgb(111, 108, 108);
+  background: var(--color-cuadro);
+  box-shadow: 40px 20px 40px var(--color-sombras);
   margin-bottom: 10%;
   margin-right: 5%;
 }

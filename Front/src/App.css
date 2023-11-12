@@ -1,11 +1,24 @@
 body {
-  background-image: url('../../Front/src/ImagenesDescargadas/fondo.png');
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
-
 }
 
+:root {
+  --color-nav-foot: #3498db; 
+  --color-menu-lateral: rgb(61, 114, 61);
+  --color-boton: black; 
+  --color-palabra-boton: white;
+  --color-boton-transicion: rgb(195, 17, 17);
+  --color-cuadro: yellow;
+  --color-subcuadro: pink;
+  --color-sombras: black;
+  --color-subtitulos: red;
+  --color-titulos: green;
+  --color-bordes: black;
+  --color-sombras-titulos: brown;
+  --color-fondo: rgb(238, 156, 156);
+}
 
 
   /* .center-content {
@@ -22,4 +35,5 @@ align-content: center;
 
    .colu{
     min-height: 100vh;
+    background-color: var(--color-fondo);
    }

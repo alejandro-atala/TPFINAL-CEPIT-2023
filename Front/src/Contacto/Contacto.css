@@ -8,9 +8,9 @@
 }
 
 .btn-enviar{
-    background-color: #0d0e0d; 
+    background-color: var(--color-boton); 
     border: none;
-    color: white;
+    color: var(--color-palabra-boton);
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -25,8 +25,8 @@
 }
 
 .btn-enviar:hover{
-    background-color: #4f5052;
-    color: white;
+    background-color: var(--color-boton-transicion);
+    color: var(--color-palabra-boton);
 }
 
 .cel{
@@ -36,9 +36,9 @@
 }
 
 .btn-custom {
-    background-color: #0d0e0d; 
+    background-color: var(--color-boton); 
     border: none;
-    color: white;
+    color: var(--color-palabra-boton);
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -51,11 +51,13 @@
 
 
 .btn-custom:hover {
-    background-color: #4f5052;
-    color: white;
+    background-color: var(--color-boton-transicion);
+    color: var(--color-palabra-boton);
 }
 
-
+.titulo-contacto {
+    color: var(--color-titulos);
+}
 .contacto-input{
     padding: 1.3%;
     margin-bottom: 5%;

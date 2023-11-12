@@ -1,15 +1,20 @@
 
-.titulo-plan{
+.titulo-plan {
   margin-bottom: 5%; 
+  color: var(--color-titulos);
 }
 
 .materias {
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid #578ee5;
+  border-top: 1px solid var(--color-bordes);
 }
 
-.plan{
+.card-title-plan {
+  color: var(--color-subtitulos);
+}
+
+.plan {
   width: auto;
   margin-right: 5%;
   margin-left: 3%;

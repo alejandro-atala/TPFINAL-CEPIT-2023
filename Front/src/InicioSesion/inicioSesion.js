@@ -155,7 +155,7 @@ const InicioSesion = ({ onLogin }) => {
     <div className=" rounded mt-3">
     <div className="d-flex justify-content-center align-items-center ">
       <div className="rounded text-center col-xs-12 col-md-4 col-sm-3 p-5 mt-4 bg-sesion">
-        <h2 className="text-center">Iniciar sesión</h2>
+        <h2 className="titulo-sesion text-center">Iniciar sesión</h2>
       {message && <div className="alert alert-danger">{message}</div>}
       <form onSubmit={handleSubmit}>
             <div className="form-group">

@@ -1,5 +1,5 @@
 .titulo-taller {
-  color: black; 
+  color: var(--color-titulos); 
   font-size: xx-large;
   font-family: 'Times New Roman', Times, serif;
 
@@ -25,7 +25,7 @@
 
 .llamado-titulo {
   font-family: 'Irish Grover', sans-serif;
-  color: rgb(0, 0, 0);
+  color: var(--color-subtitulos);
   font-size: 30px;
   margin-bottom: 10%;
 }
@@ -37,11 +37,11 @@
 }
 
 .taller {
-  width: 30%;
+  width: 80%;
   border-radius: 5%;
   padding: 3%; 
-  background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
-  box-shadow: 40px 20px 40px rgb(111, 108, 108);
+  background: var(--color-cuadro) ;
+  box-shadow: 40px 20px 40px var(--color-sombras);
   margin-left: 2%;
 }
 

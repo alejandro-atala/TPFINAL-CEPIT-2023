@@ -2,15 +2,15 @@
     width: 100%;
     border-radius: 25px;
     padding: 3%;
-    background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
-    box-shadow: 40px 20px 40px rgb(111, 108, 108);
+    background: var(--color-cuadro);
+    box-shadow: 40px 20px 40px var(--color-sombras);
 }
 
 .btn-reglamento{
-    background-color: #0d0e0d;
+    background-color: var(--color-boton);
     border: none; 
     border-radius: 10%;
-    color: white;
+    color: var(--color-palabra-boton);
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -22,13 +22,14 @@
 }
 
 .btn-reglamento:hover {
-    background-color: #4f5052;
-    color: white;
+    background-color: var(--color-boton-transicion);
+    color: var(--color-palabra-boton);
 }
 
 .card-title-reglamento{
     width: auto;
     font-size: 100%;
+    color: var(--color-subtitulos);
 }
 
 .card-reglamento {
@@ -45,4 +46,14 @@
     border-top-right-radius: 25px;
     border-bottom-left-radius: 25px ;
     border-bottom-right-radius: 25px;
+}
+
+
+.title-reglamento {
+    font-size: xx-large;
+    font-family: 'Times New Roman', Times, serif;
+    color: var(--color-titulos);
+    text-transform: uppercase;
+    margin-bottom: 2%;
+    text-shadow: 0px 4px 8px var(--color-sombras-titulos);
 }

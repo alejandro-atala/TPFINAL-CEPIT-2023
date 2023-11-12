@@ -97,7 +97,7 @@ const Contacto = () => {
       <div className="mt-5 flex-column text-center" style={{ maxWidth: '500px' }}>
         <div className="card card-custom">
           <div className="card-body">
-            <h1 className="card-title">¡Contáctanos!</h1>
+            <h1 className="titulo-contacto card-title">¡Contáctanos!</h1>
             <p className="card-text">
               ¿Necesita ayuda o tiene alguna pregunta? Déjenos sus datos y su consulta,
               y nos pondremos en contacto con usted lo antes posible.

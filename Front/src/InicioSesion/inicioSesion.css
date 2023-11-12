@@ -1,20 +1,24 @@
 .bg-sesion {
     width: 30%;
-    box-shadow: 40px 20px 40px rgb(111, 108, 108);
-    background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
+    box-shadow: 40px 20px 40px var(--color-sombras);
+    background: var(--color-cuadro);
     border-radius: 20%;
     padding: 10%;
 }
 
 .btn-sesion:hover {
-    background-color: #4f5052;
-    color: white;
+    background-color: var(--color-boton-transicion);
+    color: var(--color-palabra-boton);
+}
+
+.titulo-sesion {
+  color: var(--color-titulos);
 }
 
 .btn-sesion{
-    background-color: #0d0e0d; /* Color de fondo personalizado */
+    background-color: var(--color-boton);
     border: none;
-    color: white;
+    color: var(--color-palabra-boton);
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
