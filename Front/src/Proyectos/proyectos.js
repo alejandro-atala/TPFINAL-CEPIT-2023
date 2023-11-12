@@ -69,7 +69,7 @@ const Proyectos = () => {
     return (
 
 
-        <div className="flex-column text-center my-auto">
+        <div className="flex-column text-center my-auto box">
             <div className="col-md-12">
                 <h1 className="titulo-proyectos ">{textoProyecto}</h1>
                 <div className="texto-proyectos ">

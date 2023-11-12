@@ -32,3 +32,9 @@
     box-shadow: 0px 2px 4px var(--color-sombras);
     object-fit: cover;
 }
+
+.box{
+ 
+    padding-top:3%;
+
+}
