@@ -40,7 +40,7 @@ const InicioSesion = ({ onLogin }) => {
     try {
       // Check if the email exists in the database
       const checkEmailResponse = await axios.get(
-      `http://localhost:3000/usuario/email/${formData.email}`
+      `https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/usuario/email/${formData.email}`
       );
   console.log(checkEmailResponse.data)
       if (checkEmailResponse.data.email.length > 0) {
@@ -48,7 +48,7 @@ const InicioSesion = ({ onLogin }) => {
 
      setShowSuccessAlert({ message: 'Enviando email......' });
 
-      const sendEmailResponse = await axios.post('http://localhost:3000/email/reset', {
+      const sendEmailResponse = await axios.post('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/email/reset', {
         email: formData.email,
       });
 
@@ -87,7 +87,7 @@ const InicioSesion = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/usuario/login', formData);
+      const response = await axios.post('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/usuario/login', formData);
       const newToken = response.data.token;
       setToken(newToken);
       console.log("inicio", response.data)
@@ -103,7 +103,7 @@ const InicioSesion = ({ onLogin }) => {
       else if (response.data.tipo === 'Alumno') {
 
         // Una vez que tengas el ID del usuario, realiza una solicitud GET para obtener el ID del alumno
-        const resp = await axios.get(`http://localhost:3000/alumno/usuario/${idUsuario}`);
+        const resp = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/alumno/usuario/${idUsuario}`);
         const alumnoData = resp.data;
 
         if (alumnoData) {
@@ -114,7 +114,7 @@ const InicioSesion = ({ onLogin }) => {
         navigate('/alumno');
 
       } else if (response.data.tipo === 'Profesor') {
-        const resp = await axios.get(`http://localhost:3000/profesor/usuario/${idUsuario}`);
+        const resp = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/profesor/usuario/${idUsuario}`);
         const profesorData = resp.data;
 
 

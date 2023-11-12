@@ -22,7 +22,7 @@ const MateriasProf = () => {
 
   const fetchMaterias = async (cursoText) => {
     try {
-      const response = await axios.get(`http://localhost:3000/materias-curso/${cursoText}`);
+      const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/materias-curso/${cursoText}`);
       const materiaCursoData = response.data;
 
       if (materiaCursoData.length > 0) {

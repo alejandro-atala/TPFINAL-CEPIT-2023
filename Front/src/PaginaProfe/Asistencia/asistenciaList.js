@@ -21,7 +21,7 @@ const AsistenciaList = () => {
 
   const fetchAnios = async () => {
     try {
-      const response = await fetch('http://localhost:3000/curso/anios');
+      const response = await fetch('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/curso/anios');
       const data = await response.json();
       setAnios(data);
     } catch (error) {
@@ -31,7 +31,7 @@ const AsistenciaList = () => {
 
   const fetchAlumnosPorAnio = async (anio) => {
     try {
-      const response = await fetch(`http://localhost:3000/alumno/por-anio/${anio}`);
+      const response = await fetch(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/alumno/por-anio/${anio}`);
       const data = await response.json();
       setAlumnos(data);
     } catch (error) {
@@ -89,7 +89,7 @@ const AsistenciaList = () => {
 
     try {
       console.log(attendanceData)
-      await axios.post('http://localhost:3000/asistencia', attendanceData, {
+      await axios.post('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/asistencia', attendanceData, {
         headers: {
           'Authorization': `${token}`,
           'Content-Type': 'application/json',

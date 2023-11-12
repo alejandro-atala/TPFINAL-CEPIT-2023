@@ -17,7 +17,7 @@ const Reglamento = () => {
   useEffect(() => {
     const obtenerTextoPorReferencia = async (referencia, setTextoReglamento) => {
       try {
-        const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
+        const responseTexto = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/carga/${referencia}`);
         setTextoReglamento(responseTexto.data.texto);
       } catch (error) {
         console.error(`Error al obtener datos de ${referencia}:`, error);
@@ -26,7 +26,7 @@ const Reglamento = () => {
 
     const  obtenerTituloPorReferencia = async (referencia, setTituloReglamento) => {
       try {
-        const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
+        const responseTexto = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/carga/${referencia}`);
         setTituloReglamento(responseTexto.data.texto);
    
       } catch (error) {
@@ -38,7 +38,7 @@ const Reglamento = () => {
       try {
 
 
-        const responseImagen = await axios.get(`http://localhost:3000/imagenes/nombre/${referencia}`);
+        const responseImagen = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/imagenes/nombre/${referencia}`);
 
         if (responseImagen.data) {
           setImagenReglamento(responseImagen.data.url);
@@ -50,7 +50,7 @@ const Reglamento = () => {
   
       const cargarDatosPorReferencia = async (referencia, setDato) => {
           try {
-              const response = await axios.get(`http://localhost:3000/carga/${referencia}`);
+              const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/carga/${referencia}`);
               setDato(response.data.texto);
           } catch (error) {
               console.error(`Error al cargar los datos de ${referencia}:`, error);

@@ -19,7 +19,7 @@ const HomePage = () => {
   useEffect(() => {
     const obtenerTextoPorId = async (id, setTexto) => {
       try {
-        const response = await axios.get(`http://localhost:3000/carga/id/${id}`);
+        const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/carga/id/${id}`);
         var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
 
         setTexto(textoConSaltosDeLinea);
@@ -31,7 +31,7 @@ const HomePage = () => {
 
     const obtenerTextoPorReferencia = async (referencia, setTextoHistorial) => {
       try {
-        const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
+        const responseTexto = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/carga/${referencia}`);
         var textoConSaltosDeLinea = responseTexto.data.texto.replace(/\n/g, "<br>");
 
         setTextoHistorial(textoConSaltosDeLinea);
@@ -51,7 +51,7 @@ const HomePage = () => {
     const obtenerImagenesPorNombres = async (nombres) => {
       try {
         const imagePromises = nombres.map(async (nombre) => {
-          const response = await axios.get(`http://localhost:3000/imagenes/nombre/${nombre}`);
+          const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/imagenes/nombre/${nombre}`);
 
           return response.data.url;
         });
@@ -66,7 +66,7 @@ const HomePage = () => {
 
     const obtenerImagenPorReferencia = async (referencia, setImagen) => {
       try {
-        const responseImagen = await axios.get(`http://localhost:3000/imagenes/nombre/${referencia}`);
+        const responseImagen = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/imagenes/nombre/${referencia}`);
 
         if (responseImagen.data) {
 

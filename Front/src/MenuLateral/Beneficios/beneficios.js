@@ -10,7 +10,7 @@ const Beneficios = () => {
   useEffect(() => {
     const obtenerTextoPorReferencia = async (referencia, setTexto) => {
       try {
-        const response = await axios.get(`http://localhost:3000/carga/${referencia}`);
+        const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/carga/${referencia}`);
         var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
 
         setTexto(textoConSaltosDeLinea);
