@@ -26,11 +26,11 @@ import { ChatGateway } from './chat-gateway';
   imports: [
   TypeOrmModule.forRoot({
     type: "mysql",
-    host: "localhost",
+    host: "btrom4yni4bmtr5krkqu-mysql.services.clever-cloud.com",
     port: 3306,
-    username: "root",
-    password: "root",
-    database: "escuela",
+    username: "ulwf3kdkhjixd7i3",
+    password: "ulwf3kdkhjixd7i3",
+    database: "btrom4yni4bmtr5krkqu",
     entities: [
       "dist/**/**.entity{.ts,.js}", "node_modules/@nestjs/jwt"
     ],
