@@ -117,9 +117,10 @@ const ResetPass = () => {
 
 
     return (
-        <div className="container rounded text-center col-xs-12 col-md-4 col-sm-3 p-5 mt-4 bg-sesion">
+        <div className="container d-flex justify-content-center align-items-center ">
+        <div className="container rounded text-center col-xs-12 col-md-4 col-sm-3 p-5 align-items-center bg-sesion">
             <form onSubmit={handlePasswordResetSubmit}>
-                <div className="form-group">
+                <div className="form-group ">
                     <label htmlFor="newPassword">Nueva contraseña:</label>
                     <input
                         type="password"
@@ -176,6 +177,7 @@ const ResetPass = () => {
                     )} */}
                 </div>
             </form>
+        </div>
         </div>
     );
 };
