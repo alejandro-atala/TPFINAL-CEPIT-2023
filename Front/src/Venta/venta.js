@@ -18,7 +18,7 @@ function Venta() {
     setIsLoading(true);
     try {
 
-      const response = await axios.post(`http://localhost:3000/email/suscripcion`, formData);
+      const response = await axios.post(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/email/suscripcion`, formData);
       console.log('Solicitud POST exitosa', response.data);
 
       toast.success('Correo enviado con éxito', {

@@ -20,7 +20,7 @@ const Contacto = () => {
   useEffect(() => {
     const cargarDatosPorReferencia = async (referencia, setDato) => {
       try {
-        const response = await axios.get(`http://localhost:3000/carga/${referencia}`);
+        const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/carga/${referencia}`);
         setDato(response.data.texto);
       } catch (error) {
         console.error(`Error al cargar los datos de ${referencia}:`, error);
@@ -63,7 +63,7 @@ const Contacto = () => {
         email: email,
       };
       console.log(formData);
-      const response = await axios.post(`http://localhost:3000/email/contacto`, formData);
+      const response = await axios.post(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/email/contacto`, formData);
       console.log('Solicitud POST exitosa', response.data);
 
       toast.success('Correo enviado con éxito', {

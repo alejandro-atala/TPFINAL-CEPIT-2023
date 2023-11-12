@@ -9,7 +9,7 @@ const Historial = () => {
   useEffect(() => {
     const obtenerTextoPorReferencia = async (referencia, setTextoHistorial) => {
       try {
-        const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
+        const responseTexto = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/carga/${referencia}`);
         var textoConSaltosDeLinea = responseTexto.data.texto.replace(/\n/g, "<br>");
 
         setTextoHistorial(textoConSaltosDeLinea);
