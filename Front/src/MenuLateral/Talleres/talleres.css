@@ -7,14 +7,12 @@
 
 .img-taller {
   width: 100%;
-  height: 200px; 
-  object-fit: cover; 
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-bottom-left-radius: 25px ;
-  border-bottom-right-radius: 25px;
+  height: 200px; /* Ajusta la altura según tus necesidades */
+  object-fit: cover;
+  border-radius: 25px;
   margin-bottom: 20%;
 }
+
 
 .card-body-taller{
   display: flex;
@@ -37,9 +35,10 @@
 }
 
 .taller {
+
   width: 100%;
   border-radius: 5%;
-  padding: 3%; 
+  margin-bottom: 3%; 
   background: var(--color-cuadro) ;
   box-shadow: 20px 20px 40px var(--color-sombras);
   margin-left: 6%;
