@@ -36,11 +36,11 @@ const AvisosNotificationBadge = () => {
         const idAlumno = alumnoLogueado.idAlumno;
 
         try {
-          const response = await axios.get(`http://localhost:3000/alumno-aviso/existe/${idAviso}/${idAlumno}`);
+          const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/alumno-aviso/existe/${idAviso}/${idAlumno}`);
           const existeAviso = response.data;
 
           if (!existeAviso) {
-            const responseMarcarLeido = await axios.put(`http://localhost:3000/alumno-aviso/marcar-leidos/${idAviso}/${alumnoLogueado.idAlumno}`);
+            const responseMarcarLeido = await axios.put(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/alumno-aviso/marcar-leidos/${idAviso}/${alumnoLogueado.idAlumno}`);
             if (responseMarcarLeido.status === 200) {
               console.log(`Aviso ${idAviso} marcado como leído con éxito`);
               markAvisoComoLeido(idAviso);

@@ -64,7 +64,7 @@ const AdminPage = () => {
 
   const cargarDatos = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/${selectedTable}`);
+      const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/${selectedTable}`);
       const data = response.data;
 
       setTableData(data);
@@ -100,7 +100,7 @@ const AdminPage = () => {
         idFieldName = 'idCurso';
       }
       const id = editedData[rowIndex][idFieldName];
-      const url = `http://localhost:3000/${selectedTable}/${id}`;
+      const url = `https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/${selectedTable}/${id}`;
       await axios.delete(url);
 
       const updatedData = editedData.filter((row, index) => index !== rowIndex);
@@ -134,7 +134,7 @@ const AdminPage = () => {
         }
       }
 
-      await axios.put(`http://localhost:3000/${selectedTable}/${id}`, fieldsToUpdate);
+      await axios.put(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/${selectedTable}/${id}`, fieldsToUpdate);
 
       const updatedData = [...editedData];
       updatedData[rowIndex] = updatedRow;
@@ -184,7 +184,7 @@ const AdminPage = () => {
 
 
       // Envía la nueva fila al servidor para su creación
-      const response = await axios.post(`http://localhost:3000/${selectedTable}`, newRowData);
+      const response = await axios.post(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/${selectedTable}`, newRowData);
       const addedRow = response.data;
 
       // Agrega la fila completa al estado local

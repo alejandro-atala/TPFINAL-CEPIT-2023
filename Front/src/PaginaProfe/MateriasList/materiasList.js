@@ -20,7 +20,7 @@ const MateriasList = () => {
 
   const fetchCursos = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/curso/anios');
+      const response = await axios.get('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/curso/anios');
       const data = response.data;
 
       if (Array.isArray(data)) {
@@ -35,7 +35,7 @@ const MateriasList = () => {
 
   const fetchMaterias = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/materias');
+      const response = await axios.get('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/materias');
       const data = response.data;
 
       if (Array.isArray(data)) {
@@ -56,7 +56,7 @@ const MateriasList = () => {
     if (selectedCursoId) {
       setIsCursoSelected(true);
       try {
-        const response = await axios.get(`http://localhost:3000/materias-curso/${selectedCursoId}`);
+        const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/materias-curso/${selectedCursoId}`);
         const materiaCursoData = response.data;
   
         if (materiaCursoData.length > 0) {
@@ -106,7 +106,7 @@ const MateriasList = () => {
       }));
       
 
-      const response = await axios.post('http://localhost:3000/materias-curso/guardar', materiaData, {
+      const response = await axios.post('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/materias-curso/guardar', materiaData, {
         headers: {
           'Content-Type': 'application/json',
         },

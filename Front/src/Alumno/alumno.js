@@ -24,7 +24,7 @@ const Alumno = () => {
       }
 
       try {
-        const response = await axios.get('http://localhost:3000/avisos');
+        const response = await axios.get('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/avisos');
         const avisosData = response.data;
         setAvisos(avisosData);
 
@@ -39,7 +39,7 @@ const Alumno = () => {
           const unreadCount = await Promise.all(
             idsAvisosSinLeer.map(async (idAviso) => {
               try {
-                const response = await axios.get(`http://localhost:3000/alumno-aviso/existe/${idAviso}/${alumnoLogueado.idAlumno}`);
+                const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/alumno-aviso/existe/${idAviso}/${alumnoLogueado.idAlumno}`);
                 const existeAviso = response.data;
                 return !existeAviso;
               } catch (error) {
@@ -73,7 +73,7 @@ const Alumno = () => {
       }
   
       const avisoId = avisosSinLeer[0]; // Aquí deberías seleccionar el aviso correcto
-      const response = await axios.put(`http://localhost:3000/alumno-aviso/marcar-leidos/${avisoId}/${alumnoLogueado.idAlumno}`);
+      const response = await axios.put(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/alumno-aviso/marcar-leidos/${avisoId}/${alumnoLogueado.idAlumno}`);
   
       if (response.status === 200) {
         const avisoSeleccionado = avisos.find((aviso) => aviso.idAviso === avisoId);
@@ -100,7 +100,7 @@ const Alumno = () => {
       }
 
       for (const idAviso of idsAvisos) {
-        const response = await axios.get(`http://localhost:3000/alumno-aviso/existe/${idAviso}/${idAlumno}`);
+        const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/alumno-aviso/existe/${idAviso}/${idAlumno}`);
 
         if (!response.data) {
           console.log('Mostrar notificación para el aviso con ID:', idAviso);
@@ -110,7 +110,7 @@ const Alumno = () => {
             alumnoIdAlumno: idAlumno,
           };
 
-          const responseGuardar = await axios.post('http://localhost:3000/alumno-aviso', data);
+          const responseGuardar = await axios.post('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/alumno-aviso', data);
 
           if (responseGuardar.status === 201) {
             console.log('AlumnoAviso creado exitosamente.');
