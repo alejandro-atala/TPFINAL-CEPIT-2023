@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 const Logo = () => {
 
     return (
-        <div className="mt-5 d-flex justify-content-center align-items-center logo ">
-        <div className="col-md-9 text-center">
+        <div className="p-5 d-flex justify-content-center align-items-center logo  ">
+        <div className="col-md-9 text-center ">
             <h2>
-              <img src="https://images4.imagebam.com/9c/af/6d/MENQMV5_o.png" alt="Logo" className="logo" />
+              <img src="https://images4.imagebam.com/9c/af/6d/MENQMV5_o.png" alt="Logo" className="logo " />
             </h2>
             <h5 className='subtitulo-venta'>GRACIAS POR CONTRATAR NUESTRO SERVICIO</h5>
             <div className='texto-venta'>
