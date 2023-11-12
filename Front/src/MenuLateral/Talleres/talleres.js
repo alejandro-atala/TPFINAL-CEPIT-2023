@@ -170,7 +170,7 @@ const Talleres = () => {
   const titulo = 'Talleres Disponibles en Nuestras Instalaciones';
 
   return (
-    <div className="d-flex align-items-center">
+    <div className="">
     <div className="row">
     <div className="col-md-3 col-sm-6 col-xs-12">
     <SideMenu />
