@@ -109,9 +109,9 @@ console.log(id, value);
     <div className="col-md-3 col-sm-6 col-xs-12">
     <SideMenu />
 </div>
-        <div className="col-md-9 mt-5 d-flex justify-content-center align-items-center">
-          <div className="container-inscripcion rounded text-center p-5 bg-registro">
-            <h2 className="titulo-resgistro text-center">Registro de usuario</h2>
+        <div className="col-md-9 mt-5 d-flex justify-content-center align-items-center ">
+          <div className="container-inscripcion rounded text-center p-5 ">
+            <h2 className=" text-center">Registro de usuario</h2>
             <form>
               <div className="form-group">
                 <label htmlFor="nombre">Nombre completo:</label>
