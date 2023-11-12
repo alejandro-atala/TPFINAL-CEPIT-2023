@@ -50,7 +50,7 @@ const PlanDeEstudios = () => {
             <div className="row plan">
               {Object.keys(materiasPorCurso).map((curso) => (
                 <div key={curso} className="col-md-6 col-lg-4 mb-4">
-                  <div className="card shadow">
+                  <div className="cuadro ">
                     <div className="card-body text-center"> {/* Utilizamos la clase text-center para centrar el contenido */}
                       <h2 className="card-title-plan">{` ${curso}`}</h2>
                       <div className="materias">

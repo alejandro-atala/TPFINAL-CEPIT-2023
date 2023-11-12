@@ -6,18 +6,18 @@ body {
 
 :root {
   --color-nav-foot: #3498db; 
-  --color-menu-lateral: rgb(61, 114, 61);
+  --color-menu-lateral: rgba(116, 116, 116, 0.496);
   --color-boton: black; 
   --color-palabra-boton: white;
   --color-boton-transicion: rgb(195, 17, 17);
-  --color-cuadro: yellow;
+  --color-cuadro: rgba(48, 164, 85, 0.563);
   --color-subcuadro: pink;
-  --color-sombras: black;
-  --color-subtitulos: red;
-  --color-titulos: green;
+  --color-sombras: rgba(0, 0, 0, 0.522);
+  --color-subtitulos: rgb(0, 0, 0);
+  --color-titulos: rgb(0, 0, 0);
   --color-bordes: black;
-  --color-sombras-titulos: brown;
-  --color-fondo: rgb(238, 156, 156);
+  --color-sombras-titulos: rgba(0, 0, 0, 0.445);
+  --color-fondo: rgb(255, 255, 255);
 }
 
 

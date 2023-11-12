@@ -27,7 +27,7 @@
   font-family: 'Irish Grover', sans-serif;
   color: var(--color-subtitulos);
   font-size: 30px;
-  margin-bottom: 10%;
+  margin-bottom: 1%;
 }
 
 
@@ -37,12 +37,12 @@
 }
 
 .taller {
-  width: 80%;
+  width: 100%;
   border-radius: 5%;
   padding: 3%; 
   background: var(--color-cuadro) ;
-  box-shadow: 40px 20px 40px var(--color-sombras);
-  margin-left: 2%;
+  box-shadow: 20px 20px 40px var(--color-sombras);
+  margin-left: 6%;
 }
 
 .img-cont-taller{

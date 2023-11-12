@@ -170,15 +170,15 @@ const Talleres = () => {
   const titulo = 'Talleres Disponibles en Nuestras Instalaciones';
 
   return (
-    <div>
+    <div className="d-flex align-items-center">
     <div className="row">
     <div className="col-md-3 col-sm-6 col-xs-12">
     <SideMenu />
 </div>
-        <div className="col-md-9 mt-5  flex-column  ">   
+<div className="col-md-8 a-proximos-eventos mt-5 text-center mx-auto">
       <h1 className="titulo-taller  ">{titulo}</h1>
-      <div className="mt-4 p-5">
-        <div className="row row-cols-1 row-cols-md-4 g-4">
+      <div className="mx-auto">
+        <div className="row row-cols-1 row-cols-md-4 g-4 mx-auto">
           <div className="col taller">
             <div className="img-taller h-100">
               {imagenTaller1 && <img src={imagenTaller1} className="img-taller" alt="..." />}
@@ -230,7 +230,7 @@ const Talleres = () => {
         </div>
       </div>
       <div className="col-end rectangulo-llamado rounded">
-        <p className="llamado-titulo text-center">Inscribirse llamando al: {textoTelefono}</p>
+        <p className="llamado-titulo text-center mt-5">Inscribirse llamando al: {textoTelefono}</p>
       </div>
     </div>
     </div>
