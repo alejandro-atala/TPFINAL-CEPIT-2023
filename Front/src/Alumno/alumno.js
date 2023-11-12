@@ -130,7 +130,7 @@ const Alumno = () => {
 
   return (
    
-    <div className="container  ">
+    <div className="container pb-5 ">
       <div className="row row-cols-1 row-cols-md-3 g-4 ">
         <div className="col">
           <div className="fondo h-100 ">

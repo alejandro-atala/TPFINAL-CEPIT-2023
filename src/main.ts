@@ -12,7 +12,7 @@ async function bootstrap() {
   
   // Configura CORS aquí
   app.enableCors({
-    origin: 'http://localhost:3001', // Cambia esta URL al dominio del frontend
+    origin: ['http://localhost:3001','https://tp-final-39700.web.app'], // Cambia esta URL al dominio del frontend
     credentials: true, // Habilita las credenciales (cookies, encabezados de autenticación, etc.)
   });
 
