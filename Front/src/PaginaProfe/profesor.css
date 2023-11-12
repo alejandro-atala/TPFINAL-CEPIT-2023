@@ -60,3 +60,7 @@
     transition-duration: 0.4s;
     cursor: pointer;
 }
+
+.container{
+  padding-top:3%;
+}

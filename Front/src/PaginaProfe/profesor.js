@@ -7,10 +7,10 @@ import './profesor.css';
 const Profesor = () => {
   return (
     <>
-          <div variant="danger" className="mt-3 text-center">
+          <div variant="danger" className="text-center">
       <SessionExpiration />
     </div>
-    <div className="container mt-4 p-5">
+    <div className="container ">
     <div className="row row-cols-1 row-cols-md-3 g-4 ">
        <div className="col ">
           <div className="fondo h-100">

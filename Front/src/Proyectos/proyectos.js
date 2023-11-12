@@ -71,8 +71,8 @@ const Proyectos = () => {
 
         <div className="flex-column text-center my-auto">
             <div className="col-md-12">
-                <h1 className="titulo-proyectos mt-5">{textoProyecto}</h1>
-                <div className="texto-proyectos">
+                <h1 className="titulo-proyectos ">{textoProyecto}</h1>
+                <div className="texto-proyectos ">
                     <p className="text-center" dangerouslySetInnerHTML={htmlProcesado}></p>
                 </div>
             </div>

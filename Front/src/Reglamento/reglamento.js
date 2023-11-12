@@ -79,7 +79,7 @@ const Reglamento = () => {
 
   return (
     <div className="mt-5  flex-column text-center my-auto">
-      <div className="card-body m-5">
+      <div className="card-body ">
         <h1 className="title-reglamento">{reglamento1}</h1>
         <div className="row">
           <div className="col-md-4 card-reglamento">
