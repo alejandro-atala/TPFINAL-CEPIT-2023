@@ -15,10 +15,10 @@ const Directivos = () => {
   useEffect(() => {
     const obtenerTextoEImagenPorReferencia = async (referencia, setTexto, setImagen) => {
       try {
-        const responseTexto = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/carga/${referencia}`);
+        const responseTexto = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referencia}`);
         setTexto(responseTexto.data.texto);
 
-        const responseImagen = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/imagenes/nombre/${referencia}`);
+        const responseImagen = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/imagenes/nombre/${referencia}`);
 
         if (responseImagen.data) {
         

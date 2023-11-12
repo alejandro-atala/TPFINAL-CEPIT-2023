@@ -9,7 +9,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io](https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io) to view it in your browser.
+Open [https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io](https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.

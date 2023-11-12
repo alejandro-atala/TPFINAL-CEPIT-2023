@@ -13,7 +13,7 @@ const Solicitudes = () => {
 
     const fetchUsers= async () => {
     try {
-      const response = await axios.get('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/solicitudes');
+      const response = await axios.get('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/solicitudes');
       const data = response.data;
       console.log(data)
       setUsers(data);
@@ -24,13 +24,13 @@ const Solicitudes = () => {
 
   const acceptUser = async (user) => {
     try {
-      const response = await axios.post('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/usuario', user);
+      const response = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/usuario', user);
  
       console.log('User accepted and added to Usuarios table', response.data);
 
      
       setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.idUsuario));
-      await axios.delete(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/solicitudes/${user.idUsuario}`);
+      await axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/solicitudes/${user.idUsuario}`);
       fetchUsers();
 
       console.log("mailOptions");
@@ -41,7 +41,7 @@ const Solicitudes = () => {
       };
 
 console.log(mailOptions);
-      const mail = await axios.post(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/email/solicitud`, mailOptions);
+      const mail = await axios.post(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/email/solicitud`, mailOptions);
       console.log('Envio de email exitoso', mail.data);
 
 
@@ -51,7 +51,7 @@ console.log(mailOptions);
   };
 
   const rejectUser = async (user) => {
-    axios.delete(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/solicitudes/${user.idUsuario}`)
+    axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/solicitudes/${user.idUsuario}`)
       .then(async () => {
         setUsers((prevUsers) => prevUsers.filter((user) => user.id !== user.idUsuario));
   fetchUsers();
@@ -64,7 +64,7 @@ console.log(mailOptions);
   };
 
 
-  const mail = await axios.post(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/email/solicitud`, mailOptions);
+  const mail = await axios.post(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/email/solicitud`, mailOptions);
   console.log('Envio de email exitoso', mail.data);
 
 

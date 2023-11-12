@@ -19,8 +19,8 @@ const Boletin = () => {
 
     try {
       // Obtener datos de materias y notas del estudiante aquí
-      const materiasResponse = await axios.get('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/materias');
-      const notasResponse = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/notas-examenes/${alumnoLogueado.idAlumno}`); // Obtener notas del usuario registrado
+      const materiasResponse = await axios.get('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/materias');
+      const notasResponse = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/notas-examenes/${alumnoLogueado.idAlumno}`); // Obtener notas del usuario registrado
 
       setMaterias(materiasResponse.data);
       setNotas(notasResponse.data);

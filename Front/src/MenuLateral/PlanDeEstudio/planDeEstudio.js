@@ -10,7 +10,7 @@ const PlanDeEstudios = () => {
   useEffect(() => {
     const obtenerMateriasPorId = async (id) => {
       try {
-        const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/materias-curso/${id}`);
+        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/materias-curso/${id}`);
         const materias = response.data.map((row) => row.materia);
         return materias;
       } catch (error) {

@@ -31,7 +31,7 @@ const AvisosProfe = () => {
     try {
       if (usuarioLogueado) {
         // Realiza una solicitud para obtener el ID del profesor del usuario logueado
-        const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/profesor/${usuarioLogueado.id}`);
+        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/profesor/${usuarioLogueado.id}`);
         const profesorId = response.data.idProfesor;
 
         // Ahora que tienes el idProfesor, puedes filtrar los avisos por ese valor
@@ -60,7 +60,7 @@ const AvisosProfe = () => {
 
   const fetchAvisos = async (profesorId) => {
     try {
-      const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/avisos`);
+      const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/avisos`);
       const todosLosAvisos = response.data;
 
       // Filtra los avisos por el ID del profesor actual
@@ -90,7 +90,7 @@ const AvisosProfe = () => {
 
 
     // Realiza una solicitud para obtener el ID del profesor
-    const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/profesor/${usuarioLogueado.id}`);
+    const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/profesor/${usuarioLogueado.id}`);
     const profesorId = response.data.idProfesor;
 
     const nuevoAviso = {
@@ -102,7 +102,7 @@ const AvisosProfe = () => {
     };
 
     // Envía el nuevo aviso al servidor
-    await axios.post('https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/avisos', nuevoAviso);
+    await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/avisos', nuevoAviso);
 
     setAvisos([...avisos, nuevoAviso]);
     setAvisoContent('');
@@ -123,7 +123,7 @@ const AvisosProfe = () => {
 
   const handleGuardarEdicion = async () => {
     try {
-      await axios.put(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/avisos/${avisoEditId}`, {
+      await axios.put(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/avisos/${avisoEditId}`, {
         contenido: avisoEditText,
       });
 
@@ -145,7 +145,7 @@ const AvisosProfe = () => {
 
   const handleEliminarClick = async (id) => {
     try {
-      await axios.delete(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/avisos/${id}`);
+      await axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/avisos/${id}`);
   
       // Use a callback function in setAvisos to ensure you are working with the latest state
       setAvisos(prevAvisos => prevAvisos.filter((aviso) => aviso.idAviso !== id));

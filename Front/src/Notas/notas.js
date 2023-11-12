@@ -19,7 +19,7 @@ const Notas = () => {
   const fetchNotas = async () => {
     try {
 
-      const response = await axios.get(`https://app-9d7fdcc2-2916-41fd-93f1-ef602d6afbcc.cleverapps.io/notas-examenes/${alumnoLogueado.idAlumno}`);
+      const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/notas-examenes/${alumnoLogueado.idAlumno}`);
       const notasData = response.data; // Asumiendo que response.data es un Array de objetos de nota
       setNotas(notasData);
       console.log(notasData);
