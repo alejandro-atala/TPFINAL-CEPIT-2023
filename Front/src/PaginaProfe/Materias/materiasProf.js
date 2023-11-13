@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useUsuario } from '../../usuarioContext';
+import './materiasProf.css';
 
 const MateriasProf = () => {
   const [materiaCursoInputs, setMateriaCursoInputs] = useState(Array(25).fill(''));
@@ -87,10 +88,10 @@ const MateriasProf = () => {
           ))}
         </select>
       </div>
-      <div className="table-responsive mb-4">
-      <table className="table table-bordered">
-  <thead>
-    <tr>
+      <div className="table-responsive mb-4 fondo-tabla">
+      <table className=" ">
+  <thead >
+    <tr >
       <th className="column-header">Horario</th>
       <th className="column-header">Lunes</th>
       <th className="column-header">Martes</th>

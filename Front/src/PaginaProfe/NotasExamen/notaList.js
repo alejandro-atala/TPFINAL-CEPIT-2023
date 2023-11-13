@@ -220,7 +220,7 @@ useEffect(() => {
           <h2 className="text-center">Alumnos de {selectedAnio}</h2>
           <ListGroup>
             {alumnos.map((alumno) => (
-              <ListGroup.Item key={alumno.idAlumno} className="d-flex align-items-center justify-content-between">
+              <ListGroup.Item key={alumno.idAlumno} className="d-flex align-items-center justify-content-between borde-notas">
                 <span>{alumno.nombre}</span>
                 <Col sm={3} className="px-0">
                   <Form.Control
@@ -228,7 +228,7 @@ useEffect(() => {
                     onChange={(e) => handleNotaChange(e, alumno.idAlumno)}
                     value={alumno.selectedNota}
                     className="custom-select"
-                    style={{ width: '70px' }}
+                    style={{ width: '100px' }}
                   >
                     <option value="">Nota</option>
                     {Array.from({ length: 10 }, (_, index) => (

@@ -49,7 +49,7 @@ const Asistencia = () => {
   };
 
   return (
-    <div className='col-9 mx-auto'>
+    <div className=' p-5 col-9 mx-auto'>
       <h4 className='titulo-asistencia'>Registro de asistencias e inasistencias</h4>
       <table className="custom-table tabla-asistencia">
 

@@ -44,8 +44,8 @@ const calculateOneWeekAfter = (inputDate) => {
   const notasTrimestre0 = notas.filter((nota) => nota.trimestre === 0);
 
   return (
-    <div>
-      <h4 className='titulo-notas'>Aquí podrás ver las notas de tus exámenes</h4>
+    <div className='container'>
+      <h4 className='titulo-notas '>Aquí podrás ver las notas de tus exámenes</h4>
 
       <table className='tabla-notas'>
         <thead>

@@ -1,19 +1,24 @@
-table {
+/* table {
     border-collapse: collapse;
     width: 100%;
+
   }
   
   th, td {
     padding: 8px;
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #f30e0e;
   }
   
   tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #e91010;
   }
 
   .column-header {
-    width: 200px; /* Establece el ancho fijo deseado */
+    width: 200px; 
   }
   
+  */
+  .fondo-tabla{
+border: solid 1px ;
+  } 

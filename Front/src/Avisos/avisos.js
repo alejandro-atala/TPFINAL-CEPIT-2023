@@ -57,13 +57,13 @@ const Avisos = () => {
 
 
   return (
-    <div>
+    <div className='p-5'>
       <div className="row">
         <h4 className="titulo-avisos text-center">Avisos recibidos</h4>
       </div>
       <div>
         {avisos.map((aviso) => (
-          <div key={aviso.idAviso} className="card-avisos mt-3">
+          <div key={aviso.idAviso} className="card-avisos mt-3 mx-auto">
             <div>
               <h5 className="card-title">Aviso del profesor: <span className="nombre-profesor">{aviso.nombreProfesor}</span></h5>
               <h6>Información para el Curso:  <span className="numero-curso">{aviso.curso}</span></h6>

@@ -450,7 +450,7 @@ const handleDelete = async (option) => {
   const chatPrivadoRef = useRef();
 
   return (
-    <div className="Chat mt-5 row">
+    <div className="Chat  row">
       <div className="col-md-3 mt-5">
         <h5 className={chatAbierto ? 'ChatTitle' : 'TituloUsuarios'}>
           <span className={chatAbierto ? 'TituloChat' : 'TituloUsuarios'}>
