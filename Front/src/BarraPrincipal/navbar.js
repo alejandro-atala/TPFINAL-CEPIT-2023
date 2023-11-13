@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './navbar.css';
 import { useUsuario } from '../usuarioContext';
 import { Link, useNavigate } from 'react-router-dom'; // Importa useHistory
@@ -8,7 +8,9 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
   const navigate = useNavigate(); // Obtiene el objeto de historial
 
 
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true); // Estado del menú desplegable
 
+  const handleNavCollapse = () => setIsNavCollapsed(!isNavCollapsed); // Función para cambiar el estado del menú desplegable
 
   const handleHelloUserClick = () => {
     if (usuarioLogueado.tipo === 'Alumno') {
@@ -33,14 +35,15 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
         />
       </Link>
       <button
-        className="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+  className="navbar-toggler"
+  type="button"
+  data-bs-toggle="collapse"
+  data-bs-target="#navbarNav"
+  aria-controls="navbarNav"
+  aria-expanded={!isNavCollapsed} // Cambiar la propiedad aria-expanded según el estado del menú desplegable
+  aria-label="Toggle navigation"
+  onClick={handleNavCollapse} // Llamar a la función para cambiar el estado del menú desplegable
+>
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">

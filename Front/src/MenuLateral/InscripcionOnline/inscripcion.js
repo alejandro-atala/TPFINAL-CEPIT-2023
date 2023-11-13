@@ -105,10 +105,13 @@ console.log(id, value);
 
   return (
     <div className="side">
-    <div className="row ">
-    <div className="col-md-3 col-sm-6 col-xs-12">
-    <SideMenu />
-</div>
+    <div className="row">
+      <div className="col-md-3 col-sm-6 col-xs-12">
+        {/* Utiliza clases de Bootstrap para ocultar en pantallas pequeñas */}
+        <div className="d-none d-sm-block">
+          <SideMenu />
+        </div>
+      </div>
         <div className="col-md-9 mt-5 d-flex justify-content-center align-items-center">
           <div className="container-inscripcion rounded text-center p-5 bg-registro">
             <h2 className="text-center">Registro de usuario</h2>

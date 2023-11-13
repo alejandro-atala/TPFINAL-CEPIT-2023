@@ -153,86 +153,81 @@ const InicioSesion = ({ onLogin }) => {
 
   return (
     
-    <div className=" rounded mt-3">
-    <div className="d-flex justify-content-center align-items-center ">
-      <div className="rounded text-center col-xs-12 col-md-4 col-sm-3 p-5 mt-4 bg-sesion">
-        <h2 className="text-center">Iniciar sesión</h2>
-      {message && <div className="alert alert-danger">{message}</div>}
-      <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Correo electrónico:</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                ref={emailInputRef}
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Contraseña:</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="checkbox">
-              
-            </div>
-            <button type="submit" id="btn-iniciar" className="btn btn-sesion mt-5">
+    <div className="container mt-3">
+    <div className="row justify-content-center align-items-center">
+      <div className="col-xs-12 col-md-6 col-lg-4 p-3 bg-sesion rounded">
+        <h2 className="text-center mb-4">Iniciar sesión</h2>
+        {message && <Alert variant="danger">{message}</Alert>}
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">
+              Correo electrónico:
+            </label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              ref={emailInputRef}
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">
+              Contraseña:
+            </label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <button type="submit" className="btn btn-sesion w-100">
               Iniciar sesión
             </button>
+          </div>
+          <div className="mb-3">
             <button
               type="button"
-              id="btn-pass"
-              className="btn btn-sesion mt-2"
-              onClick={() => {
-                handlePasswordReset();
-
-              }}
+              className="btn btn-sesion w-100"
+              onClick={handlePasswordReset}
             >
               Olvidé mi contraseña
             </button>
-
-     
-          <Link  type="button"
-              id="btn-pass"
-              className="btn btn-sesion mt-4"
-              to="/inscripcion-online" >
-              Registrarse
-            </Link>
-
-          </form>
-          <div className="App">
-            {showSuccessAlert && (
-              <Alert variant="success" className="mt-3 text-center">
-                {showSuccessAlert.message}
-              </Alert>
-            )}
-            {errorAlert && (
-              <Alert variant="danger" className="mt-3 text-center">
-                {errorAlert}
-              </Alert>
-            )}
-            {showEmailWarning && (
-              <Alert variant="danger" className="mt-3 text-center">
-                Debes ingresar tu correo electrónico.
-              </Alert>
-            )}
-            <Routes>
-              <Route path="/inicio-sesion" element={<InicioSesion />} />
-            </Routes>
           </div>
-        </div>
+          <Link
+            to="/inscripcion-online"
+            className="btn btn-sesion w-100"
+          >
+            Registrarse
+          </Link>
+        </form>
+        {showSuccessAlert && (
+          <Alert variant={showSuccessAlert.variant} className="mt-3 text-center">
+            {showSuccessAlert.message}
+          </Alert>
+        )}
+        {errorAlert && (
+          <Alert variant="danger" className="mt-3 text-center">
+            {errorAlert}
+          </Alert>
+        )}
+        {showEmailWarning && (
+          <Alert variant="danger" className="mt-3 text-center">
+            Debes ingresar tu correo electrónico.
+          </Alert>
+        )}
+        <Routes>
+          <Route path="/inicio-sesion" element={<InicioSesion />} />
+        </Routes>
       </div>
-      </div>
-
-   
-  );
+    </div>
+  </div>
+);
 };
+
 
 export default InicioSesion;

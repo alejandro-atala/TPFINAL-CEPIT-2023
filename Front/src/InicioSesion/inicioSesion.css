@@ -1,8 +1,8 @@
 .bg-sesion {
-    width: 30%;
+    width: 80%;
     box-shadow: 40px 20px 40px rgb(111, 108, 108);
     background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
-    border-radius: 20%;
+    border-radius: 5%;
     padding: 10%;
 }
 
