@@ -6,12 +6,45 @@ import SessionExpiration from '../SesionExpired';
 import Solicitudes from './Solicitudes/solicitudes';
 
 const AdminPage = () => {
+  const [loading, setLoading] = useState(true);
+
   const [selectedTable, setSelectedTable] = useState('');
   const [tableData, setTableData] = useState([]);
   const [editedData, setEditedData] = useState([]);
   const [newRowData, setNewRowData] = useState({});
   const [sessionExpired, setSessionExpired] = useState(false);
   const [columns, setColumns] = useState([]);
+  const [colors, setColors] = useState({
+    '--color-nav-foot': '',
+    '--color-menu-lateral': '',
+'    --color-boton':'',
+  '  --color-palabra-boton':'',
+'    --color-boton-transicion':'',
+   ' --color-cuadro':'',
+ '   --color-subcuadro':'',
+'    --color-sombras':'',
+  '  --color-subtitulos':'',
+'    --color-titulos':'',
+  '  --color-bordes':'',
+  '  --color-sombras-titulos':'',
+   ' --color-fondo:':'',
+  });
+
+  const referencesToFetch = [
+    '--color-nav-foot',
+    '--color-menu-lateral',
+    '--color-boton',
+    '--color-palabra-boton',
+    '--color-boton-transicion',
+    '--color-cuadro',
+    '--color-subcuadro',
+    '--color-sombras',
+    '--color-subtitulos',
+    '--color-titulos',
+    '--color-bordes',
+    '--color-sombras-titulos',
+    '--color-fondo',
+  ];
 
   const requiredFields = {
     curso: ['idCurso', 'anio'],
@@ -206,8 +239,117 @@ const AdminPage = () => {
 
   const isTableEmpty = tableData.length === 0;
 
+
+  // function abrirPaleta() {
+  //   const colorElegido = prompt("Por favor, introduce un color en formato hexadecimal (#FFFFFF) o de nombre (por ejemplo, 'blue'):");
+  
+  //   if (colorElegido) {
+  //     document.documentElement.style.setProperty('--color-nav-foot', colorElegido);
+  //   }
+  // }
+  
+  const handleChangeColor = (variable, nuevoColor) => {
+    setColors({ ...colors, [variable]: nuevoColor });
+    document.documentElement.style.setProperty(variable, nuevoColor);
+  };
+
+
+  
+  const handleGuardarColor = (color, variable) => {
+    axios
+      .get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${color}`)
+      .then((response) => {
+        const data = response.data;
+       
+        if (data) {
+          console.log('resp',data)
+          // Si la referencia ya existe, actualiza el campo 'texto' con el nuevo valor del color
+          const referenceToUpdate = data; // Tomamos la primera entrada, ya que debería ser la última
+          console.log('aaa',referenceToUpdate)
+          // Actualiza la entrada existente con el nuevo valor de 'texto'
+          axios
+            .put(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referenceToUpdate.id}`, {
+            
+              texto: variable,
+            })
+            .then((response) => {
+              console.log('Color actualizado con éxito:', response.data);
+              // Aquí puedes manejar la lógica después de actualizar el color si es necesario
+            })
+            .catch((error) => {
+              console.error('Error al actualizar el color:', error);
+              // Manejar el error en caso de fallo al actualizar
+            });
+        } else {
+          // Si no hay datos, significa que la referencia no existe y se crea una nueva entrada
+          axios
+            .post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/text', {
+              referencia: color,
+              texto: variable,
+            })
+            .then((response) => {
+              console.log('Color guardado con éxito:', response.data);
+              // Aquí puedes manejar la lógica después de guardar el color si es necesario
+            })
+            .catch((error) => {
+              console.error('Error al guardar el color:', error);
+              // Manejar el error en caso de fallo al guardar
+            });
+        }
+      })
+      .catch((error) => {
+        console.error('Error al verificar la existencia de la referencia:', error);
+        // Manejar el error en caso de fallo al verificar la existencia de la referencia
+      });
+  };
+  
+  
+  
+  
+  const fetchColorsFromTable = async () => {
+    try {
+      const colorsData = {};
+  
+      // Realizar la solicitud para obtener los colores asociados a las referencias
+      for (const reference of referencesToFetch) {
+        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${reference}`);
+        
+        colorsData[reference] = response.data.texto || ''; // Valor por defecto si no hay datos
+      }
+  
+      // Establecer los colores en la paleta de colores
+      setColors(colorsData);
+    } catch (error) {
+      console.error('Error al obtener los colores de la tabla:', error);
+    }
+  };
+  
+
+  useEffect(() => {
+    // Llamar a la función para obtener los colores al cargar la página
+    fetchColorsFromTable();
+    // ... (otros useEffects)
+  }, []);
+  
+  
+  
   return (
 <div className="admin-page d-flex flex-column">
+<div className="admin-page d-flex flex-column mt-5">
+      {Object.entries(colors).map(([variable, color]) => (
+        <div key={variable} className="color-selector">
+          <input
+            type="color"
+            value={color}
+            onChange={(e) => handleChangeColor(variable, e.target.value)}
+          />
+          <label htmlFor={variable}>{variable}</label>
+          <button onClick={() => handleGuardarColor(variable, color)}>Guardar</button>
+        </div>
+      ))}
+    </div>
+
+
   <Solicitudes />
   <div className="mx-auto mt-5 text-center">
     <h4>Editar contenido de tablas</h4>
