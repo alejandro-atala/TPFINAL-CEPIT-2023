@@ -24,7 +24,7 @@ const Historial = () => {
     
   return (
     <div className=" d-flex justify-content-center align-items-center box ">
-      <div className="col-md-6 text-center">
+      <div className="col-md-6 text-center box">
         <h1 className="titulo-historial">SOBRE NUESTRA INSTITUCIÓN</h1>
         <p className="texto-historial text-center" dangerouslySetInnerHTML={htmlProcesado}></p>
       </div>

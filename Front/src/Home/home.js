@@ -128,7 +128,7 @@ const HomePage = () => {
               </div>
               <div>
                 <div classname="col-md-3 extra-home ">
-                  <div className="cuadro-imagen-home mt-5">
+                  <div className="cuadro-imagen-home mt-5 mb-5">
                     <h3 className="titulo-home2">{titulohome1}</h3>
                     {homeImage1 && <img src={homeImage2} className="imagen-home" style={{ maxWidth: '300px' }} alt="foto home 2" />}
                     {homeImage1 && <img src={homeImage1} className="imagen-home" style={{ maxWidth: '300px' }} alt="foto home 1" />}
