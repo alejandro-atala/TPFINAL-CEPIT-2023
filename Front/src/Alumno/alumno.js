@@ -130,10 +130,10 @@ const Alumno = () => {
 
   return (
    
-    <div className="container mt-4 p-5 ">
+    <div className="container pb-5 ">
       <div className="row row-cols-1 row-cols-md-3 g-4 ">
         <div className="col">
-          <div className="card h-100 ">
+          <div className="fondo h-100 ">
             <img src="https://images4.imagebam.com/ef/e7/3b/MENRF6F_o.jpg" className="img-profe" alt="..." />
             <div className="card-body">
               <h5 className="card-title-profe">Notas de exámenes</h5>
@@ -146,7 +146,7 @@ const Alumno = () => {
           </div>
         </div>
         <div className="col">
-          <div className="card h-100">
+          <div className="fondo h-100">
             <img src="https://images4.imagebam.com/75/42/5c/MENRF62_o.jpg" className="img-profe" alt="..." />
             <div className="card-body">
               <h5 className="card-title-profe">Boletín</h5>
@@ -159,7 +159,7 @@ const Alumno = () => {
           </div>
         </div>
         <div className="col">
-          <div className="card h-100">
+          <div className="fondo h-100">
             <img src="https://images4.imagebam.com/08/79/bf/MENRF6G_o.jpg" className="img-profe" alt="..." />
             <div className="card-body">
               <h5 className="card-title-profe">Materias del año en curso</h5>
@@ -172,7 +172,7 @@ const Alumno = () => {
           </div>
         </div>
         <div className="col">
-          <div className="card h-100">
+          <div className="fondo h-100">
             <img src="https://images4.imagebam.com/3e/e8/24/MENRF5Z_o.jpg" className="img-profe" alt="..." />
             <div className="card-body">
               <h5 className="card-title-profe">Asistencias</h5>
@@ -185,7 +185,7 @@ const Alumno = () => {
           </div>
         </div>
         <div className="col">
-  <div className="card h-100">
+  <div className="fondo h-100">
     <img src="https://images4.imagebam.com/96/d2/c0/MENRF61_o.jpg" className="img-profe" alt="..." />
     <div className="card-body">
       <h5 className="card-title-profe">
@@ -212,7 +212,7 @@ const Alumno = () => {
 </div>
 
 <div className={`col ${isCardDisabled ? 'disabled-card' : ''}`}>
-  <div className="card h-100">
+  <div className="fondo h-100">
     <img src="https://images4.imagebam.com/d5/79/59/MENRF6I_o.jpg" className="img-profe" alt="..." />
     <div className="card-body">
       <h5 className="card-title-profe">Enviar mensaje</h5>

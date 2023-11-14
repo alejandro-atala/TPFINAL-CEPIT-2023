@@ -142,7 +142,7 @@ const AsistenciaList = () => {
             </Form.Group>
           </Form>
           <h2 className="text-center">Alumnos de {selectedAnio}</h2>
-          <ListGroup className="d-flex flex-wrap justify-content-center">
+          <ListGroup className="d-flex flex-wrap justify-content-center borde">
             {alumnos.map((alumno) => (
               <ListGroup.Item key={alumno.idAlumno} className="d-flex justify-content-around align-items-center">
                 <span>{alumno.nombre}</span>

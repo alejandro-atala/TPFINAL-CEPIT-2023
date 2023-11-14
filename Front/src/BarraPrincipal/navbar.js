@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './navbar.css';
 import { useUsuario } from '../usuarioContext';
 import { Link, useNavigate } from 'react-router-dom'; // Importa useHistory
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Navbar = ({ loggedInUser, onLogout, userType }) => {
   const { usuarioLogueado } = useUsuario();
@@ -26,7 +28,7 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-pink">
+    <nav className="navbar  navbar-expand-lg navbar-light bg-pink">
       <Link to="/logo" className="navbar-brand">
         <img
           src="https://images4.imagebam.com/9c/af/6d/MENQMV5_o.png"

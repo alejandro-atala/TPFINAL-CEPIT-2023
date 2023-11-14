@@ -153,39 +153,40 @@ const InicioSesion = ({ onLogin }) => {
 
   return (
     
-    <div className="container mt-3">
-    <div className="row justify-content-center align-items-center">
-      <div className="col-xs-12 col-md-6 col-lg-4 p-3 bg-sesion rounded">
-        <h2 className="text-center mb-4">Iniciar sesión</h2>
-        {message && <Alert variant="danger">{message}</Alert>}
-        <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Correo electrónico:
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              ref={emailInputRef}
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Contraseña:
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-3">
-            <button type="submit" className="btn btn-sesion w-100">
+
+<div className="rounded">
+  <div className="d-flex justify-content-center align-items-center">
+    <div className="rounded text-center col-12 col-md-4 col-sm-3 p-5 mt-4 mx-auto bg-sesion">
+      
+        <h2 className="titulo-sesion text-center">Iniciar sesión</h2>
+      {message && <div className="alert alert-danger">{message}</div>}
+      <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="email">Correo electrónico:</label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                ref={emailInputRef}
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Contraseña:</label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="checkbox">
+              
+            </div>
+            <button type="submit" id="btn-iniciar" className="btn btn-sesion mt-5">
+
               Iniciar sesión
             </button>
           </div>

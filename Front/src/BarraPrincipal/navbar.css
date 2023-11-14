@@ -1,6 +1,6 @@
 
 .bg-pink {
-  background-color: rgba(232, 225, 190, 0.928);
+  background-color: var(--color-nav-foot);
   font-size: 95%;
   width: 100%;
 }
@@ -8,7 +8,7 @@
 .navbar-logo {
   width: 30%;
   height: auto;
-  margin-left: 20%; 
+  /* margin-left: 20%;  */
 }
 
 .nav-item {
@@ -17,15 +17,15 @@
 }
 
 
-.nav-link {
-  transition: color 0.3s ease, background-color 0.3s ease;
-  border-radius: 5px;
-  color: black;
-}
+/* .nav-link {
+  /* transition: color 0.3s ease, background-color 0.3s ease; */
+  /* border-radius: 5px;
+  color: var(--color-boton); 
+} */
 
 .nav-link:hover {
-  color: white;
-  background-color: rgb(15, 15, 15);
+  color: var(--color-palabra-boton) !important;
+  background-color: var(--color-boton);
 }
 
 .container-navbar{

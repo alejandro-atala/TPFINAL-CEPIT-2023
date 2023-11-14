@@ -158,7 +158,7 @@ const AvisosProfe = () => {
   
 
   return (
-    <div className='col-6 mx-auto'>
+    <div className='col-6 mx-auto p-5'>
       <div className="row">
         <h4 className="card-title">Enviar avisos al curso</h4>
         <form onSubmit={handleSubmit}>
@@ -194,7 +194,7 @@ const AvisosProfe = () => {
       </div>
       <div>
       {avisos.slice().reverse().map((aviso) => (
-  <div key={aviso.idAviso} className="card mb-4">
+  <div key={aviso.idAviso} className="borde mb-4">
             <div className="card-body">
               <h5>Aviso dirigido al Curso:  <span className="numero-curso">{aviso.curso}</span></h5>
         {aviso.idAviso === avisoEditId ? (

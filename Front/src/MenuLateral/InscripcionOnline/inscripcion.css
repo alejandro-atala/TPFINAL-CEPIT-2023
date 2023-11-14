@@ -2,17 +2,20 @@
 .container-inscripcion{
   width: 80%;
   border-radius: 25px;
-  padding: 10%;
-  background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
-  box-shadow: 40px 20px 40px rgb(111, 108, 108);
+  background: var(--color-cuadro);
+  box-shadow: 40px 20px 40px var(--color-sombras);
   margin-bottom: 10%;
-  
+  margin-left: -10%;
+}
+
+.titulo-resgistro {
+  color: var(--color-titulos);
 }
 
 .btn-registro{
-  background-color: #0d0e0d; 
+  background-color: var(--color-boton); 
   border: none;
-  color: white;
+  color: var(--color-palabra-boton);
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -27,6 +30,6 @@
 }
 
 .btn-registro:hover{
-  background-color: #4f5052;
-  color: white;
+  background-color: var(--color-boton-transicion);
+  color: var(--color-palabra-boton);
 }

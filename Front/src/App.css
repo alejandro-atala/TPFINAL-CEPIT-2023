@@ -1,11 +1,25 @@
 body {
-  background-image: url('../../Front/src/ImagenesDescargadas/fondo.png');
+  background-image: none;
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
-
 }
 
+:root {
+  --color-nav-foot: #34db5093; 
+  --color-menu-lateral: rgba(116, 116, 116, 0.496);
+  --color-boton: black; 
+  --color-palabra-boton: white;
+  --color-boton-transicion: rgb(88, 0, 0);
+  --color-cuadro: rgba(169, 111, 93, 0.563);
+  --color-subcuadro: pink;
+  --color-sombras: rgba(0, 0, 0, 0.522);
+  --color-subtitulos: rgb(0, 0, 0);
+  --color-titulos: rgb(0, 0, 0);
+  --color-bordes: black;
+  --color-sombras-titulos: rgba(0, 0, 0, 0.445);
+  --color-fondo: rgb(255, 255, 255);
+}
 
 
   /* .center-content {
@@ -22,4 +36,6 @@ align-content: center;
 
    .colu{
     min-height: 100vh;
+    background-color: var(--color-fondo);
+
    }

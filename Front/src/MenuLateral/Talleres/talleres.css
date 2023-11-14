@@ -1,5 +1,5 @@
 .titulo-taller {
-  color: black; 
+  color: var(--color-titulos); 
   font-size: xx-large;
   font-family: 'Times New Roman', Times, serif;
 
@@ -7,14 +7,12 @@
 
 .img-taller {
   width: 100%;
-  height: 200px; 
-  object-fit: cover; 
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
-  border-bottom-left-radius: 25px ;
-  border-bottom-right-radius: 25px;
+  height: 200px; /* Ajusta la altura según tus necesidades */
+  object-fit: cover;
+  border-radius: 25px;
   margin-bottom: 20%;
 }
+
 
 .card-body-taller{
 
@@ -26,9 +24,9 @@
 
 .llamado-titulo {
   font-family: 'Irish Grover', sans-serif;
-  color: rgb(0, 0, 0);
+  color: var(--color-subtitulos);
   font-size: 30px;
-  margin-bottom: 10%;
+  margin-bottom: 1%;
 }
 
 
@@ -38,12 +36,13 @@
 }
 
 .taller {
-  width: 30%;
+
+  width: 100%;
   border-radius: 5%;
-  padding: 3%; 
-  background-image: linear-gradient(to bottom,rgba(187, 179, 150, 0.928) , #d1e9ff);
-  box-shadow: 40px 20px 40px rgb(111, 108, 108);
-  margin-left: 2%;
+  margin-bottom: 3%; 
+  background: var(--color-cuadro) ;
+  box-shadow: 20px 20px 40px var(--color-sombras);
+  margin-left: 6%;
 }
 
 .img-cont-taller{

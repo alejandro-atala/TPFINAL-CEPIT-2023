@@ -81,7 +81,7 @@ const Boletin = () => {
   };
   
   return (
-    <div className='mt-5'>
+    <div className='p-5'>
       <h2 className='titulo-boletin'>Boletín de Notas</h2>
       <Table className='tabla-boletin'striped bordered hover>
         <thead>

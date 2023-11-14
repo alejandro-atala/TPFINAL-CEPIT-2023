@@ -1,6 +1,6 @@
 
 .container-footer {
-  background-color: rgba(187, 179, 150, 0.928);
+  background-color: var(--color-nav-foot);
   padding: 0.2%;
     bottom: 0;
     width: 100%;
@@ -15,11 +15,11 @@
 .social-icons a {
   font-size: 100%;
   margin: 0 10px;
-  color: #333; 
+  color: var(--color-boton);
   transition: color 0.3s; 
 }
 
 .social-icons a:hover {
-  color: white; 
+  color: var(--color-palabra-boton);
 }
 

@@ -1,6 +1,6 @@
 .side-menu {
   width: 80%;
-  background-color: rgba(201, 196, 171, 0.928);
+  background-color: var(--color-menu-lateral);
   color: rgb(9, 8, 8);
   padding: 20px;
   left: 0;
@@ -22,8 +22,8 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  border-bottom: 3px solid rgb(14, 15, 16); 
-  border-top: 3px solid rgb(8, 8, 8) ;
+  border-bottom: 3px solid var(--color-bordes); 
+  border-top: 3px solid var(--color-bordes) ;
   /* text-decoration: underline; */
   margin-top: 10%;
   margin-bottom: 15%;
@@ -51,8 +51,8 @@
 }
 
 .menu-item:hover {
-  background-color: #4f5052;
-  color: white;
+  background-color: var(--color-boton);
+  color: var(--color-palabra-boton);
   margin-left: 5%;
 }
 
