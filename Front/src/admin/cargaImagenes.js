@@ -22,7 +22,7 @@ const CargaImagenes = () => {
 
   const obtenerUrlImagenExistente = async (nombrePagina) => {
     try {
-      const response = await axios.get(`http://localhost:3000/imagenes/nombre/${nombrePagina}`);
+      const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/imagenes/nombre/${nombrePagina}`);
   
       if (response.data) {
         const imageUrl = response.data.url;
@@ -60,7 +60,7 @@ const CargaImagenes = () => {
   
       const imageUrl = response.data.secure_url;
   
-      const responseDB = await axios.post('http://localhost:3000/imagenes', {
+      const responseDB = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/imagenes', {
         nombre: nombrePagina,
         url: imageUrl,
       });
@@ -107,7 +107,7 @@ const CargaImagenes = () => {
 
     try {
       // Realiza una solicitud DELETE a la API para eliminar la imagen por nombre
-      const response = await axios.delete(`http://localhost:3000/imagenes/nombre/${nombrePagina}`);
+      const response = await axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/imagenes/nombre/${nombrePagina}`);
       console.log('Imagen borrada con éxito:', response.data);
 
       // Actualiza los mensajes de éxito y error

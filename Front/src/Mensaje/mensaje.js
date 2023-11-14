@@ -36,7 +36,7 @@ function Mensaje() {
 
   useEffect(() => {
     // Cargar la lista de usuarios al montar el componente
-    fetch('http://localhost:3000/usuario')
+    fetch('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/usuario')
       .then((response) => response.json())
       .then((data) => {
         const usuariosExcluyendoActual = data.filter(
@@ -50,7 +50,7 @@ function Mensaje() {
 
     // Establecer la conexión con el servidor de sockets
     if (!socket && usuarioLogueado?.id) {
-      const newSocket = io('http://localhost:3000', {
+      const newSocket = io('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io', {
         query: { usuario: usuarioLogueado.nombre },
       });
 
@@ -82,7 +82,7 @@ function Mensaje() {
 
   const fetchPreviousMessages = async (senderId, receiverId) => {
     try {
-      const response = await fetch(`http://localhost:3000/messages/previous/${senderId}/${receiverId}`);
+      const response = await fetch(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/messages/previous/${senderId}/${receiverId}`);
   
       if (response.ok) {
         const data = await response.json();
@@ -210,7 +210,7 @@ function Mensaje() {
       };
 
       try {
-        const response = await fetch('http://localhost:3000/messages', {
+        const response = await fetch('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/messages', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -271,7 +271,7 @@ function Mensaje() {
       }
 
       try {
-        const response = await fetch('http://localhost:3000/messages', {
+        const response = await fetch('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/messages', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -346,7 +346,7 @@ const handleDelete = async (option) => {
                 );
                 // Enviar solicitud para marcar el mensaje como eliminado para ti en el servidor
                 const response = await fetch(
-                  `http://localhost:3000/messages/${messageId}`,
+                  `https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/messages/${messageId}`,
                   {
                     method: 'PATCH',
                     headers: {
@@ -377,7 +377,7 @@ const handleDelete = async (option) => {
               if (option === 'deleteForAll') {
                 // Enviar solicitud para eliminar el mensaje de la base de datos
                 const response = await fetch(
-                  `http://localhost:3000/messages/${messageId}`,
+                  `https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/messages/${messageId}`,
                   {
                     method: 'DELETE',
                     headers: {

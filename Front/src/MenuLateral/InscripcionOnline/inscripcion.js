@@ -87,7 +87,7 @@ console.log(id, value);
 
     try {
       console.log(formData)
-      const response = await axios.post('http://localhost:3000/solicitudes', formData);
+      const response = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/solicitudes', formData);
       console.log('Registro exitoso:', response.data);
       setSuccessMessage('Procesando su solicitud. Recibira un email a la brevedad.');
       setErrorMessage([]);
@@ -105,6 +105,7 @@ console.log(id, value);
 
   return (
     <div className="side">
+
     <div className="row ">
     <div className="col-md-3 col-sm-6 col-xs-12">
     <SideMenu />
@@ -112,6 +113,7 @@ console.log(id, value);
         <div className="col-md-9 mt-5 d-flex justify-content-center align-items-center ">
           <div className="container-inscripcion rounded text-center p-5 ">
             <h2 className=" text-center">Registro de usuario</h2>
+
             <form>
               <div className="form-group">
                 <label htmlFor="nombre">Nombre completo:</label>

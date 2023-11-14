@@ -19,7 +19,7 @@ const HomePage = () => {
   useEffect(() => {
     const obtenerTextoPorId = async (id, setTexto) => {
       try {
-        const response = await axios.get(`http://localhost:3000/carga/id/${id}`);
+        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/id/${id}`);
         var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
 
         setTexto(textoConSaltosDeLinea);
@@ -31,7 +31,7 @@ const HomePage = () => {
 
     const obtenerTextoPorReferencia = async (referencia, setTextoHistorial) => {
       try {
-        const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
+        const responseTexto = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referencia}`);
         var textoConSaltosDeLinea = responseTexto.data.texto.replace(/\n/g, "<br>");
 
         setTextoHistorial(textoConSaltosDeLinea);
@@ -51,7 +51,7 @@ const HomePage = () => {
     const obtenerImagenesPorNombres = async (nombres) => {
       try {
         const imagePromises = nombres.map(async (nombre) => {
-          const response = await axios.get(`http://localhost:3000/imagenes/nombre/${nombre}`);
+          const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/imagenes/nombre/${nombre}`);
 
           return response.data.url;
         });
@@ -66,7 +66,7 @@ const HomePage = () => {
 
     const obtenerImagenPorReferencia = async (referencia, setImagen) => {
       try {
-        const responseImagen = await axios.get(`http://localhost:3000/imagenes/nombre/${referencia}`);
+        const responseImagen = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/imagenes/nombre/${referencia}`);
 
         if (responseImagen.data) {
 
@@ -95,12 +95,14 @@ const HomePage = () => {
   return (
     <div className="container-home">
     <div className="row">
+
       <div className="col-md-3 col-sm-6 col-xs-12 d-none d-sm-block">
         {/* Utiliza clases de Bootstrap para ocultar en pantallas pequeñas */}
         {/* <div className=""> */}
           <SideMenu />
         {/* </div> */}
       </div>
+
         <div className="col-md-9 mt-5 flex-column">
           <h1 className="text-left d-flex flex-column align-items-left titulo-home">{textoId1}</h1>
           <div className="row align-items-start">

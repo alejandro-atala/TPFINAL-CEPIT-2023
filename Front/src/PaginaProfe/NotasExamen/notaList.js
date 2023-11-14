@@ -31,7 +31,7 @@ useEffect(() => {
 
   const fetchAnios = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/curso/anios');
+      const response = await axios.get('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/curso/anios');
       setAnios(response.data);
 
     } catch (error) {
@@ -41,7 +41,7 @@ useEffect(() => {
 
   const fetchMaterias = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/materias');
+      const response = await axios.get('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/materias');
       setMaterias(response.data); // Asegúrate de que response.data sea la estructura correcta
     } catch (error) {
       console.error('Error fetching materias:', error);
@@ -56,7 +56,7 @@ useEffect(() => {
   const fetchAlumnosPorAnio = async (anio) => {
     try {
 
-      const response = await axios.get(`http://localhost:3000/alumno/por-anio/${anio}`);
+      const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/alumno/por-anio/${anio}`);
 
       setAlumnos(response.data);
     } catch (error) {
@@ -134,7 +134,7 @@ useEffect(() => {
     }));
     console.log(notasToSave)
     try {
-      await axios.post('http://localhost:3000/notas-examenes', notasToSave, {
+      await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/notas-examenes', notasToSave, {
         headers: {
           'Content-Type': 'application/json',
         },

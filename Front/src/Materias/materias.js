@@ -39,7 +39,7 @@ const Materias = () => {
             cursoString = "desconocido";
         }
 
-        const response = await axios.get(`http://localhost:3000/materias-curso/${cursoString}`);
+        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/materias-curso/${cursoString}`);
         const materiaCursoData = response.data;
 
         if (materiaCursoData.length > 0) {

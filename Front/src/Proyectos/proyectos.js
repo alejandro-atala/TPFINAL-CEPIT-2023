@@ -19,7 +19,7 @@ const Proyectos = () => {
     useEffect(() => {
         const obtenerImagenPorReferencia = async (referencia, setImagen) => {
             try {
-                const responseImagen = await axios.get(`http://localhost:3000/imagenes/nombre/${referencia}`);
+                const responseImagen = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/imagenes/nombre/${referencia}`);
 
                 if (responseImagen.data) {
 
@@ -33,7 +33,7 @@ const Proyectos = () => {
 
         const obtenerTextoPorReferencia = async (referencia, setTexto) => {
             try {
-                const response = await axios.get(`http://localhost:3000/carga/${referencia}`);
+                const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referencia}`);
                 var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
 
                 setTexto(textoConSaltosDeLinea);

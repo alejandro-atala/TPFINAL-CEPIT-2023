@@ -26,7 +26,7 @@ const Avisos = () => {
   useEffect(() => {
     const fetchAvisosPorCurso = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/avisos');
+        const response = await axios.get('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/avisos');
         console.log('Avisos Recibidos:', response.data);
 
         // Obtener el curso del alumno como un string legible

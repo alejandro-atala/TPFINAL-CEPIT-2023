@@ -11,7 +11,7 @@ const ProximosEventos = () => {
   useEffect(() => {
     const obtenerTextoPorReferencia = async (referencia, setTexto) => {
       try {
-        const response = await axios.get(`http://localhost:3000/carga/${referencia}`);
+        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referencia}`);
         var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
 
         setTexto(textoConSaltosDeLinea);
@@ -37,7 +37,9 @@ const ProximosEventos = () => {
      <div className="col-md-3 col-sm-6 col-xs-12">
     <SideMenu />
 </div>
+
     <div className="col-md-6 a-proximos-eventos mt-5 text-center mx-auto">
+
       <div className="row justify-content-center w-100">
         <div className="text-center">
           <h1 className='titulo-evento'>{titulo}</h1>

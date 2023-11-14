@@ -143,11 +143,11 @@ const Talleres = () => {
   useEffect(() => {
     const obtenerTextoEImagenPorReferencia = async (referencia, setTexto, setImagen) => {
       try {
-        const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
+        const responseTexto = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referencia}`);
        
         setTexto(responseTexto.data.texto);
 
-        const responseImagen = await axios.get(`http://localhost:3000/imagenes/nombre/${referencia}`);
+        const responseImagen = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/imagenes/nombre/${referencia}`);
         console.log(responseImagen.data.url)
         if (responseImagen.data) {
           setImagen(responseImagen.data.url);
@@ -175,10 +175,12 @@ const Talleres = () => {
     <div className="col-md-3 col-sm-6 col-xs-12">
     <SideMenu />
 </div>
+
 <div className="col-md-8 taller mt-5 text-center mx-auto">
       <h1 className="titulo-taller  ">{titulo}</h1>
       <div className="mx-auto">
         <div className="row row-cols-1 row-cols-md-4 g-4 mx-auto">
+
           <div className="col taller">
             <div className="img-taller h-100">
               {imagenTaller1 && <img src={imagenTaller1} className="img-taller" alt="..." />}

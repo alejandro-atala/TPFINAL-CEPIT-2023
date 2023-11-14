@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react';
 import './inicioSesion.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAlumno } from '../Alumno/AlumnoContext';
 import { useUsuario } from '../usuarioContext';
 import { useAuth } from './tokenContext';
 import { Routes, Route } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
+import Inscripcion from '../MenuLateral/InscripcionOnline/inscripcion';
 
 
 const InicioSesion = ({ onLogin }) => {
@@ -40,7 +41,7 @@ const InicioSesion = ({ onLogin }) => {
     try {
       // Check if the email exists in the database
       const checkEmailResponse = await axios.get(
-      `http://localhost:3000/usuario/email/${formData.email}`
+      `https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/usuario/email/${formData.email}`
       );
   console.log(checkEmailResponse.data)
       if (checkEmailResponse.data.email.length > 0) {
@@ -48,7 +49,7 @@ const InicioSesion = ({ onLogin }) => {
 
      setShowSuccessAlert({ message: 'Enviando email......' });
 
-      const sendEmailResponse = await axios.post('http://localhost:3000/email/reset', {
+      const sendEmailResponse = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/email/reset', {
         email: formData.email,
       });
 
@@ -87,7 +88,7 @@ const InicioSesion = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/usuario/login', formData);
+      const response = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/usuario/login', formData);
       const newToken = response.data.token;
       setToken(newToken);
       console.log("inicio", response.data)
@@ -103,7 +104,7 @@ const InicioSesion = ({ onLogin }) => {
       else if (response.data.tipo === 'Alumno') {
 
         // Una vez que tengas el ID del usuario, realiza una solicitud GET para obtener el ID del alumno
-        const resp = await axios.get(`http://localhost:3000/alumno/usuario/${idUsuario}`);
+        const resp = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/alumno/usuario/${idUsuario}`);
         const alumnoData = resp.data;
 
         if (alumnoData) {
@@ -114,7 +115,7 @@ const InicioSesion = ({ onLogin }) => {
         navigate('/alumno');
 
       } else if (response.data.tipo === 'Profesor') {
-        const resp = await axios.get(`http://localhost:3000/profesor/usuario/${idUsuario}`);
+        const resp = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/profesor/usuario/${idUsuario}`);
         const profesorData = resp.data;
 
 
@@ -152,6 +153,7 @@ const InicioSesion = ({ onLogin }) => {
 
   return (
     
+
 <div className="rounded">
   <div className="d-flex justify-content-center align-items-center">
     <div className="rounded text-center col-12 col-md-4 col-sm-3 p-5 mt-4 mx-auto bg-sesion">
@@ -184,48 +186,49 @@ const InicioSesion = ({ onLogin }) => {
               
             </div>
             <button type="submit" id="btn-iniciar" className="btn btn-sesion mt-5">
+
               Iniciar sesión
             </button>
+          </div>
+          <div className="mb-3">
             <button
               type="button"
-              id="btn-pass"
-              className="btn btn-sesion mt-2"
-              onClick={() => {
-                handlePasswordReset();
-
-              }}
+              className="btn btn-sesion w-100"
+              onClick={handlePasswordReset}
             >
               Olvidé mi contraseña
             </button>
-
-
-          </form>
-          <div className="App">
-            {showSuccessAlert && (
-              <Alert variant="success" className="mt-3 text-center">
-                {showSuccessAlert.message}
-              </Alert>
-            )}
-            {errorAlert && (
-              <Alert variant="danger" className="mt-3 text-center">
-                {errorAlert}
-              </Alert>
-            )}
-            {showEmailWarning && (
-              <Alert variant="danger" className="mt-3 text-center">
-                Debes ingresar tu correo electrónico.
-              </Alert>
-            )}
-            <Routes>
-              <Route path="/inicio-sesion" element={<InicioSesion />} />
-            </Routes>
           </div>
-        </div>
+          <Link
+            to="/inscripcion-online"
+            className="btn btn-sesion w-100"
+          >
+            Registrarse
+          </Link>
+        </form>
+        {showSuccessAlert && (
+          <Alert variant={showSuccessAlert.variant} className="mt-3 text-center">
+            {showSuccessAlert.message}
+          </Alert>
+        )}
+        {errorAlert && (
+          <Alert variant="danger" className="mt-3 text-center">
+            {errorAlert}
+          </Alert>
+        )}
+        {showEmailWarning && (
+          <Alert variant="danger" className="mt-3 text-center">
+            Debes ingresar tu correo electrónico.
+          </Alert>
+        )}
+        <Routes>
+          <Route path="/inicio-sesion" element={<InicioSesion />} />
+        </Routes>
       </div>
-      </div>
-
-   
-  );
+    </div>
+  </div>
+);
 };
+
 
 export default InicioSesion;

@@ -66,7 +66,7 @@ const BloqueDeCarga = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:3000/carga')
+    axios.get('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga')
       .then((response) => {
         setTextos(response.data);
       })
@@ -77,7 +77,7 @@ const BloqueDeCarga = () => {
 
   const cargarDetalleTexto = (referenciaSeleccionada) => {
 
-    axios.get(`http://localhost:3000/carga/${referenciaSeleccionada}`)
+    axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referenciaSeleccionada}`)
       .then((response) => {
         setTextoSeleccionado(response.data);
         setEditing(false);
@@ -106,7 +106,7 @@ const BloqueDeCarga = () => {
 
 
   const editarDetalleTexto = () => {
-    axios.put(`http://localhost:3000/carga/${textoSeleccionado.id}`, {
+    axios.put(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${textoSeleccionado.id}`, {
       referencia: referencia, // Usa el valor de referencia seleccionado
       texto: textoSeleccionado.texto,
     })
@@ -140,7 +140,7 @@ const BloqueDeCarga = () => {
       return;
     }
     axios
-      .post('http://localhost:3000/carga/text', {
+      .post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/text', {
         referencia: referencia, // Usa el valor de referencia seleccionado
         texto: textoSeleccionado.texto,
       })
@@ -168,7 +168,7 @@ const BloqueDeCarga = () => {
 
 
   const handleBorrarTexto = (id) => {
-    axios.delete(`http://localhost:3000/carga/${id}`)
+    axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${id}`)
       .then(() => {
         const updatedTextos = textos.filter((texto) => texto.id !== id);
         setTextos(updatedTextos);

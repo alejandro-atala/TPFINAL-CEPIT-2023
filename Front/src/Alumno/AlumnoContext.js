@@ -10,7 +10,7 @@ export const AlumnoProvider = ({ children }) => {
   const markAvisoComoLeido = useCallback(async (idAviso) => {
     try {
       // Hacer una solicitud PUT al servidor para marcar el aviso como leído
-      await axios.put(`http://localhost:3000/alumno-aviso/marcar-leidos/${idAviso}/${alumnoLogueado.idAlumno}`);
+      await axios.put(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/alumno-aviso/marcar-leidos/${idAviso}/${alumnoLogueado.idAlumno}`);
       
       // Después de que el aviso se marque como leído en el servidor, actualiza el estado local
       setAvisosVistos([...avisosVistos, idAviso]);

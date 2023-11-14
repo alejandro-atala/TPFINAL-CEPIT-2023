@@ -2,7 +2,7 @@
 .bg-pink {
   background-color: var(--color-nav-foot);
   font-size: 95%;
-  width: auto;
+  width: 100%;
 }
 
 .navbar-logo {
