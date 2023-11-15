@@ -3,6 +3,8 @@ import axios from 'axios';
 
 const Solicitudes = () => {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
 
@@ -24,10 +26,11 @@ const Solicitudes = () => {
 
   const acceptUser = async (user) => {
     try {
+      setLoading(true);
       const response = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/usuario', user);
  
       console.log('User accepted and added to Usuarios table', response.data);
-
+      setLoading(false);
      
       setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.idUsuario));
       await axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/solicitudes/${user.idUsuario}`);
@@ -51,8 +54,10 @@ console.log(mailOptions);
   };
 
   const rejectUser = async (user) => {
+    setLoading(true);
     axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/solicitudes/${user.idUsuario}`)
       .then(async () => {
+        setLoading(false);
         setUsers((prevUsers) => prevUsers.filter((user) => user.id !== user.idUsuario));
   fetchUsers();
 
@@ -112,6 +117,11 @@ console.log(mailOptions);
           ))}
         </tbody>
       </table>
+      {loading && ( // Condición para mostrar el spinner
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    )}
     </div>
   );
 }
