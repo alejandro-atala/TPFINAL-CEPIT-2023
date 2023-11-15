@@ -337,19 +337,7 @@ const AdminPage = () => {
   
   return (
 <div className="admin-page d-flex flex-column">
-<div className="admin-page d-flex flex-column mt-5">
-      {Object.entries(colors).map(([variable, color]) => (
-        <div key={variable} className="color-selector">
-          <input
-            type="color"
-            value={color}
-            onChange={(e) => handleChangeColor(variable, e.target.value)}
-          />
-          <label htmlFor={variable}>{variable}</label>
-          <button onClick={() => handleGuardarColor(variable, color)}>Guardar</button>
-        </div>
-      ))}
-    </div>
+
 
 
   <Solicitudes />
@@ -449,6 +437,30 @@ const AdminPage = () => {
       
       <BloqueDeCarga />
       <SessionExpiration />
+
+      <div className="admin-page mt-5 mx-auto">
+  <div className="row">
+    <div className="col">
+      {Object.entries(colors).map(([variable, color]) => (
+        <div key={variable} className="d-flex align-items-center justify-content-between mb-3">
+          <div className="d-flex align-items-center">
+            <input
+              type="color"
+              value={color}
+              onChange={(e) => handleChangeColor(variable, e.target.value)}
+            />
+            <label htmlFor={variable} className="ms-2 mb-0">{variable}</label>
+          </div>
+          <button className="btn btn-success ms-2" onClick={() => handleGuardarColor(variable, color)}>Guardar</button>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+
+
+
     </div>
   );
 };
