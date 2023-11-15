@@ -11,6 +11,7 @@ const MateriasList = () => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [isCursoSelected, setIsCursoSelected] = useState(false);
+  const [loading, setLoading] = useState(false);
 
 
   useEffect(() => {
@@ -89,7 +90,7 @@ const MateriasList = () => {
     }
   
 
-  
+    setLoading(true);
     try {
       const daysAndTimes = [
         'Lunes 8:00-9:00', 'Lunes 9:00-10:00', 'Lunes 10:00-11:00', 'Lunes 11:00-12:00', 'Lunes 12:00-13:00',
@@ -116,7 +117,7 @@ const MateriasList = () => {
         console.log('Materias guardadas exitosamente');
         setShowSuccessAlert(true);
         setShowErrorAlert(false);
-
+        setLoading(false);
         setTimeout(() => {
           setShowSuccessAlert(false);
         }, 2000);
@@ -126,6 +127,7 @@ const MateriasList = () => {
         console.error('Error al guardar las materias');
       }
     } catch (error) {
+      setLoading(false);
       console.error('Error en la solicitud:', error);
       setShowSuccessAlert(false);
       setShowErrorAlert(true);
@@ -164,7 +166,7 @@ const MateriasList = () => {
   return (
     <div className=" col-12 mt-5 ">
        <div className="row">
-      <h4 className="mb-4">Aquí podrás editar las materias según los días y horarioss</h4>
+      <h4 className="mb-4">Aquí podrás editar las materias según los días y horarios</h4>
       <div className="mb-3">
         <label>Seleccione un curso:</label>
         <select className="form-select" onChange={handleCursoChange} value={selectedCurso}>
@@ -232,9 +234,16 @@ const MateriasList = () => {
           </tbody>
         </table>
       </div>
-      <button className="btn btn-success " onClick={handleSaveClick}>
-        Guardar Materias
-      </button>
+      <button className="btn btn-success" onClick={handleSaveClick} disabled={loading}>
+  {loading ? ( // Muestra el spinner si se está cargando
+    <div className="spinner-border spinner-border-sm" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  ) : (
+    'Guardar Materias'
+  )}
+</button>
+
 
       {showSuccessAlert && (
         <Alert variant="success" className="mt-3 text-center">
