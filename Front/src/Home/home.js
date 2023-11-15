@@ -104,7 +104,7 @@ const HomePage = () => {
       </div>
 
         <div className="col-md-9 mt-5 flex-column">
-          <h1 className="text-left d-flex flex-column align-items-left titulo-home">{textoId1}</h1>
+          <h1 className="text-left d-flex flex-column align-items-left titulo-home">aaa{textoId1}</h1>
           <div className="row align-items-start">
             <div className="col-md-6 carousel-item-home">
               <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">

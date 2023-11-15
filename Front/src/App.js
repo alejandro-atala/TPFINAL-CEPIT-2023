@@ -52,7 +52,7 @@ const App = () => {
   const [sidebarVisible, setSidebarVisible] = useState(true);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [colors, setColors] = useState({});
-
+  const [loadingColors, setLoadingColors] = useState(true);
 
 
   const marcarAvisosComoLeidos = async () => { };
@@ -148,6 +148,7 @@ const App = () => {
       Object.entries(colorsData).forEach(([variable, color]) => {
         document.documentElement.style.setProperty(variable, color);
       });
+      setLoadingColors(false);
     } catch (error) {
       console.error('Error al obtener los colores de la tabla:', error);
     }
@@ -156,6 +157,16 @@ const App = () => {
 
   return (
     <BrowserRouter>
+    {/* Mostrar el mensaje de carga si loadingColors es verdadero */}
+    {loadingColors ? (
+      <div className="loading-message">
+  <div className="spinner"></div>
+  <h1>Bienvenido. Cargando datos...</h1>
+</div>
+
+ 
+    ) : (
+      // Renderizar el resto de la aplicación una vez que los colores se han cargado
       <UsuarioProvider>
         <NotificacionesProvider>
           <ProfesorProvider>
@@ -229,9 +240,10 @@ const App = () => {
             </AlumnoProvider>
           </ProfesorProvider>
         </NotificacionesProvider>
-      </UsuarioProvider>
+        </UsuarioProvider>
+      )}
     </BrowserRouter>
-  )
+  );
 };
 
 export default App;
