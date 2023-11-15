@@ -6,8 +6,12 @@ import SessionExpiration from '../SesionExpired';
 import Solicitudes from './Solicitudes/solicitudes';
 
 const AdminPage = () => {
-  const [loading, setLoading] = useState(true);
-
+  const [editingRow, setEditingRow] = useState(null);
+  const [deletingRows, setDeletingRows] = useState([null]);
+  const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [loading3, setLoading3] = useState(false);
+  const [loading4, setLoading4] = useState(false);
   const [selectedTable, setSelectedTable] = useState('');
   const [tableData, setTableData] = useState([]);
   const [editedData, setEditedData] = useState([]);
@@ -132,15 +136,16 @@ const AdminPage = () => {
       } else if (selectedTable === 'curso') {
         idFieldName = 'idCurso';
       }
-      setLoading(true);
+      setDeletingRows([...deletingRows, rowIndex]);
+
       const id = editedData[rowIndex][idFieldName];
       const url = `https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/${selectedTable}/${id}`;
       await axios.delete(url);
-      setLoading(false);
+      setDeletingRows(deletingRows.filter((index) => index !== rowIndex));
       const updatedData = editedData.filter((row, index) => index !== rowIndex);
       setEditedData(updatedData);
     } catch (error) {
-      setLoading(false);
+      setDeletingRows(deletingRows.filter((index) => index !== rowIndex));
       console.error('Error al borrar una fila:', error);
     }
   };
@@ -168,13 +173,15 @@ const AdminPage = () => {
           fieldsToUpdate[field] = updatedRow[field];
         }
       }
-
+      setLoading2(true);
       await axios.put(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/${selectedTable}/${id}`, fieldsToUpdate);
 
       const updatedData = [...editedData];
       updatedData[rowIndex] = updatedRow;
+      setLoading2(false);
       setEditedData(updatedData);
     } catch (error) {
+      setLoading2(false);
       console.error('Error al guardar cambios:', error);
     }
     cargarDatos();
@@ -217,11 +224,11 @@ const AdminPage = () => {
         return;
       }
 
-
+      setLoading(true);
       // Envía la nueva fila al servidor para su creación
       const response = await axios.post(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/${selectedTable}`, newRowData);
       const addedRow = response.data;
-
+      setLoading(false);
       // Agrega la fila completa al estado local
       setEditedData([...editedData, addedRow]);
       setNewRowData({}); // Restablece la nueva fila después de agregarla
@@ -229,6 +236,7 @@ const AdminPage = () => {
       // Después de agregar la fila, puedes recargar los datos nuevamente desde el servidor para asegurarte de que estén actualizados
       cargarDatos(); // Llama a la función que carga los datos nuevamente
     } catch (error) {
+      setLoading(false);
       console.error('Error al agregar una nueva fila:', error);
     }
   };
@@ -390,20 +398,53 @@ const AdminPage = () => {
                       </td>
                     ))}
 
-                    <td>
-                      {row.isEditing ? (
-                        <div className="btn-group">
-                          <button className="btn btn-primary" onClick={() => handleSaveChanges(rowIndex)}>Guardar</button>
-                          <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
-                          {loading }
-                        </div>
-                      ) : (
-                        <div className="btn-group">
-                          <button className="btn btn-warning" onClick={() => handleEditRow(rowIndex)}>Editar</button>
-                          <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
-                        </div>
-                      )}
-                    </td>
+<td>
+  {row.isEditing ? (
+    <div className="btn-group">
+      <button className="btn btn-primary" disabled={loading2} onClick={() => handleSaveChanges(rowIndex)}>
+        {loading2 ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Guardar'
+        )}
+      </button>
+      <button className="btn btn-danger" disabled={deletingRows.includes(rowIndex)} onClick={() => handleDeleteRow(rowIndex)}>
+        {deletingRows.includes(rowIndex) ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Borrar'
+        )}
+      </button>
+    </div>
+  ) : (
+    <div className="btn-group">
+      <button className="btn btn-warning" disabled={loading} onClick={() => handleEditRow(rowIndex)}>
+        {loading ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Editar'
+        )}
+      </button>
+      <button className="btn btn-danger" disabled={deletingRows.includes(rowIndex)} onClick={() => handleDeleteRow(rowIndex)}>
+        {deletingRows.includes(rowIndex) ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Borrar'
+        )}
+      </button>
+    </div>
+  )}
+</td>
+
+
                   </tr>
                 ))}
                 {/* Agrega una fila vacía al final para agregar nuevos datos */}
@@ -423,9 +464,15 @@ const AdminPage = () => {
                     </td>
                   ))}
                   <td>
-                    <button className="btn btn-success" onClick={handleAddRow}>
-                      Agregar
-                    </button>
+                  <button className="btn btn-success" disabled={loading} onClick={() => handleAddRow()}>
+        {loading ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Agregar'
+        )}
+      </button>
                   </td>
                 </tr>
 
