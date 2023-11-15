@@ -78,11 +78,11 @@ const Reglamento = () => {
 
 
   return (
-    <div className="mt-5  flex-column text-center my-auto box">
+    <div className="mt-5  flex-column text-center my-auto box ">
       <div className="card-body ">
         <h1 className="title-reglamento">{reglamento1}</h1>
         <div className="row">
-          <div className="col-md-4 card-reglamento">
+          <div className="col-md-4 card-reglamento mb-3">
             <div className="card-reglamentos">
               {imagenReglamento1 && <img className="img-reglamento mx-auto"  style={{ maxWidth: '300px' }} src={imagenReglamento1} alt="foto del reglamento 1" />}
               <div className="card-body">
@@ -93,7 +93,7 @@ const Reglamento = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4 card-reglamento">
+          <div className="col-md-4 card-reglamento mb-3">
             <div className="card-reglamentos">
               {imagenReglamento2 && <img className="img-reglamento mx-auto"  style={{ maxWidth: '300px' }} src={imagenReglamento2} alt="foto del reglamento 2" />}
               <div className="card-body">
@@ -104,7 +104,7 @@ const Reglamento = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4 card-reglamento">
+          <div className="col-md-4 card-reglamento mb-3">
             <div className="card-reglamentos">
               {imagenReglamento3 && <img className="img-reglamento mx-auto" style={{ maxWidth: '300px' }}  src={imagenReglamento3} alt="foto del reglamento 3" />}
               <div className="card-body">
