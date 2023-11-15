@@ -132,13 +132,15 @@ const AdminPage = () => {
       } else if (selectedTable === 'curso') {
         idFieldName = 'idCurso';
       }
+      setLoading(true);
       const id = editedData[rowIndex][idFieldName];
       const url = `https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/${selectedTable}/${id}`;
       await axios.delete(url);
-
+      setLoading(false);
       const updatedData = editedData.filter((row, index) => index !== rowIndex);
       setEditedData(updatedData);
     } catch (error) {
+      setLoading(false);
       console.error('Error al borrar una fila:', error);
     }
   };
@@ -405,6 +407,7 @@ const AdminPage = () => {
                         <div className="btn-group">
                           <button className="btn btn-primary" onClick={() => handleSaveChanges(rowIndex)}>Guardar</button>
                           <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
+                          {loading }
                         </div>
                       ) : (
                         <div className="btn-group">
