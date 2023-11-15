@@ -266,11 +266,12 @@ const AdminPage = () => {
 
   
   const handleGuardarColor = (color, variable) => {
+    setLoading(true);
     axios
       .get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${color}`)
       .then((response) => {
         const data = response.data;
-       
+        setLoading(false);
         if (data) {
           console.log('resp',data)
           // Si la referencia ya existe, actualiza el campo 'texto' con el nuevo valor del color
@@ -489,29 +490,41 @@ const AdminPage = () => {
       <SessionExpiration />
 
       <div className="admin-page mt-5 mx-auto">
-  <div className="row">
-    <div className="col">
-      {Object.entries(colors).map(([variable, color]) => (
-        <div key={variable} className="d-flex align-items-center justify-content-between mb-3">
-          <div className="d-flex align-items-center">
-            <input
-              type="color"
-              value={color}
-              onChange={(e) => handleChangeColor(variable, e.target.value)}
-            />
-            <label htmlFor={variable} className="ms-2 mb-0">{variable}</label>
-          </div>
-          <button className="btn btn-success ms-2" onClick={() => handleGuardarColor(variable, color)}>Guardar</button>
+      <div className="row">
+        <div className="col">
+          {loading && (
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
+
+      <div className="row">
+        <div className="col">
+          {Object.entries(colors).map(([variable, color]) => (
+            <div key={variable} className="d-flex align-items-center justify-content-between mb-3">
+              <div className="d-flex align-items-center">
+                <input
+                  type="color"
+                  value={color}
+                  onChange={(e) => handleChangeColor(variable, e.target.value)}
+                />
+                <label htmlFor={variable} className="ms-2 mb-0">{variable}</label>
+              </div>
+              <button
+                className="btn btn-success ms-2"
+                onClick={() => handleGuardarColor(variable, color)}
+                disabled={loading} // Deshabilita el botón mientras se está realizando la acción
+              >
+                Guardar
+              </button>
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
-  </div>
-</div>
-
-
-
-
-    </div>
+    </div>  </div>  </div>
   );
 };
 
