@@ -30,10 +30,11 @@ const Solicitudes = () => {
       const response = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/usuario', user);
  
       console.log('User accepted and added to Usuarios table', response.data);
-      setLoading(false);
+    
      
       setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.idUsuario));
       await axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/solicitudes/${user.idUsuario}`);
+      setLoading(false);
       fetchUsers();
 
       console.log("mailOptions");
