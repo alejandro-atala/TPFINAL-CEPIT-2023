@@ -217,7 +217,7 @@ const NotasExamenesList = () => {
                     onChange={(e) => handleNotaChange(e, alumno.idAlumno)}
                     value={alumno.selectedNota}
                     className="custom-select"
-                    style={{ width: '70px' }}
+                    style={{ width: '100px' }}
                   >
                     <option value="">Nota</option>
                     {Array.from({ length: 10 }, (_, index) => (
