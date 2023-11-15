@@ -107,7 +107,7 @@ console.log(id, value);
     <div className="side">
 
     <div className="row ">
-    <div className="col-md-3 col-sm-6 col-xs-12">
+    <div className="col-md-3 col-sm-6 col-xs-12 d-none d-sm-block">
     <SideMenu />
 </div>
         <div className="col-md-9 mt-5 d-flex justify-content-center align-items-center ">
