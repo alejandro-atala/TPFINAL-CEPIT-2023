@@ -53,9 +53,7 @@ const App = () => {
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [colors, setColors] = useState({});
 
-  useEffect(() => {
-    fetchColors();
-  }, []);
+
 
   const marcarAvisosComoLeidos = async () => { };
 
@@ -111,47 +109,49 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-
+    fetchColorsFromTable();
     // Detectar la ruta actual y ocultar el Sidebar si es /alumno o /profesor
     const path = window.location.pathname;
     setSidebarVisible(!(path === '/alumno' || path === '/profesor'));
   }, [window.location.pathname]);
 
-  const fetchColors = async () => {
 
-      const referencesToFetch = [
-        '--color-nav-foot',
-        '--color-menu-lateral',
-        '--color-boton',
-        '--color-palabra-boton',
-        '--color-boton-transicion',
-        '--color-cuadro',
-        '--color-subcuadro',
-        '--color-sombras',
-        '--color-subtitulos',
-        '--color-titulos',
-        '--color-bordes',
-        '--color-sombras-titulos',
-        '--color-fondo',
-      ];
-    
-     
-        try {
-          const colorsData = {};
-      
-          // Realizar la solicitud para obtener los colores asociados a las referencias
-          for (const reference of referencesToFetch) {
-            const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${reference}`);
-            
-            colorsData[reference] = response.data.texto || ''; // Valor por defecto si no hay datos
-          }
-      
-          // Establecer los colores en la paleta de colores
-          setColors(colorsData);
-        } catch (error) {
-          console.error('Error al obtener los colores de la tabla:', error);
-        }
-      };
+  const referencesToFetch = [
+    '--color-nav-foot',
+    '--color-menu-lateral',
+    '--color-boton',
+    '--color-palabra-boton',
+    '--color-boton-transicion',
+    '--color-cuadro',
+    '--color-subcuadro',
+    '--color-sombras',
+    '--color-subtitulos',
+    '--color-titulos',
+    '--color-bordes',
+    '--color-sombras-titulos',
+    '--color-fondo',
+  ];
+
+  const fetchColorsFromTable = async () => {
+    try {
+      const colorsData = {};
+  
+      // Realizar la solicitud para obtener los colores asociados a las referencias
+      for (const reference of referencesToFetch) {
+        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${reference}`);
+        
+        colorsData[reference] = response.data.texto || ''; // Valor por defecto si no hay datos
+      }
+  
+      // Establecer los colores en la paleta de colores
+      setColors(colorsData);
+      Object.entries(colorsData).forEach(([variable, color]) => {
+        document.documentElement.style.setProperty(variable, color);
+      });
+    } catch (error) {
+      console.error('Error al obtener los colores de la tabla:', error);
+    }
+  };
 
 
   return (

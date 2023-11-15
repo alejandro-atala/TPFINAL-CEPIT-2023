@@ -329,6 +329,9 @@ const AdminPage = () => {
   
       // Establecer los colores en la paleta de colores
       setColors(colorsData);
+      Object.entries(colorsData).forEach(([variable, color]) => {
+        document.documentElement.style.setProperty(variable, color);
+      });
     } catch (error) {
       console.error('Error al obtener los colores de la tabla:', error);
     }
