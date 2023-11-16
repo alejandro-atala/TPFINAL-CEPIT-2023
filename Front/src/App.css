@@ -56,7 +56,7 @@ align-content: center;
   
   .spinner-text {
     position: absolute; /* Posiciona el texto dentro del spinner */
-    top: 75%; /* Lo coloca en la mitad verticalmente */
+    top: 85%; /* Lo coloca en la mitad verticalmente */
     left: 50%; /* Lo coloca en la mitad horizontalmente */
     transform: translate(-50%, -50%); /* Centra el texto en el centro del spinner */
     font-size: 35px; /* Tamaño de fuente del texto */

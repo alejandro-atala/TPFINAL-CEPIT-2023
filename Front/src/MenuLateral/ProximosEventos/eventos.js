@@ -46,7 +46,7 @@ const ProximosEventos = () => {
         </div>
       </div>
       <div className="row justify-content-center w-100">
-        <div className="col-md-9 col-lg-4 mb-4 event">
+        <div className=" event">
           <div className="a-proximos-eventos">
             <div className="card-body-eventos">
               <h2 className="card-title-eventos">ACTOS</h2>
@@ -54,7 +54,7 @@ const ProximosEventos = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-9 col-lg-4 mb-4 event">
+        <div className=" event">
           <div className="a-proximos-eventos">
             <div className="card-body-eventos">
               <h2 className="card-title-eventos">EVENTOS</h2>
