@@ -159,9 +159,9 @@ const App = () => {
     <BrowserRouter>
     {/* Mostrar el mensaje de carga si loadingColors es verdadero */}
     {loadingColors ? (
-      <div className="loading-message">
+      <div className="loading-message"> 
   <div className="spinner"></div>
-  <h1>Bienvenido. Cargando datos...</h1>
+  <h1 className="spinner-text">Bienvenido. Cargando datos...</h1>
 </div>
 
  
