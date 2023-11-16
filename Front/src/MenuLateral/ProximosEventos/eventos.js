@@ -32,40 +32,38 @@ const ProximosEventos = () => {
   const htmlProcesadoEventos = { __html: textoEventos };
 
   return (
-   <div>
-     <div className="row">
-     <div className="col-md-3 col-sm-6 col-xs-12">
-    <SideMenu />
-</div>
-
-    <div className="col-md-6 a-proximos-eventos mt-5 text-center mx-auto">
-
-      <div className="row justify-content-center w-100">
-        <div className="text-center">
-          <h1 className='titulo-evento'>{titulo}</h1>
+    <div>
+      <div className="row">
+        <div className="col-md-3 col-sm-6 col-xs-12">
+          <SideMenu />
         </div>
-      </div>
-      <div className="row justify-content-center w-100">
-        <div className=" event">
-          <div className="a-proximos-eventos">
-            <div className="card-body-eventos">
-              <h2 className="card-title-eventos">ACTOS</h2>
-              <div className="evento" dangerouslySetInnerHTML={htmlProcesadoActos}></div>
+
+        <div className="col-md-6 a-proximos-eventos mt-5 text-center mx-auto">
+          <div className="row justify-content-center w-100">
+            <div className="text-center">
+              <h1 className='titulo-evento'>{titulo}</h1>
+            </div>
+          </div>
+          <div className="row justify-content-center w-100">
+            <div className="event">
+              <div className="a-proximos-eventos card1"> {/* Agregar una clase específica para la primera tarjeta */}
+                <div className="card-body-eventos">
+                  <h2 className="card-title-eventos">ACTOS</h2>
+                  <div className="evento" dangerouslySetInnerHTML={htmlProcesadoActos}></div>
+                </div>
+              </div>
+            </div>
+            <div className="event">
+              <div className="a-proximos-eventos card2"> {/* Agregar una clase específica para la segunda tarjeta */}
+                <div className="card-body-eventos">
+                  <h2 className="card-title-eventos">EVENTOS</h2>
+                  <div className="evento" dangerouslySetInnerHTML={htmlProcesadoEventos}></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className=" event">
-          <div className="a-proximos-eventos">
-            <div className="card-body-eventos">
-              <h2 className="card-title-eventos">EVENTOS</h2>
-              <div className="evento" dangerouslySetInnerHTML={htmlProcesadoEventos}></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-    </div> 
+      </div></div>
   );
 };
 

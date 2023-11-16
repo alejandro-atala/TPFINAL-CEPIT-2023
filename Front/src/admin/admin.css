@@ -1,15 +1,15 @@
 :root {
-    --color-nav-foot: #34db5093; 
-    --color-menu-lateral: rgba(187, 32, 32, 0.496);
-    --color-boton: black; 
-    --color-palabra-boton: white;
-    --color-boton-transicion: rgb(88, 0, 0);
-    --color-cuadro: rgba(169, 111, 93, 0.563);
-    --color-subcuadro: pink;
-    --color-sombras: rgba(0, 0, 0, 0.522);
-    --color-subtitulos: rgb(0, 0, 0);
-    --color-titulos: rgb(0, 0, 0);
-    --color-bordes: black;
-    --color-sombras-titulos: rgba(0, 0, 0, 0.445);
-    --color-fondo: rgb(255, 255, 255);
+    --color-nav-foot:null; 
+    --color-menu-lateral:null;
+    --color-boton:null; 
+    --color-palabra-boton:null;
+    --color-boton-transicion:null;
+    --color-cuadro:null;
+    --color-subcuadro: null;
+    --color-sombras:null;
+    --color-subtitulos: null;
+    --color-titulos: null;
+    --color-bordes:null;
+    --color-sombras-titulos:null;
+    --color-fondo:null;
   }

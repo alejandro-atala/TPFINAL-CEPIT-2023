@@ -48,3 +48,10 @@
 .img-cont-taller{
   width: 100%;
 }
+
+/* Estilos para la primera tarjeta */
+.talleres {
+  background: var(--color-subcuadro);/* color o imagen para la primera tarjeta */;
+}
+
+

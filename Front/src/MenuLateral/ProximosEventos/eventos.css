@@ -8,6 +8,16 @@
   border: solid 1px;;
 }
 
+/* Estilos para la primera tarjeta */
+.card1 {
+  background: var(--color-subcuadro);
+}
+
+/* Estilos para la segunda tarjeta */
+.card2 {
+  background: var(--color-subcuadro);
+}
+
 
 .titulo-evento{
   margin-bottom: 10%; 
@@ -33,7 +43,7 @@ h2{
 
 }
 
-/* .event{
+/* .card-body-eventos{
   background-color: var(--color-subcuadro);
   width: 100%;
   box-shadow: 0px 2px 4px var(--color-sombras);
