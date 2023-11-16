@@ -198,6 +198,7 @@ const CargaImagenes = () => {
         <option value='proyectoImagen1'> Proyecto Imagen 1</option>
         <option value='proyectoImagen2'> Proyecto Imagen 2</option> 
         <option value='proyectoImagen3'> Proyecto Imagen 3</option>
+        <option value='proyectoImagen4'> Proyecto Imagen 4</option>
         <option value='imagenReglamento1'> Reglamento Imagen 1 </option>
         <option value='imagenReglamento2'> Reglamento Imagen 2 </option>
         <option value='imagenReglamento3'> Reglamento Imagen 3 </option>

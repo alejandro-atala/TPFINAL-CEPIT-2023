@@ -54,6 +54,8 @@ const BloqueDeCarga = () => {
     Texto_Descripcion_Proyecto_2: 'Descripcion del Proyecto 2',
     Titulo_Proyecto_3: 'Titulo del tercer proyecto',
     Texto_Descripcion_Proyecto_3: 'Descripcion del Proyecto 3',
+    Titulo_Proyecto_4: 'Titulo del tercer proyecto',
+    Texto_Descripcion_Proyecto_4: 'Descripcion del Proyecto 3',
     Texto_Historial: 'Texto de la Historia de la Escuela',
     Reglamento_1: 'Titulo reglamento',
     Titulo_Reglamento_1: 'Titulo del Reglamento 1',

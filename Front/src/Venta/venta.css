@@ -35,4 +35,14 @@
 
   .carousel-item-venta{
     border-radius: 15px;
+
+  }
+
+  .h1-venta{
+    color: white;
+    padding-bottom: 5%;
+  }
+
+  .carru{
+    height: 100% !important;
   }
