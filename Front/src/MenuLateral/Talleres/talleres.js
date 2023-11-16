@@ -177,12 +177,12 @@ const Talleres = () => {
 </div>
 
 <div className="col-md-8 taller mt-5 text-center mx-auto">
-      <h1 className="titulo-taller  ">{titulo}</h1>
+      <h1 className="titulo-taller mb-5 ">{titulo}</h1>
       <div className="mx-auto">
         <div className="row row-cols-1 row-cols-md-4 g-4 mx-auto">
 
           <div className="col taller">
-            <div className="img-taller h-100">
+            <div className="img-taller ">
               {imagenTaller1 && <img src={imagenTaller1} className="img-taller" alt="..." />}
               <div className="card-body">
                 <h5 className="card-title text-center">{textoTaller1}</h5>
@@ -190,7 +190,7 @@ const Talleres = () => {
             </div>
           </div>
           <div className="col taller ">
-            <div className="img-taller h-100">
+            <div className="img-taller ">
               {imagenTaller2 && <img src={imagenTaller2} className="img-taller" alt="..." />}
               <div className="card-body">
                 <h5 className="card-title text-center">{textoTaller2}</h5>
@@ -198,31 +198,31 @@ const Talleres = () => {
             </div>
           </div>
           <div className="col taller">
-            <div className="img-cont-taller h-100">
+            <div className="img-cont-taller ">
               {imagenTaller3 && <img src={imagenTaller3} className="img-taller" alt="..." />}
-              <div className="card-body-taller">
+              <div className="card-body">
                 <h5 className="card-title text-center">{textoTaller3}</h5>
               </div>
             </div>
           </div>
           <div className="col taller">
-            <div className="img-cont-taller h-100">
+            <div className="img-cont-taller">
               {imagenTaller4 && <img src={imagenTaller4} className="img-taller" alt="..." />}
-              <div className="card-body-taller">
+              <div className="card-body">
                 <h4 className="card-title text-center">{textoTaller4}</h4>
               </div>
             </div>
           </div>
           <div className="col taller">
-            <div className="img-cont-taller h-100">
+            <div className="img-cont-taller ">
               {imagenTaller5 && <img src={imagenTaller5} className="img-taller" alt="..." />}
-              <div className="card-body-taller">
+              <div className="card-body">
                 <h5 className="card-title text-center">{textoTaller5}</h5>
               </div>
             </div>
           </div>
           <div className="col taller">
-            <div className="img-cont-taller h-100">
+            <div className="img-cont-taller">
               {imagenTaller6 && <img src={imagenTaller6} className="img-taller" alt="..." />}
               <div className="card-body-taller">
                 <h5 className="card-title text-center">{textoTaller6}</h5>
