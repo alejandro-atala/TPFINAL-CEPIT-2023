@@ -34,7 +34,7 @@ const Beneficios = () => {
     <SideMenu />
 </div>
       <div className="col-md-9 mt-5 d-flex flex-column">   
-        <div className="mt-5">
+        <div className="">
           <div className="row">
             <div className="col align-self-center cuadro-beneficios">
               <h2 className="titulo-beneficios">Beneficios</h2>
