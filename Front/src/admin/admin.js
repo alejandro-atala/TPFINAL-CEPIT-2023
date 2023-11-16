@@ -50,6 +50,22 @@ const AdminPage = () => {
     '--color-fondo',
   ];
 
+  const variableNames = {
+    '--color-nav-foot': 'Color de navegación y pie de página',
+    '--color-menu-lateral': 'Color del menú lateral',
+    '--color-boton': 'Color del botón',
+    '--color-palabra-boton': 'Color de la palabra del botón',
+    '--color-boton-transicion': 'Color de transición del botón',
+    '--color-cuadro': 'Color del cuadro',
+    '--color-subcuadro': 'Color del subcuadro',
+    '--color-sombras': 'Color de sombras',
+    '--color-subtitulos': 'Color de los subtítulos',
+    '--color-titulos': 'Color de los títulos',
+    '--color-bordes': 'Color de los bordes',
+    '--color-sombras-titulos': 'Color de sombras de los títulos',
+    '--color-fondo': 'Color de fondo',
+  };
+
   const requiredFields = {
     curso: ['idCurso', 'anio'],
     materias: ['idMateria', 'nombre'],
@@ -510,7 +526,7 @@ const AdminPage = () => {
                   value={color}
                   onChange={(e) => handleChangeColor(variable, e.target.value)}
                 />
-                <label htmlFor={variable} className="ms-2 mb-0">{variable}</label>
+  <label htmlFor={variable} className="ms-2 mb-0">{variableNames[variable]}</label>
               </div>
               <button
                 className="btn btn-success ms-2"
