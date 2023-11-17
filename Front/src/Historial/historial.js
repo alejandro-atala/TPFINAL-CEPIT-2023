@@ -5,8 +5,39 @@ import './historial.css';
 const Historial = () => {
 
     const [textoHistorial, setTextoHistorial] = useState('');
+    const [yearLinea1, setYearLinea1] = useState('');
+    const [yearLinea2, setYearLinea2] = useState('');
+    const [yearLinea3, setYearLinea3] = useState('');
+    const [yearLinea4, setYearLinea4] = useState('');
+    const [lineaDeTiempo1, setlineaDeTiempo1] = useState('');
+    const [lineaDeTiempo2, setlineaDeTiempo2] = useState('');
+    const [lineaDeTiempo3, setlineaDeTiempo3] = useState('');
+    const [lineaDeTiempo4, setlineaDeTiempo4] = useState('');
+    const [lineaDeTiempoBonus, setlineaDeTiempoBonus] = useState('');
+    const [imagenLinea1, setImagenLinea1] = useState(null);
+    const [imagenLinea2, setImagenLinea2] = useState(null);
+    const [imagenLinea3, setImagenLinea3] = useState(null);
+    const [ImagenLinea4, setImagenLinea4] = useState(null);
+    const [imagenBonus, setImagenBonus] = useState(null);
     
   useEffect(() => {
+    const obtenerImagenPorReferencia = async (referencia, setImagenLinea) => {
+      try {
+        const responseImagen = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/imagenes/nombre/${referencia}`);
+
+        if (responseImagen.data) {
+          setImagenLinea(responseImagen.data.url);
+        }
+      } catch (error) {
+        console.error(`Error al obtener datos de ${referencia}:`, error);
+      }
+    };
+    obtenerImagenPorReferencia('ImagenLinea1', setImagenLinea1);
+    obtenerImagenPorReferencia('ImagenLinea2', setImagenLinea2);
+    obtenerImagenPorReferencia('ImagenLinea3', setImagenLinea3);
+    obtenerImagenPorReferencia('ImagenLinea4', setImagenLinea4);
+    obtenerImagenPorReferencia('ImagenBonus', setImagenBonus);
+    
     const obtenerTextoPorReferencia = async (referencia, setTextoHistorial) => {
       try {
         const responseTexto = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referencia}`);
@@ -18,48 +49,59 @@ const Historial = () => {
       }
     };
     obtenerTextoPorReferencia('Texto_Historial', setTextoHistorial);
+    obtenerTextoPorReferencia('Año_Linea_1', setYearLinea1);
+    obtenerTextoPorReferencia('Año_Linea_2', setYearLinea2);
+    obtenerTextoPorReferencia('Año_Linea_3', setYearLinea3);
+    obtenerTextoPorReferencia('Año_Linea_4', setYearLinea4);
+    obtenerTextoPorReferencia('Linea_tiempo_1', setlineaDeTiempo1);
+    obtenerTextoPorReferencia('Linea_tiempo_2', setlineaDeTiempo2);
+    obtenerTextoPorReferencia('Linea_tiempo_3', setlineaDeTiempo3);
+    obtenerTextoPorReferencia('Linea_tiempo_4', setlineaDeTiempo4);
+    obtenerTextoPorReferencia('Texto_Bonus', setlineaDeTiempoBonus);
   }, []);
 
   const htmlProcesado = { __html: textoHistorial };
+  const htmlProcesado1 = { __html: lineaDeTiempo1 };
+  const htmlProcesado2 = { __html: lineaDeTiempo2 };
+  const htmlProcesado3 = { __html: lineaDeTiempo3 };
+  const htmlProcesado4 = { __html: lineaDeTiempo4 };
+  const htmlProcesado5 = { __html: lineaDeTiempoBonus };
     
   return (
     <div className="container">
     <div className="row">
       <div className="col-lg-12">
-        <h3 className="text-center"></h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <h3 className="text-center"> Nuestra Historia </h3>
+        <p className="text-historial text-center" dangerouslySetInnerHTML={htmlProcesado}></p>
         <ul className="timeline">
           <li>
             <div class="timeline-image">
-              {/* <img class="img-circle img-responsive" src="http://lorempixel.com/250/250/cats/1" alt=""> */}
+            {imagenLinea1 && <img className="img-circle img-responsive"  
+            style={{  marginTop: '-6px', marginLeft:'-7px' , maxWidth: '200px', height: '200px', borderRadius: '50%' }} 
+            src={imagenLinea1} alt="foto Linea 1" />}
             </div>
             <div class="timeline-panel">
               <div class="timeline-heading">
-                <h4>Step One</h4>
-                <h4 class="subheading">Subtitle</h4>
+                <h4>{yearLinea1}</h4>
               </div>
               <div class="timeline-body">
-                <p class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
+                <p class="text-muted" dangerouslySetInnerHTML={htmlProcesado1}></p>
               </div>
             </div>
             <div class="line"></div>
           </li>
           <li class="timeline-inverted">
             <div class="timeline-image">
-              {/* <img class="img-circle img-responsive" src="http://lorempixel.com/250/250/cats/2" alt=""> */}
+            {imagenLinea1 && <img className="img-circle img-responsive"  
+            style={{  marginTop: '-6px', marginLeft:'-7px' , maxWidth: '200px', height: '200px', borderRadius: '50%' }}
+             src={imagenLinea2} alt="foto Linea 1" />}
             </div>
             <div class="timeline-panel">
               <div class="timeline-heading">
-                <h4>Step Two</h4>
-                <h4 class="subheading">Subtitle</h4>
+                <h4>{yearLinea2}</h4>
               </div>
               <div class="timeline-body">
-                <p class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <p class="text-muted" dangerouslySetInnerHTML={htmlProcesado2}>
                 </p>
               </div>
             </div>
@@ -67,16 +109,16 @@ const Historial = () => {
           </li>
           <li>
             <div class="timeline-image">
-              {/* <img class="img-circle img-responsive" src="http://lorempixel.com/250/250/cats/3" alt=""> */}
+            {imagenLinea1 && <img className="img-circle img-responsive" 
+             style={{  marginTop: '-6px', marginLeft:'-7px' , maxWidth: '200px', height: '200px', borderRadius: '50%' }}
+              src={imagenLinea3} alt="foto Linea 1" />}
             </div>
             <div class="timeline-panel">
               <div class="timeline-heading">
-                <h4>Step Three</h4>
-                <h4 class="subheading">Subtitle</h4>
+                <h4>{yearLinea3}</h4>
               </div>
               <div class="timeline-body">
-                <p class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <p class="text-muted" dangerouslySetInnerHTML={htmlProcesado3}>
                 </p>
               </div>
             </div>
@@ -84,16 +126,16 @@ const Historial = () => {
           </li>
           <li class="timeline-inverted">
             <div class="timeline-image">
-              {/* <img class="img-circle img-responsive" src="http://lorempixel.com/250/250/cats/4" alt=""> */}
+            {imagenLinea1 && <img className="img-circle img-responsive"  
+            style={{  marginTop: '-6px', marginLeft:'-7px' , maxWidth: '200px', height: '200px', borderRadius: '50%' }} 
+            src={ImagenLinea4} alt="foto Linea 1" />}
             </div>
             <div class="timeline-panel">
               <div class="timeline-heading">
-                <h4>Step Three</h4>
-                <h4 class="subheading">Subtitle</h4>
+                <h4>{yearLinea4}</h4>
               </div>
               <div class="timeline-body">
-                <p class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <p class="text-muted" dangerouslySetInnerHTML={htmlProcesado4}>
                 </p>
               </div>
             </div>
@@ -101,16 +143,16 @@ const Historial = () => {
           </li>
           <li>
             <div class="timeline-image">
-              {/* <img class="img-circle img-responsive" src="http://lorempixel.com/250/250/cats/5" alt=""> */}
+            {imagenLinea1 && <img className="img-circle img-responsive"  
+            style={{  marginTop: '-6px', marginLeft:'-7px' , maxWidth: '200px', height: '200px', borderRadius: '50%' }} 
+            src={imagenBonus} alt="foto Linea 1" />}
             </div>
             <div class="timeline-panel">
               <div class="timeline-heading">
-                <h4>Bonus Step</h4>
-                <h4 class="subheading">Subtitle</h4>
+                <h4>Bonus</h4>
               </div>
               <div class="timeline-body">
-                <p class="text-muted">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                <p class="text-muted" dangerouslySetInnerHTML={htmlProcesado5}>
                 </p>
               </div>
             </div>
