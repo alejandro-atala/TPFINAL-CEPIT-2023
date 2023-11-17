@@ -193,7 +193,6 @@ const Talleres = () => {
                               src={imagenTaller1}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller1}</h4>
-                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
                             <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                           </div>
                         </div>
@@ -243,7 +242,6 @@ const Talleres = () => {
                               src={imagenTaller2}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller2}</h4>
-                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
                             <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                           </div>
                         </div>
@@ -293,7 +291,6 @@ const Talleres = () => {
                               src={imagenTaller3}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller3}</h4>
-                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
                             <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                           </div>
                         </div>
@@ -343,7 +340,6 @@ const Talleres = () => {
                               src={imagenTaller4}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller4}</h4>
-                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
                             <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                           </div>
                         </div>
@@ -393,7 +389,6 @@ const Talleres = () => {
                               src={imagenTaller5}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller5}</h4>
-                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
                             <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                           </div>
                         </div>
@@ -443,7 +438,6 @@ const Talleres = () => {
                               src={imagenTaller6}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller6}</h4>
-                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
                             <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                           </div>
                         </div>
