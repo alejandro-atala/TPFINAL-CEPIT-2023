@@ -160,7 +160,21 @@ const App = () => {
     {/* Mostrar el mensaje de carga si loadingColors es verdadero */}
     {loadingColors ? (
       <div className="loading-message"> 
-  <div className="spinner"></div>
+<div class="container">
+	<div class="row">
+		<div id="loader">
+    		<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="lading"></div>
+		</div>
+	</div>
+</div>
   <h1 className="spinner-text">Bienvenido. Cargando datos...</h1>
 </div>
 
