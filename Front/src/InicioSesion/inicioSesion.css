@@ -22,10 +22,14 @@
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: block;
-    width: 100%;
+    /* display: block; */
+    /* width: 100%; */
     font-size: 100%;
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
 }
+
+.btn-registrarse:hover {
+    color:blue;
+  }
