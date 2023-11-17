@@ -190,10 +190,10 @@ const InicioSesion = ({ onLogin }) => {
           <div className="mb-3">
             <button
               type="button"
-              className="btn btn-sesion w-100"
+              className="btn btn-olvide w-100"
               onClick={handlePasswordReset}
             >
-              Olvidé mi contraseña
+              ¿Olvidé mi contraseña?
             </button>
           </div>
 

@@ -11,6 +11,11 @@
     color: var(--color-palabra-boton);
 }
 
+.btn-olvide {
+    text-decoration: underline;
+    color: blue;
+}
+
 .titulo-sesion {
   color: var(--color-titulos);
 }

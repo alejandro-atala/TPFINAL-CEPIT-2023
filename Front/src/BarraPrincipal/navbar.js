@@ -62,7 +62,7 @@ const Navbar = ({ loggedInUser, onLogout, userType }) => {
           </li>
           <li className="nav-item">
             <Link to="/historial" className="nav-link">
-              Historial
+              Historia
             </Link>
           </li>
           <li className="nav-item">

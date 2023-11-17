@@ -22,7 +22,7 @@ margin-top:-1%;
 }
 
 .img-circle {
-border-radius: 50%;
+  border-radius: 50%;
 }
 
 
@@ -129,10 +129,11 @@ margin-bottom: 0;
 
 .timeline .timeline-heading h4 {
 margin-top:22px;
-margin-bottom: 4px;
-padding:0;
-color: #b3b3b3;
-line-height: 1.2; 
+
+  margin-bottom: 4px;
+  padding:0;
+  color: #b3b3b3;
+  line-height: 1.2; 
 }
 
 .timeline .timeline-heading h4.subheading {
