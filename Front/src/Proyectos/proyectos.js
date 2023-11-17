@@ -85,11 +85,11 @@ const Proyectos = () => {
                             <div class="timeline">
                                 <a href="#" class="timeline-content">
                                     <span class="year" >{proyectoImages1 && (
-                                        <img src={proyectoImages1} className="imagen-proyecto" style={{ maxWidth: '90px', height: '90px', borderRadius: '50%' }} alt="Foto del proyecto 1" />
+                                        <img src={proyectoImages1} className="imagen-proyecto"
+                                         style={{  marginTop: '-11px', maxWidth: '90px', height: '90px', borderRadius: '50%' }}
+                                          alt="Foto del proyecto 1" />
                                     )}</span>
-
                                     <div class="inner-content">
-
                                         <h3 class="title">{tituloProyecto1}</h3>
                                         <p class="description" dangerouslySetInnerHTML={htmlProcesado1}>
 
@@ -100,7 +100,7 @@ const Proyectos = () => {
                             <div class="timeline">
                                 <a href="#" class="timeline-content">
                                     <span class="year">{proyectoImages2 && (
-                                        <img src={proyectoImages2} className="imagen-proyecto" style={{ maxWidth: '90px', height: '90px', borderRadius: '50%' }} alt="Foto del proyecto 1" />
+                                        <img src={proyectoImages2} className="imagen-proyecto" style={{ marginTop: '-11px', maxWidth: '90px', height: '90px', borderRadius: '50%' }} alt="Foto del proyecto 1" />
                                     )}</span>
                                     <div class="inner-content">
                                         <h3 class="title">{tituloProyecto2}</h3>
@@ -113,7 +113,7 @@ const Proyectos = () => {
                             <div class="timeline">
                                 <a href="#" class="timeline-content">
                                     <span class="year">{proyectoImages3 && (
-                                        <img src={proyectoImages3} className="imagen-proyecto" style={{ maxWidth: '90px', height: '90px', borderRadius: '50%' }} alt="Foto del proyecto 1" />
+                                        <img src={proyectoImages3} className="imagen-proyecto" style={{ marginTop: '-11px', maxWidth: '90px', height: '90px', borderRadius: '50%' }} alt="Foto del proyecto 1" />
                                     )}</span>
                                     <div class="inner-content">
                                         <h3 class="title">{tituloProyecto3}</h3>
@@ -125,7 +125,7 @@ const Proyectos = () => {
                             <div class="timeline">
                                 <a href="#" class="timeline-content">
                                     <span class="year">{proyectoImages4 && (
-                                        <img src={proyectoImages4} className="imagen-proyecto" style={{ maxWidth: '90px', height: '90px', borderRadius: '50%' }} alt="Foto del proyecto 1" />
+                                        <img src={proyectoImages4} className="imagen-proyecto" style={{ marginTop: '-11px', maxWidth: '90px', height: '90px', borderRadius: '50%' }} alt="Foto del proyecto 1" />
                                     )}</span>
                                     <div class="inner-content">
                                         <h3 class="title">{tituloProyecto4}</h3>

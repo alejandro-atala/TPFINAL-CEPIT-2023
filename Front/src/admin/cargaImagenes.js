@@ -195,6 +195,11 @@ const CargaImagenes = () => {
         <option value="taller4">Taller 4</option>
         <option value="taller5">Taller 5</option>
         <option value="taller6">Taller 6</option>
+        <option value='ImagenLinea1'> Imagen de Linea de tiempo 1</option>
+        <option value='ImagenLinea2'> Imagen de Linea de tiempo 2</option>
+        <option value='ImagenLinea3'> Imagen de Linea de tiempo 3</option>
+        <option value='ImagenLinea4'> Imagen de Linea de tiempo 4</option>
+        <option value='ImagenBonus'> Imagen de Linea de tiempo Bonus</option>
         <option value='proyectoImagen1'> Proyecto Imagen 1</option>
         <option value='proyectoImagen2'> Proyecto Imagen 2</option> 
         <option value='proyectoImagen3'> Proyecto Imagen 3</option>
