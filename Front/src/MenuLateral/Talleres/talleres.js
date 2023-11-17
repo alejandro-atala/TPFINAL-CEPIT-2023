@@ -189,7 +189,7 @@ const Talleres = () => {
                         <div class="card ">
                           <div class="card-body text-center">
                             <img
-                              className="img-fluid"
+                              className="img-taller"
                               src={imagenTaller1}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller1}</h4>
@@ -238,7 +238,7 @@ const Talleres = () => {
                         <div class="card">
                           <div class="card-body text-center">
                             <img
-                              className="img-fluid"
+                              className="img-taller"
                               src={imagenTaller2}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller2}</h4>
@@ -287,7 +287,7 @@ const Talleres = () => {
                         <div class="card">
                           <div class="card-body text-center">
                             <img
-                              className="img-fluid"
+                              className="img-taller"
                               src={imagenTaller3}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller3}</h4>
@@ -336,7 +336,7 @@ const Talleres = () => {
                         <div class="card">
                           <div class="card-body text-center">
                             <img
-                              className="img-fluid"
+                              className="img-taller"
                               src={imagenTaller4}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller4}</h4>
@@ -385,7 +385,7 @@ const Talleres = () => {
                         <div class="card">
                           <div class="card-body text-center">
                             <img
-                              className="img-fluid"
+                              className="img-taller"
                               src={imagenTaller5}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller5}</h4>
@@ -432,9 +432,9 @@ const Talleres = () => {
                     <div class="mainflip">
                       <div class="frontside">
                         <div class="card">
-                          <div class="card-body text-center">
+                          <div class="card-body text-center ">
                             <img
-                              className="img-fluid"
+                              className="img-taller"
                               src={imagenTaller6}
                               alt="card image"
                             />                            <h4 class="card-title">{textoTaller6}</h4>
