@@ -84,18 +84,18 @@ border-right-width: 14px;
 border-left-width: 0;
 }
 
-/* .timeline>li .timeline-image {
+.timeline>li .timeline-image {
 z-index: 100;
 position: absolute;
 left: 50%;
-border: 7px solid #3b5998;
+/* border: 7px solid #3b5998; */
 border-radius: 100%;
-background-color: #3b5998;
-box-shadow: 0 0 5px #4582ec;
+/* background-color: #3b5998; */
+/* box-shadow: 0 0 5px #4582ec; */
 width: 200px;
 height: 200px;
 margin-left: -100px;
-} */
+}
 
 .timeline>li .timeline-image h4 {
 margin-top: 12px;
