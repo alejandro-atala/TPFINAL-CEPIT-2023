@@ -103,7 +103,7 @@ const Contacto = () => {
               y nos pondremos en contacto con usted lo antes posible.</h4>
           </div>
         </div>
-        <div className="col-md-9 ">
+        <div className="col-md-9 col-md-9-contacto">
           <div className="contact-form ">
             <div className="form-group ">
               <label className="control-label col-sm-2" htmlFor="firstName">Nombre</label>
