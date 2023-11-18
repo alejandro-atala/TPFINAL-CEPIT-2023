@@ -84,7 +84,7 @@ border-right-width: 14px;
 border-left-width: 0;
 }
 
-.timeline>li .timeline-image {
+/* .timeline>li .timeline-image {
 z-index: 100;
 position: absolute;
 left: 50%;
@@ -95,7 +95,7 @@ box-shadow: 0 0 5px #4582ec;
 width: 200px;
 height: 200px;
 margin-left: -100px;
-}
+} */
 
 .timeline>li .timeline-image h4 {
 margin-top: 12px;
@@ -159,8 +159,8 @@ left: 690px;
 width: 4px;
 height:340px;
 background-color: #3b5998;
--ms-transform: rotate(-44deg); /* IE 9 */
--webkit-transform: rotate(-44deg); /* Safari */
+-ms-transform: rotate(-44deg); 
+-webkit-transform: rotate(-44deg); 
 transform: rotate(-44deg);
 box-shadow: 0 0 5px #4582ec;
 }
@@ -286,3 +286,4 @@ padding: 0 14px 20px 0px;
 display: none;
 }
 }
+
