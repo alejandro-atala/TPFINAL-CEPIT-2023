@@ -113,7 +113,7 @@ h4{text-align:center;margin:30px 0;color:#444}
 
 /******************* Timeline Demo - 4 *****************/
 .main-timeline4{overflow:hidden;position:relative}
-.main-timeline4:before{content:"";width:5px;height:70%;background:#333;position:absolute;top:70px;left:50%;transform:translateX(-50%)}
+.main-timeline4:before{content:"";width:5px;height:78%;background:#333;position:absolute;top:70px;left:50%;transform:translateX(-50%)}
 .main-timeline4 .timeline-content:before,.main-timeline4 .timeline:before{top:50%;transform:translateY(-50%);content:""}
 .main-timeline4 .timeline{width:50%;padding-left:100px;float:right;position:relative}
 .main-timeline4 .timeline:before{width:20px;height:20px;border-radius:50%;background:#fff;border:5px solid #333;position:absolute;left:-10px}
