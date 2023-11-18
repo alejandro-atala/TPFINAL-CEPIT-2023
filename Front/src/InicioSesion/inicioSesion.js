@@ -157,7 +157,7 @@ const InicioSesion = ({ onLogin }) => {
     <div className="row justify-content-center align-items-center">
       <div className="col-xs-12 col-md-6 col-lg-4 p-3 bg-sesion rounded">
         <h2 className="text-center mb-4">Iniciar sesión</h2>
-        {/* Resto del formulario */}
+        {message && <Alert variant="danger">{message}</Alert>}
         <form onSubmit={handleSubmit}>
           <div className="mb-3 input-group">
             <span className="input-group-text"><FontAwesomeIcon icon={faUser} /></span>
@@ -196,8 +196,6 @@ const InicioSesion = ({ onLogin }) => {
               ¿Olvidé mi contraseña?
             </button>
           </div>
-
-
           <Link
             to="/inscripcion-online"
             className="btn btn-registrarse w-100"
