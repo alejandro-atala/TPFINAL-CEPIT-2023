@@ -93,106 +93,94 @@ const Contacto = () => {
 
 
   return (
-    <div className="d-flex align-items-center justify-content-center" >
-      <div className="mt-5 flex-column text-center" style={{ maxWidth: '800px' }}>
-        <div className="card card-custom mx-auto">
-          <div className="card-body">
-            <h1 className="titulo-contacto card-title">¡Contáctanos!</h1>
-            <p className="card-text">
-              ¿Necesita ayuda o tiene alguna pregunta? Déjenos sus datos y su consulta,
-              y nos pondremos en contacto con usted lo antes posible.
-            </p>
-            {isSubmitted ? (
-              <p>¡Gracias por contactarnos!</p>
-            ) : (
-              <form onSubmit={handleSubmit} className="contact-form">
-                <div className="form-group">
-                  <label htmlFor="firstName">Nombre</label>
-                  <p>
-                    <input
-                      className='contacto-input'
-                      type="text"
-                      id="firstName"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      required
-                    />
-                  </p>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Apellido</label>
-                  <p>
-                    <input
-                      className='contacto-input'
-                      type="text"
-                      id="lastName"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      required
-                    />
-                  </p>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Correo Electrónico</label>
-                  <p>
-                    <input className='contacto-input'
-                      type="email"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                    />
-                  </p>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="consulta">Su Consulta</label>
-                  <p>
-                    <textarea
-                      className='contacto-input-consulta'
-                      type="consulta"
-                      id="consulta"
-                      value={consulta}
-                      onChange={(e) => setConsulta(e.target.value)}
-                      required
-                    />
-                  </p>
-                </div>
-                <button type="submit" className="btn-enviar">Enviar</button>
-
-                <div type="submit" className="" disabled={isLoading}>
-                  {isLoading ? (
-                    <div className="loader"></div> 
-                  ) : (
-                    ''
-                  )}
-                </div>
-              </form>
-            )}
-
-            <p className="card-telefono"> Nuestro Teléfono:
-              <div className='cel'>
-                {telefono}</div> </p>
-
-            <div className="redes-sociales">
-              <button className="btn btn-custom mx-2" onClick={() => abrirURL(facebookURL)}>
-                Facebook
-              </button>
-
-              <button className="btn btn-custom mx-2" onClick={() => abrirURL(instagramURL)}>
-                Instagram
-              </button>
+    <div className="container contact">
+      <div className="row">
+        <div className="col-md-3">
+          <div className="contact-info">
+            <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image"/>
+            <h2>¡Contáctanos</h2>
+            <h4>¿Necesita ayuda o tiene alguna pregunta? Déjenos sus datos y su consulta,
+              y nos pondremos en contacto con usted lo antes posible.</h4>
+          </div>
+        </div>
+        <div className="col-md-9 ">
+          <div className="contact-form ">
+            <div className="form-group ">
+              <label className="control-label col-sm-2" htmlFor="firstName">Nombre</label>
+              <div className="col-sm-10">
+                <input
+                  className='contacto-input'
+                  type="text"
+                  id="firstName"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                />
+              </div>
             </div>
+            <div className="form-group">
+              <label className="control-label col-sm-2" htmlFor="lastName">Apellido</label>
+              <div className="col-sm-10">
+                <input
+                  className='contacto-input'
+                  type="text"
+                  id="lastName"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="control-label col-sm-2" htmlFor="email">Correo Electrónico</label>
+              <div className="col-sm-10">
+                <input
+                  className='contacto-input'
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="control-label col-sm-2" htmlFor="consulta">Su Consulta</label>
+              <div className="col-sm-10">
+                <textarea
+                  className='contacto-input-consulta'
+                  id="consulta"
+                  value={consulta}
+                  onChange={(e) => setConsulta(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            <div className="col-sm-offset-2 col-sm-10">
+    <button type="submit" className="btn-enviar" onClick={handleSubmit} disabled={isLoading} style={{ position: 'relative' }}>
+      Enviar
+      {isLoading && (
+        <div id="circle" style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '110%', marginLeft: '5px' }}>
+          <div className="loading"></div>
+        </div>
+      )}
+    </button>
+  </div>
+          </div>
+          <p className="card-telefono"> Nuestro Teléfono: {telefono}</p>
+          <div className="redes-sociales">
+            <button className="btn btn-custom mx-2" onClick={() => abrirURL(facebookURL)}>
+              Facebook
+            </button>
+            <button className="btn btn-custom mx-2" onClick={() => abrirURL(instagramURL)}>
+              Instagram
+            </button>
           </div>
         </div>
       </div>
-
-
       <ToastContainer />
     </div>
   );
-}
+};
+
 export default Contacto;
-
-
-
-
