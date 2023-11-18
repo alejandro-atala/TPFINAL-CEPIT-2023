@@ -7,7 +7,7 @@
     margin-bottom: 10%;
 }
 
-.btn-enviar{
+.btn-contacto{
     background-color: var(--color-boton); 
     border: none;
     color: var(--color-palabra-boton);
@@ -19,7 +19,7 @@
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
-    width: 80%;
+    min-width: 50%;
     margin-bottom: 20%;
     border-radius: 4%;
 }

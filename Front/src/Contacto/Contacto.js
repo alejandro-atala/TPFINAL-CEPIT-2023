@@ -157,7 +157,7 @@ const Contacto = () => {
               </div>
             </div>
             <div className="col-sm-offset-2 col-sm-10">
-    <button type="submit" className="btn-enviar" onClick={handleSubmit} disabled={isLoading} style={{ position: 'relative' }}>
+    <button type="submit" className="btn-contacto" onClick={handleSubmit} disabled={isLoading} style={{ position: 'relative' }}>
       Enviar
       {isLoading && (
         <div id="circle" style={{ position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '110%', marginLeft: '5px' }}>
