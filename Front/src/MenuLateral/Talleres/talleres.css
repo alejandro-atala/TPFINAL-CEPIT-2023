@@ -1,6 +1,6 @@
 .titulo-taller {
   color: var(--color-titulos); 
-  font-size: xx-large;
+  /* font-size: xx-large; */
   font-family: 'Times New Roman', Times, serif;
 
 }
@@ -60,7 +60,7 @@
 
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 #team {
-    background: #eee !important;
+    background: (--color-subcuadro) !important;
 }
 
 .btn-primary:hover,
@@ -72,9 +72,9 @@
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #007b5e;
-    border-color: #007b5e;
+    color: var(--color-palabra-boton);
+    background-color: var(--color-boton);
+   
 }
 
 section {
@@ -83,14 +83,14 @@ section {
 
 section .section-title {
     text-align: center;
-    color: #007b5e;
+    color: var(--color-titulos);
     margin-bottom: 50px;
     text-transform: uppercase;
 }
 
 #team .card {
     border: none;
-    background: #ffffff;
+    background: white;
 }
 
 .image-flip:hover .backside,
@@ -136,7 +136,7 @@ section .section-title {
     position: absolute;
     top: 0;
     left: 0;
-    background: white;
+    background:(--color-subcuadro);
     -webkit-transform: rotateY(-180deg);
     -moz-transform: rotateY(-180deg);
     -o-transform: rotateY(-180deg);
@@ -172,16 +172,21 @@ section .section-title {
 
 .backside .card a {
     font-size: 18px;
-    color: #007b5e !important;
+    color:var(--color-titulos) !important;
 }
 
 .frontside .card .card-title,
 .backside .card .card-title {
-    color: #007b5e !important;
+    color: var(--color-titulos) !important;
 }
 
 .frontside .card .card-body img {
     width: 220px;
     height: 220px;
     border-radius: 50%;
+}
+
+.bordes{
+  border-radius: 5% ;
+  margin-top: -10%;
 }

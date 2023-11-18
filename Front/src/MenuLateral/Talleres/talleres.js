@@ -176,10 +176,10 @@ const Talleres = () => {
           <SideMenu />
         </div>
 
-        <div className="col-md-8 taller mt-5 text-center mx-auto ">
-          <section id="team" class="pb-5">
-            <div class="container rounded-circle">
-              <h5 class="section-title h1">{titulo}</h5>
+        <div className=" col-md-8 taller mt-5 text-center mx-auto ">
+          <section id="team" class="pb-5 bordes">
+            <div class="container ">
+              <h1 class="section-title h1 ">{titulo}</h1>
               <div class="row ">
 
                 <div class="col-xs-12 col-sm-6 col-md-4 ">
@@ -187,7 +187,7 @@ const Talleres = () => {
                     <div class="mainflip flip-0">
                       <div class="frontside">
                         <div class="card ">
-                          <div class="card-body text-center">
+                          <div class="card-body text-center ">
                             <img
                               className="img-taller"
                               src={imagenTaller1}
