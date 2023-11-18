@@ -175,7 +175,8 @@ const App = () => {
 		</div>
 	</div>
 </div>
-  <h1 className="spinner-text">Bienvenido. Cargando datos...</h1>
+  <h1 className="spinner-text">Bienvenido. <br></br> Cargando datos...</h1>
+  
 </div>
 
  
