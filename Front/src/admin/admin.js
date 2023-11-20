@@ -6,6 +6,7 @@ import SessionExpiration from '../SesionExpired';
 import Solicitudes from './Solicitudes/solicitudes';
 
 const AdminPage = () => {
+  const [loadingColors, setLoadingColors] = useState(false);
   const [editingRow, setEditingRow] = useState(null);
   const [deletingRows, setDeletingRows] = useState([null]);
   const [loading, setLoading] = useState(false);
@@ -88,6 +89,7 @@ const AdminPage = () => {
   }, []);
 
   useEffect(() => {
+    setLoadingColors(true);
     if (selectedTable) {
       cargarDatos();
     }
@@ -123,6 +125,7 @@ const AdminPage = () => {
       setTableData(data);
       setColumns(Object.keys(data[0] || {}));
       setEditedData(data.map((row) => ({ ...row, isEditing: false })));
+
     } catch (error) {
       console.error(`Error al cargar datos de ${selectedTable}:`, error);
     }
@@ -346,10 +349,12 @@ const AdminPage = () => {
   
       // Establecer los colores en la paleta de colores
       setColors(colorsData);
+      setLoadingColors(false);
       Object.entries(colorsData).forEach(([variable, color]) => {
         document.documentElement.style.setProperty(variable, color);
       });
     } catch (error) {
+      setLoadingColors(false);
       console.error('Error al obtener los colores de la tabla:', error);
     }
   };
@@ -364,11 +369,29 @@ const AdminPage = () => {
   
   
   return (
-<div className="admin-page d-flex flex-column">
-
-
-
-  <Solicitudes />
+    <div className="admin-page d-flex flex-column">
+    {loadingColors ? (
+      <div className="loading-message"> 
+        <div class="container">
+          <div class="row">
+            <div id="loader">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="lading"></div>
+            </div>
+          </div>
+        </div>
+        <h1 className="spinner-text">Bienvenido Administrador <br></br> Cargando datos...</h1>
+      </div>
+    ) : (
+      <div>
+        <Solicitudes />
   <div className="mx-auto mt-5 text-center">
     <h4>Editar contenido de tablas</h4>
     <div className="d-flex justify-content-between align-items-center">
@@ -507,7 +530,7 @@ const AdminPage = () => {
 
       <div className="admin-page mt-5 mx-auto">
       <div className="row">
-        <div className="col">
+        <div className="col-3 mx-auto">
           {loading && (
             <div className="d-flex justify-content-center">
               <div className="spinner-border text-primary" role="status">
@@ -540,7 +563,7 @@ const AdminPage = () => {
         </div>
       </div>
     </div>
-    </div>  </div>  </div>
+    </div>  </div>  </div> )}</div>
   );
 };
 
