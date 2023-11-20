@@ -98,7 +98,7 @@ const Contacto = () => {
         <div className="col-md-3 col-md-3-contact">
           <div className="contact-info">
             <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image"/>
-            <h2>¡Contáctanos</h2>
+            <h2 className='titulo-contacto'>¡Contáctanos!</h2>
             <h4>¿Necesita ayuda o tiene alguna pregunta? Déjenos sus datos y su consulta,
               y nos pondremos en contacto con usted lo antes posible.</h4>
           </div>
@@ -167,15 +167,7 @@ const Contacto = () => {
     </button>
   </div>
           </div>
-          <p className="card-telefono"> Nuestro Teléfono: {telefono}</p>
-          <div className="redes-sociales">
-            <button className="btn btn-custom mx-2" onClick={() => abrirURL(facebookURL)}>
-              Facebook
-            </button>
-            <button className="btn btn-custom mx-2" onClick={() => abrirURL(instagramURL)}>
-              Instagram
-            </button>
-          </div>
+          <p className="card-telefono text-center"> Nuestro Teléfono: {telefono}</p>
         </div>
       </div>
       <ToastContainer />
