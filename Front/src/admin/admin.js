@@ -370,7 +370,7 @@ const AdminPage = () => {
   
   return (
     <div className="admin-page d-flex flex-column">
-    {loadingColors ? (
+    {/* {loadingColors ? (
       <div className="loading-message"> 
         <div class="container">
           <div class="row">
@@ -389,7 +389,7 @@ const AdminPage = () => {
         </div>
         <h1 className="spinner-text">Bienvenido Administrador <br></br> Cargando datos...</h1>
       </div>
-    ) : (
+    ) : ( */}
       <div>
         <Solicitudes />
   <div className="mx-auto mt-5 text-center">
