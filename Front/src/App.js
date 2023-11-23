@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,createContext } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {  Alert } from 'react-bootstrap';
@@ -40,8 +40,8 @@ import Proyectos from './Proyectos/proyectos';
 import Historial from './Historial/historial';
 import Reglamento from './Reglamento/reglamento';
 import { useAuth } from './InicioSesion/tokenContext';
-
-
+import axios from 'axios';
+export const ColorContext = createContext();
 
 const App = () => {
 
@@ -51,6 +51,8 @@ const App = () => {
   const unreadAvisosCount = 0;
   const [sidebarVisible, setSidebarVisible] = useState(true);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [colors, setColors] = useState({});
+  const [loadingColors, setLoadingColors] = useState(true);
 
 
   const marcarAvisosComoLeidos = async () => { };
@@ -107,17 +109,79 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-
+    fetchColorsFromTable();
     // Detectar la ruta actual y ocultar el Sidebar si es /alumno o /profesor
     const path = window.location.pathname;
     setSidebarVisible(!(path === '/alumno' || path === '/profesor'));
   }, [window.location.pathname]);
 
 
+  const referencesToFetch = [
+    '--color-nav-foot',
+    '--color-menu-lateral',
+    '--color-boton',
+    '--color-palabra-boton',
+    '--color-boton-transicion',
+    '--color-cuadro',
+    '--color-subcuadro',
+    '--color-sombras',
+    '--color-subtitulos',
+    '--color-titulos',
+    '--color-bordes',
+    '--color-sombras-titulos',
+    '--color-fondo',
+  ];
+
+  const fetchColorsFromTable = async () => {
+    try {
+      const colorsData = {};
+  
+      // Realizar la solicitud para obtener los colores asociados a las referencias
+      for (const reference of referencesToFetch) {
+        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${reference}`);
+        
+        colorsData[reference] = response.data.texto || ''; // Valor por defecto si no hay datos
+      }
+  
+      // Establecer los colores en la paleta de colores
+      setColors(colorsData);
+      Object.entries(colorsData).forEach(([variable, color]) => {
+        document.documentElement.style.setProperty(variable, color);
+      });
+      setLoadingColors(false);
+    } catch (error) {
+      console.error('Error al obtener los colores de la tabla:', error);
+    }
+  };
 
 
   return (
     <BrowserRouter>
+    {/* Mostrar el mensaje de carga si loadingColors es verdadero */}
+    {loadingColors ? (
+      <div className="loading-message"> 
+<div class="container">
+	<div class="row">
+		<div id="loader">
+    		<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="lading"></div>
+		</div>
+	</div>
+</div>
+  <h1 className="spinner-text">Bienvenido. <br></br> Cargando datos...</h1>
+  
+</div>
+
+ 
+    ) : (
+      // Renderizar el resto de la aplicación una vez que los colores se han cargado
       <UsuarioProvider>
         <NotificacionesProvider>
           <ProfesorProvider>
@@ -191,9 +255,10 @@ const App = () => {
             </AlumnoProvider>
           </ProfesorProvider>
         </NotificacionesProvider>
-      </UsuarioProvider>
+        </UsuarioProvider>
+      )}
     </BrowserRouter>
-  )
+  );
 };
 
 export default App;

@@ -5,21 +5,7 @@ body {
   background-repeat: no-repeat;
 }
 
-:root {
-  --color-nav-foot: #34db5093; 
-  --color-menu-lateral: rgba(116, 116, 116, 0.496);
-  --color-boton: black; 
-  --color-palabra-boton: white;
-  --color-boton-transicion: rgb(88, 0, 0);
-  --color-cuadro: rgba(169, 111, 93, 0.563);
-  --color-subcuadro: pink;
-  --color-sombras: rgba(0, 0, 0, 0.522);
-  --color-subtitulos: rgb(0, 0, 0);
-  --color-titulos: rgb(0, 0, 0);
-  --color-bordes: black;
-  --color-sombras-titulos: rgba(0, 0, 0, 0.445);
-  --color-fondo: rgb(255, 255, 255);
-}
+
 
 
   /* .center-content {
@@ -39,3 +25,171 @@ align-content: center;
     background-color: var(--color-fondo);
 
    }
+
+
+
+   .loading-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0; /* Color de fondo */
+  }
+  
+  .loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .spinner {
+    border: 10px solid rgba(0, 0, 0, 0.1);
+    border-top: 10px solid #3498db; /* Color del spinner */
+    border-radius: 50%;
+    width: 50vw; /* Ancho relativo al viewport width */
+    height: 50vw; /* Altura relativa al viewport width */
+    max-width: 400px; /* Máximo ancho */
+    max-height: 400px; /* Máxima altura */
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+  }
+  
+  .spinner-text {
+    position: absolute; /* Posiciona el texto dentro del spinner */
+    top: 85%; /* Lo coloca en la mitad verticalmente */
+    left: 50%; /* Lo coloca en la mitad horizontalmente */
+    transform: translate(-50%, -50%); /* Centra el texto en el centro del spinner */
+    font-size: 35px; /* Tamaño de fuente del texto */
+    color: #333; /* Color del texto */
+    text-align: center; /* Alineación del texto */
+    width: 100%; /* Ancho del texto igual al del spinner */
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  h1 {
+    font-size: 24px;
+    color: #333; /* Color del texto */
+    text-align: center;
+  }
+  
+
+
+  #loader {
+    bottom: 0;
+    height: 375px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 375px;
+}
+
+#loader .dot {
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 87.5px;
+}
+#loader .dot::before {
+    border-radius: 100%;
+    content: "";
+    height: 87.5px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: scale(0);
+    width: 87.5px;
+}
+#loader .dot:nth-child(7n+1) {
+    transform: rotate(45deg);
+}
+#loader .dot:nth-child(7n+1)::before {
+    animation: 0.8s linear 0.1s normal none infinite running load;
+    background: #00ff80 none repeat scroll 0 0;
+}
+#loader .dot:nth-child(7n+2) {
+    transform: rotate(90deg);
+}
+#loader .dot:nth-child(7n+2)::before {
+    animation: 0.8s linear 0.2s normal none infinite running load;
+    background: #00ffea none repeat scroll 0 0;
+}
+#loader .dot:nth-child(7n+3) {
+    transform: rotate(135deg);
+}
+#loader .dot:nth-child(7n+3)::before {
+    animation: 0.8s linear 0.3s normal none infinite running load;
+    background: #00aaff none repeat scroll 0 0;
+}
+#loader .dot:nth-child(7n+4) {
+    transform: rotate(180deg);
+}
+#loader .dot:nth-child(7n+4)::before {
+    animation: 0.8s linear 0.4s normal none infinite running load;
+    background: #0040ff none repeat scroll 0 0;
+}
+#loader .dot:nth-child(7n+5) {
+    transform: rotate(225deg);
+}
+#loader .dot:nth-child(7n+5)::before {
+    animation: 0.8s linear 0.5s normal none infinite running load;
+    background: #2a00ff none repeat scroll 0 0;
+}
+#loader .dot:nth-child(7n+6) {
+    transform: rotate(270deg);
+}
+#loader .dot:nth-child(7n+6)::before {
+    animation: 0.8s linear 0.6s normal none infinite running load;
+    background: #9500ff none repeat scroll 0 0;
+}
+#loader .dot:nth-child(7n+7) {
+    transform: rotate(315deg);
+}
+#loader .dot:nth-child(7n+7)::before {
+    animation: 0.8s linear 0.7s normal none infinite running load;
+    background: magenta none repeat scroll 0 0;
+}
+#loader .dot:nth-child(7n+8) {
+    transform: rotate(360deg);
+}
+#loader .dot:nth-child(7n+8)::before {
+    animation: 0.8s linear 0.8s normal none infinite running load;
+    background: #ff0095 none repeat scroll 0 0;
+}
+#loader .lading {
+
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    bottom: -40px;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    right: 0;
+    width: 180px;
+}
+@keyframes load {
+100% {
+    opacity: 0;
+    transform: scale(1);
+}
+}
+@keyframes load {
+100% {
+    opacity: 0;
+    transform: scale(1);
+}
+}

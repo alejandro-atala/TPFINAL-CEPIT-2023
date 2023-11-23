@@ -17,29 +17,32 @@ const HomePage = () => {
   const [itemHome4, setItemHome4] = useState('');
 
   useEffect(() => {
-    const obtenerTextoPorId = async (id, setTexto) => {
-      try {
-        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/id/${id}`);
-        var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
+    // const obtenerTextoPorId = async (id, setTexto) => {
 
-        setTexto(textoConSaltosDeLinea);
+    //   try {
+    //     const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/id/${id}`);
+    //     var textoConSaltosDeLinea = response.data.texto.replace(/\n/g, "<br>");
+      
+    //     setTexto(textoConSaltosDeLinea);
 
-      } catch (error) {
-        console.error(`Error al obtener el texto con ID ${id}:`, error);
-      }
-    };
+    //   } catch (error) {
+    //     console.error(`Error al obtener el texto con ID ${id}:`, error);
+    //   }
+    // };
 
     const obtenerTextoPorReferencia = async (referencia, setTextoHistorial) => {
+
       try {
         const responseTexto = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referencia}`);
         var textoConSaltosDeLinea = responseTexto.data.texto.replace(/\n/g, "<br>");
-
+      
         setTextoHistorial(textoConSaltosDeLinea);
       } catch (error) {
         console.error(`Error al obtener datos de ${referencia}:`, error);
       }
     };
-
+    obtenerTextoPorReferencia('Titulo_instituto', setTextoId1);
+    obtenerTextoPorReferencia('Descripcion', setTextoId2);
     obtenerTextoPorReferencia('Texto_Home', setTextoHome);
     obtenerTextoPorReferencia('Titulo_home', setTituloHome);
     obtenerTextoPorReferencia('Item_home1', setItemHome1);
@@ -80,8 +83,8 @@ const HomePage = () => {
 
 
     // Obtener textos para ID 1 y ID 2
-    obtenerTextoPorId(1, setTextoId1);
-    obtenerTextoPorId(2, setTextoId2);
+    // obtenerTextoPorId(1, setTextoId1);
+    // obtenerTextoPorId(2, setTextoId2);
 
     // Obtener imágenes por nombre
     obtenerImagenesPorNombres(['home1', 'home2', 'home3']);

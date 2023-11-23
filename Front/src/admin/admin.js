@@ -6,12 +6,66 @@ import SessionExpiration from '../SesionExpired';
 import Solicitudes from './Solicitudes/solicitudes';
 
 const AdminPage = () => {
+  const [loadingColors, setLoadingColors] = useState(false);
+  const [editingRow, setEditingRow] = useState(null);
+  const [deletingRows, setDeletingRows] = useState([null]);
+  const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [loading3, setLoading3] = useState(false);
+  const [loading4, setLoading4] = useState(false);
   const [selectedTable, setSelectedTable] = useState('');
   const [tableData, setTableData] = useState([]);
   const [editedData, setEditedData] = useState([]);
   const [newRowData, setNewRowData] = useState({});
   const [sessionExpired, setSessionExpired] = useState(false);
   const [columns, setColumns] = useState([]);
+  const [colors, setColors] = useState({
+    '--color-nav-foot': '',
+    '--color-menu-lateral': '',
+'    --color-boton':'',
+  '  --color-palabra-boton':'',
+'    --color-boton-transicion':'',
+   ' --color-cuadro':'',
+ '   --color-subcuadro':'',
+'    --color-sombras':'',
+  '  --color-subtitulos':'',
+'    --color-titulos':'',
+  '  --color-bordes':'',
+  '  --color-sombras-titulos':'',
+   ' --color-fondo:':'',
+  });
+
+  const referencesToFetch = [
+    '--color-nav-foot',
+    '--color-menu-lateral',
+    '--color-boton',
+    '--color-palabra-boton',
+    '--color-boton-transicion',
+    '--color-cuadro',
+    '--color-subcuadro',
+    '--color-sombras',
+    '--color-subtitulos',
+    '--color-titulos',
+    '--color-bordes',
+    '--color-sombras-titulos',
+    '--color-fondo',
+  ];
+
+  const variableNames = {
+    '--color-nav-foot': 'Color de navegación y pie de página',
+    '--color-menu-lateral': 'Color del menú lateral',
+    '--color-boton': 'Color del botón',
+    '--color-palabra-boton': 'Color de la palabra del botón',
+    '--color-boton-transicion': 'Color de transición del botón',
+    '--color-cuadro': 'Color del cuadro',
+    '--color-subcuadro': 'Color del subcuadro',
+    '--color-sombras': 'Color de sombras',
+    '--color-subtitulos': 'Color de los subtítulos',
+    '--color-titulos': 'Color de los títulos',
+    '--color-bordes': 'Color de los bordes',
+    '--color-sombras-titulos': 'Color de sombras de los títulos',
+    '--color-fondo': 'Color de fondo',
+  };
 
   const requiredFields = {
     curso: ['idCurso', 'anio'],
@@ -35,6 +89,7 @@ const AdminPage = () => {
   }, []);
 
   useEffect(() => {
+    setLoadingColors(true);
     if (selectedTable) {
       cargarDatos();
     }
@@ -70,6 +125,7 @@ const AdminPage = () => {
       setTableData(data);
       setColumns(Object.keys(data[0] || {}));
       setEditedData(data.map((row) => ({ ...row, isEditing: false })));
+
     } catch (error) {
       console.error(`Error al cargar datos de ${selectedTable}:`, error);
     }
@@ -99,13 +155,16 @@ const AdminPage = () => {
       } else if (selectedTable === 'curso') {
         idFieldName = 'idCurso';
       }
+      setDeletingRows([...deletingRows, rowIndex]);
+
       const id = editedData[rowIndex][idFieldName];
       const url = `https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/${selectedTable}/${id}`;
       await axios.delete(url);
-
+      setDeletingRows(deletingRows.filter((index) => index !== rowIndex));
       const updatedData = editedData.filter((row, index) => index !== rowIndex);
       setEditedData(updatedData);
     } catch (error) {
+      setDeletingRows(deletingRows.filter((index) => index !== rowIndex));
       console.error('Error al borrar una fila:', error);
     }
   };
@@ -133,13 +192,15 @@ const AdminPage = () => {
           fieldsToUpdate[field] = updatedRow[field];
         }
       }
-
+      setLoading2(true);
       await axios.put(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/${selectedTable}/${id}`, fieldsToUpdate);
 
       const updatedData = [...editedData];
       updatedData[rowIndex] = updatedRow;
+      setLoading2(false);
       setEditedData(updatedData);
     } catch (error) {
+      setLoading2(false);
       console.error('Error al guardar cambios:', error);
     }
     cargarDatos();
@@ -182,11 +243,11 @@ const AdminPage = () => {
         return;
       }
 
-
+      setLoading(true);
       // Envía la nueva fila al servidor para su creación
       const response = await axios.post(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/${selectedTable}`, newRowData);
       const addedRow = response.data;
-
+      setLoading(false);
       // Agrega la fila completa al estado local
       setEditedData([...editedData, addedRow]);
       setNewRowData({}); // Restablece la nueva fila después de agregarla
@@ -194,6 +255,7 @@ const AdminPage = () => {
       // Después de agregar la fila, puedes recargar los datos nuevamente desde el servidor para asegurarte de que estén actualizados
       cargarDatos(); // Llama a la función que carga los datos nuevamente
     } catch (error) {
+      setLoading(false);
       console.error('Error al agregar una nueva fila:', error);
     }
   };
@@ -206,9 +268,130 @@ const AdminPage = () => {
 
   const isTableEmpty = tableData.length === 0;
 
+
+  // function abrirPaleta() {
+  //   const colorElegido = prompt("Por favor, introduce un color en formato hexadecimal (#FFFFFF) o de nombre (por ejemplo, 'blue'):");
+  
+  //   if (colorElegido) {
+  //     document.documentElement.style.setProperty('--color-nav-foot', colorElegido);
+  //   }
+  // }
+  
+  const handleChangeColor = (variable, nuevoColor) => {
+    setColors({ ...colors, [variable]: nuevoColor });
+    document.documentElement.style.setProperty(variable, nuevoColor);
+  };
+
+
+  
+  const handleGuardarColor = (color, variable) => {
+    setLoading(true);
+    axios
+      .get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${color}`)
+      .then((response) => {
+        const data = response.data;
+        setLoading(false);
+        if (data) {
+          console.log('resp',data)
+          // Si la referencia ya existe, actualiza el campo 'texto' con el nuevo valor del color
+          const referenceToUpdate = data; // Tomamos la primera entrada, ya que debería ser la última
+          console.log('aaa',referenceToUpdate)
+          // Actualiza la entrada existente con el nuevo valor de 'texto'
+          axios
+            .put(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referenceToUpdate.id}`, {
+            
+              texto: variable,
+            })
+            .then((response) => {
+              console.log('Color actualizado con éxito:', response.data);
+              // Aquí puedes manejar la lógica después de actualizar el color si es necesario
+            })
+            .catch((error) => {
+              console.error('Error al actualizar el color:', error);
+              // Manejar el error en caso de fallo al actualizar
+            });
+        } else {
+          // Si no hay datos, significa que la referencia no existe y se crea una nueva entrada
+          axios
+            .post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/text', {
+              referencia: color,
+              texto: variable,
+            })
+            .then((response) => {
+              console.log('Color guardado con éxito:', response.data);
+              // Aquí puedes manejar la lógica después de guardar el color si es necesario
+            })
+            .catch((error) => {
+              console.error('Error al guardar el color:', error);
+              // Manejar el error en caso de fallo al guardar
+            });
+        }
+      })
+      .catch((error) => {
+        console.error('Error al verificar la existencia de la referencia:', error);
+        // Manejar el error en caso de fallo al verificar la existencia de la referencia
+      });
+  };
+  
+  
+  
+  
+  const fetchColorsFromTable = async () => {
+    try {
+      const colorsData = {};
+  
+      // Realizar la solicitud para obtener los colores asociados a las referencias
+      for (const reference of referencesToFetch) {
+        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${reference}`);
+        
+        colorsData[reference] = response.data.texto || ''; // Valor por defecto si no hay datos
+      }
+  
+      // Establecer los colores en la paleta de colores
+      setColors(colorsData);
+      setLoadingColors(false);
+      Object.entries(colorsData).forEach(([variable, color]) => {
+        document.documentElement.style.setProperty(variable, color);
+      });
+    } catch (error) {
+      setLoadingColors(false);
+      console.error('Error al obtener los colores de la tabla:', error);
+    }
+  };
+  
+
+  useEffect(() => {
+    // Llamar a la función para obtener los colores al cargar la página
+    fetchColorsFromTable();
+    // ... (otros useEffects)
+  }, []);
+  
+  
+  
   return (
-<div className="admin-page d-flex flex-column">
-  <Solicitudes />
+    <div className="admin-page d-flex flex-column">
+    {/* {loadingColors ? (
+      <div className="loading-message"> 
+        <div class="container">
+          <div class="row">
+            <div id="loader">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="lading"></div>
+            </div>
+          </div>
+        </div>
+        <h1 className="spinner-text">Bienvenido Administrador <br></br> Cargando datos...</h1>
+      </div>
+    ) : ( */}
+      <div>
+        <Solicitudes />
   <div className="mx-auto mt-5 text-center">
     <h4>Editar contenido de tablas</h4>
     <div className="d-flex justify-content-between align-items-center">
@@ -258,19 +441,53 @@ const AdminPage = () => {
                       </td>
                     ))}
 
-                    <td>
-                      {row.isEditing ? (
-                        <div className="btn-group">
-                          <button className="btn btn-primary" onClick={() => handleSaveChanges(rowIndex)}>Guardar</button>
-                          <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
-                        </div>
-                      ) : (
-                        <div className="btn-group">
-                          <button className="btn btn-warning" onClick={() => handleEditRow(rowIndex)}>Editar</button>
-                          <button className="btn btn-danger" onClick={() => handleDeleteRow(rowIndex)}>Borrar</button>
-                        </div>
-                      )}
-                    </td>
+<td>
+  {row.isEditing ? (
+    <div className="btn-group">
+      <button className="btn btn-primary" disabled={loading2} onClick={() => handleSaveChanges(rowIndex)}>
+        {loading2 ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Guardar'
+        )}
+      </button>
+      <button className="btn btn-danger" disabled={deletingRows.includes(rowIndex)} onClick={() => handleDeleteRow(rowIndex)}>
+        {deletingRows.includes(rowIndex) ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Borrar'
+        )}
+      </button>
+    </div>
+  ) : (
+    <div className="btn-group">
+      <button className="btn btn-warning" disabled={loading} onClick={() => handleEditRow(rowIndex)}>
+        {loading ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Editar'
+        )}
+      </button>
+      <button className="btn btn-danger" disabled={deletingRows.includes(rowIndex)} onClick={() => handleDeleteRow(rowIndex)}>
+        {deletingRows.includes(rowIndex) ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Borrar'
+        )}
+      </button>
+    </div>
+  )}
+</td>
+
+
                   </tr>
                 ))}
                 {/* Agrega una fila vacía al final para agregar nuevos datos */}
@@ -290,9 +507,15 @@ const AdminPage = () => {
                     </td>
                   ))}
                   <td>
-                    <button className="btn btn-success" onClick={handleAddRow}>
-                      Agregar
-                    </button>
+                  <button className="btn btn-success" disabled={loading} onClick={() => handleAddRow()}>
+        {loading ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Agregar'
+        )}
+      </button>
                   </td>
                 </tr>
 
@@ -304,7 +527,43 @@ const AdminPage = () => {
       
       <BloqueDeCarga />
       <SessionExpiration />
+
+      <div className="admin-page mt-5 mx-auto">
+      <div className="row">
+        <div className="col-3 mx-auto">
+          {loading && (
+            <div className="d-flex justify-content-center">
+              <div className="spinner-border text-primary" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          )}
+
+      <div className="row">
+        <div className="col">
+          {Object.entries(colors).map(([variable, color]) => (
+            <div key={variable} className="d-flex align-items-center justify-content-between mb-3">
+              <div className="d-flex align-items-center">
+                <input
+                  type="color"
+                  value={color}
+                  onChange={(e) => handleChangeColor(variable, e.target.value)}
+                />
+  <label htmlFor={variable} className="ms-2 mb-0">{variableNames[variable]}</label>
+              </div>
+              <button
+                className="btn btn-success ms-2"
+                onClick={() => handleGuardarColor(variable, color)}
+                disabled={loading} // Deshabilita el botón mientras se está realizando la acción
+              >
+                Guardar
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
+    </div>  </div>  </div> )}</div>
   );
 };
 

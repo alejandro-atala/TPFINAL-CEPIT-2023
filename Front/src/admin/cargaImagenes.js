@@ -16,8 +16,8 @@ const CargaImagenes = () => {
   const [imagenThumbnailUrl, setImagenThumbnailUrl] = useState(null); // Nuevo estado para la miniatura de la imagen
   const [miniaturaVisible, setMiniaturaVisible] = useState(true); // Estado para controlar la visibilidad de la miniatura
   const [imagenMiniaturaUrl, setImagenMiniaturaUrl] = useState('');
-
-
+  const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
 
 
   const obtenerUrlImagenExistente = async (nombrePagina) => {
@@ -50,7 +50,7 @@ const CargaImagenes = () => {
       const formData = new FormData();
       formData.append('file', imagen);
       formData.append('upload_preset', 'dgmwrypk');
-  
+      setLoading(true);
       const response = await axios.post(
         'https://api.cloudinary.com/v1_1/difggjfxn/image/upload/',
         formData
@@ -64,7 +64,7 @@ const CargaImagenes = () => {
         nombre: nombrePagina,
         url: imageUrl,
       });
-  
+      setLoading(false);
       setSuccessMessage('Imagen guardada con éxito');
       setErrorMessage('');
       setImagenUrl(imageUrl);
@@ -83,6 +83,7 @@ const CargaImagenes = () => {
         setSuccessMessage('');
       }, 3000);
     } catch (error) {
+      setLoading(false);
       console.error('Error al guardar la imagen:', error);
       setErrorMessage('Error al guardar la imagen');
       setSuccessMessage('');
@@ -106,10 +107,11 @@ const CargaImagenes = () => {
     }
 
     try {
+      setLoading2(true);
       // Realiza una solicitud DELETE a la API para eliminar la imagen por nombre
       const response = await axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/imagenes/nombre/${nombrePagina}`);
       console.log('Imagen borrada con éxito:', response.data);
-
+      setLoading2(false);
       // Actualiza los mensajes de éxito y error
       setSuccessMessage('Imagen borrada con éxito');
       setErrorMessage('');
@@ -124,6 +126,7 @@ const CargaImagenes = () => {
         setSuccessMessage('');
       }, 2000);
     } catch (error) {
+      setLoading2(false);
       // Si ocurre un error al borrar la imagen, muestra un mensaje de error
       console.error('Error al borrar la imagen:', error);
       setErrorMessage('Error al borrar la imagen');
@@ -192,9 +195,15 @@ const CargaImagenes = () => {
         <option value="taller4">Taller 4</option>
         <option value="taller5">Taller 5</option>
         <option value="taller6">Taller 6</option>
+        <option value='ImagenLinea1'> Imagen de Linea de tiempo 1</option>
+        <option value='ImagenLinea2'> Imagen de Linea de tiempo 2</option>
+        <option value='ImagenLinea3'> Imagen de Linea de tiempo 3</option>
+        <option value='ImagenLinea4'> Imagen de Linea de tiempo 4</option>
+        <option value='ImagenBonus'> Imagen de Linea de tiempo Bonus</option>
         <option value='proyectoImagen1'> Proyecto Imagen 1</option>
         <option value='proyectoImagen2'> Proyecto Imagen 2</option> 
         <option value='proyectoImagen3'> Proyecto Imagen 3</option>
+        <option value='proyectoImagen4'> Proyecto Imagen 4</option>
         <option value='imagenReglamento1'> Reglamento Imagen 1 </option>
         <option value='imagenReglamento2'> Reglamento Imagen 2 </option>
         <option value='imagenReglamento3'> Reglamento Imagen 3 </option>
@@ -219,13 +228,28 @@ const CargaImagenes = () => {
 
       <br></br>
 
-      <button onClick={handleGuardarImagen} className="btn btn-success mt-3 ">
-        Guardar Imagen
+      <button onClick={handleGuardarImagen} className="btn btn-success mt-3">
+        {loading ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Guardar Imagen'
+        )}
       </button>
 
+      {/* Botón Borrar Imagen con el spinner */}
       <button onClick={handleBorrarImagen} className="btn btn-danger mt-3 ms-2">
-        Borrar Imagen
+        {loading2 ? (
+          <div className="spinner-border spinner-border-sm" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          'Borrar Imagen'
+        )}
       </button>
+
+
       {successMessage && (
         <Alert variant="success" className="text-center mt-3">
           {successMessage}

@@ -16,6 +16,8 @@ const BloqueDeCarga = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [editMode, setEditMode] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
 
 
   const nombresDeReferencia = {
@@ -52,7 +54,18 @@ const BloqueDeCarga = () => {
     Texto_Descripcion_Proyecto_2: 'Descripcion del Proyecto 2',
     Titulo_Proyecto_3: 'Titulo del tercer proyecto',
     Texto_Descripcion_Proyecto_3: 'Descripcion del Proyecto 3',
+    Titulo_Proyecto_4: 'Titulo del tercer proyecto',
+    Texto_Descripcion_Proyecto_4: 'Descripcion del Proyecto 3',
     Texto_Historial: 'Texto de la Historia de la Escuela',
+    Año_Linea_1: 'Año 1',
+    Año_Linea_2: 'Año 2',
+    Año_Linea_3: 'Año 3',
+    Año_Linea_4: 'Año 4',
+    Linea_tiempo_1: 'Linea de tiempo 1',
+    Linea_tiempo_2: 'Linea de tiempo 2',
+    Linea_tiempo_3: 'Linea de tiempo 3',
+    Linea_tiempo_4: 'Linea de tiempo 4',
+    Texto_Bonus: 'Linea de tiempo Bonus',
     Reglamento_1: 'Titulo reglamento',
     Titulo_Reglamento_1: 'Titulo del Reglamento 1',
     Titulo_Reglamento_2: 'Titulo del Reglamento 2',
@@ -106,11 +119,14 @@ const BloqueDeCarga = () => {
 
 
   const editarDetalleTexto = () => {
+    setLoading(true);
     axios.put(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${textoSeleccionado.id}`, {
       referencia: referencia, // Usa el valor de referencia seleccionado
       texto: textoSeleccionado.texto,
     })
+    
       .then(() => {
+        setLoading(false);
         setSuccessMessage('Texto actualizado con éxito');
         setErrorMessage('');
         // Ocultar el mensaje de éxito después de 2 segundos
@@ -119,6 +135,7 @@ const BloqueDeCarga = () => {
         }, 2000);
       })
       .catch(() => {
+        setLoading(false);
         setErrorMessage('Error al guardar el texto');
         setSuccessMessage('');
         // Ocultar el mensaje de error después de 2 segundos
@@ -129,6 +146,7 @@ const BloqueDeCarga = () => {
   }
 
   const handleGuardarTexto = () => {
+
     if (!textoSeleccionado.texto.trim() || !referencia) {
       // El textarea está vacío, muestra un mensaje de error
       setErrorMessage('La referencia/texto no puede estar vacío');
@@ -139,12 +157,14 @@ const BloqueDeCarga = () => {
       }, 2000);
       return;
     }
+    setLoading(true);
     axios
       .post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/text', {
         referencia: referencia, // Usa el valor de referencia seleccionado
         texto: textoSeleccionado.texto,
       })
       .then((response) => {
+        setLoading(false);
         setTextos([...textos, response.data]);
         setNuevoTexto('');
         setReferencia(''); // Limpia la referencia después de guardar
@@ -156,6 +176,7 @@ const BloqueDeCarga = () => {
         }, 2000);
       })
       .catch((error) => {
+        setLoading(false);
         console.error('Error al crear un texto:', error);
         setErrorMessage('Error al guardar el texto');
         setSuccessMessage('');
@@ -168,8 +189,10 @@ const BloqueDeCarga = () => {
 
 
   const handleBorrarTexto = (id) => {
+    setLoading2(true);
     axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${id}`)
       .then(() => {
+        setLoading2(false);
         const updatedTextos = textos.filter((texto) => texto.id !== id);
         setTextos(updatedTextos);
         setTextoSeleccionado({ referencia: '', texto: '' });
@@ -181,6 +204,7 @@ const BloqueDeCarga = () => {
         setEditing(false); // Deshabilitar la edición después de borrar
       })
       .catch((error) => {
+        setLoading2(false);
         console.error('Error al borrar un texto:', error);
         setErrorMessage('Error al borrar el texto');
         setSuccessMessage('');
@@ -221,18 +245,34 @@ const BloqueDeCarga = () => {
             style={{ height: '200px' }}
           />
 
-          <button
+<button
             onClick={handleGuardarEditarTexto}
             className={`btn ${editMode ? 'btn-primary' : 'btn-success'} mt-3`}
+            disabled={loading} // Deshabilita el botón mientras se está realizando la carga
           >
-            {editMode ? 'Guardar Edición' : 'Guardar'}
+            {loading ? ( // Muestra el spinner si se está cargando
+            <div className="spinner-border spinner-border-sm" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            ) : (
+              editMode ? 'Guardar Edición' : 'Guardar'
+            )}
           </button>
 
 
-
-          <button onClick={() => handleBorrarTexto(textoSeleccionado.id)} className="btn btn-danger mt-3 ms-2">
-            Borrar Texto
-          </button>
+        <button
+  onClick={() => handleBorrarTexto(textoSeleccionado.id)}
+  className="btn btn-danger mt-3 ms-2"
+  disabled={loading2} // Deshabilita el botón mientras se está realizando la carga
+>
+  {loading2 ? ( // Muestra el spinner si se está cargando
+    <div className="spinner-border spinner-border-sm" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </div>
+  ) : (
+    'Borrar Texto'
+  )}
+</button>
 
 
         </div>

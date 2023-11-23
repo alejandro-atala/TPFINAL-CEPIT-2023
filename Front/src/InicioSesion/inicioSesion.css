@@ -1,5 +1,5 @@
 .bg-sesion {
-    width: 30%;
+    width: 50%;
     box-shadow: 40px 20px 40px var(--color-sombras);
     background: var(--color-cuadro);
     border-radius: 20%;
@@ -9,6 +9,11 @@
 .btn-sesion:hover {
     background-color: var(--color-boton-transicion);
     color: var(--color-palabra-boton);
+}
+
+.btn-olvide {
+    text-decoration: underline;
+    color: blue;
 }
 
 .titulo-sesion {
@@ -22,10 +27,14 @@
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: block;
-    width: 100%;
+    /* display: block; */
+    /* width: 100%; */
     font-size: 100%;
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
 }
+
+.btn-registrarse:hover {
+    color:blue;
+  }

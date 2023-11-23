@@ -7,8 +7,8 @@ import { useUsuario } from '../usuarioContext';
 import { useAuth } from './tokenContext';
 import { Routes, Route } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
-import Inscripcion from '../MenuLateral/InscripcionOnline/inscripcion';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 
 const InicioSesion = ({ onLogin }) => {
   const { setToken } = useAuth();
@@ -159,10 +159,8 @@ const InicioSesion = ({ onLogin }) => {
         <h2 className="text-center mb-4">Iniciar sesión</h2>
         {message && <Alert variant="danger">{message}</Alert>}
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Correo electrónico:
-            </label>
+          <div className="mb-3 input-group">
+            <span className="input-group-text"><FontAwesomeIcon icon={faUser} /></span>
             <input
               type="email"
               className="form-control"
@@ -170,18 +168,18 @@ const InicioSesion = ({ onLogin }) => {
               ref={emailInputRef}
               value={formData.email}
               onChange={handleChange}
+              placeholder="Correo electrónico"
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Contraseña:
-            </label>
+          <div className="mb-3 input-group">
+            <span className="input-group-text"><FontAwesomeIcon icon={faKey} /></span>
             <input
               type="password"
               className="form-control"
               id="password"
               value={formData.password}
               onChange={handleChange}
+              placeholder="Contraseña"
             />
           </div>
           <div className="mb-3">
@@ -192,15 +190,15 @@ const InicioSesion = ({ onLogin }) => {
           <div className="mb-3">
             <button
               type="button"
-              className="btn btn-sesion w-100"
+              className="btn btn-olvide w-100"
               onClick={handlePasswordReset}
             >
-              Olvidé mi contraseña
+              ¿Olvidé mi contraseña?
             </button>
           </div>
           <Link
             to="/inscripcion-online"
-            className="btn btn-sesion w-100"
+            className="btn btn-registrarse w-100"
           >
             Registrarse
           </Link>
