@@ -29,7 +29,7 @@ const ResetPass = () => {
 
         try {
             // Realiza una solicitud al servidor para validar el token
-            const response = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/usuario/resetpassword/token', { token });
+            const response = await axios.post('http://localhost:3000/usuario/resetpassword/token', { token });
        
            console.log("esperando...", response)
          
@@ -81,7 +81,7 @@ const ResetPass = () => {
     
                 // Envia la solicitud para restablecer la contraseña
                 const response = await axios.post(
-                    `https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/usuario/resetpassword/email/`,
+                    `http://localhost:3000/usuario/resetpassword/email/`,
                     requestData
                 );
     

@@ -41,7 +41,7 @@ const InicioSesion = ({ onLogin }) => {
     try {
       // Check if the email exists in the database
       const checkEmailResponse = await axios.get(
-      `https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/usuario/email/${formData.email}`
+      `http://localhost:3000/usuario/email/${formData.email}`
       );
   console.log(checkEmailResponse.data)
       if (checkEmailResponse.data.email.length > 0) {
@@ -49,7 +49,7 @@ const InicioSesion = ({ onLogin }) => {
 
      setShowSuccessAlert({ message: 'Enviando email......' });
 
-      const sendEmailResponse = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/email/reset', {
+      const sendEmailResponse = await axios.post('http://localhost:3000/email/reset', {
         email: formData.email,
       });
 
@@ -88,7 +88,7 @@ const InicioSesion = ({ onLogin }) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/usuario/login', formData);
+      const response = await axios.post('http://localhost:3000/usuario/login', formData);
       const newToken = response.data.token;
       setToken(newToken);
       console.log("inicio", response.data)
@@ -104,7 +104,7 @@ const InicioSesion = ({ onLogin }) => {
       else if (response.data.tipo === 'Alumno') {
 
         // Una vez que tengas el ID del usuario, realiza una solicitud GET para obtener el ID del alumno
-        const resp = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/alumno/usuario/${idUsuario}`);
+        const resp = await axios.get(`http://localhost:3000/alumno/usuario/${idUsuario}`);
         const alumnoData = resp.data;
 
         if (alumnoData) {
@@ -115,7 +115,7 @@ const InicioSesion = ({ onLogin }) => {
         navigate('/alumno');
 
       } else if (response.data.tipo === 'Profesor') {
-        const resp = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/profesor/usuario/${idUsuario}`);
+        const resp = await axios.get(`http://localhost:3000/profesor/usuario/${idUsuario}`);
         const profesorData = resp.data;
 
 

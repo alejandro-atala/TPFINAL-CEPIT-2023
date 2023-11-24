@@ -138,7 +138,7 @@ const App = () => {
   
       // Realizar la solicitud para obtener los colores asociados a las referencias
       for (const reference of referencesToFetch) {
-        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${reference}`);
+        const response = await axios.get(`http://localhost:3000/carga/${reference}`);
         
         colorsData[reference] = response.data.texto || ''; // Valor por defecto si no hay datos
       }
@@ -157,7 +157,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
-    {/* Mostrar el mensaje de carga si loadingColors es verdadero */}
+    {/* Mostrar el mensaje de carga si loadingColors es verdadero
     {loadingColors ? (
       <div className="loading-message"> 
 <div class="container">
@@ -181,7 +181,7 @@ const App = () => {
 
  
     ) : (
-      // Renderizar el resto de la aplicación una vez que los colores se han cargado
+      // Renderizar el resto de la aplicación una vez que los colores se han cargado */}
       <UsuarioProvider>
         <NotificacionesProvider>
           <ProfesorProvider>
@@ -235,8 +235,8 @@ const App = () => {
                         <Route path="/ProfAvisos" element={<ProfeAvisos />} />
                         <Route path="/Profesor" element={<ProfesorProvider />} />
 
-                        <Route path="/admin"  element={<ProtectedRoute element={<AdminPage />} /> }  />
-                        {/* <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} /> */}
+                        {/* <Route path="/admin"  element={<ProtectedRoute element={<AdminPage />} /> }  /> */}
+                        <Route path="/admin" element={<div className="center-content"> <AdminPage /> </div>} />
 
                         <Route path="/resetpass" element={<ResetPass />} />
 
@@ -256,7 +256,7 @@ const App = () => {
           </ProfesorProvider>
         </NotificacionesProvider>
         </UsuarioProvider>
-      )}
+      {/* )} */}
     </BrowserRouter>
   );
 };

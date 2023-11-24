@@ -23,7 +23,7 @@ const Historial = () => {
   useEffect(() => {
     const obtenerImagenPorReferencia = async (referencia, setImagenLinea) => {
       try {
-        const responseImagen = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/imagenes/nombre/${referencia}`);
+        const responseImagen = await axios.get(`http://localhost:3000/imagenes/nombre/${referencia}`);
 
         if (responseImagen.data) {
           setImagenLinea(responseImagen.data.url);
@@ -40,7 +40,7 @@ const Historial = () => {
     
     const obtenerTextoPorReferencia = async (referencia, setTextoHistorial) => {
       try {
-        const responseTexto = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referencia}`);
+        const responseTexto = await axios.get(`http://localhost:3000/carga/${referencia}`);
         var textoConSaltosDeLinea = responseTexto.data.texto.replace(/\n/g, "<br>");
 
         setTextoHistorial(textoConSaltosDeLinea);

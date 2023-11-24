@@ -119,7 +119,7 @@ const AdminPage = () => {
 
   const cargarDatos = async () => {
     try {
-      const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/${selectedTable}`);
+      const response = await axios.get(`http://localhost:3000/${selectedTable}`);
       const data = response.data;
 
       setTableData(data);
@@ -158,7 +158,7 @@ const AdminPage = () => {
       setDeletingRows([...deletingRows, rowIndex]);
 
       const id = editedData[rowIndex][idFieldName];
-      const url = `https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/${selectedTable}/${id}`;
+      const url = `http://localhost:3000/${selectedTable}/${id}`;
       await axios.delete(url);
       setDeletingRows(deletingRows.filter((index) => index !== rowIndex));
       const updatedData = editedData.filter((row, index) => index !== rowIndex);
@@ -193,7 +193,7 @@ const AdminPage = () => {
         }
       }
       setLoading2(true);
-      await axios.put(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/${selectedTable}/${id}`, fieldsToUpdate);
+      await axios.put(`http://localhost:3000/${selectedTable}/${id}`, fieldsToUpdate);
 
       const updatedData = [...editedData];
       updatedData[rowIndex] = updatedRow;
@@ -245,7 +245,7 @@ const AdminPage = () => {
 
       setLoading(true);
       // Envía la nueva fila al servidor para su creación
-      const response = await axios.post(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/${selectedTable}`, newRowData);
+      const response = await axios.post(`http://localhost:3000/${selectedTable}`, newRowData);
       const addedRow = response.data;
       setLoading(false);
       // Agrega la fila completa al estado local
@@ -287,7 +287,7 @@ const AdminPage = () => {
   const handleGuardarColor = (color, variable) => {
     setLoading(true);
     axios
-      .get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${color}`)
+      .get(`http://localhost:3000/carga/${color}`)
       .then((response) => {
         const data = response.data;
         setLoading(false);
@@ -298,7 +298,7 @@ const AdminPage = () => {
           console.log('aaa',referenceToUpdate)
           // Actualiza la entrada existente con el nuevo valor de 'texto'
           axios
-            .put(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${referenceToUpdate.id}`, {
+            .put(`http://localhost:3000/carga/${referenceToUpdate.id}`, {
             
               texto: variable,
             })
@@ -313,7 +313,7 @@ const AdminPage = () => {
         } else {
           // Si no hay datos, significa que la referencia no existe y se crea una nueva entrada
           axios
-            .post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/text', {
+            .post('http://localhost:3000/carga/text', {
               referencia: color,
               texto: variable,
             })
@@ -342,7 +342,7 @@ const AdminPage = () => {
   
       // Realizar la solicitud para obtener los colores asociados a las referencias
       for (const reference of referencesToFetch) {
-        const response = await axios.get(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/carga/${reference}`);
+        const response = await axios.get(`http://localhost:3000/carga/${reference}`);
         
         colorsData[reference] = response.data.texto || ''; // Valor por defecto si no hay datos
       }
@@ -563,7 +563,11 @@ const AdminPage = () => {
         </div>
       </div>
     </div>
-    </div>  </div>  </div> )}</div>
+    </div>  </div>  </div>
+    
+     {/* )} */}
+    
+    </div>
   );
 };
 

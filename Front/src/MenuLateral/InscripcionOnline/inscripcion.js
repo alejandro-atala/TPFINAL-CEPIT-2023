@@ -87,7 +87,7 @@ console.log(id, value);
 
     try {
       console.log(formData)
-      const response = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/solicitudes', formData);
+      const response = await axios.post('http://localhost:3000/solicitudes', formData);
       console.log('Registro exitoso:', response.data);
       setSuccessMessage('Procesando su solicitud. Recibira un email a la brevedad.');
       setErrorMessage([]);

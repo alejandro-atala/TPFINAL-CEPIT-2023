@@ -15,7 +15,7 @@ const Solicitudes = () => {
 
     const fetchUsers= async () => {
     try {
-      const response = await axios.get('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/solicitudes');
+      const response = await axios.get('http://localhost:3000/solicitudes');
       const data = response.data;
       console.log(data)
       setUsers(data);
@@ -27,13 +27,13 @@ const Solicitudes = () => {
   const acceptUser = async (user) => {
     try {
       setLoading(true);
-      const response = await axios.post('https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/usuario', user);
+      const response = await axios.post('http://localhost:3000/usuario', user);
  
       console.log('User accepted and added to Usuarios table', response.data);
     
      
       setUsers((prevUsers) => prevUsers.filter((u) => u.id !== user.idUsuario));
-      await axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/solicitudes/${user.idUsuario}`);
+      await axios.delete(`http://localhost:3000/solicitudes/${user.idUsuario}`);
       setLoading(false);
       fetchUsers();
 
@@ -45,7 +45,7 @@ const Solicitudes = () => {
       };
 
 console.log(mailOptions);
-      const mail = await axios.post(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/email/solicitud`, mailOptions);
+      const mail = await axios.post(`http://localhost:3000/email/solicitud`, mailOptions);
       console.log('Envio de email exitoso', mail.data);
 
 
@@ -56,7 +56,7 @@ console.log(mailOptions);
 
   const rejectUser = async (user) => {
     setLoading(true);
-    axios.delete(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/solicitudes/${user.idUsuario}`)
+    axios.delete(`http://localhost:3000/solicitudes/${user.idUsuario}`)
       .then(async () => {
         setLoading(false);
         setUsers((prevUsers) => prevUsers.filter((user) => user.id !== user.idUsuario));
@@ -70,7 +70,7 @@ console.log(mailOptions);
   };
 
 
-  const mail = await axios.post(`https://app-2361a359-07df-48b8-acfd-5fb4c0536ce2.cleverapps.io/email/solicitud`, mailOptions);
+  const mail = await axios.post(`http://localhost:3000/email/solicitud`, mailOptions);
   console.log('Envio de email exitoso', mail.data);
 
 
