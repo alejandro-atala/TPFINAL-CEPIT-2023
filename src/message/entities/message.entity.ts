@@ -22,7 +22,9 @@ export class Message {
   @Column({ default: false }) // Valor predeterminado es false
   eliminado: boolean;
 
-  
+  @Column({ default: false }) // Valor predeterminado es false
+  eliminadoParaTodos: boolean;
+
 
   @ManyToOne(() => Usuario)
   @JoinColumn({ name: 'senderId' })

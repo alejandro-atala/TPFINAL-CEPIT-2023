@@ -47,6 +47,10 @@ export class MessageService {
     });
   }
 
+  async getMessageById(messageId: number): Promise<Message | undefined> {
+    return this.messageRepository.findOne({ where: { id: messageId } });
+  }
+  
   async getAllMessages(): Promise<Message[]> {
     return this.messageRepository.find();
   }
@@ -69,15 +73,19 @@ export class MessageService {
     const filteredMessages = messages.filter((message) => {
       const shouldBeShown = !(message.eliminado === true && message.senderId === senderId) || message.receiverId === senderId;
       
-      if (!shouldBeShown) {
+      // Agregar la condición para los mensajes eliminados para todos
+      const shouldBeShownForAll = !(message.eliminadoParaTodos === true);
+      
+      if (!shouldBeShown || !shouldBeShownForAll) {
         console.log('Mensaje marcado como eliminado o filtrado:', message.id);
       }
       
-      return shouldBeShown;
+      return shouldBeShown && shouldBeShownForAll;
     });
   
     return filteredMessages;
   }
+  
   
 
   async deleteMessage(messageId: number): Promise<void> {
@@ -100,6 +108,20 @@ export class MessageService {
   
     // Marcar el mensaje como eliminado para el usuario
     message.eliminado = true;
+    await this.messageRepository.save(message);
+  }
+  
+  async markMessageAsDeletedForAll(messageId: number): Promise<void> {
+    const message = await this.messageRepository.findOne({ where: { id: messageId } });
+  
+    if (!message) {
+      throw new NotFoundException(`Mensaje con ID ${messageId} no encontrado`);
+    }
+  
+    // Marcar el mensaje como eliminado para todos
+    message.eliminadoParaTodos = true;
+  
+    // Guardar el mensaje en la base de datos
     await this.messageRepository.save(message);
   }
   

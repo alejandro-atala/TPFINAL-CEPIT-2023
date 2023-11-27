@@ -43,5 +43,10 @@ async create(@Body() messageData: CreateMessageDto): Promise<Message> {
 async markMessageAsDeletedForMe(@Param('messageId') messageId: number): Promise<void> {
   await this.messageService.markMessageAsDeletedForMe(messageId);
 }
+
+@Patch('deleteForAll/:messageId')
+async markMessageAsDeletedForAll(@Param('messageId') messageId: number): Promise<void> {
+  await this.messageService.markMessageAsDeletedForAll(messageId);
+}
   
 }
