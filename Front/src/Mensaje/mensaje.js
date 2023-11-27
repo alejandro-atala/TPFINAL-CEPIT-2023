@@ -10,6 +10,7 @@ import {
 } from './ui-components';
 import './mensaje.css';
 import { useUsuario } from '../usuarioContext';
+import { v4 as uuidv4 } from 'uuid';
 
 function Mensaje() {
   const [isConnected, setIsConnected] = useState(false);
@@ -32,46 +33,61 @@ function Mensaje() {
     new Set(),
   );
   const messagesRef = useRef(null);
-  const inputRef = useRef(); 
+  const inputRef = useRef();
+
+  const cargarUsuarios = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/usuario');
+
+      if (!response.ok) {
+        throw new Error(
+          `Error al realizar la solicitud GET. Código de estado: ${response.status}`,
+        );
+      }
+
+      const data = await response.json();
+      const usuariosExcluyendoActual = data.filter(
+        (usuario) =>
+          usuario.nombre !== usuarioLogueado?.nombre &&
+          usuario.curso === usuarioLogueado?.curso,
+      );
+      setUsuariosTotales(usuariosExcluyendoActual);
+    } catch (error) {
+      console.error('Error al cargar usuarios:', error.message);
+    }
+  };
+  useEffect(() => {
+    cargarUsuarios();
+  }, [usuarioLogueado?.curso]);
 
   useEffect(() => {
-    // Cargar la lista de usuarios al montar el componente
-    fetch('http://localhost:3000/usuario')
-      .then((response) => response.json())
-      .then((data) => {
-        const usuariosExcluyendoActual = data.filter(
-          (usuario) => usuario.nombre !== usuarioLogueado?.nombre,
-        );
-        setUsuariosTotales(usuariosExcluyendoActual);
-      })
-      .catch((error) => {
-        console.error('Error al obtener la lista de usuarios', error);
-      });
+    const conectarASocket = () => {
+      if (usuarioLogueado?.id) {
+        const newSocket = io('http://localhost:3000', {
+          query: { usuario: usuarioLogueado.nombre },
+        });
 
-    // Establecer la conexión con el servidor de sockets
-    if (!socket && usuarioLogueado?.id) {
-      const newSocket = io('http://localhost:3000', {
-        query: { usuario: usuarioLogueado.nombre },
-      });
+        newSocket.on('connect', () => {
+          console.log('WebSocket conectado');
+          setIsConnected(true);
+        });
 
-      newSocket.on('connect', () => {
-        console.log('WebSocket conectado');
-      });
+        newSocket.on('chat_message', handleChatMessage);
+        newSocket.on('connected_users', handleConnectedUsers);
 
-      newSocket.on('chat_message', handleChatMessage);
-      newSocket.on('connected_users', handleConnectedUsers);
+        setSocket(newSocket);
+      }
+    };
 
-      setSocket(newSocket);
-    } else if (socket) {
-      // Lógica de reconexión o manejo de la conexión existente
-      // Por ejemplo, puedes manejar la reconexión en caso de que la conexión se corte.
-      socket.on('disconnect', () => {
-        console.log('WebSocket desconectado');
-        // Puedes agregar lógica para reconectar aquí si la conexión se pierde.
-        // Por ejemplo, volver a conectarse automáticamente después de un tiempo.
-      });
-    }
-  }, [socket, usuarioLogueado?.id, usuarioLogueado?.nombre]);
+    cargarUsuarios();
+    conectarASocket();
+
+    return () => {
+      if (socket) {
+        socket.disconnect();
+      }
+    };
+  }, [usuarioLogueado?.id, usuarioLogueado?.nombre]);
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -79,14 +95,15 @@ function Mensaje() {
     }
   };
 
-
   const fetchPreviousMessages = async (senderId, receiverId) => {
     try {
-      const response = await fetch(`http://localhost:3000/messages/previous/${senderId}/${receiverId}`);
-  
+      const response = await fetch(
+        `http://localhost:3000/messages/previous/${senderId}/${receiverId}`,
+      );
+
       if (response.ok) {
         const data = await response.json();
-  
+
         if (Array.isArray(data) && data.length > 0) {
           return data; // Devuelve los mensajes previos como un array
         } else {
@@ -104,40 +121,106 @@ function Mensaje() {
   };
 
   useEffect(() => {
-    if (usuarioLogueado?.id && chatDestino) {
-      if (!mensajesCargados) {
-        fetchPreviousMessages(usuarioLogueado.id, usuarioReceptor.idUsuario).then((loadedMessages) => {
-          if (Array.isArray(loadedMessages)) {
+    const cargarMensajesPrevios = async () => {
+      try {
+        if (usuarioLogueado?.id && chatDestino && !mensajesCargados) {
+          const loadedMessages = await fetchPreviousMessages(
+            usuarioLogueado.id,
+            usuarioReceptor.idUsuario,
+          );
+
+          if (Array.isArray(loadedMessages) && loadedMessages.length > 0) {
             const mensajesActualizados = loadedMessages.map((mensaje) => ({
               ...mensaje,
               esMensajeEnviado: mensaje.senderId === usuarioLogueado?.id,
             }));
-            setChatMensajes((mensajes) => [...mensajes, ...mensajesActualizados]);
+
+            // Aplicar mensajes eliminados para mí
+            const mensajesFiltrados = mensajesActualizados.filter(
+              (mensaje) =>
+                !mensajesEliminadosParaMi.has(mensaje.id) &&
+                !deletedMessagesForMe.has(mensaje.id),
+            );
+
+            setChatMensajes((mensajes) => [...mensajesFiltrados]);
             setMensajesCargados(true);
-          } else {
-            console.error('loadedMessages no es un array válido:', loadedMessages);
           }
-        });
+        }
+      } catch (error) {
+        console.error('Error al cargar mensajes previos:', error);
       }
+    };
+
+    cargarUsuarios();
+    cargarMensajesPrevios();
+  }, [
+    usuarioLogueado?.id,
+    usuarioLogueado?.nombre,
+    chatDestino,
+    usuarioReceptor,
+    mensajesCargados,
+  ]);
+
+  useEffect(() => {
+    const handleDeleteForAll = (data) => {
+      const { messageId } = data;
+
+      // Actualizar el estado local para reflejar que el mensaje se eliminó para todos
+      setChatMensajes((mensajes) =>
+        mensajes.map((mensaje) =>
+          mensaje.id === messageId
+            ? {
+                ...mensaje,
+                eliminado: true,
+                eliminadoParaTodos: true,
+                content: 'Mensaje eliminado para todos',
+              }
+            : mensaje,
+        ),
+      );
+    };
+
+    // Configurar el socket para escuchar el nuevo evento
+    if (socket) {
+      socket.on('delete_message_for_all', handleDeleteForAll);
     }
-  }, [chatDestino, usuarioLogueado?.id, usuarioReceptor, mensajesCargados]);
-  
+  }, [socket]);
+
+  useEffect(() => {
+    scrollToBottom(); // Asegurarse de que la ventana de chat se desplace hacia abajo al cargar nuevos mensajes
+  }, [chatMensajes]);
+
+  useEffect(() => {
+    console.log('chatMensajes actualizado en el efecto:', chatMensajes);
+  }, [chatMensajes]);
 
   const handleChatMessage = (data) => {
     console.log('Mensaje recibido:', data);
 
-    const messageExists = chatMensajes.some((mensaje) => mensaje.id === data.id);
+    // Verificar si el mensaje ya existe en el estado local
+    const messageExists = chatMensajes.some(
+      (mensaje) => mensaje.id === data.id,
+    );
 
     if (!messageExists) {
+      console.log('Agregando nuevo mensaje al estado:', data);
+
+      // Determinar si el mensaje es enviado por el usuario actual
       const esMensajeEnviado = data.senderId === usuarioLogueado?.id;
+
+      // Crear un nuevo mensaje con la información recibida
       const nuevoMensaje = {
         ...data,
         esMensajeEnviado: esMensajeEnviado,
         eliminado: false,
+        eliminadoParaTodos: true,
       };
 
+      // Actualizar el estado local con el nuevo mensaje
       setChatMensajes((mensajes) => [...mensajes, nuevoMensaje]);
     }
+
+    // Asegúrate de que la función scrollToBottom() esté llamada correctamente
     scrollToBottom();
   };
 
@@ -146,61 +229,29 @@ function Mensaje() {
       (name) => name !== usuarioLogueado?.nombre,
     );
     setUsuariosConectados(filteredUsers);
-    console.log('Usuarios conectados:', filteredUsers);
   };
 
-  // const iniciarChatConUsuario = (usuario) => {
-  //   console.log('Iniciar chat con usuario:', usuario);
-  //   if (usuario !== chatDestino) {
-
-  
-  //     // Limpiar la selección de mensajes al iniciar una conversación
-  //     setSelectedMessages(new Set());
-  //     setChatMensajes([]);
-  //     const mensajesActuales = chatMensajes.slice(); // Crea una copia de los mensajes actuales
-  //     setChatDestino(usuario);
-
-  //     const usuarioReceptor = usuariosTotales.find((u) => u.nombre === usuario);
-  //     console.log('Usuario receptor:', usuarioReceptor);
-  
-  //     setUsuarioReceptor(usuarioReceptor);
-  //     setChatMensajes(mensajesActuales);
-  //     setChatAbierto(true);
-  //   }
-  // };
-  
   const iniciarChatConUsuario = (usuario) => {
     console.log('Iniciar chat con usuario:', usuario);
     if (usuario !== chatDestino) {
       // Limpiar la selección de mensajes al iniciar una conversación
       setSelectedMessages(new Set());
-  
+
       // Limpiar los mensajes anteriores del chat anterior
       setChatMensajes([]);
-      
+
       const usuarioReceptor = usuariosTotales.find((u) => u.nombre === usuario);
       console.log('Usuario receptor:', usuarioReceptor);
-    
+
       setUsuarioReceptor(usuarioReceptor);
       setChatDestino(usuario);
-     setChatAbierto(true);
+      setChatAbierto(true);
       setMensajesCargados(false); // Reiniciar el estado de mensajes cargados
     }
   };
-  
-    
 
-  const cerrarChat = () => {
-    // if (chatDestino) {
-    //   console.log('Cerrar chat con:', chatDestino);
-    // }
-    // setChatAbierto(true);
-    // setChatDestino(null);
-  };
-
-   const enviarPrimerMensaje = async () => {
+  const enviarMensaje = async () => {
     if (chatDestino && nuevoMensaje && usuarioLogueado && usuarioReceptor) {
-      // Enviar el primer mensaje
       const messageData = {
         content: nuevoMensaje,
         senderId: usuarioLogueado.id,
@@ -208,67 +259,7 @@ function Mensaje() {
         timestamp: new Date().getTime(),
         usuarioId: usuarioLogueado.id,
       };
-
-      try {
-        const response = await fetch('http://localhost:3000/messages', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(messageData),
-        });
-
-        if (response.ok) {
-          console.log('Mensaje guardado con éxito en la base de datos');
-          if (socket) {
-            socket.emit('chat_message', messageData);
-            console.log('Mensaje emitido a través del socket');
-          } else {
-            console.error('Socket no está definido o es nulo');
-          }
-
-          // Cargar mensajes previos después de enviar el primer mensaje
-          const loadedMessages = await fetchPreviousMessages(
-            usuarioLogueado.id,
-            usuarioReceptor.idUsuario
-          );
-
-          if (Array.isArray(loadedMessages)) {
-            const mensajesActualizados = loadedMessages.map((mensaje) => ({
-              ...mensaje,
-              esMensajeEnviado: mensaje.senderId === usuarioLogueado?.id,
-            }));
-            setChatMensajes(mensajesActualizados);
-            setMensajesCargados(true);
-          } else {
-            console.error('loadedMessages no es un array válido:', loadedMessages);
-          }
-        } else {
-          console.error('Error al guardar el mensaje en la base de datos');
-        }
-      } catch (error) {
-        console.error('Error al realizar la solicitud POST', error);
-      }
-      setNuevoMensaje('');
-      scrollToBottom();
-    }
-  };
-
-
-  const enviarMensaje = async () => {
-    if (chatDestino && nuevoMensaje && usuarioLogueado && usuarioReceptor) {
-      console.log('Enviar mensaje:', nuevoMensaje, 'a', chatDestino);
-      const messageData = {
-        content: nuevoMensaje,
-        senderId: usuarioLogueado.id,
-        receiverId: usuarioReceptor.idUsuario,
-        timestamp: new Date().getTime(),
-      };
       console.log('Mensaje a enviar:', messageData);
-      if (!mensajesCargados) {
-        // Si no hay mensajes previos cargados, cargarlos antes de enviar el primer mensaje
-        enviarPrimerMensaje();
-      }
 
       try {
         const response = await fetch('http://localhost:3000/messages', {
@@ -293,6 +284,25 @@ function Mensaje() {
       } catch (error) {
         console.error('Error al realizar la solicitud POST', error);
       }
+
+      // Después de enviar el mensaje, cargar los mensajes actualizados
+      const loadedMessages = await fetchPreviousMessages(
+        usuarioLogueado.id,
+        usuarioReceptor.idUsuario,
+      );
+
+      if (Array.isArray(loadedMessages)) {
+        const mensajesActualizados = loadedMessages.map((mensaje) => ({
+          ...mensaje,
+          esMensajeEnviado: mensaje.senderId === usuarioLogueado?.id,
+        }));
+
+        setChatMensajes(mensajesActualizados);
+        setMensajesCargados(true);
+      } else {
+        console.error('loadedMessages no es un array válido:', loadedMessages);
+      }
+
       setNuevoMensaje('');
       if (inputRef.current) {
         inputRef.current.focus();
@@ -314,36 +324,44 @@ function Mensaje() {
   const toggleMessageSelection = (messageId) => {
     setSelectedMessages((selected) => {
       const newSelectedMessages = new Set(selected);
-  
+
       if (newSelectedMessages.has(messageId)) {
         newSelectedMessages.delete(messageId);
       } else {
         newSelectedMessages.add(messageId);
       }
-  
+
       return newSelectedMessages;
     });
   };
-  
-  
 
- // Dentro de tu función handleDelete
-const handleDelete = async (option) => {
-  if (selectedMessages.size > 0) {
-    try {
-      await Promise.all(
-        Array.from(selectedMessages).map(async (messageId) => {
+  const handleDelete = async (option) => {
+    if (selectedMessages.size > 0) {
+      const selectedMessagesArray = Array.from(selectedMessages);
+
+      try {
+        for (const messageId of selectedMessagesArray) {
           if (typeof messageId === 'number') {
-            const messageToDelete = chatMensajes.find(
-              (mensaje) => mensaje.id === messageId,
+            // Filtrar el mensaje actual del estado local
+            setChatMensajes((mensajes) =>
+              mensajes.map((mensaje) =>
+                mensaje.id === messageId
+                  ? {
+                      ...mensaje,
+                      eliminado: option === 'deleteForMe',
+                      eliminadoParaTodos: option === 'deleteForAll',
+                    }
+                  : mensaje,
+              ),
             );
 
-            if (messageToDelete) {
+            try {
               if (option === 'deleteForMe') {
                 // Agrega el ID del mensaje a mensajesEliminadosParaMi
                 setMensajesEliminadosParaMi(
                   (prevSet) => new Set([...prevSet, messageId]),
                 );
+
                 // Enviar solicitud para marcar el mensaje como eliminado para ti en el servidor
                 const response = await fetch(
                   `http://localhost:3000/messages/${messageId}`,
@@ -352,7 +370,7 @@ const handleDelete = async (option) => {
                     headers: {
                       'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ eliminado: 1 }), // Marcar el mensaje como eliminado para ti
+                    body: JSON.stringify({ eliminado: true }), // Marcar el mensaje como eliminado para ti
                   },
                 );
 
@@ -360,12 +378,6 @@ const handleDelete = async (option) => {
                   console.log(
                     'Mensaje marcado como eliminado para ti con éxito en la base de datos',
                   );
-                  // Eliminar el mensaje del estado local
-                  setChatMensajes((mensajes) =>
-                    mensajes.filter((mensaje) => mensaje.id !== messageId)
-                    
-                  );
-                  scrollToBottom();
                 } else {
                   console.error(
                     'Error al marcar el mensaje como eliminado para ti en la base de datos',
@@ -377,9 +389,9 @@ const handleDelete = async (option) => {
               if (option === 'deleteForAll') {
                 // Enviar solicitud para eliminar el mensaje de la base de datos
                 const response = await fetch(
-                  `http://localhost:3000/messages/${messageId}`,
+                  `http://localhost:3000/messages/deleteForAll/${messageId}`,
                   {
-                    method: 'DELETE',
+                    method: 'PATCH',
                     headers: {
                       'Content-Type': 'application/json',
                     },
@@ -390,10 +402,6 @@ const handleDelete = async (option) => {
                   console.log(
                     'Mensaje eliminado con éxito de la base de datos',
                   );
-                  // Eliminar el mensaje del estado local
-                  setChatMensajes((mensajes) =>
-                    mensajes.filter((mensaje) => mensaje.id !== messageId)
-                  );
                 } else {
                   console.error(
                     'Error al eliminar el mensaje de la base de datos',
@@ -401,28 +409,38 @@ const handleDelete = async (option) => {
                   );
                 }
               }
+              if (socket) {
+                socket.emit('delete_message_for_all', { messageId });
+              }
+
+              setDeletedMessagesForMe(
+                (prevSet) => new Set([...prevSet, messageId]),
+              );
+            } catch (error) {
+              console.error(
+                'Error al eliminar el mensaje en el servidor',
+                error,
+              );
             }
           }
-        })
-      );
-    } catch (error) {
-      console.error('Error al eliminar mensajes en paralelo', error);
+        }
+      } catch (error) {
+        console.error('Error al eliminar mensajes', error);
+      }
+
+      // Limpia los mensajes seleccionados y oculta el modal
+      setSelectedMessages(new Set());
+      closeDeleteModal();
+    } else {
+      // No hay mensajes seleccionados, muestra la advertencia
+      setShowSelectionWarning(true);
+
+      // Luego, puedes ocultar la advertencia después de unos segundos si lo deseas
+      setTimeout(() => {
+        setShowSelectionWarning(false);
+      }, 3000);
     }
-
-    // Limpia los mensajes seleccionados y oculta el modal
-    setSelectedMessages(new Set());
-    closeDeleteModal();
-  } else {
-    // No hay mensajes seleccionados, muestra la advertencia
-    setShowSelectionWarning(true);
-
-    // Luego, puedes ocultar la advertencia después de unos segundos si lo deseas
-    setTimeout(() => {
-      setShowSelectionWarning(false);
-    }, 3000);
-  }
-};
-
+  };
 
   const formatTimestamp = (timestamp) => {
     if (!timestamp) {
@@ -450,7 +468,7 @@ const handleDelete = async (option) => {
   const chatPrivadoRef = useRef();
 
   return (
-    <div className="Chat  row">
+    <div className="Chat mt-5 row">
       <div className="col-md-3 mt-5">
         <h5 className={chatAbierto ? 'ChatTitle' : 'TituloUsuarios'}>
           <span className={chatAbierto ? 'TituloChat' : 'TituloUsuarios'}>
@@ -459,9 +477,16 @@ const handleDelete = async (option) => {
         </h5>
         {chatAbierto ? (
           <div className="UsuariosConectados">
-            <ul className="UsuariosList">
-              {usuariosTotales.map((usuario) => (
-                <li key={usuario.idUsuario} className="mb-1">
+            <ul
+              className="UsuariosList"
+              style={{ display: 'flex', flexWrap: 'wrap' }}
+            >
+              {usuariosTotales.map((usuario, index) => (
+                <li
+                  key={usuario.idUsuario}
+                  className="mb-1"
+                  style={{ flexBasis: '30%' }}
+                >
                   <button
                     onClick={() => iniciarChatConUsuario(usuario.nombre)}
                     className="SendButton btn btn-secondary"
@@ -475,48 +500,58 @@ const handleDelete = async (option) => {
         ) : null}
       </div>
 
-
       <div className="col-md-9">
         {chatAbierto ? (
           <div className="ChatContent">
             <h5 className="CenteredTitle">Estoy chateando con {chatDestino}</h5>
-            
+
             <button
               onClick={() => openDeleteModal('deleteForMe')}
               className="eliminarSeleccionados btn btn-secondary mb-2"
             >
               Eliminar Seleccionados
             </button>
-            <ChatPrivado ref={chatPrivadoRef}>
+            <ChatPrivado>
               <UlMensajes>
                 <ListaMensajes>
-                  {chatMensajes.map((mensaje, index) => {
-                    const mensajeId = mensaje.id || `mensaje-${index}`;
-                    console.log('Procesando mensaje:', mensaje.id);
-                    // Agregar una condición para mostrar mensajes eliminados al receptor
+                  {chatMensajes.map((mensaje) => {
+                    console.log('Mensaje completo:', mensaje);
+                    const mensajeId = mensaje.id;
                     if (
                       !mensaje.eliminado ||
                       (mensaje.eliminado &&
-                        mensaje.receiverId === usuarioLogueado?.id)
+                        (mensaje.receiverId === usuarioLogueado?.id ||
+                          mensajesEliminadosParaMi.has(mensaje.id) ||
+                          deletedMessagesForMe.has(mensaje.id)))
                     ) {
                       const esMensajeEnviado = mensaje.esMensajeEnviado;
                       const contenido = mensaje.content;
                       const horaMinutos = formatTimestamp(mensaje.timestamp);
-                      const messageClass = Array.from(selectedMessages).includes(
-                        mensaje.id,
-                      )
+                      const messageClass = Array.from(
+                        selectedMessages,
+                      ).includes(mensaje.id)
                         ? 'Mensaje MensajeSeleccionado'
                         : 'Mensaje';
-  
+
                       return (
                         <div
                           key={mensajeId}
                           className={messageClass}
-                          onClick={() => chatDestino && esMensajeEnviado ? toggleMessageSelection(mensaje.id) : null}
+                          onClick={() =>
+                            chatDestino && esMensajeEnviado
+                              ? toggleMessageSelection(mensaje.id)
+                              : null
+                          }
                         >
                           {esMensajeEnviado ? (
                             <LiMensajeEnviado>
-                              <div className="MensajeContenido ">{contenido}</div>
+                              <div className="MensajeContenido ">
+                                {mensaje.eliminado
+                                  ? 'Eliminado para ti'
+                                  : mensaje.eliminadoParaTodos
+                                  ? 'Eliminado para todos'
+                                  : contenido}
+                              </div>
                               <div className="HoraMensajeEnviado">
                                 {horaMinutos}
                               </div>
@@ -526,7 +561,9 @@ const handleDelete = async (option) => {
                               <span className="NombreRemitente">
                                 {usuarioReceptor?.nombre}
                               </span>
-                              <div className="MensajeContenido">{contenido}</div>
+                              <div className="MensajeContenido">
+                                {contenido}
+                              </div>
                               <div className="HoraMensajeRecibido">
                                 {horaMinutos}
                               </div>
@@ -556,14 +593,17 @@ const handleDelete = async (option) => {
                 >
                   Eliminar para todos
                 </button>
-                <button onClick={closeDeleteModal} className="eliminarSeleccionados btn btn-secondary m-2">
+                <button
+                  onClick={closeDeleteModal}
+                  className="eliminarSeleccionados btn btn-secondary m-2"
+                >
                   Cancelar
                 </button>
               </div>
             )}
             <div className="InputContainer">
               <input
-              ref={inputRef}
+                ref={inputRef}
                 type="text"
                 value={nuevoMensaje}
                 onChange={(e) => setNuevoMensaje(e.target.value)}
@@ -571,7 +611,10 @@ const handleDelete = async (option) => {
                 placeholder="Escribe un mensaje"
                 onKeyPress={handleKeyPress}
               />
-              <button onClick={enviarMensaje} className="SendButton btn btn-success m-2">
+              <button
+                onClick={enviarMensaje}
+                className="SendButton btn btn-success m-2"
+              >
                 Enviar
               </button>
             </div>
@@ -585,7 +628,6 @@ const handleDelete = async (option) => {
       </div>
     </div>
   );
-  
 }
 
 export default Mensaje;
